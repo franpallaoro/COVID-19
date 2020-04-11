@@ -74,3 +74,6 @@ df_casos$date <- as.Date(df_casos$date, format = "%Y-%m-%d")
 
 # o pacote tictoc foi usado para verificar quantos segundos demoram para baixar os 
 # dados. Hoje demorou cerca de 10 segundos. 
+
+write.csv(x = df_obitos, file = 'obitos_cartorio.csv')
+write.csv(x = df_casos, file = 'casos_covid.csv')
