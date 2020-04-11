@@ -1,18 +1,23 @@
-#--- Obtenção dos dados obtidos em https://brasil.io/dataset/covid19/caso pela API ---#
+# --------------------------------------------------
+# Obtenção dos dados obtidos em
+# https://brasil.io/dataset/covid19/caso 
+# pela API
+
+# --------------------------------------------------
+# Carrega pacotes
 
 library(tidyverse)
 library(httr)
 library(jsonlite)
 
-#library(tictoc)
-
-#tic("tempo total gasto para baixar os dados")
-#tic("tempo para pegar o data frame de óbitos")
+# -------------------------------------------------- 
+# Coleta de dados (Web scraping) ÓBITOS
 
 df_obitos <- NULL
 
-cont = 1 
-path <- paste0('https://brasil.io/api/dataset/covid19/obito_cartorio/data?page=', cont)
+cont <- 1 
+path <- paste0(
+  'https://brasil.io/api/dataset/covid19/obito_cartorio/data?page=', cont)
 request <- GET(url = path)
 
 while (request$status_code != 404) {
@@ -20,27 +25,30 @@ while (request$status_code != 404) {
   df <- fromJSON(response, flatten = TRUE)
   df_obitos <- rbind(df_obitos, df[["results"]])
   
-  cont = cont + 1 
+  cont <- cont + 1 
   path <- paste0('https://brasil.io/api/dataset/covid19/obito_cartorio/data?page=', cont)
   request <- GET(url = path)
 }
 
-# organizar o banco de dados de modo que mostre todas as datas de um estado  
-# específico de uma vez (por ordem alfabética) e deixar o estado como a 
-# primeira variável do banco de dados:
+# -------------------------------------------------- 
+# Preparação dos dados (data wrangling) ÓBITOS
+
+# organizar o banco de dados de modo 
+# que mostre todas as datas de um estado
+# específico de uma vez (por ordem alfabética)
+# e deixar o estado como a primeira variável 
+# do banco de dados:
 
 df_obitos <- df_obitos[order(df_obitos$state, df_obitos$date),]
-
 df_obitos <- df_obitos[c('state', names(df_obitos)[!names(df_obitos) %in% 'state'])]
 
-# toc()
 
-
-# tic('tempo para pegar o data frame de casos')
+# -------------------------------------------------- 
+# Coleta de dados (Web scraping) CASOS CONFIRMADOS
 
 df_casos <- NULL
 
-cont = 1 
+cont <- 1 
 path <- paste0('https://brasil.io/api/dataset/covid19/caso/data?page=', cont)
 request <- GET(url = path)
 
@@ -49,22 +57,26 @@ while (request$status_code != 404) {
   df <- fromJSON(response, flatten = TRUE)
   df_casos <- rbind(df_casos, df[["results"]])
   
-  cont = cont + 1 
+  cont <- cont + 1 
   path <- paste0('https://brasil.io/api/dataset/covid19/caso/data?page=', cont)
   request <- GET(url = path)
 }
 
-# toc()
-
+# -------------------------------------------------- 
+# Preparação dos dados (data wrangling)  CASOS CONFIRMADOS
 # mesmo esquema para o banco de casos
 # neste caso, deixarei estado, cidade e data como as primeiras variáveis:
 
 df_casos <- df_casos[order(df_casos$state, df_casos$city, df_casos$date),]
-
 org_casos <- c('state', 'city', 'date')
 df_casos <- df_casos[c(org_casos, names(df_casos)[!names(df_casos) %in% org_casos])]
 
-# toc()
+# -------------------------------------------------- 
+# Salva dados em um arquivo RDS
 
-# o pacote tictoc foi usado para verificar quantos segundos demoram para baixar os 
-# dados. Hoje demorou cerca de 10 segundos. 
+saveRDS(df_casos,
+        file = here::here("data", "casos_covid19_br_mun.rds"))
+
+saveRDS(df_obitos,
+        file = here::here("data", "obitos_br_uf.rds"))
+
