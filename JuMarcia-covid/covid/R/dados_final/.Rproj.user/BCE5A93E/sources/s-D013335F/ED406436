@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586451901947.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2294650601",
+    "id" : "ED406436",
+    "lastKnownWriteTime" : 1586443130,
+    "last_content_update" : 1586443130,
+    "path" : "C:/Users/mhbar/Google Drive/monitora_super_ju/covid/R/dados_final/merge.R",
+    "project_path" : "merge.R",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

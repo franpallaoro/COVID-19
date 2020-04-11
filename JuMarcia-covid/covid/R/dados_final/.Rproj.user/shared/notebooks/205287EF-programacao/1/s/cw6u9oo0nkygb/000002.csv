@@ -1,0 +1,5 @@
+"0","####################################"
+"0","############# Vizualizaçao dos missings"
+"0","################### http://naniar.njtierney.com/articles/naniar-visualisation.html"
+"0","#######################"
+"0","vis_dat(banco_completo)"

@@ -1,0 +1,48 @@
+"0","covid <- banco_imputado %>%
+            filter(y >= 5000) %>%
+            select(banco_imputado, 6:36) %>%
+            cor()
+"
+"2","Erro: Must subset columns with a valid subscript vector.
+[31mx[39m The subscript has the wrong type `data.frame<
+  Country: factor<f6039>
+  Lat    : double
+  Long   : double
+  33     : double
+  34     : double
+  y      : double
+  1      : double
+  2      : double
+  3      : double
+  4      : double
+  5      : double
+  6      : double
+  7      : double
+  8      : double
+  9      : double
+  10     : double
+  11     : double
+  12     : double
+  13     : double
+  14     : double
+  15     : double
+  16     : double
+  17     : double
+  18     : double
+  19     : double
+  20     : double
+  21     : double
+  22     : double
+  23     : double
+  24     : double
+  25     : double
+  26     : double
+  27     : double
+  28     : double
+  29     : double
+  30     : double
+  31     : double
+  32     : double
+>`.
+[34mi[39m It must be numeric or character.
+"

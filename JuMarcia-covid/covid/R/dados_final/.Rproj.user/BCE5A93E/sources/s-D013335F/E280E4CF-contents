@@ -1,0 +1,45 @@
+#------------------------------ confirmados 
+df.temp <- read.csv2('time_series_covid19_confirmed_global.csv', 
+                       sep = ',', header = TRUE)
+  
+# longitude e latitude como numerica
+df.temp$Lat <- as.numeric(as.character(df.temp$Lat))
+df.temp$Long <- as.numeric(as.character(df.temp$Long))
+  
+aux <- data.frame(table(df.temp$Country.Region))
+repeated.count <- as.character(aux[which(aux$Freq != 1),1])
+  
+temp = aggregate(.~Country.Region, data = df.temp, FUN = sum)
+
+dfi <- read.table('indicadores.txt')
+dfi$Country<- ifelse(dfi$Country == 'United States', 
+                             'US', as.character(dfi$Country))
+#--- mesclando os bancos
+
+dfc <- temp
+colnames(dfc)[1] <- 'Country'
+
+df <- merge(dfc, dfi, by = 'Country')
+
+# 75 é o ultimo dia
+banco <- df[,c(1,3, 4, (ncol(df)-53):(ncol(df)-51), (ncol(df)-49):ncol(df))]
+
+write.table(banco, file = 'confirmados.txt')
+
+#---- teve paises que não entraram, devem estar com nomes diferentes
+# verificar:
+
+#aux <- data.frame(table(c(as.character(df$Country), as.character(dfc$Country))))
+#aux <- aux[which(aux$Freq == 1 ),]
+
+#View(aux)
+#View(dfi$Country)
+
+#View(dfi$Country[which(dfi$Country%in%dfc$Country == 'FALSE')])
+
+
+# Diamond Princess é um cruzeiro, não um país
+# MS Zaandam também é um cruzeiro
+# Holy See = vaticano, pelo jeito não tem dados de indices
+
+# Taiwan* ??? nao tem 

@@ -1,0 +1,8 @@
+"0",""
+"0","library(rpart)"
+"0","library(rpart.plot)"
+"0",""
+"0","banco_completo %>%"
+"0","  add_prop_miss() %>%"
+"0","  rpart(prop_miss_all ~ ., data = .) %>%"
+"0","  prp(type = 4, extra = 101, prefix = ""Prop. Miss = "", roundint = FALSE)"

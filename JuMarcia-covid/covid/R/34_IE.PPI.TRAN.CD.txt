@@ -1,0 +1,265 @@
+"Country" "CCode" "INome" "Indicador" "Ano"
+"1" "Aruba" "ABW" "Investment in transport with private participation (current US$)" NA NA
+"2" "Afghanistan" "AFG" "Investment in transport with private participation (current US$)" NA NA
+"3" "Angola" "AGO" "Investment in transport with private participation (current US$)" 5.3e+07 "X2007"
+"4" "Albania" "ALB" "Investment in transport with private participation (current US$)" 284600000 "X2017"
+"5" "Andorra" "AND" "Investment in transport with private participation (current US$)" NA NA
+"6" "Arab World" "ARB" "Investment in transport with private participation (current US$)" NA NA
+"7" "United Arab Emirates" "ARE" "Investment in transport with private participation (current US$)" NA NA
+"8" "Argentina" "ARG" "Investment in transport with private participation (current US$)" 1.6e+07 "X2012"
+"9" "Armenia" "ARM" "Investment in transport with private participation (current US$)" 1.01e+08 "X2013"
+"10" "American Samoa" "ASM" "Investment in transport with private participation (current US$)" NA NA
+"11" "Antigua and Barbuda" "ATG" "Investment in transport with private participation (current US$)" NA NA
+"12" "Australia" "AUS" "Investment in transport with private participation (current US$)" NA NA
+"13" "Austria" "AUT" "Investment in transport with private participation (current US$)" NA NA
+"14" "Azerbaijan" "AZE" "Investment in transport with private participation (current US$)" NA NA
+"15" "Burundi" "BDI" "Investment in transport with private participation (current US$)" NA NA
+"16" "Belgium" "BEL" "Investment in transport with private participation (current US$)" NA NA
+"17" "Benin" "BEN" "Investment in transport with private participation (current US$)" 4.89e+08 "X2009"
+"18" "Burkina Faso" "BFA" "Investment in transport with private participation (current US$)" 471300000 "X2017"
+"19" "Bangladesh" "BGD" "Investment in transport with private participation (current US$)" 179500000 "X2017"
+"20" "Bulgaria" "BGR" "Investment in transport with private participation (current US$)" 7.9e+07 "X2013"
+"21" "Bahrain" "BHR" "Investment in transport with private participation (current US$)" NA NA
+"22" "Bahamas, The" "BHS" "Investment in transport with private participation (current US$)" NA NA
+"23" "Bosnia and Herzegovina" "BIH" "Investment in transport with private participation (current US$)" NA NA
+"24" "Belarus" "BLR" "Investment in transport with private participation (current US$)" 3960000 "X2008"
+"25" "Belize" "BLZ" "Investment in transport with private participation (current US$)" 37600000 "X2002"
+"26" "Bermuda" "BMU" "Investment in transport with private participation (current US$)" NA NA
+"27" "Bolivia" "BOL" "Investment in transport with private participation (current US$)" 16600000 "X2000"
+"28" "Brazil" "BRA" "Investment in transport with private participation (current US$)" 1041400000 "X2018"
+"29" "Barbados" "BRB" "Investment in transport with private participation (current US$)" NA NA
+"30" "Brunei Darussalam" "BRN" "Investment in transport with private participation (current US$)" NA NA
+"31" "Bhutan" "BTN" "Investment in transport with private participation (current US$)" NA NA
+"32" "Botswana" "BWA" "Investment in transport with private participation (current US$)" NA NA
+"33" "Central African Republic" "CAF" "Investment in transport with private participation (current US$)" NA NA
+"34" "Canada" "CAN" "Investment in transport with private participation (current US$)" NA NA
+"35" "Central Europe and the Baltics" "CEB" "Investment in transport with private participation (current US$)" NA NA
+"36" "Switzerland" "CHE" "Investment in transport with private participation (current US$)" NA NA
+"37" "Channel Islands" "CHI" "Investment in transport with private participation (current US$)" NA NA
+"38" "Chile" "CHL" "Investment in transport with private participation (current US$)" NA NA
+"39" "China" "CHN" "Investment in transport with private participation (current US$)" 25964800000 "X2018"
+"40" "Cote d'Ivoire" "CIV" "Investment in transport with private participation (current US$)" 471300000 "X2017"
+"41" "Cameroon" "CMR" "Investment in transport with private participation (current US$)" 9e+07 "X1999"
+"42" "Congo, Dem. Rep." "COD" "Investment in transport with private participation (current US$)" NA NA
+"43" "Congo, Rep." "COG" "Investment in transport with private participation (current US$)" 5.6e+07 "X2010"
+"44" "Colombia" "COL" "Investment in transport with private participation (current US$)" 2027740000 "X2018"
+"45" "Comoros" "COM" "Investment in transport with private participation (current US$)" 5e+05 "X2003"
+"46" "Cabo Verde" "CPV" "Investment in transport with private participation (current US$)" NA NA
+"47" "Costa Rica" "CRI" "Investment in transport with private participation (current US$)" 6.63e+08 "X2015"
+"48" "Caribbean small states" "CSS" "Investment in transport with private participation (current US$)" NA NA
+"49" "Cuba" "CUB" "Investment in transport with private participation (current US$)" NA NA
+"50" "Curacao" "CUW" "Investment in transport with private participation (current US$)" NA NA
+"51" "Cayman Islands" "CYM" "Investment in transport with private participation (current US$)" NA NA
+"52" "Cyprus" "CYP" "Investment in transport with private participation (current US$)" NA NA
+"53" "Czech Republic" "CZE" "Investment in transport with private participation (current US$)" NA NA
+"54" "Germany" "DEU" "Investment in transport with private participation (current US$)" NA NA
+"55" "Djibouti" "DJI" "Investment in transport with private participation (current US$)" 3.96e+08 "X2007"
+"56" "Dominica" "DMA" "Investment in transport with private participation (current US$)" NA NA
+"57" "Denmark" "DNK" "Investment in transport with private participation (current US$)" NA NA
+"58" "Dominican Republic" "DOM" "Investment in transport with private participation (current US$)" 73400000 "X2013"
+"59" "Algeria" "DZA" "Investment in transport with private participation (current US$)" 1.08e+08 "X2009"
+"60" "East Asia & Pacific (excluding high income)" "EAP" "Investment in transport with private participation (current US$)" 29462230000 "X2018"
+"61" "Early-demographic dividend" "EAR" "Investment in transport with private participation (current US$)" 14869630000 "X2017"
+"62" "East Asia & Pacific" "EAS" "Investment in transport with private participation (current US$)" NA NA
+"63" "Europe & Central Asia (excluding high income)" "ECA" "Investment in transport with private participation (current US$)" 3588880000 "X2017"
+"64" "Europe & Central Asia" "ECS" "Investment in transport with private participation (current US$)" NA NA
+"65" "Ecuador" "ECU" "Investment in transport with private participation (current US$)" 3.77e+08 "X2018"
+"66" "Egypt, Arab Rep." "EGY" "Investment in transport with private participation (current US$)" 4.98e+08 "X2017"
+"67" "Euro area" "EMU" "Investment in transport with private participation (current US$)" NA NA
+"68" "Eritrea" "ERI" "Investment in transport with private participation (current US$)" NA NA
+"69" "Spain" "ESP" "Investment in transport with private participation (current US$)" NA NA
+"70" "Estonia" "EST" "Investment in transport with private participation (current US$)" NA NA
+"71" "Ethiopia" "ETH" "Investment in transport with private participation (current US$)" NA NA
+"72" "European Union" "EUU" "Investment in transport with private participation (current US$)" NA NA
+"73" "Fragile and conflict affected situations" "FCS" "Investment in transport with private participation (current US$)" NA NA
+"74" "Finland" "FIN" "Investment in transport with private participation (current US$)" NA NA
+"75" "Fiji" "FJI" "Investment in transport with private participation (current US$)" NA NA
+"76" "France" "FRA" "Investment in transport with private participation (current US$)" NA NA
+"77" "Faroe Islands" "FRO" "Investment in transport with private participation (current US$)" NA NA
+"78" "Micronesia, Fed. Sts." "FSM" "Investment in transport with private participation (current US$)" NA NA
+"79" "Gabon" "GAB" "Investment in transport with private participation (current US$)" 349600000 "X2016"
+"80" "United Kingdom" "GBR" "Investment in transport with private participation (current US$)" NA NA
+"81" "Georgia" "GEO" "Investment in transport with private participation (current US$)" 3.45e+08 "X2008"
+"82" "Ghana" "GHA" "Investment in transport with private participation (current US$)" 5.5e+08 "X2017"
+"83" "Gibraltar" "GIB" "Investment in transport with private participation (current US$)" NA NA
+"84" "Guinea" "GIN" "Investment in transport with private participation (current US$)" 1.59e+08 "X2009"
+"85" "Gambia, The" "GMB" "Investment in transport with private participation (current US$)" NA NA
+"86" "Guinea-Bissau" "GNB" "Investment in transport with private participation (current US$)" NA NA
+"87" "Equatorial Guinea" "GNQ" "Investment in transport with private participation (current US$)" NA NA
+"88" "Greece" "GRC" "Investment in transport with private participation (current US$)" NA NA
+"89" "Grenada" "GRD" "Investment in transport with private participation (current US$)" NA NA
+"90" "Greenland" "GRL" "Investment in transport with private participation (current US$)" NA NA
+"91" "Guatemala" "GTM" "Investment in transport with private participation (current US$)" 1.2e+08 "X2014"
+"92" "Guam" "GUM" "Investment in transport with private participation (current US$)" NA NA
+"93" "Guyana" "GUY" "Investment in transport with private participation (current US$)" NA NA
+"94" "High income" "HIC" "Investment in transport with private participation (current US$)" NA NA
+"95" "Hong Kong SAR, China" "HKG" "Investment in transport with private participation (current US$)" NA NA
+"96" "Honduras" "HND" "Investment in transport with private participation (current US$)" 87900000 "X2015"
+"97" "Heavily indebted poor countries (HIPC)" "HPC" "Investment in transport with private participation (current US$)" NA NA
+"98" "Croatia" "HRV" "Investment in transport with private participation (current US$)" NA NA
+"99" "Haiti" "HTI" "Investment in transport with private participation (current US$)" 5.7e+07 "X2014"
+"100" "Hungary" "HUN" "Investment in transport with private participation (current US$)" NA NA
+"101" "IBRD only" "IBD" "Investment in transport with private participation (current US$)" 53149200000 "X2018"
+"102" "IDA & IBRD total" "IBT" "Investment in transport with private participation (current US$)" 37048760000 "X2017"
+"103" "IDA total" "IDA" "Investment in transport with private participation (current US$)" NA NA
+"104" "IDA blend" "IDB" "Investment in transport with private participation (current US$)" 1.505e+09 "X2008"
+"105" "Indonesia" "IDN" "Investment in transport with private participation (current US$)" 2903430000 "X2018"
+"106" "IDA only" "IDX" "Investment in transport with private participation (current US$)" NA NA
+"107" "Isle of Man" "IMN" "Investment in transport with private participation (current US$)" NA NA
+"108" "India" "IND" "Investment in transport with private participation (current US$)" 9486170000 "X2018"
+"109" "Not classified" "INX" "Investment in transport with private participation (current US$)" NA NA
+"110" "Ireland" "IRL" "Investment in transport with private participation (current US$)" NA NA
+"111" "Iran, Islamic Rep." "IRN" "Investment in transport with private participation (current US$)" 2.35e+08 "X2016"
+"112" "Iraq" "IRQ" "Investment in transport with private participation (current US$)" 5e+08 "X2010"
+"113" "Iceland" "ISL" "Investment in transport with private participation (current US$)" NA NA
+"114" "Israel" "ISR" "Investment in transport with private participation (current US$)" NA NA
+"115" "Italy" "ITA" "Investment in transport with private participation (current US$)" NA NA
+"116" "Jamaica" "JAM" "Investment in transport with private participation (current US$)" 4.52e+08 "X2016"
+"117" "Jordan" "JOR" "Investment in transport with private participation (current US$)" 9.4e+07 "X2014"
+"118" "Japan" "JPN" "Investment in transport with private participation (current US$)" NA NA
+"119" "Kazakhstan" "KAZ" "Investment in transport with private participation (current US$)" 7.4e+08 "X2018"
+"120" "Kenya" "KEN" "Investment in transport with private participation (current US$)" 213920000 "X2018"
+"121" "Kyrgyz Republic" "KGZ" "Investment in transport with private participation (current US$)" NA NA
+"122" "Cambodia" "KHM" "Investment in transport with private participation (current US$)" 1e+09 "X2017"
+"123" "Kiribati" "KIR" "Investment in transport with private participation (current US$)" NA NA
+"124" "St. Kitts and Nevis" "KNA" "Investment in transport with private participation (current US$)" NA NA
+"125" "Korea, Rep." "KOR" "Investment in transport with private participation (current US$)" NA NA
+"126" "Kuwait" "KWT" "Investment in transport with private participation (current US$)" NA NA
+"127" "Latin America & Caribbean (excluding high income)" "LAC" "Investment in transport with private participation (current US$)" 4250500000 "X2018"
+"128" "Lao PDR" "LAO" "Investment in transport with private participation (current US$)" 1500000 "X2009"
+"129" "Lebanon" "LBN" "Investment in transport with private participation (current US$)" 3e+06 "X2004"
+"130" "Liberia" "LBR" "Investment in transport with private participation (current US$)" 2.5e+07 "X2013"
+"131" "Libya" "LBY" "Investment in transport with private participation (current US$)" NA NA
+"132" "St. Lucia" "LCA" "Investment in transport with private participation (current US$)" NA NA
+"133" "Latin America & Caribbean" "LCN" "Investment in transport with private participation (current US$)" 4250500000 "X2018"
+"134" "Least developed countries: UN classification" "LDC" "Investment in transport with private participation (current US$)" NA NA
+"135" "Low income" "LIC" "Investment in transport with private participation (current US$)" NA NA
+"136" "Liechtenstein" "LIE" "Investment in transport with private participation (current US$)" NA NA
+"137" "Sri Lanka" "LKA" "Investment in transport with private participation (current US$)" 1.2e+08 "X2017"
+"138" "Lower middle income" "LMC" "Investment in transport with private participation (current US$)" 13173940000 "X2017"
+"139" "Low & middle income" "LMY" "Investment in transport with private participation (current US$)" 37048760000 "X2017"
+"140" "Lesotho" "LSO" "Investment in transport with private participation (current US$)" NA NA
+"141" "Late-demographic dividend" "LTE" "Investment in transport with private participation (current US$)" 32654340000 "X2018"
+"142" "Lithuania" "LTU" "Investment in transport with private participation (current US$)" NA NA
+"143" "Luxembourg" "LUX" "Investment in transport with private participation (current US$)" NA NA
+"144" "Latvia" "LVA" "Investment in transport with private participation (current US$)" NA NA
+"145" "Macao SAR, China" "MAC" "Investment in transport with private participation (current US$)" NA NA
+"146" "St. Martin (French part)" "MAF" "Investment in transport with private participation (current US$)" NA NA
+"147" "Morocco" "MAR" "Investment in transport with private participation (current US$)" 2e+08 "X2008"
+"148" "Monaco" "MCO" "Investment in transport with private participation (current US$)" NA NA
+"149" "Moldova" "MDA" "Investment in transport with private participation (current US$)" 6e+07 "X2008"
+"150" "Madagascar" "MDG" "Investment in transport with private participation (current US$)" 245100000 "X2017"
+"151" "Maldives" "MDV" "Investment in transport with private participation (current US$)" 4.78e+08 "X2010"
+"152" "Middle East & North Africa" "MEA" "Investment in transport with private participation (current US$)" NA NA
+"153" "Mexico" "MEX" "Investment in transport with private participation (current US$)" 589360000 "X2018"
+"154" "Marshall Islands" "MHL" "Investment in transport with private participation (current US$)" NA NA
+"155" "Middle income" "MIC" "Investment in transport with private participation (current US$)" 53957120000 "X2018"
+"156" "North Macedonia" "MKD" "Investment in transport with private participation (current US$)" 2.95e+08 "X2008"
+"157" "Mali" "MLI" "Investment in transport with private participation (current US$)" 55400000 "X2003"
+"158" "Malta" "MLT" "Investment in transport with private participation (current US$)" NA NA
+"159" "Myanmar" "MMR" "Investment in transport with private participation (current US$)" 1.04e+08 "X2018"
+"160" "Middle East & North Africa (excluding high income)" "MNA" "Investment in transport with private participation (current US$)" NA NA
+"161" "Montenegro" "MNE" "Investment in transport with private participation (current US$)" NA NA
+"162" "Mongolia" "MNG" "Investment in transport with private participation (current US$)" NA NA
+"163" "Northern Mariana Islands" "MNP" "Investment in transport with private participation (current US$)" NA NA
+"164" "Mozambique" "MOZ" "Investment in transport with private participation (current US$)" 8e+07 "X2013"
+"165" "Mauritania" "MRT" "Investment in transport with private participation (current US$)" NA NA
+"166" "Mauritius" "MUS" "Investment in transport with private participation (current US$)" 3.83e+08 "X2009"
+"167" "Malawi" "MWI" "Investment in transport with private participation (current US$)" 6e+06 "X1999"
+"168" "Malaysia" "MYS" "Investment in transport with private participation (current US$)" 1.543e+09 "X2017"
+"169" "North America" "NAC" "Investment in transport with private participation (current US$)" NA NA
+"170" "Namibia" "NAM" "Investment in transport with private participation (current US$)" NA NA
+"171" "New Caledonia" "NCL" "Investment in transport with private participation (current US$)" NA NA
+"172" "Niger" "NER" "Investment in transport with private participation (current US$)" NA NA
+"173" "Nigeria" "NGA" "Investment in transport with private participation (current US$)" 4.4e+09 "X2013"
+"174" "Nicaragua" "NIC" "Investment in transport with private participation (current US$)" 1.04e+08 "X2000"
+"175" "Netherlands" "NLD" "Investment in transport with private participation (current US$)" NA NA
+"176" "Norway" "NOR" "Investment in transport with private participation (current US$)" NA NA
+"177" "Nepal" "NPL" "Investment in transport with private participation (current US$)" 3.5e+08 "X2015"
+"178" "Nauru" "NRU" "Investment in transport with private participation (current US$)" NA NA
+"179" "New Zealand" "NZL" "Investment in transport with private participation (current US$)" NA NA
+"180" "OECD members" "OED" "Investment in transport with private participation (current US$)" NA NA
+"181" "Oman" "OMN" "Investment in transport with private participation (current US$)" NA NA
+"182" "Other small states" "OSS" "Investment in transport with private participation (current US$)" NA NA
+"183" "Pakistan" "PAK" "Investment in transport with private participation (current US$)" 1.2e+09 "X2010"
+"184" "Panama" "PAN" "Investment in transport with private participation (current US$)" 4e+08 "X2016"
+"185" "Peru" "PER" "Investment in transport with private participation (current US$)" 2.15e+08 "X2018"
+"186" "Philippines" "PHL" "Investment in transport with private participation (current US$)" 745350000 "X2017"
+"187" "Palau" "PLW" "Investment in transport with private participation (current US$)" NA NA
+"188" "Papua New Guinea" "PNG" "Investment in transport with private participation (current US$)" NA NA
+"189" "Poland" "POL" "Investment in transport with private participation (current US$)" NA NA
+"190" "Pre-demographic dividend" "PRE" "Investment in transport with private participation (current US$)" NA NA
+"191" "Puerto Rico" "PRI" "Investment in transport with private participation (current US$)" NA NA
+"192" "Korea, Dem. People’s Rep." "PRK" "Investment in transport with private participation (current US$)" NA NA
+"193" "Portugal" "PRT" "Investment in transport with private participation (current US$)" NA NA
+"194" "Paraguay" "PRY" "Investment in transport with private participation (current US$)" 5.8e+07 "X1998"
+"195" "West Bank and Gaza" "PSE" "Investment in transport with private participation (current US$)" NA NA
+"196" "Pacific island small states" "PSS" "Investment in transport with private participation (current US$)" NA NA
+"197" "Post-demographic dividend" "PST" "Investment in transport with private participation (current US$)" NA NA
+"198" "French Polynesia" "PYF" "Investment in transport with private participation (current US$)" NA NA
+"199" "Qatar" "QAT" "Investment in transport with private participation (current US$)" NA NA
+"200" "Romania" "ROU" "Investment in transport with private participation (current US$)" 50400000 "X2017"
+"201" "Russian Federation" "RUS" "Investment in transport with private participation (current US$)" 1762430000 "X2018"
+"202" "Rwanda" "RWA" "Investment in transport with private participation (current US$)" NA NA
+"203" "South Asia" "SAS" "Investment in transport with private participation (current US$)" 9486170000 "X2018"
+"204" "Saudi Arabia" "SAU" "Investment in transport with private participation (current US$)" NA NA
+"205" "Sudan" "SDN" "Investment in transport with private participation (current US$)" 3e+07 "X2006"
+"206" "Senegal" "SEN" "Investment in transport with private participation (current US$)" 1.73e+08 "X2015"
+"207" "Singapore" "SGP" "Investment in transport with private participation (current US$)" NA NA
+"208" "Solomon Islands" "SLB" "Investment in transport with private participation (current US$)" NA NA
+"209" "Sierra Leone" "SLE" "Investment in transport with private participation (current US$)" 1.3e+08 "X2010"
+"210" "El Salvador" "SLV" "Investment in transport with private participation (current US$)" NA NA
+"211" "San Marino" "SMR" "Investment in transport with private participation (current US$)" NA NA
+"212" "Somalia" "SOM" "Investment in transport with private participation (current US$)" 4.42e+08 "X2018"
+"213" "Serbia" "SRB" "Investment in transport with private participation (current US$)" 1117970000 "X2018"
+"214" "Sub-Saharan Africa (excluding high income)" "SSA" "Investment in transport with private participation (current US$)" NA NA
+"215" "South Sudan" "SSD" "Investment in transport with private participation (current US$)" NA NA
+"216" "Sub-Saharan Africa" "SSF" "Investment in transport with private participation (current US$)" NA NA
+"217" "Small states" "SST" "Investment in transport with private participation (current US$)" NA NA
+"218" "Sao Tome and Principe" "STP" "Investment in transport with private participation (current US$)" NA NA
+"219" "Suriname" "SUR" "Investment in transport with private participation (current US$)" NA NA
+"220" "Slovak Republic" "SVK" "Investment in transport with private participation (current US$)" NA NA
+"221" "Slovenia" "SVN" "Investment in transport with private participation (current US$)" NA NA
+"222" "Sweden" "SWE" "Investment in transport with private participation (current US$)" NA NA
+"223" "Eswatini" "SWZ" "Investment in transport with private participation (current US$)" NA NA
+"224" "Sint Maarten (Dutch part)" "SXM" "Investment in transport with private participation (current US$)" NA NA
+"225" "Seychelles" "SYC" "Investment in transport with private participation (current US$)" NA NA
+"226" "Syrian Arab Republic" "SYR" "Investment in transport with private participation (current US$)" 4.5e+07 "X2009"
+"227" "Turks and Caicos Islands" "TCA" "Investment in transport with private participation (current US$)" NA NA
+"228" "Chad" "TCD" "Investment in transport with private participation (current US$)" NA NA
+"229" "East Asia & Pacific (IDA & IBRD countries)" "TEA" "Investment in transport with private participation (current US$)" 29462230000 "X2018"
+"230" "Europe & Central Asia (IDA & IBRD countries)" "TEC" "Investment in transport with private participation (current US$)" 3588880000 "X2017"
+"231" "Togo" "TGO" "Investment in transport with private participation (current US$)" 4.42e+08 "X2011"
+"232" "Thailand" "THA" "Investment in transport with private participation (current US$)" 3.129e+09 "X2017"
+"233" "Tajikistan" "TJK" "Investment in transport with private participation (current US$)" NA NA
+"234" "Turkmenistan" "TKM" "Investment in transport with private participation (current US$)" NA NA
+"235" "Latin America & the Caribbean (IDA & IBRD countries)" "TLA" "Investment in transport with private participation (current US$)" 4250500000 "X2018"
+"236" "Timor-Leste" "TLS" "Investment in transport with private participation (current US$)" 4.9e+08 "X2018"
+"237" "Middle East & North Africa (IDA & IBRD countries)" "TMN" "Investment in transport with private participation (current US$)" NA NA
+"238" "Tonga" "TON" "Investment in transport with private participation (current US$)" NA NA
+"239" "South Asia (IDA & IBRD)" "TSA" "Investment in transport with private participation (current US$)" 9486170000 "X2018"
+"240" "Sub-Saharan Africa (IDA & IBRD countries)" "TSS" "Investment in transport with private participation (current US$)" NA NA
+"241" "Trinidad and Tobago" "TTO" "Investment in transport with private participation (current US$)" NA NA
+"242" "Tunisia" "TUN" "Investment in transport with private participation (current US$)" 8.4e+08 "X2007"
+"243" "Turkey" "TUR" "Investment in transport with private participation (current US$)" 6923900000 "X2018"
+"244" "Tuvalu" "TUV" "Investment in transport with private participation (current US$)" NA NA
+"245" "Tanzania" "TZA" "Investment in transport with private participation (current US$)" 1.34e+08 "X2007"
+"246" "Uganda" "UGA" "Investment in transport with private participation (current US$)" 4.04e+08 "X2006"
+"247" "Ukraine" "UKR" "Investment in transport with private participation (current US$)" 1.5e+08 "X2017"
+"248" "Upper middle income" "UMC" "Investment in transport with private participation (current US$)" 40759600000 "X2018"
+"249" "Uruguay" "URY" "Investment in transport with private participation (current US$)" NA NA
+"250" "United States" "USA" "Investment in transport with private participation (current US$)" NA NA
+"251" "Uzbekistan" "UZB" "Investment in transport with private participation (current US$)" 2.5e+07 "X2008"
+"252" "St. Vincent and the Grenadines" "VCT" "Investment in transport with private participation (current US$)" NA NA
+"253" "Venezuela, RB" "VEN" "Investment in transport with private participation (current US$)" 3.4e+07 "X2004"
+"254" "British Virgin Islands" "VGB" "Investment in transport with private participation (current US$)" NA NA
+"255" "Virgin Islands (U.S.)" "VIR" "Investment in transport with private participation (current US$)" NA NA
+"256" "Vietnam" "VNM" "Investment in transport with private participation (current US$)" 4500000 "X2016"
+"257" "Vanuatu" "VUT" "Investment in transport with private participation (current US$)" NA NA
+"258" "World" "WLD" "Investment in transport with private participation (current US$)" NA NA
+"259" "Samoa" "WSM" "Investment in transport with private participation (current US$)" NA NA
+"260" "Kosovo" "XKX" "Investment in transport with private participation (current US$)" 6.3e+07 "X2013"
+"261" "Yemen, Rep." "YEM" "Investment in transport with private participation (current US$)" 2.2e+08 "X2008"
+"262" "South Africa" "ZAF" "Investment in transport with private participation (current US$)" 9.7e+07 "X2011"
+"263" "Zambia" "ZMB" "Investment in transport with private participation (current US$)" 15550000 "X2003"
+"264" "Zimbabwe" "ZWE" "Investment in transport with private participation (current US$)" 9.7e+07 "X2011"

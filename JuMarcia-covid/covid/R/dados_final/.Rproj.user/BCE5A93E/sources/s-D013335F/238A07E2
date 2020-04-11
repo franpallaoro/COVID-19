@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586453655840.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "238A07E2",
+    "lastKnownWriteTime" : 2009267798448,
+    "last_content_update" : 1586453655840,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "context" : "namespace:dplyr:::filter_impl"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_code_browser"
+}

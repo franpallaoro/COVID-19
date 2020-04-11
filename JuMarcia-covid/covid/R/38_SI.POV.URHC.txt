@@ -1,0 +1,265 @@
+"Country" "CCode" "INome" "Indicador" "Ano"
+"1" "Aruba" "ABW" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"2" "Afghanistan" "AFG" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"3" "Angola" "AGO" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"4" "Albania" "ALB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"5" "Andorra" "AND" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"6" "Arab World" "ARB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"7" "United Arab Emirates" "ARE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"8" "Argentina" "ARG" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"9" "Armenia" "ARM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"10" "American Samoa" "ASM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"11" "Antigua and Barbuda" "ATG" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"12" "Australia" "AUS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"13" "Austria" "AUT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"14" "Azerbaijan" "AZE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"15" "Burundi" "BDI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"16" "Belgium" "BEL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"17" "Benin" "BEN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"18" "Burkina Faso" "BFA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"19" "Bangladesh" "BGD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"20" "Bulgaria" "BGR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"21" "Bahrain" "BHR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"22" "Bahamas, The" "BHS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"23" "Bosnia and Herzegovina" "BIH" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"24" "Belarus" "BLR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"25" "Belize" "BLZ" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"26" "Bermuda" "BMU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"27" "Bolivia" "BOL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"28" "Brazil" "BRA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"29" "Barbados" "BRB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"30" "Brunei Darussalam" "BRN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"31" "Bhutan" "BTN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"32" "Botswana" "BWA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"33" "Central African Republic" "CAF" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"34" "Canada" "CAN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"35" "Central Europe and the Baltics" "CEB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"36" "Switzerland" "CHE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"37" "Channel Islands" "CHI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"38" "Chile" "CHL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"39" "China" "CHN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"40" "Cote d'Ivoire" "CIV" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"41" "Cameroon" "CMR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"42" "Congo, Dem. Rep." "COD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"43" "Congo, Rep." "COG" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"44" "Colombia" "COL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"45" "Comoros" "COM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"46" "Cabo Verde" "CPV" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"47" "Costa Rica" "CRI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"48" "Caribbean small states" "CSS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"49" "Cuba" "CUB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"50" "Curacao" "CUW" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"51" "Cayman Islands" "CYM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"52" "Cyprus" "CYP" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"53" "Czech Republic" "CZE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"54" "Germany" "DEU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"55" "Djibouti" "DJI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"56" "Dominica" "DMA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"57" "Denmark" "DNK" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"58" "Dominican Republic" "DOM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"59" "Algeria" "DZA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"60" "East Asia & Pacific (excluding high income)" "EAP" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"61" "Early-demographic dividend" "EAR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"62" "East Asia & Pacific" "EAS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"63" "Europe & Central Asia (excluding high income)" "ECA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"64" "Europe & Central Asia" "ECS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"65" "Ecuador" "ECU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"66" "Egypt, Arab Rep." "EGY" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"67" "Euro area" "EMU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"68" "Eritrea" "ERI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"69" "Spain" "ESP" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"70" "Estonia" "EST" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"71" "Ethiopia" "ETH" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"72" "European Union" "EUU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"73" "Fragile and conflict affected situations" "FCS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"74" "Finland" "FIN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"75" "Fiji" "FJI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"76" "France" "FRA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"77" "Faroe Islands" "FRO" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"78" "Micronesia, Fed. Sts." "FSM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"79" "Gabon" "GAB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"80" "United Kingdom" "GBR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"81" "Georgia" "GEO" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"82" "Ghana" "GHA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"83" "Gibraltar" "GIB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"84" "Guinea" "GIN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"85" "Gambia, The" "GMB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"86" "Guinea-Bissau" "GNB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"87" "Equatorial Guinea" "GNQ" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"88" "Greece" "GRC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"89" "Grenada" "GRD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"90" "Greenland" "GRL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"91" "Guatemala" "GTM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"92" "Guam" "GUM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"93" "Guyana" "GUY" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"94" "High income" "HIC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"95" "Hong Kong SAR, China" "HKG" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"96" "Honduras" "HND" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"97" "Heavily indebted poor countries (HIPC)" "HPC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"98" "Croatia" "HRV" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"99" "Haiti" "HTI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"100" "Hungary" "HUN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"101" "IBRD only" "IBD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"102" "IDA & IBRD total" "IBT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"103" "IDA total" "IDA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"104" "IDA blend" "IDB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"105" "Indonesia" "IDN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"106" "IDA only" "IDX" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"107" "Isle of Man" "IMN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"108" "India" "IND" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"109" "Not classified" "INX" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"110" "Ireland" "IRL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"111" "Iran, Islamic Rep." "IRN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"112" "Iraq" "IRQ" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"113" "Iceland" "ISL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"114" "Israel" "ISR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"115" "Italy" "ITA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"116" "Jamaica" "JAM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"117" "Jordan" "JOR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"118" "Japan" "JPN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"119" "Kazakhstan" "KAZ" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"120" "Kenya" "KEN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"121" "Kyrgyz Republic" "KGZ" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"122" "Cambodia" "KHM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"123" "Kiribati" "KIR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"124" "St. Kitts and Nevis" "KNA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"125" "Korea, Rep." "KOR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"126" "Kuwait" "KWT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"127" "Latin America & Caribbean (excluding high income)" "LAC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"128" "Lao PDR" "LAO" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"129" "Lebanon" "LBN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"130" "Liberia" "LBR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"131" "Libya" "LBY" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"132" "St. Lucia" "LCA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"133" "Latin America & Caribbean" "LCN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"134" "Least developed countries: UN classification" "LDC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"135" "Low income" "LIC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"136" "Liechtenstein" "LIE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"137" "Sri Lanka" "LKA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"138" "Lower middle income" "LMC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"139" "Low & middle income" "LMY" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"140" "Lesotho" "LSO" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"141" "Late-demographic dividend" "LTE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"142" "Lithuania" "LTU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"143" "Luxembourg" "LUX" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"144" "Latvia" "LVA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"145" "Macao SAR, China" "MAC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"146" "St. Martin (French part)" "MAF" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"147" "Morocco" "MAR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"148" "Monaco" "MCO" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"149" "Moldova" "MDA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"150" "Madagascar" "MDG" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"151" "Maldives" "MDV" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"152" "Middle East & North Africa" "MEA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"153" "Mexico" "MEX" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"154" "Marshall Islands" "MHL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"155" "Middle income" "MIC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"156" "North Macedonia" "MKD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"157" "Mali" "MLI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"158" "Malta" "MLT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"159" "Myanmar" "MMR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"160" "Middle East & North Africa (excluding high income)" "MNA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"161" "Montenegro" "MNE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"162" "Mongolia" "MNG" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"163" "Northern Mariana Islands" "MNP" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"164" "Mozambique" "MOZ" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"165" "Mauritania" "MRT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"166" "Mauritius" "MUS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"167" "Malawi" "MWI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"168" "Malaysia" "MYS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"169" "North America" "NAC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"170" "Namibia" "NAM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"171" "New Caledonia" "NCL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"172" "Niger" "NER" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"173" "Nigeria" "NGA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"174" "Nicaragua" "NIC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"175" "Netherlands" "NLD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"176" "Norway" "NOR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"177" "Nepal" "NPL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"178" "Nauru" "NRU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"179" "New Zealand" "NZL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"180" "OECD members" "OED" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"181" "Oman" "OMN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"182" "Other small states" "OSS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"183" "Pakistan" "PAK" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"184" "Panama" "PAN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"185" "Peru" "PER" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"186" "Philippines" "PHL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"187" "Palau" "PLW" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"188" "Papua New Guinea" "PNG" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"189" "Poland" "POL" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"190" "Pre-demographic dividend" "PRE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"191" "Puerto Rico" "PRI" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"192" "Korea, Dem. People’s Rep." "PRK" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"193" "Portugal" "PRT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"194" "Paraguay" "PRY" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"195" "West Bank and Gaza" "PSE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"196" "Pacific island small states" "PSS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"197" "Post-demographic dividend" "PST" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"198" "French Polynesia" "PYF" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"199" "Qatar" "QAT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"200" "Romania" "ROU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"201" "Russian Federation" "RUS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"202" "Rwanda" "RWA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"203" "South Asia" "SAS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"204" "Saudi Arabia" "SAU" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"205" "Sudan" "SDN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"206" "Senegal" "SEN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"207" "Singapore" "SGP" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"208" "Solomon Islands" "SLB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"209" "Sierra Leone" "SLE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"210" "El Salvador" "SLV" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"211" "San Marino" "SMR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"212" "Somalia" "SOM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"213" "Serbia" "SRB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"214" "Sub-Saharan Africa (excluding high income)" "SSA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"215" "South Sudan" "SSD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"216" "Sub-Saharan Africa" "SSF" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"217" "Small states" "SST" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"218" "Sao Tome and Principe" "STP" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"219" "Suriname" "SUR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"220" "Slovak Republic" "SVK" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"221" "Slovenia" "SVN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"222" "Sweden" "SWE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"223" "Eswatini" "SWZ" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"224" "Sint Maarten (Dutch part)" "SXM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"225" "Seychelles" "SYC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"226" "Syrian Arab Republic" "SYR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"227" "Turks and Caicos Islands" "TCA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"228" "Chad" "TCD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"229" "East Asia & Pacific (IDA & IBRD countries)" "TEA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"230" "Europe & Central Asia (IDA & IBRD countries)" "TEC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"231" "Togo" "TGO" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"232" "Thailand" "THA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"233" "Tajikistan" "TJK" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"234" "Turkmenistan" "TKM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"235" "Latin America & the Caribbean (IDA & IBRD countries)" "TLA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"236" "Timor-Leste" "TLS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"237" "Middle East & North Africa (IDA & IBRD countries)" "TMN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"238" "Tonga" "TON" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"239" "South Asia (IDA & IBRD)" "TSA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"240" "Sub-Saharan Africa (IDA & IBRD countries)" "TSS" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"241" "Trinidad and Tobago" "TTO" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"242" "Tunisia" "TUN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"243" "Turkey" "TUR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"244" "Tuvalu" "TUV" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"245" "Tanzania" "TZA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"246" "Uganda" "UGA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"247" "Ukraine" "UKR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"248" "Upper middle income" "UMC" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"249" "Uruguay" "URY" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"250" "United States" "USA" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"251" "Uzbekistan" "UZB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"252" "St. Vincent and the Grenadines" "VCT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"253" "Venezuela, RB" "VEN" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"254" "British Virgin Islands" "VGB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"255" "Virgin Islands (U.S.)" "VIR" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"256" "Vietnam" "VNM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"257" "Vanuatu" "VUT" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"258" "World" "WLD" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"259" "Samoa" "WSM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"260" "Kosovo" "XKX" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"261" "Yemen, Rep." "YEM" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"262" "South Africa" "ZAF" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"263" "Zambia" "ZMB" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA
+"264" "Zimbabwe" "ZWE" "Urban poverty headcount ratio at national poverty lines (% of urban population)" NA NA

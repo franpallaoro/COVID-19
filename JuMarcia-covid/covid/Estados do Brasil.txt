@@ -1,0 +1,59 @@
+Estados do Brasil por Sigla
+
+AC
+AL
+AP
+AM
+BA
+CE
+DF
+ES
+GO
+MA
+MT
+MS
+MG
+PA
+PB
+PR
+PE
+PI
+RJ
+RN
+RS
+RO
+RR
+SC
+SP
+SE
+TO
+
+http://pt.wikipedia.org/wiki/Lista_de_estados_do_Brasil_por_%C3%A1rea
+Posição 	Estado 	Área (km²)
+1 	Amazonas 	1.570.745,680
+2 	Pará 	1.247.689,515
+3 	Mato Grosso 	903.357,908
+4 	Minas Gerais 	586.528,293
+5 	Bandeira da Bahia Bahia 	564.692,669
+6 	Mato Grosso do Sul 	357.124,962
+7 	Goiás 	340.086,698
+8 	Maranhão 	331.983,293
+9 	Rio Grande do Sul 	281.748,538
+10 	Tocantins 	277.620,914
+11 	Piauí 	251.529,186
+12 	São Paulo 	248.209,426
+13 	Rondônia 	237.576,167
+14 	Roraima 	224.298,980
+15 	Paraná 	199.314,850
+16 	Acre 	152.581,388
+17 	Ceará 	148.825,602
+18 	Amapá 	142.814,585
+19 	Pernambuco 	98.311,616
+20 	Santa Catarina 	95.346,181
+21 	Paraíba 	56.439,838
+22 	Rio Grande do Norte 	52.796,791
+23 	Espírito Santo 	46.077,519
+24 	Rio de Janeiro 	43.696,054
+25 	Alagoas 	27.767,661
+26 	Sergipe 	21.910,348
+27 	Distrito Federal 	5.801,937

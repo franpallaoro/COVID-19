@@ -1,0 +1,71 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#loader {
+    position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100vw;
+	height: 90vh;
+	z-index: 9999;
+    background: url('../img/loader.gif') center no-repeat #fff;
+}
+
+#map {
+    width: 100vw;
+    height: 95vh;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    text-align: left;
+    line-height: 18px;
+    color: #555;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 1.0;
+}
+
+#rodape {
+    padding-left: -25px;
+    padding-right: -25px;
+    border-top: 5px solid #333;
+    width: 100vw;
+    height: 4vh;
+    text-align: center;
+    color: #333;
+    font: 8px sans-serif;
+    line-height: 4vh;
+    vertical-align: middle;
+}
+
+#rodape div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#rodape img {
+    height: 8vh;
+    display: inline-block;
+    vertical-align: middle;
+}

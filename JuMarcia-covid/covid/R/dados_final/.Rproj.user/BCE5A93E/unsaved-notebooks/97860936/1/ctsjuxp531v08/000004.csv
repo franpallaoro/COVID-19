@@ -1,0 +1,5 @@
+"0","centroids <- aggregate(cbind(PC1, PC2) ~ groups, pcaOutput2, mean)
+"
+"2","Error in model.frame.default(formula = cbind(PC1, PC2) ~ groups, data = pcaOutput2) : 
+  tipo inválido (closure) para variável 'groups'
+"

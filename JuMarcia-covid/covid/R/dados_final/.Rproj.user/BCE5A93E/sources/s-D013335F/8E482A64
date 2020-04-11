@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586545433133.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "8E482A64",
+    "lastKnownWriteTime" : 1586190060,
+    "last_content_update" : 1586546377773,
+    "path" : "C:/Users/mhbar/Google Drive/monitora_super_ju/covid/R/dados_final/programacao_marcia.Rmd",
+    "project_path" : "programacao_marcia.Rmd",
+    "properties" : {
+        "cursorPosition" : "458,0",
+        "scrollLine" : "421"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

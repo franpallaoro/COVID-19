@@ -1,0 +1,7 @@
+"0","banco_cp= banco_imputado%>%
+            select(-1,:3)
+"
+"2","Erro: ':' inesperado in:
+""banco_cp= banco_imputado%>%
+            select(-1,:""
+"

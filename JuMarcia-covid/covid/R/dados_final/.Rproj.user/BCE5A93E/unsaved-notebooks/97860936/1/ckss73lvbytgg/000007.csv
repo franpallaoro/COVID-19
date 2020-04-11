@@ -1,0 +1,4 @@
+"0","rf.pred <- ceiling(predict(rf_model, test[,-c(1:3, 6)]))
+"
+"2","Error in eval(predvars, data, env) : objeto '2' não encontrado
+"

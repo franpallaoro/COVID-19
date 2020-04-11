@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586543596640.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "4A0A72FE",
+    "lastKnownWriteTime" : 1586446243,
+    "last_content_update" : 1586446243,
+    "path" : "C:/Users/mhbar/Google Drive/monitora_super_ju/covid/R/dados_final/imputacao.R",
+    "project_path" : "imputacao.R",
+    "properties" : {
+        "cursorPosition" : "24,0",
+        "scrollLine" : "1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

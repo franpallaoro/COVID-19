@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586544123498.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "927BDE0B",
+    "lastKnownWriteTime" : 1586479129,
+    "last_content_update" : 1586479129,
+    "path" : "C:/Users/mhbar/Google Drive/monitora_super_ju/covid/R/dados_final/modelagem.R",
+    "project_path" : "modelagem.R",
+    "properties" : {
+        "cursorPosition" : "169,33",
+        "scrollLine" : "146"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

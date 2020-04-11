@@ -1,0 +1,694 @@
+---
+title: "desafio"
+author: "marcia"
+date: "01/04/2020"
+output: html_document
+---
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(knitr)
+library(DT)
+library(RColorBrewer)
+library(dplyr)
+library(plotly)
+library(reshape2)
+library(shiny)
+library(shinydashboard)
+library(ggrepel)
+library(naniar)
+library(randomForest)
+library(glmnet)
+library(ggpubr)
+library(plotROC)
+library(pROC)
+library(visdat)
+```
+
+# Leitura dos dados
+
+```{r}
+
+banco_completo <- read_excel("dataset.xlsx")
+banco_completo <- banco_completo[,-1]
+names(banco_completo)[2]<-"resultado_covid"
+
+
+banco_vania <- read_excel("dataset_n598.xls")
+banco_vania = banco_vania[,-c(1, 47)]
+names(banco_vania)[2]<-"resultado_covid"
+names(banco_vania)[12] = "mean_corpus_cula_rhemoglobin_conc"
+banco_vania$resultado_covid = as.factor(banco_vania$resultado_covid)
+
+#install.packages("RANN")
+#install.packages("caret")
+library(caret)
+library(RANN)
+
+```
+
+Antes de fazer a análise , vou indicar no banco da Vania o que é variável numérica e o que é categórica.
+
+
+```{r}
+nomes_banco_vania=names(banco_vania)
+nomes_mudar_fatores = nomes_banco_vania[c(1:5, 26:45)] # variáveis que são fatores
+banco_vania = banco_vania %>%
+                mutate_at(nomes_mudar_fatores , as.factor)
+
+```
+
+
+
+# Número de missings do banco de dados
+
+```{r}
+####################################
+############# Vizualizaçao dos missings
+################### http://naniar.njtierney.com/articles/naniar-visualisation.html
+#######################
+vis_dat(banco_completo)
+
+gg_miss_var(banco_completo)
+
+gg_miss_var(banco_completo, facet = resultado_covid)
+
+## visualizando os missings como arvores
+banco_completo %>%
+  add_prop_miss() %>%
+  head()
+
+library(rpart)
+library(rpart.plot)
+
+banco_completo %>%
+  add_prop_miss() %>%
+  rpart(prop_miss_all ~ ., data = .) %>%
+  prp(type = 4, extra = 101, prefix = "Prop. Miss = ", roundint = FALSE)
+
+####################################
+############# Para a imputacao pode-se utilizar o knn ou árvores de decisao
+#######################
+preProcValues <- preProcess(dataset_n598 %>% 
+                          dplyr::select(c(1:45)),
+                            method = c("knnImpute"),
+                            k = 20,
+                            knnSummary = mean)
+
+novo_banco1 <- predict(preProcValues, dataset_n598,na.action = na.pass)
+
+
+preProcValues <- preProcess(dataset_n598 %>% 
+                          dplyr::select(c(1:45)),
+                            method = c("bagImpute"))
+
+preProc <- preProcess(method="bagImpute", training[, 1:4])
+
+```
+
+
+Como os dados possuem muitos missings, procedeu-se a uma limpeza no banco, excluindo aquelas varíáveis com a maior proporcao de 'NA'. Muitas delas eram compostas por exames de urina dos pacientes.
+
+
+# Banco de dados formatado pela Vania
+
+
+```{r}
+
+vis_dat(banco_vania)
+
+gg_miss_var(banco_vania)
+
+gg_miss_var(banco_vania, facet = resultado_covid)
+
+banco_vania_negativos = banco_vania %>%
+                          filter(resultado_covid == 0) 
+
+vis_dat(banco_vania_negativos)
+gg_miss_var(banco_vania_negativos)
+
+
+banco_vania_positivos = banco_vania %>%
+                          filter(resultado_covid == 1) 
+
+
+vis_dat(banco_vania_positivos)
+gg_miss_var(banco_vania_positivos)
+
+```
+
+```{r}
+dim(banco_vania)
+
+dim(banco_vania_positivos)
+
+dim(banco_vania_negativos)
+
+dim(banco_completo)
+
+```
+
+# Descritiva do banco da vania
+
+
+```{r}
+
+
+ggplot(banco_vania, aes(resultado_covid, fill = resultado_covid)) + 
+      geom_bar() + 
+      theme_bw() + 
+      scale_fill_brewer(palette = "Dark2") + 
+      theme(legend.position = "none")
+
+
+require(knitr)
+
+kable(head(banco_vania), 
+      caption = "Primeiras seis observações do conjunto de dados", 
+      align = "c")
+
+
+
+```
+
+
+## Histogramas
+ Gráfico das variáveis quantitativas por casos confirmados de covid.
+
+```{r , out.width = '33%'}
+require(WVPlots)
+
+for (i in 6:25){ ## sao as variaveis continuas
+title.var = paste0("Histograma de ", names(banco_vania)[i], " Por resultado do teste do COVID")
+plot.sh <- ShadowHist(banco_vania, names(banco_vania)[i], "resultado_covid", title = title.var)
+print(plot.sh)
+}
+
+
+
+```
+
+# Gráficos de Barras
+
+GRáfico das variáveis categóricas por casos confirmados de covid.
+
+```{r , out.width = '33%'}
+
+
+# for (i in c(1,3,4,5, 26:45)){ ## sao as variaveis categoricas
+# title.var = paste0("Histograma de ", names(banco_vania)[i], " Por resultado do teste do COVID")
+# plot.sh <- ShadowPlot(banco_vania, names(banco_vania)[i], "resultado_covid", title = title.var, monochrome = FALSE)
+# print(plot.sh)
+# }
+
+
+ggplot(banco_vania) +
+        geom_bar(aes(x = Patientagequantile, y=resultado_covid, fill = resultado_covid),
+                 stat = "identity")
+ggplot(banco_vania) +
+        geom_bar(aes(x = Patientaddmitedtoregularward1yes0no, y=resultado_covid, fill = resultado_covid),
+                 stat = "identity")
+ggplot(banco_vania) +
+        geom_bar(aes(x = Patientaddmitedtosemiintensiveunit1yes0no, y=resultado_covid, fill = resultado_covid),
+                 stat = "identity")
+ggplot(banco_vania) +
+        geom_bar(aes(x = Patientaddmitedtointensivecareunit1yes0no, y=resultado_covid, fill = resultado_covid),
+                 stat = "identity")
+ggplot(banco_vania) +
+        geom_bar(aes(x = RespiratorySyncytialVirus_n, y=resultado_covid, fill = resultado_covid),
+                 stat = "identity")
+
+ggplot(banco_vania) +
+        geom_bar(aes(x = StreptoA_n, y=resultado_covid, fill = resultado_covid),
+                 stat = "identity")
+
+# ggplot(banco_vania) +
+#         geom_bar(aes(x = Patientagequantile, y=resultado_covid, fill = resultado_covid),
+#                  stat = "identity", position = "fill")
+
+
+ggplot(banco_vania, aes(x = StreptoA_n , fill = resultado_covid)) +
+  geom_bar()
+
+```
+
+## Box plots
+
+
+```{r , out.width = '33%'}
+
+for (i in 6:25){
+title.var = paste0("Box-Plot de ", names(banco_vania)[i], " Por resultado do teste COVID")
+plot.bp <- ScatterBoxPlot(banco_vania, "resultado_covid", names(banco_vania)[i], pt_alpha = 0.2, 
+                          title = title.var, 
+                          pt_color = "gray", 
+                          box_color = c("seagreen2", "sandybrown"), 
+                          box_fill = c("#1B9E77", "#D95F02"))
+print(plot.bp)
+}
+```
+
+
+### Dispersão
+
+```{r}
+require(GGally)
+ggpairs(banco_vania,
+        columns=6:11, aes(colour=resultado_covid, alpha=0.5),
+        lower=list(continuous="points"),
+        upper=list(continuous="blank"),
+        axisLabels="none", switch="both") +
+  theme_gray()
+
+ggpairs(banco_vania,
+        columns=11:16, aes(colour=resultado_covid, alpha=0.5),
+        lower=list(continuous="points"),
+        upper=list(continuous="blank"),
+        axisLabels="none", switch="both") +
+  theme_gray()
+
+ggpairs(banco_vania,
+        columns=17:22, aes(colour=resultado_covid, alpha=0.5),
+        lower=list(continuous="points"),
+        upper=list(continuous="blank"),
+        axisLabels="none", switch="both") +
+  theme_gray()
+
+ggpairs(banco_vania,
+        columns=23:26, aes(colour=resultado_covid, alpha=0.5),
+        lower=list(continuous="points"),
+        upper=list(continuous="blank"),
+        axisLabels="none", switch="both") +
+  theme_gray()
+
+```
+
+### Correlação entre as features (covariáveis) do banco de dados.
+
+Para esse gráfico, só foram utilizadas as variáveis quantitativas sem nenhum missing.
+
+```{r}
+features <- banco_vania[,6:19]
+vis_dat(banco_vania[, 6:19])
+
+
+
+library(corrplot) #correlograma
+library(RColorBrewer) #paleta
+
+M = cor(features)
+corrplot(M, method = "color", col = brewer.pal(n = 8, name = "Dark2"),
+         type = "full", order = "hclust", number.cex = .7,
+         addCoef.col = "black", # Add coefficient of correlation
+         tl.col = "black", tl.srt = 90, # Text label color and rotation
+         # hide correlation coefficient on the principal diagonal
+         diag = TRUE)
+```
+
+
+# Imputacao
+
+```{r}
+####################################
+############# Para a imputacao pode-se utilizar o knn ou árvores de decisao
+#######################
+
+## kNN O X deve ser numerico
+#library(DMwR)
+#knnOutput <- knnImputation(banco_vania, k=1,  meth = "weighAvg")  # perform knn imputation.
+#knnOutput <- knnImputation(banco_vania, k=1,  meth = "median")  # perform knn imputation.
+#anyNA(knnOutput)
+
+
+library(mice)
+#miceMod <- mice(banco_vania[, !names(banco_vania) %in% "resultado_covid"], method="rf")  # perform mice imputation, based on random forests.
+miceMod <- mice(banco_vania, method="rf")  #
+miceOutput <- complete(miceMod)  # generate the completed data.
+anyNA(miceOutput) 
+
+banco_vania_imput_rf = miceOutput 
+############
+################################
+# rec <- recipe(HHV ~ carbon + hydrogen + oxygen + nitrogen + sulfur,
+#               data = biomass_tr)
+# 
+# ratio_recipe <- rec %>%
+#   step_knnimpute(all_predictors(), neighbors = 3)
+# ratio_recipe2 <- prep(ratio_recipe, training = biomass_tr)
+# imputed <- bake(ratio_recipe2, biomass_te)
+
+########
+library(caret)
+
+preProc <- preProcess(method="bagImpute", banco_vania)
+banco_vania_caret_bag <- predict(preProc, banco_vania)
+
+preProc2 <- preProcess(method = "knnImpute", k = 10, banco_vania)
+banco_vania_caret_knn_10 <- predict(preProc, banco_vania)
+anyNA(banco_vania_caret_knn_10) 
+
+#banco_imputado = banco_vania_imput_rf
+banco_imputado = banco_vania_caret_bag 
+#banco_imputado = banco_vania_caret_knn_10 
+
+```
+
+# Grafo das variaveis quantitativas
+
+```{r}
+# variaveis quanti vai de 6 a 25
+
+## coloque aqui o banco imputado que foi escolhido
+banco_imputado = banco_vania_imput_rf
+#banco_imputado = banco_vania_caret_bag 
+#banco_imputado = banco_vania_caret_knn_10 
+
+#names(banco_imputado)[6:15] = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
+#names(banco_imputado)[16:25] = c("l", "m", "n", "o", "p", "q", "r", "s", "t", "u")
+
+
+co_covid_positivo <- filter(banco_imputado, resultado_covid == 1) %>%
+  select(6:15) %>% ## aqui coloca os grupos de idade
+  cor()
+
+co_covid_negativo <- filter(banco_imputado, resultado_covid == 0) %>%
+  select(6:15) %>%
+  cor()
+
+
+#
+library(igraph)
+g_positivo <- graph.adjacency(co_covid_positivo,
+                         weighted = TRUE,
+                         diag = FALSE,
+                         mode = "upper")
+
+g_negativo <- graph.adjacency(co_covid_negativo,
+                         weighted = TRUE,
+                         diag = FALSE,
+                         mode = "upper")
+
+#
+cut.off_p <- mean(E(g_positivo)$weight)
+cut.off_n <- mean(E(g_negativo)$weight)
+
+g_positivo_2 <- delete_edges(g_positivo, E(g_positivo)[weight < cut.off_p])
+g_negativo_2 <- delete_edges(g_negativo, E(g_negativo)[weight < cut.off_n])
+
+c_g_positivo_2 <- cluster_fast_greedy(g_positivo_2) 
+c_g_negativo_2 <- cluster_fast_greedy(g_negativo_2) 
+
+#
+par(mfrow = c(1,2))
+
+plot(c_g_positivo_2, g_positivo_2,
+     #vertex.size = colSums(co_covid_positivo) * 10,
+     #vertex.frame.color = NA, 
+     #vertex.label.color = "black", 
+     #vertex.label.cex = 1,
+     edge.width = E(g_positivo_2)$weight * 15,
+     layout = layout_with_fr(g_positivo_2),
+     main = "covids positivos")
+
+plot(c_g_negativo_2, g_negativo_2,
+     #vertex.size = colSums(co_covid_negativo) * 10,
+     #vertex.frame.color = NA, 
+     #vertex.label.color = "black", 
+     #vertex.label.cex = 1,
+     edge.width = E(g_negativo_2)$weight * 15,
+     layout = layout_with_fr(g_negativo_2),
+     main = "Covid Negativos")
+
+
+```
+
+# PCA
+
+```{r}
+
+library(ellipse)
+banco_imputado = banco_vania_imput_rf
+
+banco_cp= banco_imputado%>%
+            select(6:25)
+
+# perform pca and extract scores
+pcaOutput <- prcomp(as.matrix(banco_cp))
+pcaOutput2 <- as.data.frame(pcaOutput$x)
+  
+# define groups for plotting
+pcaOutput2$groups <-banco_imputado$resultado_covid
+  
+centroids <- aggregate(cbind(PC1, PC2) ~ groups, pcaOutput2, mean)
+
+conf.rgn  <- do.call(rbind, lapply(unique(pcaOutput2$groups), function(t)
+  data.frame(groups = as.character(t),
+             ellipse(cov(pcaOutput2[pcaOutput2$groups == t, 1:2]),
+                   centre = as.matrix(centroids[centroids$groups == t, 2:3]),
+                   level = 0.95),
+             stringsAsFactors = FALSE)))
+    
+ggplot(data = pcaOutput2, aes(x = PC1, y = PC2, group = groups, color = groups)) + 
+    geom_polygon(data = conf.rgn, aes(fill = groups), alpha = 0.2) +
+    geom_point(size = 2, alpha = 0.6) + 
+    labs(color = "",
+         fill = "") 
+
+```
+
+# Agrupamento via tse
+
+```{r}
+# Esse pode demorar
+banco_imputado = banco_vania_imput_rf
+
+library(tsne)
+
+banco_imputado %>%
+  select(6:25) %>%
+  dist() %>%
+  #cmdscale %>%
+  tsne() %>%
+  as.data.frame() %>%
+  mutate(group = banco_imputado$resultado_covid) %>%
+  ggplot(aes(x = V1, y = V2, color = group)) +
+    geom_point()
+
+
+
+```
+
+# Modelos
+
+# Idade como categórica
+## Árvore de decisao
+
+```{r}
+set.seed(9)
+index <- createDataPartition(banco_imputado$resultado_covid, p = 0.9, list = FALSE)
+train_data <- banco_imputado[index, ]
+test_data  <- banco_imputado[-index, ]
+
+
+library(rpart)
+library(rpart.plot)
+
+
+fit <- rpart(resultado_covid ~ .,
+            data = train_data,
+            method = "class",
+            control = rpart.control(#xval = 10, 
+                                    #minbucket = 2, 
+                                    cp = 0.02), 
+             parms = list(split = "information"))
+
+rpart.plot(fit, extra = 100)
+
+#printcp(fit) # display the results
+#plotcp(fit) # visualize cross-validation results
+#summary(fit) # detailed summary of splits
+
+```
+
+
+
+# Idade como contínua
+
+```{r}
+banco_imputado = banco_imputado %>%
+                  mutate_at("Patientagequantile", as.numeric)    
+
+                  
+
+set.seed(9)
+index <- createDataPartition(banco_imputado$resultado_covid, p = 0.9, list = FALSE)
+train_data <- banco_imputado[index, ]
+test_data  <- banco_imputado[-index, ]
+
+
+library(rpart)
+library(rpart.plot)
+
+
+fit <- rpart(resultado_covid ~ .,
+            data = train_data,
+            method = "class",
+            control = rpart.control(#xval = 10, 
+                                    #minbucket = 2, 
+                                    cp = 0.02), 
+             parms = list(split = "information"))
+
+rpart.plot(fit, extra = 100)
+```
+
+
+# Modelagem random forest
+
+```{r}
+set.seed(9)
+model_rf_down <- caret::train(resultado_covid ~ .,
+                         data = banco_imputado,
+                         method = "rf",
+                         #preProcess = c("scale", "center"),
+                         trControl = trainControl(method = "repeatedcv", 
+                                                  number = 10, 
+                                                  repeats = 1, 
+                                                  savePredictions = TRUE, 
+                                                  verboseIter = FALSE,
+                                                  sampling = "down"))
+model_rf_down
+
+imp <- model_rf_down$finalModel$importance
+imp[order(imp, decreasing = TRUE)[1:10],]
+
+importance <- varImp(model_rf_down, scale = TRUE)
+plot(importance)
+
+
+#confusionMatrix(predict(model_rf_down, test_data), as.factor(test_data$resultado_covid))
+```
+
+# Modelagem boosting
+
+```{r}
+library(xgboost)
+model_xgb <- caret::train(resultado_covid ~ .,
+                          data = banco_imputado,
+                          method = "xgbTree",
+                          #preProcess = c("scale", "center"),
+                          trControl = trainControl(method = "repeatedcv", 
+                                                  number = 10, 
+                                                  repeats = 1, 
+                                                  savePredictions = TRUE, 
+                                                  verboseIter = FALSE)) #,
+                                                  #sampling = "down"))
+
+
+importance <- varImp(model_xgb, scale = TRUE)
+plot(importance)
+
+```
+
+# Random forest busca aleatoria de parametros
+
+```{r}
+
+banco_imputado$Patientagequantile = as.numeric(banco_imputado$Patientagequantile)
+
+
+fit_control5 <- trainControl(method = "repeatedcv",
+                           number = 10,
+                           repeats = 1,
+                           #sampling = "down",
+                           search = "random")
+
+
+rf_model <- train(resultado_covid ~ ., 
+                  data = banco_imputado, 
+                  method = "rf", 
+                  preProcess = c("scale", "center"),
+                  trControl = fit_control5,
+                  #tuneGrid = hiperparametros3,
+                  verbose = FALSE,
+                  tuneLength = 10)
+
+rf_model
+
+plot(rf_model)
+plot(rf_model, metric = "Kappa" , plotType = "level")
+ggplot(rf_model)
+
+importance_rf_model <- varImp(rf_model, scale = TRUE)
+importance_rf_model
+
+
+```
+
+# Boosting busca aleatoria de parametros
+
+```{r}
+library(glmnet)
+
+fit_control5 <- trainControl(method = "repeatedcv",
+                           number = 10,
+                           repeats = 1,
+                           #sampling = "down",
+                           search = "random")
+
+xgbGrid <- expand.grid(nrounds = c(1, 10),
+                       max_depth = c(1, 4),
+                       eta = c(.1, .4),
+                       gamma = 0,
+                       colsample_bytree = .7,
+                       min_child_weight = 1,
+                       subsample = c(.8, 1))
+
+
+xgb_model5 <- train(resultado_covid ~ ., 
+                  data = banco_imputado, 
+                  method = "xgbTree",, 
+                  preProcess = c("scale", "center"),
+                  trControl = fit_control5,
+                  #tuneGrid = hiperparametros3,
+                  verbose = FALSE,
+                  tuneGrid = xgbGrid)
+                  #tuneLength = 10)
+
+xgb_model5
+
+plot(xgb_model5)
+plot(xgb_model5, metric = "Kappa" , plotType = "level")
+ggplot(xgb_model5)
+
+importance_xgb_model5 <- varImp(xgb_model5, scale = TRUE)
+importance_xgb_model5
+
+```
+
+
+# Curva Roc
+
+```{r}
+roc_data <- data.frame(Response=data_blood_count%>% 
+                         filter(split=="Test") %>% 
+                         select(`SARS-Cov-2 exam result`) %>% 
+                         pull()=="positive",
+                       Predictor=c(pred_rf,pred_logistic_l1),
+                       Model=rep(c("Random Forest",
+                                   "Logistic"),each=sum(split=="Test")))
+
+
+g1 <- ggplot(data=roc_data,aes(m=Predictor,d=Response,color=Model,fill=Model))+
+  geom_roc()+
+  theme_bw()+
+  xlab("1-Specificity")+
+  ylab("Sensitivity")+
+  geom_abline(slope = 1,intercept = 0)
+print(g1)
+
+
+```
+

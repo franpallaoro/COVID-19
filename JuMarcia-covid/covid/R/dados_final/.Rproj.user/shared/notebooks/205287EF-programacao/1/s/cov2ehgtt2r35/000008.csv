@@ -1,0 +1,5 @@
+"0",""
+"0","banco_vania_negativos = banco_vania %>%"
+"0","                          filter(resultado_covid == 0) "
+"0",""
+"0","vis_dat(banco_vania_negativos)"

@@ -1,0 +1,39 @@
+#tabela h3 a::after {
+    opacity: 0.2;
+    content: "\e012";
+    font-family: 'Glyphicons Halflings';
+}
+
+/* #tabela h3 {
+    margin: 0;
+} */
+
+#tabela p.descricao {
+    margin: 0 1em 1em 2em;
+    font-size: 10pt;
+}
+
+
+#totalContent {
+    display: none;
+}
+#municipioContent {
+    display: none;
+}
+#estadoContent {
+    display: none;
+}
+#fontesContent {
+    display: none;
+}
+#citiesTimeContent {
+    display: none;
+}
+
+
+
+#map {
+    width: 100%;
+    /* min-width: 500px; */
+    height: 500px;
+}

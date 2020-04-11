@@ -1,0 +1,10 @@
+"0","fit <- rpart(y ~ .,
+            data = train[,c(1:3)],
+            method = ""class"",
+            control = rpart.control(#xval = 10, 
+                                    #minbucket = 2, 
+                                    cp = 0.02), 
+             parms = list(split = ""information""))
+"
+"2","Error in eval(predvars, data, env) : objeto 'y' não encontrado
+"

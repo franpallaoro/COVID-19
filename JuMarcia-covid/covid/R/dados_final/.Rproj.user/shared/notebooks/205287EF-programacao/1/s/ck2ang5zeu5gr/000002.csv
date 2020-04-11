@@ -1,0 +1,5 @@
+"0","nomes_banco_vania=names(banco_vania)"
+"0","nomes_mudar_fatores = nomes_banco_vania[c(1:5, 26:45)] # variáveis que são fatores"
+"0","banco_vania = banco_vania %>%"
+"0","                mutate_at(nomes_mudar_fatores , as.factor)"
+"0",""

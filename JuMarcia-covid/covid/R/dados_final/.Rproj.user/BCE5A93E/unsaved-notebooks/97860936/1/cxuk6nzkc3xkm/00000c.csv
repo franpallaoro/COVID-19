@@ -1,0 +1,5 @@
+"0","c_g100 <- cluster_fast_greedy(g100) 
+"
+"2","Error in cluster_fast_greedy(g100) : 
+  At fast_community.c:633 : weights must be positive, Invalid value
+"

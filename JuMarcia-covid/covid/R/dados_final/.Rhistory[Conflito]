@@ -1,0 +1,512 @@
+main = 'COVID-19 worldwide')
+grafo.plot(mins = 1, maxs = 1000)
+windows()
+grafo.plot <- function(mins, maxs){
+covid <- filter(banco_imputado, y >= mins & y < maxs) %>%
+select(4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = paste0('Between ', mins,' and ' , maxs, ' confirmed cases'))
+}
+grafo.plot(mins = 1, maxs = 1000)
+grafo.plot(mins = 1000, maxs = 5000)
+windows()
+grafo.plot(mins = 1000, maxs = 5000)
+grafo.plot(mins = 5000, maxs = 1000000)
+#------------------------------ confirmados
+df.temp <- read.csv2('time_series_covid19_confirmed_global.csv',
+sep = ',', header = TRUE)
+# longitude e latitude como numerica
+df.temp$Lat <- as.numeric(as.character(df.temp$Lat))
+df.temp$Long <- as.numeric(as.character(df.temp$Long))
+aux <- data.frame(table(df.temp$Country.Region))
+repeated.count <- as.character(aux[which(aux$Freq != 1),1])
+temp = aggregate(.~Country.Region, data = df.temp, FUN = sum)
+dfi <- read.table('indicadores.txt')
+dfi$Country<- ifelse(dfi$Country == 'United States',
+'US', as.character(dfi$Country))
+dfc <- temp
+colnames(dfc)[1] <- 'Country'
+df <- merge(dfc, dfi, by = 'Country')
+# 75 é o ultimo dia
+banco <- df[,c(1,3, 4, (ncol(df)-53):(ncol(df)-51), (ncol(df)-49):ncol(df))]
+write.table(banco, file = 'confirmados.txt')
+#---- teve paises que não entraram, devem estar com nomes diferentes
+#aux <- data.frame(table(c(as.character(df$Country), as.character(dfc$Country))))
+#View(aux)
+# Diamond Princess é um cruzeiro, não um país
+# Diamond Princess é um cruzeiro, não um país
+# MS Zaandam também é um cruzeiro
+# Taiwan* ??? nao tem
+# Taiwan* ??? nao tem
+# Taiwan* ??? nao tem
+# quantidade de NA em cada indicador econômico
+NA.col <- round(apply(apply(auxiliar, 2, is.na), 2, sum)/nrow(auxiliar), 2)
+var.70 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.7)])
+var.60 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.6)])
+var.50 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.5)])
+df.aux <- banco[,var.50]
+temp = aggregate(.~Country.Region, data = df.temp, FUN = sum)
+dfi <- read.table('indicadores.txt')
+dfi$Country<- ifelse(dfi$Country == 'United States',
+'US', as.character(dfi$Country))
+dfc <- temp
+colnames(dfc)[1] <- 'Country'
+df <- merge(dfc, dfi, by = 'Country')
+# 75 é o ultimo dia
+banco <- df[,c(1,3, 4, (ncol(df)-53):(ncol(df)-51), (ncol(df)-49):ncol(df))]
+write.table(banco, file = 'confirmados.txt')
+#---- teve paises que não entraram, devem estar com nomes diferentes
+#aux <- data.frame(table(c(as.character(df$Country), as.character(dfc$Country))))
+#View(aux)
+# Diamond Princess é um cruzeiro, não um país
+# Diamond Princess é um cruzeiro, não um país
+# MS Zaandam também é um cruzeiro
+banco <- read.table('confirmados.txt')
+library(naniar)
+auxiliar <- banco[,-c(1:6)]
+vis_miss(auxiliar)
+gg_miss_upset(auxiliar, nsets = 6)
+banco_imputado = df.knn
+colnames(banco_imputado)[6] <- 'y'
+View(banco_imputado)
+y
+names(banco_imputado)
+nomes_banco = names(banco_imputado)
+length(names)
+length(nomes_banco)
+names(banco_imputado) = seq(1:38)
+names(banco_imputado)
+library(igraph)
+library(dplyr)
+grafo.plot <- function(mins, maxs){
+covid <- filter(banco_imputado, y >= mins & y < maxs) %>%
+select(4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = paste0('Between ', mins,' and ' , maxs, ' confirmed cases'))
+}
+grafo.plot(mins = 5000, maxs = 1000000)
+covid <- select(banco_imputado, 4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+banco_nomes
+banco_nomes_banco
+nomes_banco
+library(readxl)
+import_variavel <- read_excel("import_variavel.xlsx")
+View(import_variavel)
+names(banco_imputado)
+import_variavel
+names(import_variavel)
+names(VARIAVEL...1)
+names(import_variavel$VARIAVEL...1)
+import_variavel[, c(1, 4)]
+nomes_banco_codigo = cbind(nomes_banco, seq(1:38))
+nomes_banco_codigo
+nomes_completo_variaveis = import_variavel[, c(1, 4)]
+nomes_banco_cruzado = inner_join(nomes_banco_codigo, nomes_completo_variaveis)
+names(nomes_completo_variaveis)
+names(nomes_completo_variaveis) = c(variavel, abreviatura)
+names(nomes_completo_variaveis) = c("variavel", "abreviatura")
+names(nomes_completo_variaveis)
+names(nomes_banco_codigo) = c("variavel", "codigo")
+names(nomes_banco_codigo) = c("abreviatura", "codigo")
+teste = merge(nomes_banco_codigo, nomes_completo_variaveis, by = abreviatura)
+teste = merge(nomes_banco_codigo, nomes_completo_variaveis, by = 'abreviatura')
+names(nomes_banco_codigo)
+nomes_banco
+seq(1:38)
+x_teste=seq(1:38)
+nomes_banco_codigo = cbind(nomes_banco, x_teste)
+nomes_banco_codigo
+nomes_banco_cruzado = inner_join(nomes_banco_codigo, nomes_completo_variaveis)
+teste = merge(nomes_banco_codigo, nomes_completo_variaveis, by = 'abreviatura')
+nomes_banco_codigo
+names(nomes_banco_codigo) = c("abreviatura", "codigo")
+nomes_banco_codigo
+teste = merge(nomes_banco_codigo, nomes_completo_variaveis, by = 'abreviatura')
+banco_imputado = df.knn
+#------------------------------ confirmados
+df.temp <- read.csv2('time_series_covid19_confirmed_global.csv',
+sep = ',', header = TRUE)
+# longitude e latitude como numerica
+df.temp$Lat <- as.numeric(as.character(df.temp$Lat))
+df.temp$Long <- as.numeric(as.character(df.temp$Long))
+aux <- data.frame(table(df.temp$Country.Region))
+repeated.count <- as.character(aux[which(aux$Freq != 1),1])
+temp = aggregate(.~Country.Region, data = df.temp, FUN = sum)
+dfi <- read.table('indicadores.txt')
+dfi$Country<- ifelse(dfi$Country == 'United States',
+'US', as.character(dfi$Country))
+dfc <- temp
+colnames(dfc)[1] <- 'Country'
+df <- merge(dfc, dfi, by = 'Country')
+# 75 é o ultimo dia
+banco <- df[,c(1,3, 4, (ncol(df)-53):(ncol(df)-51), (ncol(df)-49):ncol(df))]
+write.table(banco, file = 'confirmados.txt')
+#---- teve paises que não entraram, devem estar com nomes diferentes
+#aux <- data.frame(table(c(as.character(df$Country), as.character(dfc$Country))))
+#View(aux)
+# Diamond Princess é um cruzeiro, não um país
+# Diamond Princess é um cruzeiro, não um país
+# MS Zaandam também é um cruzeiro
+banco_imputado = df.knn
+# quantidade de NA em cada indicador econômico
+NA.col <- round(apply(apply(auxiliar, 2, is.na), 2, sum)/nrow(auxiliar), 2)
+var.70 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.7)])
+var.60 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.6)])
+var.50 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.5)])
+df.aux <- banco[,var.50]
+#-------------------------- IMPUTAÇÃO
+require(caret)
+library(mice)
+preProc <- preProcess(method = "bagImpute", df.aux)
+df.bag <- predict(preProc, df.aux)
+preProc2 <- preProcess(method = "knnImpute", k = 10, df.aux)
+df.knn <- predict(preProc, df.aux)
+miceMod <- mice(df.aux, method = "rf")
+miceOutput <- complete(miceMod)  # generate the completed data.
+anyNA(miceOutput) # por algum motivo o banco ainda tem 7 NAs
+banco_imputado = df.knn
+banco <- read.table('confirmados.txt')
+library(naniar)
+auxiliar <- banco[,-c(1:6)]
+vis_miss(auxiliar)
+gg_miss_upset(auxiliar, nsets = 6)
+gg_miss_var(auxiliar, show_pct = TRUE)
+windows()
+banco_imputado = df.knn
+colnames(banco_imputado)[6] <- 'y'
+preProc <- preProcess(method = "bagImpute", df.aux)
+df.bag <- predict(preProc, df.aux)
+preProc2 <- preProcess(method = "knnImpute", k = 10, df.aux)
+df.knn <- predict(preProc, df.aux)
+miceMod <- mice(df.aux, method = "rf")
+miceOutput <- complete(miceMod)  # generate the completed data.
+anyNA(miceOutput) # por algum motivo o banco ainda tem 7 NAs
+# quantidade de NA em cada indicador econômico
+NA.col <- round(apply(apply(auxiliar, 2, is.na), 2, sum)/nrow(auxiliar), 2)
+var.70 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.7)])
+var.60 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.6)])
+var.50 <- c(colnames(banco)[1:6], names(NA.col)[which(as.numeric(NA.col) < 0.5)])
+df.aux <- banco[,var.50]
+#-------------------------- IMPUTAÇÃO
+require(caret)
+library(mice)
+preProc <- preProcess(method = "bagImpute", df.aux)
+df.bag <- predict(preProc, df.aux)
+preProc2 <- preProcess(method = "knnImpute", k = 10, df.aux)
+df.knn <- predict(preProc, df.aux)
+miceMod <- mice(df.aux, method = "rf")
+miceOutput <- complete(miceMod)  # generate the completed data.
+anyNA(miceOutput) # por algum motivo o banco ainda tem 7 NAs
+banco_imputado = df.knn
+banco_imputado2=banco_imputado
+colnames(banco_imputado)[6] <- 'y'
+nomes_banco = names(banco_imputado)
+names(banco_imputado) = seq(1:38)
+x_teste=seq(1:38)
+nomes_banco_codigo = cbind(nomes_banco, x_teste)
+names(nomes_banco_codigo) = c("abreviatura", "codigo")
+import_variavel <- read_excel("import_variavel.xlsx")
+nomes_completo_variaveis = import_variavel[, c(1, 4)]
+names(nomes_completo_variaveis) = c("variavel", "abreviatura")
+teste = merge(nomes_banco_codigo, nomes_completo_variaveis, by = 'abreviatura')
+nomes_banco_codigo
+banco_imputado2=banco_imputado
+banco_imputado=banco_imputado2
+colnames(banco_imputado)[6] <- 'y'
+nomes_banco = names(banco_imputado)
+names(banco_imputado) = seq(1:38)
+x_teste=seq(1:38)
+nomes_banco_codigo = cbind(nomes_banco, x_teste)
+names(nomes_banco_codigo)[1] = "abreviatura"
+names(nomes_banco_codigo)[2] = "codigo"
+nomes_banco_codigo
+View(preProc)
+banco_imputado2=banco_imputado
+banco_imputado=banco_imputado2
+banco_imputado = df.knn
+colnames(banco_imputado)[6] <- 'y'
+nomes_banco = names(banco_imputado)
+names(banco_imputado) = seq(1:38)
+x_teste=seq(1:38)
+nomes_banco_codigo = cbind(nomes_banco, x_teste)
+nomes_banco_codigo
+codigo=seq(1:38)
+nomes_banco_codigo = cbind(nomes_banco, x_teste)
+nomes_banco_codigo
+nomes_banco_codigo = cbind(nomes_banco, codigo)
+nomes_banco_codigo
+abreviatura = names(banco_imputado)
+names(banco_imputado) = seq(1:38)
+codigo=seq(1:38)
+nomes_banco_codigo = cbind(abreviatura, codigo)
+nomes_banco_codigo
+banco_imputado2=banco_imputado
+banco_imputado=banco_imputado2
+banco_imputado = df.knn
+colnames(banco_imputado)[6] <- 'y'
+names(banco_imputado)
+abreviatura = names(banco_imputado)
+names(banco_imputado) = seq(1:38)
+codigo=seq(1:38)
+nomes_banco_codigo = cbind(abreviatura, codigo)
+nomes_banco_codigo
+import_variavel <- read_excel("import_variavel.xlsx")
+nomes_completo_variaveis = import_variavel[, c(1, 4)]
+names(nomes_completo_variaveis) = c("variavel", "abreviatura")
+teste = merge(nomes_banco_codigo, nomes_completo_variaveis, by = 'abreviatura')
+teste
+library(igraph)
+library(dplyr)
+grafo.plot <- function(mins, maxs){
+covid <- filter(banco_imputado, y >= mins & y < maxs) %>%
+select(4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = paste0('Between ', mins,' and ' , maxs, ' confirmed cases'))
+}
+grafo.plot(mins = 5000, maxs = 1000000)
+covid <- select(banco_imputado, 4:36) %>%
+cor()
+covid <- select(banco_imputado, 4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+covid <- select(banco_imputado, 4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+colnames(banco_imputado)[6] <- 'y'
+covid <- select(banco_imputado, 4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+#layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+covid <- filter(banco_imputado, y >= mins & y < maxs) %>%
+select(4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = paste0('Between ', mins,' and ' , maxs, ' confirmed cases'))
+grafo.plot <- function(mins, maxs){
+covid <- filter(banco_imputado, y >= mins & y < maxs) %>%
+select(4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = paste0('Between ', mins,' and ' , maxs, ' confirmed cases'))
+}
+grafo.plot(mins = 5000, maxs = 1000000)
+function ()
+covid <- select(banco_imputado, 4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+covid <- select(banco_imputado, 4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+fit_control <- trainControl(method = "repeatedcv",
+number = 10,
+repeats = 1,
+#sampling = "down",
+search = "random")
+rf_model <- train(y ~ .,
+data = banco_imputado[,-c(1:3)],
+method = "rf",
+preProcess = c("scale", "center"),
+trControl = fit_control,
+#tuneGrid = hiperparametros3,
+verbose = FALSE,
+tuneLength = 10)
+rf_model
+plot(rf_model)
+library(igraph)
+library(dplyr)
+covid <- select(banco_imputado, 4:36) %>%
+cor()
+c100 <- graph.adjacency(covid,
+weighted = TRUE,
+diag = FALSE,
+mode = "upper")
+cut.off1 <- mean(E(c100)$weight)
+g100 <- delete_edges(c100, E(c100)[weight < cut.off1])
+c_g100 <- cluster_fast_greedy(g100)
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+windows() ## create window to plot your file
+## ... your plotting code here ...
+dev.off()
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+windows()
+plot(c_g100, g100,
+#vertex.size = colSums(co_covid_positivo) * 10,
+#vertex.frame.color = NA,
+#vertex.label.color = "black",
+#vertex.label.cex = 1,
+edge.width = E(g100)$weight * 15,
+layout = layout_with_fr(g100),
+main = 'COVID-19 worldwide')
+dim(teste)

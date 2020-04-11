@@ -1,0 +1,5 @@
+"0",""
+"0","## visualizando os missings como arvores"
+"0","banco_completo %>%"
+"0","  add_prop_miss() %>%"
+"0","  head()"

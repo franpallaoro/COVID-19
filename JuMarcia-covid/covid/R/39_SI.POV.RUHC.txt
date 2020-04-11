@@ -1,0 +1,265 @@
+"Country" "CCode" "INome" "Indicador" "Ano"
+"1" "Aruba" "ABW" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"2" "Afghanistan" "AFG" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"3" "Angola" "AGO" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"4" "Albania" "ALB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"5" "Andorra" "AND" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"6" "Arab World" "ARB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"7" "United Arab Emirates" "ARE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"8" "Argentina" "ARG" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"9" "Armenia" "ARM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"10" "American Samoa" "ASM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"11" "Antigua and Barbuda" "ATG" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"12" "Australia" "AUS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"13" "Austria" "AUT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"14" "Azerbaijan" "AZE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"15" "Burundi" "BDI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"16" "Belgium" "BEL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"17" "Benin" "BEN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"18" "Burkina Faso" "BFA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"19" "Bangladesh" "BGD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"20" "Bulgaria" "BGR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"21" "Bahrain" "BHR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"22" "Bahamas, The" "BHS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"23" "Bosnia and Herzegovina" "BIH" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"24" "Belarus" "BLR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"25" "Belize" "BLZ" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"26" "Bermuda" "BMU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"27" "Bolivia" "BOL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"28" "Brazil" "BRA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"29" "Barbados" "BRB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"30" "Brunei Darussalam" "BRN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"31" "Bhutan" "BTN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"32" "Botswana" "BWA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"33" "Central African Republic" "CAF" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"34" "Canada" "CAN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"35" "Central Europe and the Baltics" "CEB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"36" "Switzerland" "CHE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"37" "Channel Islands" "CHI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"38" "Chile" "CHL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"39" "China" "CHN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"40" "Cote d'Ivoire" "CIV" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"41" "Cameroon" "CMR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"42" "Congo, Dem. Rep." "COD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"43" "Congo, Rep." "COG" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"44" "Colombia" "COL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"45" "Comoros" "COM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"46" "Cabo Verde" "CPV" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"47" "Costa Rica" "CRI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"48" "Caribbean small states" "CSS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"49" "Cuba" "CUB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"50" "Curacao" "CUW" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"51" "Cayman Islands" "CYM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"52" "Cyprus" "CYP" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"53" "Czech Republic" "CZE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"54" "Germany" "DEU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"55" "Djibouti" "DJI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"56" "Dominica" "DMA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"57" "Denmark" "DNK" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"58" "Dominican Republic" "DOM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"59" "Algeria" "DZA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"60" "East Asia & Pacific (excluding high income)" "EAP" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"61" "Early-demographic dividend" "EAR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"62" "East Asia & Pacific" "EAS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"63" "Europe & Central Asia (excluding high income)" "ECA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"64" "Europe & Central Asia" "ECS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"65" "Ecuador" "ECU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"66" "Egypt, Arab Rep." "EGY" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"67" "Euro area" "EMU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"68" "Eritrea" "ERI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"69" "Spain" "ESP" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"70" "Estonia" "EST" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"71" "Ethiopia" "ETH" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"72" "European Union" "EUU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"73" "Fragile and conflict affected situations" "FCS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"74" "Finland" "FIN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"75" "Fiji" "FJI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"76" "France" "FRA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"77" "Faroe Islands" "FRO" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"78" "Micronesia, Fed. Sts." "FSM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"79" "Gabon" "GAB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"80" "United Kingdom" "GBR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"81" "Georgia" "GEO" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"82" "Ghana" "GHA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"83" "Gibraltar" "GIB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"84" "Guinea" "GIN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"85" "Gambia, The" "GMB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"86" "Guinea-Bissau" "GNB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"87" "Equatorial Guinea" "GNQ" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"88" "Greece" "GRC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"89" "Grenada" "GRD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"90" "Greenland" "GRL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"91" "Guatemala" "GTM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"92" "Guam" "GUM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"93" "Guyana" "GUY" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"94" "High income" "HIC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"95" "Hong Kong SAR, China" "HKG" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"96" "Honduras" "HND" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"97" "Heavily indebted poor countries (HIPC)" "HPC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"98" "Croatia" "HRV" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"99" "Haiti" "HTI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"100" "Hungary" "HUN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"101" "IBRD only" "IBD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"102" "IDA & IBRD total" "IBT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"103" "IDA total" "IDA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"104" "IDA blend" "IDB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"105" "Indonesia" "IDN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"106" "IDA only" "IDX" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"107" "Isle of Man" "IMN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"108" "India" "IND" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"109" "Not classified" "INX" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"110" "Ireland" "IRL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"111" "Iran, Islamic Rep." "IRN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"112" "Iraq" "IRQ" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"113" "Iceland" "ISL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"114" "Israel" "ISR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"115" "Italy" "ITA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"116" "Jamaica" "JAM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"117" "Jordan" "JOR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"118" "Japan" "JPN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"119" "Kazakhstan" "KAZ" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"120" "Kenya" "KEN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"121" "Kyrgyz Republic" "KGZ" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"122" "Cambodia" "KHM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"123" "Kiribati" "KIR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"124" "St. Kitts and Nevis" "KNA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"125" "Korea, Rep." "KOR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"126" "Kuwait" "KWT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"127" "Latin America & Caribbean (excluding high income)" "LAC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"128" "Lao PDR" "LAO" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"129" "Lebanon" "LBN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"130" "Liberia" "LBR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"131" "Libya" "LBY" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"132" "St. Lucia" "LCA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"133" "Latin America & Caribbean" "LCN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"134" "Least developed countries: UN classification" "LDC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"135" "Low income" "LIC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"136" "Liechtenstein" "LIE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"137" "Sri Lanka" "LKA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"138" "Lower middle income" "LMC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"139" "Low & middle income" "LMY" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"140" "Lesotho" "LSO" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"141" "Late-demographic dividend" "LTE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"142" "Lithuania" "LTU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"143" "Luxembourg" "LUX" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"144" "Latvia" "LVA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"145" "Macao SAR, China" "MAC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"146" "St. Martin (French part)" "MAF" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"147" "Morocco" "MAR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"148" "Monaco" "MCO" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"149" "Moldova" "MDA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"150" "Madagascar" "MDG" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"151" "Maldives" "MDV" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"152" "Middle East & North Africa" "MEA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"153" "Mexico" "MEX" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"154" "Marshall Islands" "MHL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"155" "Middle income" "MIC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"156" "North Macedonia" "MKD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"157" "Mali" "MLI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"158" "Malta" "MLT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"159" "Myanmar" "MMR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"160" "Middle East & North Africa (excluding high income)" "MNA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"161" "Montenegro" "MNE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"162" "Mongolia" "MNG" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"163" "Northern Mariana Islands" "MNP" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"164" "Mozambique" "MOZ" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"165" "Mauritania" "MRT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"166" "Mauritius" "MUS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"167" "Malawi" "MWI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"168" "Malaysia" "MYS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"169" "North America" "NAC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"170" "Namibia" "NAM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"171" "New Caledonia" "NCL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"172" "Niger" "NER" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"173" "Nigeria" "NGA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"174" "Nicaragua" "NIC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"175" "Netherlands" "NLD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"176" "Norway" "NOR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"177" "Nepal" "NPL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"178" "Nauru" "NRU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"179" "New Zealand" "NZL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"180" "OECD members" "OED" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"181" "Oman" "OMN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"182" "Other small states" "OSS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"183" "Pakistan" "PAK" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"184" "Panama" "PAN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"185" "Peru" "PER" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"186" "Philippines" "PHL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"187" "Palau" "PLW" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"188" "Papua New Guinea" "PNG" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"189" "Poland" "POL" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"190" "Pre-demographic dividend" "PRE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"191" "Puerto Rico" "PRI" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"192" "Korea, Dem. People’s Rep." "PRK" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"193" "Portugal" "PRT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"194" "Paraguay" "PRY" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"195" "West Bank and Gaza" "PSE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"196" "Pacific island small states" "PSS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"197" "Post-demographic dividend" "PST" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"198" "French Polynesia" "PYF" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"199" "Qatar" "QAT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"200" "Romania" "ROU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"201" "Russian Federation" "RUS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"202" "Rwanda" "RWA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"203" "South Asia" "SAS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"204" "Saudi Arabia" "SAU" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"205" "Sudan" "SDN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"206" "Senegal" "SEN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"207" "Singapore" "SGP" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"208" "Solomon Islands" "SLB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"209" "Sierra Leone" "SLE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"210" "El Salvador" "SLV" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"211" "San Marino" "SMR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"212" "Somalia" "SOM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"213" "Serbia" "SRB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"214" "Sub-Saharan Africa (excluding high income)" "SSA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"215" "South Sudan" "SSD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"216" "Sub-Saharan Africa" "SSF" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"217" "Small states" "SST" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"218" "Sao Tome and Principe" "STP" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"219" "Suriname" "SUR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"220" "Slovak Republic" "SVK" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"221" "Slovenia" "SVN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"222" "Sweden" "SWE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"223" "Eswatini" "SWZ" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"224" "Sint Maarten (Dutch part)" "SXM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"225" "Seychelles" "SYC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"226" "Syrian Arab Republic" "SYR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"227" "Turks and Caicos Islands" "TCA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"228" "Chad" "TCD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"229" "East Asia & Pacific (IDA & IBRD countries)" "TEA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"230" "Europe & Central Asia (IDA & IBRD countries)" "TEC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"231" "Togo" "TGO" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"232" "Thailand" "THA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"233" "Tajikistan" "TJK" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"234" "Turkmenistan" "TKM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"235" "Latin America & the Caribbean (IDA & IBRD countries)" "TLA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"236" "Timor-Leste" "TLS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"237" "Middle East & North Africa (IDA & IBRD countries)" "TMN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"238" "Tonga" "TON" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"239" "South Asia (IDA & IBRD)" "TSA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"240" "Sub-Saharan Africa (IDA & IBRD countries)" "TSS" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"241" "Trinidad and Tobago" "TTO" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"242" "Tunisia" "TUN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"243" "Turkey" "TUR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"244" "Tuvalu" "TUV" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"245" "Tanzania" "TZA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"246" "Uganda" "UGA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"247" "Ukraine" "UKR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"248" "Upper middle income" "UMC" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"249" "Uruguay" "URY" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"250" "United States" "USA" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"251" "Uzbekistan" "UZB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"252" "St. Vincent and the Grenadines" "VCT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"253" "Venezuela, RB" "VEN" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"254" "British Virgin Islands" "VGB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"255" "Virgin Islands (U.S.)" "VIR" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"256" "Vietnam" "VNM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"257" "Vanuatu" "VUT" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"258" "World" "WLD" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"259" "Samoa" "WSM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"260" "Kosovo" "XKX" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"261" "Yemen, Rep." "YEM" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"262" "South Africa" "ZAF" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"263" "Zambia" "ZMB" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA
+"264" "Zimbabwe" "ZWE" "Rural poverty headcount ratio at national poverty lines (% of rural population)" NA NA

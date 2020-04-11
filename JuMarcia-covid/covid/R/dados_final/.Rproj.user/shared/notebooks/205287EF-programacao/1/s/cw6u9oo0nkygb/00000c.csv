@@ -1,0 +1,11 @@
+"0",""
+"0","####################################"
+"0","############# Para a imputacao pode-se utilizar o knn ou árvores de decisao"
+"0","#######################"
+"0","preProcValues <- preProcess(dataset_n598 %>% "
+"0","                          dplyr::select(c(1:45)),"
+"0","                            method = c(""knnImpute""),"
+"0","                            k = 20,"
+"0","                            knnSummary = mean)"
+"2","Error in eval(lhs, parent, parent) : objeto 'dataset_n598' não encontrado
+"

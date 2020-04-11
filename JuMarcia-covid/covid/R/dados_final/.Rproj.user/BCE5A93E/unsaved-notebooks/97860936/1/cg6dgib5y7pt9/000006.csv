@@ -1,0 +1,14 @@
+"0","rpart.plot(fit, extra = 100)
+"
+"2","Bad 'data' field in model 'call' (expected a data.frame or a matrix).
+To silence this warning:
+    Call rpart.plot with roundint=FALSE,
+    or rebuild the rpart model with model=TRUE."
+"2","Erro: box.palette: c(""#F7FCF5"", ""#EEF8EA"", ""#E5F5E0"", ""#D6EFD0"", ""#C7E9C0"", ""#B4E1AD"", ""#A1D99B"", ""#8ACE88"", ""#74C476"") is neither a color nor a palette.
+Try something like box.palette=""blue"" or box.palette=""Blues"".
+The predefined palettes are (with an optional ""-"" prefix):
+  Grays Greys Greens Blues Browns Oranges Reds Purples
+  Gy Gn Bu Bn Or Rd Pu (alternative names for the above palettes)
+  BuGn BuBn GnRd etc.  (two-color diverging palettes: any combination of two palettes)
+  RdYlGn GnYlRd BlGnYl YlGnBl (three color palettes)
+"
