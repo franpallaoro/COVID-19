@@ -33,6 +33,9 @@ df_obitos <- df_obitos[order(df_obitos$state, df_obitos$date),]
 
 df_obitos <- df_obitos[c('state', names(df_obitos)[!names(df_obitos) %in% 'state'])]
 
+# transformando em data:
+df_obitos$date <- as.Date(df_obitos$date, format = "%Y-%m-%d")
+
 # toc()
 
 
@@ -63,6 +66,9 @@ df_casos <- df_casos[order(df_casos$state, df_casos$city, df_casos$date),]
 
 org_casos <- c('state', 'city', 'date')
 df_casos <- df_casos[c(org_casos, names(df_casos)[!names(df_casos) %in% org_casos])]
+
+# transformando em data:
+df_casos$date <- as.Date(df_casos$date, format = "%Y-%m-%d")
 
 # toc()
 
