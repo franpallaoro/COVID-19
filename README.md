@@ -23,7 +23,7 @@ _Em breve!_
 
 ## Integrantes
 
-- Francielle L. Pallaoro
+- Franciele L. Pallaoro
 - Gustavo M. Utpott
 - Juliana S. Souza 
 - Márcia H. Barbian
