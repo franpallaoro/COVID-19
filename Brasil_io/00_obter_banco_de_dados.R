@@ -46,8 +46,6 @@ df_obitos <- df_obitos[c('state', names(df_obitos)[!names(df_obitos) %in% 'state
 # transformando em data:
 df_obitos$date <- as.Date(df_obitos$date, format = "%Y-%m-%d")
 
-# toc()
-
 
 
 # -------------------------------------------------- 
@@ -78,17 +76,8 @@ df_casos <- df_casos[order(df_casos$state, df_casos$city, df_casos$date),]
 org_casos <- c('state', 'city', 'date')
 df_casos <- df_casos[c(org_casos, names(df_casos)[!names(df_casos) %in% org_casos])]
 
-
 # transformando em data:
 df_casos$date <- as.Date(df_casos$date, format = "%Y-%m-%d")
-
-# toc()
-
-# o pacote tictoc foi usado para verificar quantos segundos demoram para baixar os 
-# dados. Hoje demorou cerca de 10 segundos. 
-
-write.csv(x = df_obitos, file = 'obitos_cartorio.csv')
-write.csv(x = df_casos, file = 'casos_covid.csv')
 
 # -------------------------------------------------- 
 # Salva dados em um arquivo RDS
@@ -98,5 +87,4 @@ saveRDS(df_casos,
 
 saveRDS(df_obitos,
         file = here::here("data", "obitos_br_uf.rds"))
-
 
