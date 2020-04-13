@@ -1,5 +1,5 @@
 
-# covidMetrika ![logoCM](../flp/images/logoCM.png)
+<img src="../flp/images/logoCM.png" width="250">
 
 ## O repositório
 
@@ -34,6 +34,6 @@ _Em breve!_
 
 Interessados em colaborar podem enviar e-mail para citton.padilha@ufrgs.br
 
-![logoUFRGS](../flp/images/Ufrgs.png)
-![logoPPG](../flp/images/ppgepi.png)
-![logoIME](../flp/images/ime.png)
+<img src="../flp/images/Ufrgs.png" width="200">
+<img src="../flp/images/ppgepi.png" width="200">
+<img src="../flp/images/ime.png" width="200">
