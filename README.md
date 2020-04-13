@@ -34,6 +34,4 @@ _Em breve!_
 
 Interessados em colaborar podem enviar e-mail para citton.padilha@ufrgs.br
 
-<img src="../flp/images/Ufrgs.png" width="200">
-<img src="../flp/images/ppgepi.png" width="200">
-<img src="../flp/images/ime.png" width="200">
+<img src="../flp/images/Ufrgs.png" width="200"> <img src="../flp/images/ppgepi.png" width="200"> <img src="../flp/images/ime.png" width="200">
