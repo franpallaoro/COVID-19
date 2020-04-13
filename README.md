@@ -1,5 +1,5 @@
 
-<img src="../flp/images/logoCM.png" width="250">
+<img src="../flp/images/logoCM.png" width="300">
 
 ## O repositório
 
@@ -34,4 +34,4 @@ _Em breve!_
 
 Interessados em colaborar podem enviar e-mail para citton.padilha@ufrgs.br
 
-<img src="../flp/images/Ufrgs.png" width="200"> <img src="../flp/images/ppgepi.png" width="200"> <img src="../flp/images/ime.png" width="200">
+<img src="../flp/images/Ufrgs.png" width="100"> <img src="../flp/images/ppgepi.png" width="170"> <img src="../flp/images/ime.png" width="170">
