@@ -1,6 +1,0 @@
-"0","########
-library(caret)
-"
-"2","Error: package or namespace load failed for ‘caret’ in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):
- there is no package called ‘stringi’
-"

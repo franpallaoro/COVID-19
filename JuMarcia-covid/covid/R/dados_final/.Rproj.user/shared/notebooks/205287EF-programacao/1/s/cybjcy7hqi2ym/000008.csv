@@ -1,6 +1,0 @@
-"0","co_covid_positivo <- filter(banco_imputado, resultado_covid == 1) %>%
-  select(1, 6:15) %>% ## aqui coloca os grupos de idade
-  cor()
-"
-"2","Error in cor(.) : 'x' must be numeric
-"
