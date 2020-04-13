@@ -1,4 +1,5 @@
-# covidMetrika
+
+# covidMetrika ![logoCM](../flp/images/logoCM.png)
 
 ## O repositório
 
@@ -7,15 +8,15 @@ Repositório destinado aos projetos do grupo __covidMetrika__ composto por estud
 ## Objetivos
 
 1. Descrição dos casos confirmados de COVID-19 (incluindo óbitos)
-	  - Visualização dos casos confirmados: (i) temporalmente (casos novos/acumulados diários e por semana epidemiológica); (ii) espaço-temporal (mapas de casos novos/acumulados por 100 mil/hab. por semana epidemiológica);
+- Visualização dos casos confirmados: (i) temporalmente (casos novos/acumulados diários e por semana epidemiológica); (ii) espaço-temporal (mapas de casos novos/acumulados por 100 mil/hab. por semana epidemiológica);
 2. Como se comporta a transmissão do vírus SARS-CoV-2?
-	  - Estimativa de parâmetros associados à transmissibilidade do vírus: (i) número básico de reprodução (R_0, R_e); (ii) taxas de ataque;
+  - Estimativa de parâmetros associados à transmissibilidade do vírus: (i) número básico de reprodução (R_0, R_e); (ii) taxas de ataque;
 3. Modelagem da dinâmica do vírus
-	  - Dinâmica temporal: (i) ajuste exponencial/logística; (ii) modelos compartimentais (SIR, SEIR, etc.);
-	  - Dinâmica espacial (mapeamento de doenças): estimativa de taxas de infectados padronizadas e métodos de suavização (pop. pequena);
-	  - Modelos espaço-temporais: mobilidade espacial e outros fatores associados à transmissão do vírus;
+- Dinâmica temporal: (i) ajuste exponencial/logística; (ii) modelos compartimentais (SIR, SEIR, etc.);
+- Dinâmica espacial (mapeamento de doenças): estimativa de taxas de infectados padronizadas e métodos de suavização (pop. pequena);
+- Modelos espaço-temporais: mobilidade espacial e outros fatores associados à transmissão do vírus;
 4. Avaliação de impacto de intervenções não-farmacológicas
-	  - Modelos de micro-simulação.
+- Modelos de micro-simulação.
 
 ## Publicações
 
@@ -33,3 +34,6 @@ _Em breve!_
 
 Interessados em colaborar podem enviar e-mail para citton.padilha@ufrgs.br
 
+![logoUFRGS](../flp/images/Ufrgs.png)
+![logoPPG](../flp/images/ppgepi.png)
+![logoIME](../flp/images/ime.png)
