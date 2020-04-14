@@ -166,11 +166,14 @@ ui <- dashboardPage(
       
       menuItem("Dashboard", icon = icon("chart-area"), tabName = "dashbr", 
                badgeLabel = "BR", badgeColor = "green"),
-      menuItem("Dashboard", icon = icon("chart-bar"), tabName = "dashuf", 
+      menuItem("Dashboard", icon = icon("chart-bar"), tabName = "dashuf",
                badgeLabel = "UF", badgeColor = "green"),
-      menuItem("T.B.A.", icon = icon("chart-line"), tabName = "resp", badgeColor = "green"),
-      menuItem("Fonte de Dados", icon = icon("download"), tabName = "dados", badgeColor = "green"),
-      menuItem("CovidMetrika", icon = icon("users"), tabName = "us", badgeColor = "green")
+      menuItem("T.B.A.", icon = icon("chart-line"), tabName = "resp",
+               badgeLabel = "Óbitos", badgeColor = "green"),
+      menuItem("Fonte de Dados", icon = icon("download"), tabName = "dados",
+               badgeLabel = "Links", badgeColor = "green"),
+      menuItem("CovidMetrika", icon = icon("users"), tabName = "us",
+               badgeLabel = "Quem somos", badgeColor = "green")
     )
   ),
   
@@ -186,27 +189,27 @@ ui <- dashboardPage(
               fluidRow(
                 #-------------------------------------
                 # as três 'caixas' com informações resumo: 
-        
+                
                 valueBoxOutput("casosBox", width = 3),
                 valueBoxOutput("obitosBox", width = 3),
                 valueBoxOutput("taxaBox", width = 3),
                 valueBoxOutput("letalBox", width = 3),
-        
+                
                 #-------------------------------------
                 column(width = 12,
-                  box(plotlyOutput("confPlot", height = 300L), width = 12L, height = 340L)), 
+                       box(plotlyOutput("confPlot", height = 300L), width = 12L, height = 340L)), 
                 
                 box(ggiraphOutput("mapaPlot", height = 500L), width = 6L, height = 540L),
                 box(plotlyOutput("barPlot", height = 500L), width = 6L, height = 540L)
-      ) #fluidrow
+              ) #fluidrow
       ), # final da parte dos dados nacionais
       
-      tabItem("dashuf", "Em construção"),
-      tabItem("resp", "Em construção"),
-      tabItem("dados", "Em construção"), 
-      tabItem("us", "Em construção") 
+      tabItem("dashuf", "Widgets tab "),
+      tabItem("resp", "Sub-item 1 tab content"),
+      tabItem("dados", "Sub-item 2 tab content"), 
+      tabItem("us", "Sub-item 2 tab content") 
     )
-
+    
   ) # dashboard body
 ) # final de ui
 #-------------------------------------
@@ -219,19 +222,19 @@ server <- function(input, output) {
   
   output$casosBox <- renderValueBox({
     valueBox(casos_br[nrow(casos_br),1], "Casos", icon = icon("ambulance"),
-      color = "olive"
+             color = "olive"
     )
   })
   
   output$obitosBox <- renderValueBox({
     valueBox(casos_br[nrow(casos_br),2], "Óbitos", icon = icon("skull"),
-      color = "light-blue"
+             color = "light-blue"
     )
   })
   
   output$taxaBox <- renderValueBox({
     valueBox(round(casos_br[nrow(casos_br),3],2), "Taxa /100k hab.", icon = icon("heartbeat"),
-      color = "lime"
+             color = "lime"
     )
   })
   
@@ -243,8 +246,8 @@ server <- function(input, output) {
     )
   })
   #-------------------------------------
-
-    output$confPlot <- renderPlotly({
+  
+  output$confPlot <- renderPlotly({
     plot_geral(input$typevar)
   })
   
