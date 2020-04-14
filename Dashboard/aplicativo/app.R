@@ -13,7 +13,7 @@ library(ggiraph)
 theme_set(theme_gray())
 #-------------------------------------
 # banco de dados de  casos confirmados:
-covid <- readRDS(here::here('data', 'casos_covid19_br_mun.rds'))
+covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
 
 # banco de dados por estado:
 data_state <- covid %>%
@@ -41,7 +41,7 @@ casos_br <- casos_br %>%
 fcolor <- c("#3d9970", "#3c8dbc", "#01ff6f", "#39cccc")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
 
-obts <- readRDS(here::here('data', 'obitos_br_uf.rds'))
+obts <- readRDS(here::here('obitos_br_uf.rds'))
 
 temp <- obts %>%
   select(date, epidemiological_week_2020)
@@ -209,7 +209,7 @@ ui <- dashboardPage(
         
                 #-------------------------------------
                 column(width = 12,
-                  box(width = 12, plotlyOutput("confPlot", height = 300L))), 
+                  box(width = NULL, plotlyOutput("confPlot", height = 300L))), 
                 
                 box(ggiraphOutput("mapaPlot", height = 500L), width = 6L, height = 540L),
                 box(plotlyOutput("barPlot", height = 500L), width = 6L, height = 540L)
@@ -218,7 +218,36 @@ ui <- dashboardPage(
       
       tabItem("dashuf", "Em construção"),
       tabItem("resp", "Em construção"),
-      tabItem("dados", "Em construção"), 
+      tabItem("dados", 
+              
+              fluidRow(
+                infoBox(tags$p("Brasil.io", style = "font-size: 200%;"), 
+                        subtitle = 'Fonte: Secretarias de Saúde das Unidades Federativas, 
+                        dados tratados por Álvaro Justen e colaboradores',
+                         icon = icon("at"), color = "green", width = 12, 
+                         href = "https://brasil.io/dataset/covid19/caso", fill = TRUE),
+                
+                valueBox('Sobre:', subtitle = 'Informações dos dados', icon = icon("info"), 
+                        color = 'green', width = 3, 
+                        href = 'https://github.com/turicas/covid19-br/blob/master/api.md#casos'),
+                
+                valueBox('Dados:', subtitle = 'Download', icon = icon("download"), 
+                        color = 'green', width = 3,
+                        href = 'https://data.brasil.io/dataset/covid19/_meta/list.html'),
+                
+                valueBox('F.A.Q.:', subtitle = 'Perguntas Frequentes', icon = icon("question-circle"), 
+                        color = 'green', width = 3,
+                        href = 'https://github.com/turicas/covid19-br/blob/master/faq.md'),
+                
+                valueBox('Licença:', subtitle = '(CC BY-SA 4.0)', icon = icon("creative-commons"), 
+                        color = 'green', width = 3,
+                        href = 'https://creativecommons.org/licenses/by-sa/4.0/deed.en')
+                
+              ) #fluidRow
+             
+              
+              
+              ), 
       tabItem("us", "Em construção") 
     )
 
