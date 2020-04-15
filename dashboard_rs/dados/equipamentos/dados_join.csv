@@ -1,0 +1,498 @@
+microregiao,mesorregiao,codigo,equip_vida,ventilador_mecanico,date,confirmed,deaths,is_last,confirmed_per_100k_inhabitants,death_rate,place_type
+Porto Alegre,Metropolitana,4314902,11895,1211,2020-04-12,314,6,TRUE,21.1623,0.0191,city
+Caxias Do Sul,Nordeste,4305108,3750,267,2020-04-12,34,0,TRUE,6.65484,NA,city
+Canoas,Metropolitana,4304606,1642,99,2020-04-12,13,1,TRUE,3.75055,0.0769,city
+Pelotas,Sudeste,4314407,1673,151,2020-04-12,5,0,TRUE,1.46026,NA,city
+Santa Maria,Centro Ocidental,4316907,2075,119,2020-04-12,8,0,TRUE,2.83564,NA,city
+Gravataí,Metropolitana,4309209,483,34,2020-04-12,13,0,TRUE,4.61781,NA,city
+Viamão,Metropolitana,4323002,224,19,2020-04-12,8,0,TRUE,3.1345,NA,city
+Novo Hamburgo,Metropolitana,4313409,1551,106,2020-04-12,25,2,TRUE,10.13179,0.08,city
+São Leopoldo,Metropolitana,4318705,322,24,2020-04-12,16,1,TRUE,6.75576,0.0625,city
+Rio Grande,Sudeste,4315602,411,36,2020-04-12,3,0,TRUE,1.42177,NA,city
+Alvorada,Metropolitana,4300604,123,9,2020-04-12,5,1,TRUE,2.3775,0.2,city
+Passo Fundo,Noroeste,4314100,3499,174,2020-04-12,18,2,TRUE,8.855,0.1111,city
+Sapucaia Do Sul,Metropolitana,4320008,266,31,2020-04-12,3,0,TRUE,2.12653,NA,city
+Santa Cruz Do Sul,Centro Oriental,4316808,388,23,2020-04-12,1,0,TRUE,0.76678,NA,city
+Cachoeirinha,Metropolitana,4303103,109,9,2020-04-12,6,0,TRUE,4.60501,NA,city
+Uruguaiana,Sudoeste,4322400,429,40,2020-04-12,3,0,TRUE,2.36276,NA,city
+Bagé,Sudoeste,4301602,356,48,2020-04-12,27,0,TRUE,22.28771,NA,city
+Bento Gonçalves,Nordeste,4302105,570,66,2020-04-12,11,0,TRUE,9.13212,NA,city
+Erechim,Noroeste,4307005,522,30,2020-04-12,3,0,TRUE,2.83388,NA,city
+Guaíba,Metropolitana,4309308,68,2,2020-04-12,1,0,TRUE,1.01892,NA,city
+Lajeado,Centro Oriental,4311403,449,29,2020-04-12,16,0,TRUE,19.04444,NA,city
+Ijuí,Noroeste,4310207,691,54,NA,NA,NA,NA,NA,NA,NA
+Esteio,Metropolitana,4307708,226,14,2020-04-12,2,0,TRUE,2.40379,NA,city
+Cachoeira Do Sul,Centro Oriental,4303004,363,32,2020-04-12,2,0,TRUE,2.43306,NA,city
+Sapiranga,Metropolitana,4319901,136,12,2020-04-12,1,0,TRUE,1.22348,NA,city
+Santo Ângelo,Noroeste,4317509,436,37,NA,NA,NA,NA,NA,NA,NA
+Sant'ana Do Livramento,Sudoeste,4317103,296,24,2020-04-12,7,0,TRUE,9.08772,NA,city
+Alegrete,Sudoeste,4300406,201,23,2020-04-12,1,0,TRUE,1.3589,NA,city
+Santa Rosa,Noroeste,4317202,321,26,2020-04-12,4,0,TRUE,5.46045,NA,city
+Farroupilha,Nordeste,4307906,244,13,2020-04-12,5,0,TRUE,6.91267,NA,city
+Venâncio Aires,Centro Oriental,4322608,236,25,NA,NA,NA,NA,NA,NA,NA
+Campo Bom,Metropolitana,4303905,66,10,2020-04-12,4,0,TRUE,5.99592,NA,city
+Camaquã,Metropolitana,4303509,150,10,2020-03-30,0,0,TRUE,NA,NA,city
+Vacaria,Nordeste,4322509,257,16,2020-04-12,1,0,TRUE,1.51016,NA,city
+Montenegro,Metropolitana,4312401,354,30,2020-04-12,1,0,TRUE,1.53224,NA,city
+Carazinho,Noroeste,4304705,153,10,NA,NA,NA,NA,NA,NA,NA
+São Gabriel,Sudoeste,4318309,95,7,2020-04-12,1,0,TRUE,1.61018,NA,city
+Cruz Alta,Noroeste,4306106,157,15,NA,NA,NA,NA,NA,NA,NA
+São Borja,Sudoeste,4318002,113,15,NA,NA,NA,NA,NA,NA,NA
+Parobé,Metropolitana,4314050,57,6,NA,NA,NA,NA,NA,NA,NA
+Taquara,Metropolitana,4321204,99,12,2020-04-12,1,0,TRUE,1.74016,NA,city
+Canguçu,Sudeste,4304507,182,15,2020-04-12,1,0,TRUE,1.78428,NA,city
+Capão Da Canoa,Metropolitana,4304630,119,11,2020-04-12,4,0,TRUE,7.5402,NA,city
+Tramandaí,Metropolitana,4321600,329,37,2020-04-12,1,0,TRUE,1.93367,NA,city
+Estância Velha,Metropolitana,4307609,25,2,2020-04-12,3,0,TRUE,5.99736,NA,city
+Santiago,Centro Ocidental,4317400,195,12,2020-04-12,1,0,TRUE,2.02327,NA,city
+Osório,Metropolitana,4313508,41,8,2020-04-12,2,0,TRUE,4.34839,NA,city
+Canela,Metropolitana,4304408,65,6,NA,NA,NA,NA,NA,NA,NA
+Marau,Noroeste,4311809,96,8,2020-04-12,9,1,TRUE,20.37997,0.1111,city
+Panambi,Noroeste,4313904,50,2,NA,NA,NA,NA,NA,NA,NA
+São Lourenço Do Sul,Sudeste,4318804,42,5,2020-04-12,1,0,TRUE,2.29453,NA,city
+Santo Antônio Da Patrulha,Metropolitana,4317608,36,4,2020-04-12,2,0,TRUE,4.66266,NA,city
+Eldorado Do Sul,Metropolitana,4306767,22,2,2020-04-12,1,0,TRUE,2.42219,NA,city
+Charqueadas,Metropolitana,4305355,18,2,2020-04-12,1,0,TRUE,2.45164,NA,city
+Rosário Do Sul,Sudoeste,4316402,123,8,NA,NA,NA,NA,NA,NA,NA
+Torres,Metropolitana,4321501,91,10,2020-04-12,9,0,TRUE,23.2366,NA,city
+Dom Pedrito,Sudoeste,4306601,49,3,2020-04-12,1,0,TRUE,2.60004,NA,city
+Rio Pardo,Centro Oriental,4315701,42,3,NA,NA,NA,NA,NA,NA,NA
+Itaqui,Sudoeste,4310603,44,3,NA,NA,NA,NA,NA,NA,NA
+Portão,Metropolitana,4314803,17,3,NA,NA,NA,NA,NA,NA,NA
+Igrejinha,Metropolitana,4310108,96,4,NA,NA,NA,NA,NA,NA,NA
+Gramado,Metropolitana,4309100,209,26,NA,NA,NA,NA,NA,NA,NA
+Garibaldi,Nordeste,4308607,83,2,2020-04-12,2,0,TRUE,5.70288,NA,city
+Estrela,Centro Oriental,4307807,403,37,2020-04-12,2,0,TRUE,5.86235,NA,city
+Caçapava Do Sul,Sudeste,4302808,41,3,NA,NA,NA,NA,NA,NA,NA
+São Luiz Gonzaga,Noroeste,4318903,77,2,NA,NA,NA,NA,NA,NA,NA
+Palmeira Das Missões,Noroeste,4313706,46,5,NA,NA,NA,NA,NA,NA,NA
+Teutônia,Centro Oriental,4321451,53,3,NA,NA,NA,NA,NA,NA,NA
+Dois Irmãos,Metropolitana,4306403,45,3,2020-04-12,2,0,TRUE,6.12164,NA,city
+Candelária,Centro Oriental,4304200,58,1,NA,NA,NA,NA,NA,NA,NA
+Frederico Westphalen,Noroeste,4308508,37,2,NA,NA,NA,NA,NA,NA,NA
+Soledade,Noroeste,4320800,56,2,NA,NA,NA,NA,NA,NA,NA
+Flores Da Cunha,Nordeste,4308201,79,4,NA,NA,NA,NA,NA,NA,NA
+Carlos Barbosa,Nordeste,4304804,102,2,2020-04-12,1,0,TRUE,3.35199,NA,city
+Santa Vitória Do Palmar,Sudeste,4317301,27,5,NA,NA,NA,NA,NA,NA,NA
+Triunfo,Metropolitana,4322004,54,4,NA,NA,NA,NA,NA,NA,NA
+Nova Santa Rita,Metropolitana,4313375,7,NA,NA,NA,NA,NA,NA,NA,NA
+Três Coroas,Metropolitana,4321709,31,1,NA,NA,NA,NA,NA,NA,NA
+Lagoa Vermelha,Nordeste,4311304,62,5,NA,NA,NA,NA,NA,NA,NA
+São José Do Norte,Sudeste,4318507,27,4,NA,NA,NA,NA,NA,NA,NA
+Nova Prata,Nordeste,4313300,139,5,NA,NA,NA,NA,NA,NA,NA
+Vera Cruz,Centro Oriental,4322707,39,3,NA,NA,NA,NA,NA,NA,NA
+Taquari,Centro Oriental,4321303,30,2,2020-04-12,4,0,TRUE,14.89092,NA,city
+Jaguarão,Sudeste,4311007,28,NA,NA,NA,NA,NA,NA,NA,NA
+Veranópolis,Nordeste,4322806,127,3,2020-04-12,1,0,TRUE,3.81083,NA,city
+Encruzilhada Do Sul,Sudeste,4306908,32,NA,2020-04-12,2,1,TRUE,7.72887,0.5,city
+Guaporé,Nordeste,4309407,59,3,NA,NA,NA,NA,NA,NA,NA
+São Sebastião Do Caí,Metropolitana,4319505,38,2,2020-04-12,2,0,TRUE,7.78665,NA,city
+Capão Do Leão,Sudeste,4304663,5,NA,2020-04-12,1,0,TRUE,3.94415,NA,city
+Sarandi,Noroeste,4320107,35,3,2020-04-12,1,0,TRUE,4.08347,NA,city
+Ivoti,Metropolitana,4310801,43,2,2020-04-12,4,1,TRUE,16.46565,0.25,city
+São Jerônimo,Metropolitana,4318408,37,5,NA,NA,NA,NA,NA,NA,NA
+Tapejara,Noroeste,4320909,31,NA,NA,NA,NA,NA,NA,NA,NA
+Tupanciretã,Centro Ocidental,4322202,31,3,NA,NA,NA,NA,NA,NA,NA
+Três De Maio,Noroeste,4321808,112,10,NA,NA,NA,NA,NA,NA,NA
+Três Passos,Noroeste,4321907,124,11,NA,NA,NA,NA,NA,NA,NA
+São Sepé,Centro Ocidental,4319604,32,2,NA,NA,NA,NA,NA,NA,NA
+Imbé,Metropolitana,4310330,8,NA,2020-04-12,1,0,TRUE,4.38596,NA,city
+Encantado,Centro Oriental,4306809,57,5,2020-04-12,2,0,TRUE,8.80824,NA,city
+Quaraí,Sudoeste,4315305,27,4,NA,NA,NA,NA,NA,NA,NA
+São Francisco De Paula,Nordeste,4318200,18,1,NA,NA,NA,NA,NA,NA,NA
+Nova Hartz,Metropolitana,4313060,6,NA,NA,NA,NA,NA,NA,NA,NA
+São Marcos,Nordeste,4319000,34,5,NA,NA,NA,NA,NA,NA,NA
+Nova Petrópolis,Metropolitana,4313201,36,3,NA,NA,NA,NA,NA,NA,NA
+Rolante,Metropolitana,4316006,31,2,2020-04-12,1,0,TRUE,4.68406,NA,city
+Butiá,Metropolitana,4302709,26,2,NA,NA,NA,NA,NA,NA,NA
+Arroio Do Meio,Centro Oriental,4301008,66,4,NA,NA,NA,NA,NA,NA,NA
+Piratini,Sudeste,4314605,21,2,2020-04-12,1,0,TRUE,4.83957,NA,city
+Ibirubá,Noroeste,4310009,33,2,NA,NA,NA,NA,NA,NA,NA
+Horizontina,Noroeste,4309605,18,2,NA,NA,NA,NA,NA,NA,NA
+Júlio De Castilhos,Centro Ocidental,4311205,21,1,NA,NA,NA,NA,NA,NA,NA
+São Francisco De Assis,Sudoeste,4318101,28,1,NA,NA,NA,NA,NA,NA,NA
+Arroio Grande,Sudeste,4301305,18,2,NA,NA,NA,NA,NA,NA,NA
+Não-Me-Toque,Noroeste,4312658,44,2,NA,NA,NA,NA,NA,NA,NA
+Serafina Corrêa,Nordeste,4320404,47,2,2020-04-12,5,0,TRUE,28.56816,NA,city
+Tapes,Metropolitana,4321105,15,1,NA,NA,NA,NA,NA,NA,NA
+Agudo,Centro Ocidental,4300109,38,5,NA,NA,NA,NA,NA,NA,NA
+Xangri-Lá,Metropolitana,4323804,16,NA,NA,NA,NA,NA,NA,NA,NA
+Sananduva,Noroeste,4316600,17,1,2020-04-12,2,0,TRUE,12.29256,NA,city
+Cidreira,Metropolitana,4305454,12,1,2020-04-12,2,0,TRUE,12.30466,NA,city
+Getúlio Vargas,Noroeste,4308904,50,7,NA,NA,NA,NA,NA,NA,NA
+São Pedro Do Sul,Centro Ocidental,4319406,31,6,NA,NA,NA,NA,NA,NA,NA
+Giruá,Noroeste,4309001,22,2,NA,NA,NA,NA,NA,NA,NA
+Restinga Seca,Centro Ocidental,4315503,27,2,NA,NA,NA,NA,NA,NA,NA
+Espumoso,Noroeste,4307500,48,3,NA,NA,NA,NA,NA,NA,NA
+Dom Feliciano,Metropolitana,4306502,22,3,NA,NA,NA,NA,NA,NA,NA
+Sobradinho,Centro Oriental,4320701,50,2,NA,NA,NA,NA,NA,NA,NA
+Santo Cristo,Noroeste,4317905,48,4,NA,NA,NA,NA,NA,NA,NA
+Arroio Dos Ratos,Metropolitana,4301107,2,NA,2020-04-12,3,0,TRUE,21.19992,NA,city
+Cerro Largo,Noroeste,4305207,22,2,NA,NA,NA,NA,NA,NA,NA
+Balneário Pinhal,Metropolitana,4301636,23,3,NA,NA,NA,NA,NA,NA,NA
+Bom Princípio,Metropolitana,4302352,31,2,NA,NA,NA,NA,NA,NA,NA
+Santo Augusto,Noroeste,4317806,40,4,NA,NA,NA,NA,NA,NA,NA
+Feliz,Metropolitana,4308102,21,2,NA,NA,NA,NA,NA,NA,NA
+Barra Do Ribeiro,Metropolitana,4301909,7,NA,NA,NA,NA,NA,NA,NA,NA
+Tenente Portela,Noroeste,4321402,179,15,NA,NA,NA,NA,NA,NA,NA
+Crissiumal,Noroeste,4306007,44,1,NA,NA,NA,NA,NA,NA,NA
+Arroio Do Tigre,Centro Oriental,4301206,29,2,NA,NA,NA,NA,NA,NA,NA
+Antônio Prado,Nordeste,4300802,33,2,NA,NA,NA,NA,NA,NA,NA
+Mostardas,Metropolitana,4312500,15,1,NA,NA,NA,NA,NA,NA,NA
+Cacequi,Centro Ocidental,4302907,11,NA,NA,NA,NA,NA,NA,NA,NA
+Salto Do Jacuí,Noroeste,4316451,12,NA,NA,NA,NA,NA,NA,NA,NA
+Cruzeiro Do Sul,Centro Oriental,4306205,11,NA,2020-04-12,1,0,TRUE,8.09848,NA,city
+Bom Retiro Do Sul,Centro Oriental,4302402,34,NA,2020-04-12,1,0,TRUE,8.11162,NA,city
+Pinheiro Machado,Sudeste,4314506,12,1,NA,NA,NA,NA,NA,NA,NA
+Cerro Grande Do Sul,Metropolitana,4305173,2,NA,2020-04-12,1,0,TRUE,8.1706,NA,city
+Capela De Santana,Metropolitana,4304689,1,NA,NA,NA,NA,NA,NA,NA,NA
+Vale Do Sol,Centro Oriental,4322533,11,2,NA,NA,NA,NA,NA,NA,NA
+Nonoai,Noroeste,4312708,45,2,NA,NA,NA,NA,NA,NA,NA
+Redentora,Noroeste,4315404,1,NA,NA,NA,NA,NA,NA,NA,NA
+Roca Sales,Centro Oriental,4315800,16,1,NA,NA,NA,NA,NA,NA,NA
+Bom Jesus,Nordeste,4302303,26,NA,NA,NA,NA,NA,NA,NA,NA
+Palmares Do Sul,Metropolitana,4313656,9,NA,NA,NA,NA,NA,NA,NA,NA
+Terra De Areia,Metropolitana,4321436,23,1,NA,NA,NA,NA,NA,NA,NA
+Barros Cassal,Noroeste,4302006,10,NA,NA,NA,NA,NA,NA,NA,NA
+Três Cachoeiras,Metropolitana,4321667,4,NA,NA,NA,NA,NA,NA,NA,NA
+Jaguari,Centro Ocidental,4311106,17,2,NA,NA,NA,NA,NA,NA,NA
+Seberi,Noroeste,4320206,39,2,NA,NA,NA,NA,NA,NA,NA
+Ronda Alta,Noroeste,4316105,35,3,NA,NA,NA,NA,NA,NA,NA
+Tapera,Noroeste,4321006,15,1,NA,NA,NA,NA,NA,NA,NA
+Arvorezinha,Nordeste,4301404,31,2,NA,NA,NA,NA,NA,NA,NA
+Fontoura Xavier,Noroeste,4308300,9,2,NA,NA,NA,NA,NA,NA,NA
+Porto Xavier,Noroeste,4315107,13,1,NA,NA,NA,NA,NA,NA,NA
+Santo Antônio Das Missões,Noroeste,4317707,6,NA,NA,NA,NA,NA,NA,NA,NA
+Sinimbu,Centro Oriental,4320677,8,NA,NA,NA,NA,NA,NA,NA,NA
+Planalto,Noroeste,4314704,20,3,NA,NA,NA,NA,NA,NA,NA
+Arroio Do Sal,Metropolitana,4301057,5,NA,2020-04-12,1,0,TRUE,9.93542,NA,city
+Nova Bassano,Nordeste,4312906,12,1,NA,NA,NA,NA,NA,NA,NA
+Constantina,Noroeste,4305801,18,2,NA,NA,NA,NA,NA,NA,NA
+Candiota,Sudeste,4304358,9,2,NA,NA,NA,NA,NA,NA,NA
+Chapada,Noroeste,4305306,17,1,NA,NA,NA,NA,NA,NA,NA
+Pantano Grande,Centro Oriental,4313953,9,NA,NA,NA,NA,NA,NA,NA,NA
+Casca,Noroeste,4304903,19,2,NA,NA,NA,NA,NA,NA,NA
+Catuípe,Noroeste,4305009,1,NA,NA,NA,NA,NA,NA,NA,NA
+São Vicente Do Sul,Centro Ocidental,4319802,18,1,NA,NA,NA,NA,NA,NA,NA
+Jóia,Noroeste,4311155,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Paverama,Centro Oriental,4314159,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Entre-Ijuís,Noroeste,4306932,NA,NA,NA,NA,NA,NA,NA,NA,NA
+General Câmara,Metropolitana,4308805,2,NA,NA,NA,NA,NA,NA,NA,NA
+Caraá,Metropolitana,4304713,3,NA,NA,NA,NA,NA,NA,NA,NA
+Glorinha,Metropolitana,4309050,3,1,2020-04-12,1,0,TRUE,12.34873,NA,city
+Santana Da Boa Vista,Sudeste,4317004,11,1,NA,NA,NA,NA,NA,NA,NA
+Minas Do Leão,Metropolitana,4312252,4,NA,2020-04-12,2,0,TRUE,24.7678,NA,city
+Cristal,Sudeste,4306056,6,1,NA,NA,NA,NA,NA,NA,NA
+Santa Bárbara Do Sul,Noroeste,4316709,7,NA,NA,NA,NA,NA,NA,NA,NA
+Tuparendi,Noroeste,4322301,17,4,NA,NA,NA,NA,NA,NA,NA
+Salvador Do Sul,Metropolitana,4316501,15,1,NA,NA,NA,NA,NA,NA,NA
+Pedro Osório,Sudeste,4314209,10,1,NA,NA,NA,NA,NA,NA,NA
+Boqueirão Do Leão,Centro Oriental,4302451,9,NA,NA,NA,NA,NA,NA,NA,NA
+São Miguel Das Missões,Noroeste,4319158,13,2,NA,NA,NA,NA,NA,NA,NA
+Paraí,Nordeste,4314001,47,2,2020-04-12,2,0,TRUE,26.11989,NA,city
+Paraíso Do Sul,Centro Oriental,4314027,7,NA,NA,NA,NA,NA,NA,NA,NA
+Guarani Das Missões,Noroeste,4309506,32,2,NA,NA,NA,NA,NA,NA,NA
+Barão Do Triunfo,Metropolitana,4301750,1,NA,NA,NA,NA,NA,NA,NA,NA
+Lavras Do Sul,Sudoeste,4311502,9,2,NA,NA,NA,NA,NA,NA,NA
+Segredo,Centro Oriental,4320263,14,NA,NA,NA,NA,NA,NA,NA,NA
+Ametista Do Sul,Noroeste,4300646,14,1,NA,NA,NA,NA,NA,NA,NA
+Coronel Bicaco,Noroeste,4305900,6,1,NA,NA,NA,NA,NA,NA,NA
+Manoel Viana,Sudoeste,4311759,3,NA,NA,NA,NA,NA,NA,NA,NA
+Ibiraiaras,Noroeste,4309902,9,NA,NA,NA,NA,NA,NA,NA,NA
+Iraí,Noroeste,4310504,15,1,NA,NA,NA,NA,NA,NA,NA
+Palmitinho,Noroeste,4313805,38,NA,NA,NA,NA,NA,NA,NA,NA
+Amaral Ferrador,Sudeste,4300638,4,NA,NA,NA,NA,NA,NA,NA,NA
+Ajuricaba,Noroeste,4300208,14,2,NA,NA,NA,NA,NA,NA,NA
+São José Do Ouro,Noroeste,4318606,30,2,NA,NA,NA,NA,NA,NA,NA
+Erval Seco,Noroeste,4307302,1,NA,NA,NA,NA,NA,NA,NA,NA
+Roque Gonzales,Noroeste,4316303,18,2,NA,NA,NA,NA,NA,NA,NA
+Herval,Sudeste,4307104,15,1,NA,NA,NA,NA,NA,NA,NA
+Hulha Negra,Sudoeste,4309654,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Condor,Noroeste,4305702,13,1,NA,NA,NA,NA,NA,NA,NA
+Maquiné,Metropolitana,4311775,4,NA,NA,NA,NA,NA,NA,NA,NA
+Boa Vista Do Buricá,Noroeste,4302204,36,2,NA,NA,NA,NA,NA,NA,NA
+Chuí,Sudeste,4305439,3,NA,NA,NA,NA,NA,NA,NA,NA
+Faxinal Do Soturno,Centro Ocidental,4308003,66,8,NA,NA,NA,NA,NA,NA,NA
+Formigueiro,Centro Ocidental,4308409,5,NA,NA,NA,NA,NA,NA,NA,NA
+Augusto Pestana,Noroeste,4301503,5,NA,NA,NA,NA,NA,NA,NA,NA
+Ipê,Nordeste,4310439,8,NA,NA,NA,NA,NA,NA,NA,NA
+Barão De Cotegipe,Noroeste,4301701,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Santa Clara Do Sul,Centro Oriental,4316758,15,NA,NA,NA,NA,NA,NA,NA,NA
+Morro Redondo,Sudeste,4312450,6,2,NA,NA,NA,NA,NA,NA,NA
+Passo Do Sobrado,Centro Oriental,4314076,5,NA,NA,NA,NA,NA,NA,NA,NA
+Nova Palma,Centro Ocidental,4313102,11,1,2020-04-12,1,0,TRUE,15.35627,NA,city
+Sertão Santana,Metropolitana,4320552,4,NA,NA,NA,NA,NA,NA,NA,NA
+Lagoão,Noroeste,4311254,5,1,NA,NA,NA,NA,NA,NA,NA
+Cambará Do Sul,Nordeste,4303608,15,1,NA,NA,NA,NA,NA,NA,NA
+Morro Reuter,Metropolitana,4312476,19,4,NA,NA,NA,NA,NA,NA,NA
+Santa Maria Do Herval,Metropolitana,4316956,8,NA,NA,NA,NA,NA,NA,NA,NA
+Bossoroca,Noroeste,4302501,8,NA,NA,NA,NA,NA,NA,NA,NA
+Alpestre,Noroeste,4300505,9,1,NA,NA,NA,NA,NA,NA,NA
+Progresso,Centro Oriental,4315156,30,6,NA,NA,NA,NA,NA,NA,NA
+Aratiba,Noroeste,4300901,30,NA,NA,NA,NA,NA,NA,NA,NA
+Cândido Godói,Noroeste,4304309,39,2,NA,NA,NA,NA,NA,NA,NA
+Barão,Metropolitana,4301651,10,1,NA,NA,NA,NA,NA,NA,NA
+Independência,Noroeste,4310405,12,1,NA,NA,NA,NA,NA,NA,NA
+Cerrito,Sudeste,4305124,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lindolfo Collor,Metropolitana,4311627,5,NA,NA,NA,NA,NA,NA,NA,NA
+Anta Gorda,Nordeste,4300703,11,1,2020-04-12,2,0,TRUE,33.43922,NA,city
+Estação,Noroeste,4307559,16,NA,NA,NA,NA,NA,NA,NA,NA
+Alecrim,Noroeste,4300307,24,2,NA,NA,NA,NA,NA,NA,NA
+Vale Real,Metropolitana,4322541,1,NA,NA,NA,NA,NA,NA,NA,NA
+Rodeio Bonito,Noroeste,4315909,48,1,NA,NA,NA,NA,NA,NA,NA
+Trindade Do Sul,Noroeste,4321956,19,NA,NA,NA,NA,NA,NA,NA,NA
+São Paulo Das Missões,Noroeste,4319307,41,4,NA,NA,NA,NA,NA,NA,NA
+Picada Café,Metropolitana,4314423,7,1,NA,NA,NA,NA,NA,NA,NA
+Tiradentes Do Sul,Noroeste,4321477,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Passa Sete,Centro Oriental,4314068,1,NA,NA,NA,NA,NA,NA,NA,NA
+Araricá,Metropolitana,4300877,10,NA,NA,NA,NA,NA,NA,NA,NA
+Tucunduva,Noroeste,4322103,17,2,NA,NA,NA,NA,NA,NA,NA
+Sentinela Do Sul,Metropolitana,4320354,1,1,NA,NA,NA,NA,NA,NA,NA
+Gaurama,Noroeste,4308706,12,NA,NA,NA,NA,NA,NA,NA,NA
+Itaara,Centro Ocidental,4310538,1,NA,NA,NA,NA,NA,NA,NA,NA
+Tavares,Metropolitana,4321352,7,NA,NA,NA,NA,NA,NA,NA,NA
+Campina Das Missões,Noroeste,4303707,32,2,NA,NA,NA,NA,NA,NA,NA
+Campinas Do Sul,Noroeste,4303806,17,2,NA,NA,NA,NA,NA,NA,NA
+Machadinho,Noroeste,4311700,6,1,NA,NA,NA,NA,NA,NA,NA
+Chuvisca,Metropolitana,4305447,4,NA,NA,NA,NA,NA,NA,NA,NA
+São Martinho,Noroeste,4319109,20,2,NA,NA,NA,NA,NA,NA,NA
+Sertão,Noroeste,4320503,16,NA,NA,NA,NA,NA,NA,NA,NA
+Nova Esperança Do Sul,Centro Ocidental,4313037,3,NA,NA,NA,NA,NA,NA,NA,NA
+Barracão,Noroeste,4301800,2,NA,NA,NA,NA,NA,NA,NA,NA
+São Nicolau,Noroeste,4319208,5,1,NA,NA,NA,NA,NA,NA,NA
+Liberato Salzano,Noroeste,4311601,12,1,NA,NA,NA,NA,NA,NA,NA
+Rondinha,Noroeste,4316204,6,NA,NA,NA,NA,NA,NA,NA,NA
+Selbach,Noroeste,4320305,11,NA,NA,NA,NA,NA,NA,NA,NA
+Brochier,Metropolitana,4302659,3,NA,NA,NA,NA,NA,NA,NA,NA
+Cacique Doble,Noroeste,4303202,9,1,NA,NA,NA,NA,NA,NA,NA
+Muçum,Centro Oriental,4312609,14,1,NA,NA,NA,NA,NA,NA,NA
+Erval Grande,Noroeste,4307203,2,NA,NA,NA,NA,NA,NA,NA,NA
+Mata,Centro Ocidental,4312104,4,NA,NA,NA,NA,NA,NA,NA,NA
+Aceguá,Sudoeste,4300034,17,1,NA,NA,NA,NA,NA,NA,NA
+Caibaté,Noroeste,4303301,17,2,NA,NA,NA,NA,NA,NA,NA
+Pinheirinho Do Vale,Noroeste,4314498,2,NA,NA,NA,NA,NA,NA,NA,NA
+Viadutos,Noroeste,4322905,9,NA,NA,NA,NA,NA,NA,NA,NA
+Miraguaí,Noroeste,4312302,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Harmonia,Metropolitana,4309555,7,NA,2020-04-12,3,0,TRUE,61.65228,NA,city
+Caiçara,Noroeste,4303400,12,NA,NA,NA,NA,NA,NA,NA,NA
+Humaitá,Noroeste,4309704,14,1,NA,NA,NA,NA,NA,NA,NA
+Ciríaco,Noroeste,4305504,6,NA,NA,NA,NA,NA,NA,NA,NA
+Tupandi,Metropolitana,4322251,4,NA,2020-04-12,1,0,TRUE,20.59732,NA,city
+Porto Lucena,Noroeste,4315008,22,1,NA,NA,NA,NA,NA,NA,NA
+Vicente Dutra,Noroeste,4323101,6,NA,NA,NA,NA,NA,NA,NA,NA
+David Canabarro,Noroeste,4306304,13,1,NA,NA,NA,NA,NA,NA,NA
+São José Do Hortêncio,Metropolitana,4318481,9,NA,NA,NA,NA,NA,NA,NA,NA
+Ibiaçá,Noroeste,4309803,4,1,NA,NA,NA,NA,NA,NA,NA
+Nova Araçá,Nordeste,4312807,4,NA,NA,NA,NA,NA,NA,NA,NA
+Cerro Branco,Centro Oriental,4305132,4,NA,NA,NA,NA,NA,NA,NA,NA
+São João Da Urtiga,Noroeste,4318424,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Tabaí,Centro Oriental,4320859,NA,NA,2020-04-12,4,0,TRUE,84.76372,NA,city
+Doutor Maurício Cardoso,Noroeste,4306734,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Riozinho,Metropolitana,4315750,8,NA,NA,NA,NA,NA,NA,NA,NA
+Maçambará,Sudoeste,4311718,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Campo Novo,Noroeste,4304002,7,NA,NA,NA,NA,NA,NA,NA,NA
+Capivari Do Sul,Metropolitana,4304671,3,NA,NA,NA,NA,NA,NA,NA,NA
+Tunas,Noroeste,4322152,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Marcelino Ramos,Noroeste,4311908,7,2,NA,NA,NA,NA,NA,NA,NA
+Mato Leitão,Centro Oriental,4312153,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fazenda Vilanova,Centro Oriental,4308078,4,NA,NA,NA,NA,NA,NA,NA,NA
+Maximiliano De Almeida,Noroeste,4312203,12,1,NA,NA,NA,NA,NA,NA,NA
+Ibarama,Centro Oriental,4309753,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pinhal Grande,Centro Ocidental,4314472,6,NA,NA,NA,NA,NA,NA,NA,NA
+Fortaleza Dos Valos,Noroeste,4308458,11,NA,NA,NA,NA,NA,NA,NA,NA
+Vila Maria,Noroeste,4323408,6,NA,2020-04-12,1,0,TRUE,22.94631,NA,city
+Gramado Xavier,Centro Oriental,4309159,1,NA,NA,NA,NA,NA,NA,NA,NA
+Três Palmeiras,Noroeste,4321857,12,NA,NA,NA,NA,NA,NA,NA,NA
+Vila Nova Do Sul,Centro Ocidental,4323457,2,NA,NA,NA,NA,NA,NA,NA,NA
+Barra Do Quaraí,Sudoeste,4301875,5,1,NA,NA,NA,NA,NA,NA,NA
+Novo Cabrais,Centro Oriental,4313391,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Novo Barreiro,Noroeste,4313490,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Ilópolis,Nordeste,4310306,15,NA,NA,NA,NA,NA,NA,NA,NA
+Ibirapuitã,Noroeste,4309951,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Marques De Souza,Centro Oriental,4312054,26,2,NA,NA,NA,NA,NA,NA,NA
+Putinga,Nordeste,4315206,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pontão,Noroeste,4314779,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pejuçara,Noroeste,4314308,6,2,NA,NA,NA,NA,NA,NA,NA
+Mariana Pimentel,Metropolitana,4311981,7,NA,NA,NA,NA,NA,NA,NA,NA
+Paim Filho,Noroeste,4313607,6,1,NA,NA,NA,NA,NA,NA,NA
+Cotiporã,Nordeste,4305959,5,NA,NA,NA,NA,NA,NA,NA,NA
+Jaboticaba,Noroeste,4310850,5,NA,NA,NA,NA,NA,NA,NA,NA
+Pareci Novo,Metropolitana,4314035,NA,NA,2020-04-12,1,0,TRUE,26.06203,NA,city
+Chiapetta,Noroeste,4305405,8,NA,NA,NA,NA,NA,NA,NA,NA
+Quinze De Novembro,Noroeste,4315354,10,1,NA,NA,NA,NA,NA,NA,NA
+Jaquirana,Nordeste,4311122,12,1,NA,NA,NA,NA,NA,NA,NA
+São Pedro Da Serra,Metropolitana,4319356,2,NA,NA,NA,NA,NA,NA,NA,NA
+Água Santa,Noroeste,4300059,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Severiano De Almeida,Noroeste,4320602,13,1,NA,NA,NA,NA,NA,NA,NA
+Nova Roma Do Sul,Nordeste,4313359,1,NA,NA,NA,NA,NA,NA,NA,NA
+Estrela Velha,Centro Oriental,4307815,6,NA,NA,NA,NA,NA,NA,NA,NA
+Capão Do Cipó,Centro Ocidental,4304655,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Arambaré,Metropolitana,4300851,1,NA,NA,NA,NA,NA,NA,NA,NA
+Nova Alvorada,Nordeste,4312757,15,1,NA,NA,NA,NA,NA,NA,NA
+Jacutinga,Noroeste,4310900,10,1,NA,NA,NA,NA,NA,NA,NA
+Áurea,Noroeste,4301552,5,NA,NA,NA,NA,NA,NA,NA,NA
+Alegria,Noroeste,4300455,12,NA,NA,NA,NA,NA,NA,NA,NA
+Jari,Centro Ocidental,4311130,3,NA,NA,NA,NA,NA,NA,NA,NA
+São José Dos Ausentes,Nordeste,4318622,14,NA,NA,NA,NA,NA,NA,NA,NA
+Vale Verde,Metropolitana,4322525,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Itacurubi,Centro Ocidental,4310553,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Turuçu,Sudeste,4322327,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Itatiba Do Sul,Noroeste,4310702,12,1,NA,NA,NA,NA,NA,NA,NA
+Braga,Noroeste,4302600,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Dois Lajeados,Nordeste,4306452,23,NA,NA,NA,NA,NA,NA,NA,NA
+Novo Machado,Noroeste,4313425,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Campestre Da Serra,Nordeste,4303673,9,NA,NA,NA,NA,NA,NA,NA,NA
+Vila Flores,Nordeste,4323309,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Campos Borges,Noroeste,4304101,2,1,NA,NA,NA,NA,NA,NA,NA
+São Valentim,Noroeste,4319703,4,NA,NA,NA,NA,NA,NA,NA,NA
+Nova Bréscia,Centro Oriental,4313003,30,NA,NA,NA,NA,NA,NA,NA,NA
+Charrua,Noroeste,4305371,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Esmeralda,Nordeste,4307401,8,NA,NA,NA,NA,NA,NA,NA,NA
+Barra Do Guarita,Noroeste,4301859,2,NA,NA,NA,NA,NA,NA,NA,NA
+São Martinho Da Serra,Centro Ocidental,4319125,1,NA,NA,NA,NA,NA,NA,NA,NA
+Colorado,Noroeste,4305603,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Monte Alegre Dos Campos,Nordeste,4312377,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Caseiros,Noroeste,4304952,2,NA,NA,NA,NA,NA,NA,NA,NA
+Vitória Das Missões,Noroeste,4323754,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Ernestina,Noroeste,4307054,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Muitos Capões,Nordeste,4312617,8,NA,NA,NA,NA,NA,NA,NA,NA
+Imigrante,Centro Oriental,4310363,9,NA,NA,NA,NA,NA,NA,NA,NA
+Dona Francisca,Centro Ocidental,4306700,4,NA,NA,NA,NA,NA,NA,NA,NA
+Taquaruçu Do Sul,Noroeste,4321329,3,NA,NA,NA,NA,NA,NA,NA,NA
+São Domingos Do Sul,Noroeste,4318051,10,NA,2020-04-12,3,0,TRUE,97.59271,NA,city
+Mormaço,Noroeste,4312427,2,NA,NA,NA,NA,NA,NA,NA,NA
+Dilermando De Aguiar,Centro Ocidental,4306379,2,NA,NA,NA,NA,NA,NA,NA,NA
+Alto Feliz,Metropolitana,4300570,3,NA,NA,NA,NA,NA,NA,NA,NA
+Herveiras,Centro Oriental,4309571,1,NA,NA,NA,NA,NA,NA,NA,NA
+Tio Hugo,Noroeste,4321469,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Westfália,Centro Oriental,4323770,4,NA,NA,NA,NA,NA,NA,NA,NA
+Erebango,Noroeste,4306973,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mampituba,Metropolitana,4311734,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Morrinhos Do Sul,Metropolitana,4312443,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Esperança Do Sul,Noroeste,4307450,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pinto Bandeira,Nordeste,4314548,1,NA,NA,NA,NA,NA,NA,NA,NA
+Garruchos,Sudoeste,4308656,NA,NA,NA,NA,NA,NA,NA,NA,NA
+São Pedro Do Butiá,Noroeste,4319372,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Sede Nova,Noroeste,4320230,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Arroio Do Padre,Sudeste,4301073,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Centenário,Noroeste,4305116,2,NA,NA,NA,NA,NA,NA,NA,NA
+Victor Graeff,Noroeste,4323200,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lagoa Bonita Do Sul,Centro Oriental,4311239,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Presidente Lucena,Metropolitana,4315149,7,1,NA,NA,NA,NA,NA,NA,NA
+Derrubadas,Noroeste,4306320,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Cristal Do Sul,Noroeste,4306072,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Rio Dos Índios,Noroeste,4315552,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Vista Gaúcha,Noroeste,4323705,6,NA,NA,NA,NA,NA,NA,NA,NA
+Entre Rios Do Sul,Noroeste,4306957,4,NA,NA,NA,NA,NA,NA,NA,NA
+Toropi,Centro Ocidental,4321493,2,NA,NA,NA,NA,NA,NA,NA,NA
+Boa Vista Do Sul,Nordeste,4302253,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Senador Salgado Filho,Noroeste,4320321,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Quevedos,Centro Ocidental,4315321,2,NA,NA,NA,NA,NA,NA,NA,NA
+Coxilha,Noroeste,4305975,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Vista Alegre,Noroeste,4323507,2,1,NA,NA,NA,NA,NA,NA,NA
+São Jorge,Nordeste,4318440,1,NA,2020-04-12,1,0,TRUE,35.41076,NA,city
+Capitão,Centro Oriental,4304697,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Salvador Das Missões,Noroeste,4316477,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Três Forquilhas,Metropolitana,4321832,3,NA,NA,NA,NA,NA,NA,NA,NA
+Camargo,Noroeste,4303558,2,NA,NA,NA,NA,NA,NA,NA,NA
+São Valério Do Sul,Noroeste,4319737,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Fagundes Varela,Nordeste,4307864,6,NA,NA,NA,NA,NA,NA,NA,NA
+Nova Candelária,Noroeste,4313011,1,NA,NA,NA,NA,NA,NA,NA,NA
+Três Arroios,Noroeste,4321634,10,NA,NA,NA,NA,NA,NA,NA,NA
+Maratá,Metropolitana,4311791,17,1,NA,NA,NA,NA,NA,NA,NA
+Jacuizinho,Noroeste,4310876,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Saldanha Marinho,Noroeste,4316436,9,NA,NA,NA,NA,NA,NA,NA,NA
+Sagrada Família,Noroeste,4316428,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Boa Vista Do Incra,Noroeste,4302238,1,NA,NA,NA,NA,NA,NA,NA,NA
+Pinhal,Noroeste,4314456,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Monte Belo Do Sul,Nordeste,4312385,1,NA,NA,NA,NA,NA,NA,NA,NA
+São José Das Missões,Noroeste,4318457,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lajeado Do Bugre,Noroeste,4311429,NA,NA,NA,NA,NA,NA,NA,NA,NA
+São João Do Polêsine,Centro Ocidental,4318432,2,NA,NA,NA,NA,NA,NA,NA,NA
+Nova Pádua,Nordeste,4313086,1,NA,NA,NA,NA,NA,NA,NA,NA
+Santa Margarida Do Sul,Sudoeste,4316972,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Dom Pedro De Alcântara,Metropolitana,4306551,2,NA,NA,NA,NA,NA,NA,NA,NA
+Mato Castelhano,Noroeste,4312138,4,NA,NA,NA,NA,NA,NA,NA,NA
+Barra Funda,Noroeste,4301958,1,NA,NA,NA,NA,NA,NA,NA,NA
+Coronel Barros,Noroeste,4305871,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Dezesseis De Novembro,Noroeste,4306353,2,NA,NA,NA,NA,NA,NA,NA,NA
+Boa Vista Do Cadeado,Noroeste,4302220,8,NA,NA,NA,NA,NA,NA,NA,NA
+Eugênio De Castro,Noroeste,4307831,1,NA,NA,NA,NA,NA,NA,NA,NA
+Colinas,Centro Oriental,4305587,6,NA,NA,NA,NA,NA,NA,NA,NA
+Itati,Metropolitana,4310652,9,NA,NA,NA,NA,NA,NA,NA,NA
+Forquetinha,Centro Oriental,4308433,3,NA,NA,NA,NA,NA,NA,NA,NA
+Porto Mauá,Noroeste,4315057,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Silveira Martins,Centro Ocidental,4320651,9,1,NA,NA,NA,NA,NA,NA,NA
+São José Do Sul,Metropolitana,4318614,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pirapó,Noroeste,4314555,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Unistalda,Centro Ocidental,4322376,3,NA,NA,NA,NA,NA,NA,NA,NA
+Rolador,Noroeste,4315958,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Faxinalzinho,Noroeste,4308052,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Santo Expedito Do Sul,Noroeste,4317954,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Travesseiro,Centro Oriental,4321626,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Cerro Grande,Noroeste,4305157,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Coqueiros Do Sul,Noroeste,4305850,2,NA,NA,NA,NA,NA,NA,NA,NA
+Paulo Bento,Noroeste,4314134,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Nova Ramada,Noroeste,4313334,NA,NA,NA,NA,NA,NA,NA,NA,NA
+São Valentim Do Sul,Nordeste,4319711,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Inhacorá,Noroeste,4310413,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Novo Tiradentes,Noroeste,4313441,1,NA,NA,NA,NA,NA,NA,NA,NA
+São Vendelino,Metropolitana,4319752,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Bozano,Noroeste,4302584,8,NA,NA,NA,NA,NA,NA,NA,NA
+Santo Antônio Do Palma,Noroeste,4317558,1,1,NA,NA,NA,NA,NA,NA,NA
+Itapuca,Nordeste,4310579,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Gramado Dos Loureiros,Noroeste,4309126,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Boa Vista Das Missões,Noroeste,4302154,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Vanini,Noroeste,4322558,1,NA,NA,NA,NA,NA,NA,NA,NA
+Vila Lângaro,Noroeste,4323358,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Relvado,Centro Oriental,4315453,4,NA,NA,NA,NA,NA,NA,NA,NA
+Poço Das Antas,Metropolitana,4314753,10,NA,NA,NA,NA,NA,NA,NA,NA
+São José Do Inhacorá,Noroeste,4318499,14,1,NA,NA,NA,NA,NA,NA,NA
+Mariano Moro,Noroeste,4312005,1,NA,NA,NA,NA,NA,NA,NA,NA
+Ubiretama,Noroeste,4322343,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Dois Irmãos Das Missões,Noroeste,4306429,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Benjamin Constant Do Sul,Noroeste,4302055,1,NA,NA,NA,NA,NA,NA,NA,NA
+Santo Antônio Do Planalto,Noroeste,4317756,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pedras Altas,Sudeste,4314175,NA,NA,NA,NA,NA,NA,NA,NA,NA
+São José Do Herval,Noroeste,4318465,2,NA,NA,NA,NA,NA,NA,NA,NA
+São Pedro Das Missões,Noroeste,4319364,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Sério,Centro Oriental,4320453,10,NA,NA,NA,NA,NA,NA,NA,NA
+Doutor Ricardo,Centro Oriental,4306759,11,NA,NA,NA,NA,NA,NA,NA,NA
+Sete De Setembro,Noroeste,4320578,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Bom Progresso,Noroeste,4302378,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Almirante Tamandaré Do Sul,Noroeste,4300471,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pinhal Da Serra,Nordeste,4314464,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Protásio Alves,Nordeste,4315172,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Ivorá,Centro Ocidental,4310751,8,1,NA,NA,NA,NA,NA,NA,NA
+Ipiranga Do Sul,Noroeste,4310462,2,NA,NA,NA,NA,NA,NA,NA,NA
+Muliterno,Noroeste,4312625,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Cruzaltense,Noroeste,4306130,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Quatro Irmãos,Noroeste,4315313,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Vespasiano Corrêa,Centro Oriental,4322855,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Nova Boa Vista,Noroeste,4312955,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Floriano Peixoto,Noroeste,4308250,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Santa Tereza,Nordeste,4317251,1,NA,NA,NA,NA,NA,NA,NA,NA
+Canudos Do Vale,Centro Oriental,4304614,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Novo Xingu,Noroeste,4313466,1,NA,NA,NA,NA,NA,NA,NA,NA
+Barra Do Rio Azul,Noroeste,4301925,1,NA,NA,NA,NA,NA,NA,NA,NA
+Linha Nova,Metropolitana,4311643,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Nicolau Vergueiro,Noroeste,4312674,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Capão Bonito Do Sul,Nordeste,4304622,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pouso Novo,Centro Oriental,4315131,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mato Queimado,Noroeste,4312179,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Alto Alegre,Noroeste,4300554,1,NA,NA,NA,NA,NA,NA,NA,NA
+Santa Cecília Do Sul,Noroeste,4316733,1,NA,NA,NA,NA,NA,NA,NA,NA
+Gentil,Noroeste,4308854,4,NA,NA,NA,NA,NA,NA,NA,NA
+Coronel Pilar,Nordeste,4305934,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lagoa Dos Três Cantos,Noroeste,4311270,2,NA,NA,NA,NA,NA,NA,NA,NA
+Ponte Preta,Noroeste,4314787,2,NA,NA,NA,NA,NA,NA,NA,NA
+Vista Alegre Do Prata,Nordeste,4323606,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Guabiju,Nordeste,4309258,6,NA,NA,NA,NA,NA,NA,NA,NA
+Coqueiro Baixo,Centro Oriental,4305835,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Tupanci Do Sul,Noroeste,4322186,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Montauri,Nordeste,4312351,2,NA,NA,NA,NA,NA,NA,NA,NA
+Porto Vera Cruz,Noroeste,4315073,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Carlos Gomes,Noroeste,4304853,2,NA,NA,NA,NA,NA,NA,NA,NA
+André Da Rocha,Nordeste,4300661,NA,NA,NA,NA,NA,NA,NA,NA,NA
+União Da Serra,Nordeste,4322350,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Engenho Velho,Noroeste,4306924,3,NA,NA,NA,NA,NA,NA,NA,NA

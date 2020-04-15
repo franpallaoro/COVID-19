@@ -1,0 +1,498 @@
+municipio,microregiao,mesorregiao
+Porto Alegre,Porto Alegre,Metropolitana
+Caxias do Sul,Caxias do Sul,Nordeste
+Canoas,Porto Alegre,Metropolitana
+Pelotas,Pelotas,Sudeste
+Santa Maria,Santa Maria,Centro Ocidental
+Gravataí,Porto Alegre,Metropolitana
+Viamão,Porto Alegre,Metropolitana
+Novo Hamburgo,Porto Alegre,Metropolitana
+São Leopoldo,Porto Alegre,Metropolitana
+Rio Grande,Litoral Lagunar,Sudeste
+Alvorada,Porto Alegre,Metropolitana
+Passo Fundo,Passo Fundo,Noroeste
+Sapucaia do Sul,Porto Alegre,Metropolitana
+Santa Cruz do Sul,Santa Cruz do Sul,Centro Oriental
+Cachoeirinha,Porto Alegre,Metropolitana
+Uruguaiana,Campanha Ocidental,Sudoeste
+Bagé,Campanha Meridional,Sudoeste
+Bento Gonçalves,Caxias do Sul,Nordeste
+Erechim,Erechim,Noroeste
+Guaíba,Porto Alegre,Metropolitana
+Lajeado,Lajeado-Estrela,Centro Oriental
+Ijuí,Ijuí,Noroeste
+Esteio,Porto Alegre,Metropolitana
+Cachoeira do Sul,Cachoeira do Sul,Centro Oriental
+Sapiranga,Porto Alegre,Metropolitana
+Santo Ângelo,Santo Ângelo,Noroeste
+Sant'ana do Livramento,Campanha Central,Sudoeste
+Alegrete,Campanha Ocidental,Sudoeste
+Santa Rosa,Santa Rosa,Noroeste
+Farroupilha,Caxias do Sul,Nordeste
+Venâncio Aires,Santa Cruz do Sul,Centro Oriental
+Campo Bom,Porto Alegre,Metropolitana
+Camaquã,Camaquã,Metropolitana
+Vacaria,Vacaria,Nordeste
+Montenegro,Montenegro,Metropolitana
+Carazinho,Carazinho,Noroeste
+São Gabriel,Campanha Central,Sudoeste
+Cruz Alta,Cruz Alta,Noroeste
+São Borja,Campanha Ocidental,Sudoeste
+Parobé,Porto Alegre,Metropolitana
+Taquara,Gramado-Canela,Metropolitana
+Canguçu,Pelotas,Sudeste
+Capão da Canoa,Osório,Metropolitana
+Tramandaí,Osório,Metropolitana
+Estância Velha,Porto Alegre,Metropolitana
+Santiago,Santiago,Centro Ocidental
+Osório,Osório,Metropolitana
+Canela,Gramado-Canela,Metropolitana
+Marau,Passo Fundo,Noroeste
+Panambi,Ijuí,Noroeste
+São Lourenço do Sul,Pelotas,Sudeste
+Santo Antônio da Patrulha,Osório,Metropolitana
+Eldorado do Sul,Porto Alegre,Metropolitana
+Charqueadas,São Jerônimo,Metropolitana
+Rosário do Sul,Campanha Central,Sudoeste
+Torres,Osório,Metropolitana
+Dom Pedrito,Campanha Meridional,Sudoeste
+Rio Pardo,Cachoeira do Sul,Centro Oriental
+Itaqui,Campanha Ocidental,Sudoeste
+Portão,Montenegro,Metropolitana
+Igrejinha,Gramado-Canela,Metropolitana
+Gramado,Gramado-Canela,Metropolitana
+Garibaldi,Caxias do Sul,Nordeste
+Estrela,Lajeado-Estrela,Centro Oriental
+Caçapava do Sul,Serras de Sudeste,Sudeste
+São Luiz Gonzaga,Santo Ângelo,Noroeste
+Palmeira das Missões,Carazinho,Noroeste
+Teutônia,Lajeado Estrela,Centro Oriental
+Dois Irmãos,Gramado-Canela,Metropolitana
+Candelária,Santa Cruz do Sul,Centro Oriental
+Frederico Westphalen,Frederico Westphalen,Noroeste
+Soledade,Soledade,Noroeste
+Flores da Cunha,Caxias do Sul,Nordeste
+Carlos Barbosa,Caxias do Sul,Nordeste
+Santa Vitória do Palmar,Litoral Lagunar,Sudeste
+Triunfo,São Jerônimo,Metropolitana
+Nova Santa Rita,Porto Alegre,Metropolitana
+Três Coroas,Gramado-Canela,Metropolitana
+Lagoa Vermelha,Vacaria,Nordeste
+São José do Norte,Litoral Lagunar,Sudeste
+Nova Prata,Guaporé,Nordeste
+Vera Cruz,Santa Cruz do Sul,Centro Oriental
+Taquari,Lajeado-Estrela,Centro Oriental
+Jaguarão,Jaguarão,Sudeste
+Veranópolis,Caxias do Sul,Nordeste
+Encruzilhada do Sul,Serras de Sudeste,Sudeste
+Guaporé,Guaporé,Nordeste
+São Sebastião do Caí,Montenegro,Metropolitana
+Capão do Leão,Pelotas,Sudeste
+Sarandi,Carazinho,Noroeste
+Ivoti,Gramado-Canela,Metropolitana
+São Jerônimo,São Jerônimo,Metropolitana
+Tapejara,Passo Fundo,Noroeste
+Tupanciretã,Santiago,Centro Ocidental
+Três de Maio,Santa Rosa,Noroeste
+Três Passos,Três Passos,Noroeste
+São Sepé,Santa Maria,Centro Ocidental
+Imbé,Osório,Metropolitana
+Encantado,Lajeado-Estrela,Centro Oriental
+Quaraí,Campanha Ocidental,Sudoeste
+São Francisco de Paula,Vacaria,Nordeste
+Nova Hartz,Porto Alegre,Metropolitana
+São Marcos,Caxias do Sul,Nordeste
+Nova Petrópolis,Gramado-Canela,Metropolitana
+Rolante,Gramado-Canela,Metropolitana
+Butiá,São Jerônimo,Metropolitana
+Arroio do Meio,Lajeado-Estrela,Centro Oriental
+Piratini,Serras de Sudeste,Sudeste
+Ibirubá,Cruz Alta,Noroeste
+Horizontina,Três Passos,Noroeste
+Júlio de Castilhos,Santiago,Centro Ocidental
+São Francisco de Assis,Campanha Ocidental,Sudoeste
+Arroio Grande,Jaguarão,Sudeste
+Não-Me-Toque,Não-Me-Toque,Noroeste
+Serafina Corrêa,Guaporé,Nordeste
+Tapes,Camaquã,Metropolitana
+Agudo,Restinga Seca,Centro Ocidental
+Xangri-lá,Osório,Metropolitana
+Sananduva,Sananduva,Noroeste
+Cidreira,Osório,Metropolitana
+Getúlio Vargas,Erechim,Noroeste
+São Pedro do Sul,Santa Maria,Centro Ocidental
+Giruá,Santo Ângelo,Noroeste
+Restinga Seca,Restinga Seca,Centro Ocidental
+Espumoso,Cruz Alta,Noroeste
+Dom Feliciano,Camaquã,Metropolitana
+Sobradinho,Santa Cruz do Sul,Centro Oriental
+Santo Cristo,Santa Rosa,Noroeste
+Arroio dos Ratos,São Jerônimo,Metropolitana
+Cerro Largo,Cerro Largo,Noroeste
+Balneário Pinhal,Osório,Metropolitana
+Bom Princípio,Montenegro,Metropolitana
+Santo Augusto,Ijuí,Noroeste
+Feliz,Montenegro,Metropolitana
+Barra do Ribeiro,Camaquã,Metropolitana
+Tenente Portela,Três Passos,Noroeste
+Crissiumal,Três Passos,Noroeste
+Arroio do Tigre,Santa Cruz do Sul,Centro Oriental
+Antônio Prado,Caxias do Sul,Nordeste
+Mostardas,Osório,Metropolitana
+Cacequi,Santa Maria,Centro Ocidental
+Salto do Jacuí,Cruz Alta,Noroeste
+Cruzeiro do Sul,Lajeado-Estrela,Centro Oriental
+Bom Retiro do Sul,Lajeado-Estrela,Centro Oriental
+Pinheiro Machado,Serras de Sudeste,Sudeste
+Cerro Grande do Sul,Camaquã,Metropolitana
+Capela de Santana,Montenegro,Metropolitana
+Vale do Sol,Santa Cruz do Sul,Centro Oriental
+Nonoai,Frederico Westphalen,Noroeste
+Redentora,Três Passos,Noroeste
+Roca Sales,Lajeado-Estrela,Centro Oriental
+Bom Jesus,Vacaria,Nordeste
+Palmares do Sul,Osório,Metropolitana
+Terra de Areia,Osório,Metropolitana
+Barros Cassal,Soledade,Noroeste
+Três Cachoeiras,Osório,Metropolitana
+Jaguari,Santa Maria,Centro Ocidental
+Seberi,Frederico Westphalen,Noroeste
+Ronda Alta,Passo Fundo,Noroeste
+Tapera,Não-Me-Toque,Noroeste
+Arvorezinha,Guaporé,Nordeste
+Fontoura Xavier,Soledade,Noroeste
+Porto Xavier,Cerro Largo,Noroeste
+Santo Antônio das Missões,Santo Ângelo,Noroeste
+Sinimbu,Santa Cruz do Sul,Centro Oriental
+Planalto,Frederico Westphalen,Noroeste
+Arroio do Sal,Osório,Metropolitana
+Nova Bassano,Guaporé,Nordeste
+Constantina,Frederico Westphalen,Noroeste
+Candiota,Serras de Sudeste,Sudeste
+Chapada,Carazinho,Noroeste
+Pantano Grande,Cachoeira do Sul,Centro Oriental
+Casca,Passo Fundo,Noroeste
+Catuípe,Santo Ângelo,Noroeste
+São Vicente do Sul,Santa Maria,Centro Ocidental
+Jóia,Cruz Alta,Noroeste
+Paverama,Lajeado-Estrela,Centro Oriental
+Entre-Ijuís,Santo Ângelo,Noroeste
+General Câmara,São Jerônimo,Metropolitana
+Caraá,Osório,Metropolitana
+Glorinha,Porto Alegre,Metropolitana
+Santana da Boa Vista,Serras de Sudeste,Sudeste
+Minas do Leão,São Jerônimo,Metropolitana
+Cristal,Pelotas,Sudeste
+Santa Bárbara do Sul,Cruz Alta,Noroeste
+Tuparendi,Santa Rosa,Noroeste
+Salvador do Sul,Montenegro,Metropolitana
+Pedro Osório,Pelotas,Sudeste
+Boqueirão do Leão,Lajeado-Estrela,Centro Oriental
+São Miguel das Missões,Santo Ângelo,Noroeste
+Paraí,Guaporé,Nordeste
+Paraíso do Sul,Cachoeira do Sul,Centro Oriental
+Guarani das Missões,Cerro Largo,Noroeste
+Barão do Triunfo,São Jerônimo,Metropolitana
+Lavras do Sul,Campanha Meridional,Sudoeste
+Segredo,Santa Cruz do Sul,Centro Oriental
+Ametista do Sul,Frederico Westphalen,Noroeste
+Coronel Bicaco,Ijuí,Noroeste
+Manoel Viana,Campanha Ocidental,Sudoeste
+Ibiraiaras,Passo Fundo,Noroeste
+Iraí,Frederico Westphalen,Noroeste
+Palmitinho,Frederico Westphalen,Noroeste
+Amaral Ferrador,Serras de Sudeste,Sudeste
+Ajuricaba,Ijuí,Noroeste
+São José do Ouro,Sananduva,Noroeste
+Erval Seco,Frederico Westphalen,Noroeste
+Roque Gonzales,Cerro Largo,Noroeste
+Herval,Jaguarão,Sudeste
+Hulha Negra,Campanha Meridional,Sudoeste
+Condor,Ijuí,Noroeste
+Maquiné,Osório,Metropolitana
+Boa Vista do Buricá,Três Passos,Noroeste
+Chuí,Litoral Lagunar,Sudeste
+Faxinal do Soturno,Restinga Seca,Centro Ocidental
+Formigueiro,Restinga Seca,Centro Ocidental
+Augusto Pestana,Ijuí,Noroeste
+Ipê,Vacaria,Nordeste
+Barão de Cotegipe,Erechim,Noroeste
+Santa Clara do Sul,Lajeado-Estrela,Centro Oriental
+Morro Redondo,Pelotas,Sudeste
+Passo do Sobrado,Cachoeira do Sul,Centro Oriental
+Nova Palma,Restinga Seca,Centro Ocidental
+Sertão Santana,Porto Alegre,Metropolitana
+Lagoão,Soledade,Noroeste
+Cambará do Sul,Vacaria,Nordeste
+Morro Reuter,Gramado-Canela,Metropolitana
+Santa Maria do Herval,Gramado-Canela,Metropolitana
+Bossoroca,Santo Ângelo,Noroeste
+Alpestre,Frederico Westphalen,Noroeste
+Progresso,Lajeado-Estrela,Centro Oriental
+Aratiba,Erechim,Noroeste
+Cândido Godói,Santa Rosa,Noroeste
+Barão,Montenegro,Metropolitana
+Independência,Santa Rosa,Noroeste
+Cerrito,Pelotas,Sudeste
+Lindolfo Collor,Gramado-Canela,Metropolitana
+Anta Gorda,Guaporé,Nordeste
+Estação,Erechim,Noroeste
+Alecrim,Santa Rosa,Noroeste
+Vale Real,Montenegro,Metropolitana
+Rodeio Bonito,Frederico Westphalen,Noroeste
+Trindade do Sul,Frederico Westphalen,Noroeste
+São Paulo das Missões,Cerro Largo,Noroeste
+Picada Café,Gramado-Canela,Metropolitana
+Tiradentes do Sul,Três Passos,Noroeste
+Passa Sete,Santa Cruz do Sul,Centro Oriental
+Araricá,Porto Alegre,Metropolitana
+Tucunduva,Santa Rosa,Noroeste
+Sentinela do Sul,Camaquã,Metropolitana
+Gaurama,Erechim,Noroeste
+Itaara,Santa Maria,Centro Ocidental
+Tavares,Osório,Metropolitana
+Campina das Missões,Cerro Largo,Noroeste
+Campinas do Sul,Erechim,Noroeste
+Machadinho,Sananduva,Noroeste
+Chuvisca,Camaquã,Metropolitana
+São Martinho,Três Passos,Noroeste
+Sertão,Passo Fundo,Noroeste
+Nova Esperança do Sul,Santa Maria,Centro Ocidental
+Barracão,Sananduva,Noroeste
+São Nicolau,Santo Ângelo,Noroeste
+Liberato Salzano,Frederico Westphalen,Noroeste
+Rondinha,Frederico Westphalen,Noroeste
+Selbach,Não-Me-Toque,Noroeste
+Brochier,Montenegro,Metropolitana
+Cacique Doble,Sananduva,Noroeste
+Muçum,Lajeado-Estrela,Centro Oriental
+Erval Grande,Erechim,Noroeste
+Mata,Santa Maria,Centro Ocidental
+Aceguá,Campanha Meridional,Sudoeste
+Caibaté,Cerro Largo,Noroeste
+Pinheirinho do Vale,Frederico Westphalen,Noroeste
+Viadutos,Erechim,Noroeste
+Miraguaí,Três Passos,Noroeste
+Harmonia,Montenegro,Metropolitana
+Caiçara,Frederico Westphalen,Noroeste
+Humaitá,Três Passos,Noroeste
+Ciríaco,Passo Fundo,Noroeste
+Tupandi,Montenegro,Metropolitana
+Porto Lucena,Santa Rosa,Noroeste
+Vicente Dutra,Frederico Westphalen,Noroeste
+David Canabarro,Passo Fundo,Noroeste
+São José do Hortêncio,Montenegro,Metropolitana
+Ibiaçá,Sananduva,Noroeste
+Nova Araçá,Guaporé,Nordeste
+Cerro Branco,Cachoeira do Sul,Centro Oriental
+São João da Urtiga,Sananduva,Noroeste
+Tabaí,Lajeado-Estrela,Centro Oriental
+Doutor Maurício Cardoso,Três Passos,Noroeste
+Riozinho,Gramado-Canela,Metropolitana
+Maçambará,Campanha Ocidental,Sudoeste
+Campo Novo,Três Passos,Noroeste
+Capivari do Sul,Osório,Metropolitana
+Tunas,Soledade,Noroeste
+Marcelino Ramos,Erechim,Noroeste
+Mato Leitão,Santa Cruz do Sul,Centro Oriental
+Fazenda Vilanova,Lajeado-Estrela,Centro Oriental
+Maximiliano de Almeida,Sananduva,Noroeste
+Ibarama,Santa Cruz do Sul,Centro Oriental
+Pinhal Grande,Santiago,Centro Ocidental
+Fortaleza dos Valos,Cruz Alta,Noroeste
+Vila Maria,Passo Fundo,Noroeste
+Gramado Xavier,Santa Cruz do Sul,Centro Oriental
+Três Palmeiras,Frederico Westphalen,Noroeste
+Vila Nova do Sul,Santa Maria,Centro Ocidental
+Barra do Quaraí,Campanha Ocidental,Sudoeste
+Novo Cabrais,Cachoeira do Sul,Centro Oriental
+Novo Barreiro,Carazinho,Noroeste
+Ilópolis,Guaporé,Nordeste
+Ibirapuitã,Soledade,Noroeste
+Marques de Souza,Lajeado-Estrela,Centro Oriental
+Putinga,Guaporé,Nordeste
+Pontão,Passo Fundo,Noroeste
+Pejuçara,Ijuí,Noroeste
+Mariana Pimentel,Porto Alegre,Metropolitana
+Paim Filho,Sananduva,Noroeste
+Cotiporã,Caxias do Sul,Nordeste
+Jaboticaba,Carazinho,Noroeste
+Pareci Novo,Montenegro,Metropolitana
+Chiapetta,Ijuí,Noroeste
+Quinze de Novembro,Cruz Alta,Noroeste
+Jaquirana,Vacaria,Nordeste
+São Pedro da Serra,Montenegro,Metropolitana
+Água Santa,Passo Fundo,Noroeste
+Severiano de Almeida,Erechim,Noroeste
+Nova Roma do Sul,Caxias do Sul,Nordeste
+Estrela Velha,Santa Cruz do Sul,Centro Oriental
+Capão do Cipó,Santiago,Centro Ocidental
+Arambaré,Camaquã,Metropolitana
+Nova Alvorada,Guaporé,Nordeste
+Jacutinga,Erechim,Noroeste
+Áurea,Erechim,Noroeste
+Alegria,Ijuí,Noroeste
+Jari,Santiago,Centro Ocidental
+São José dos Ausentes,Vacaria,Nordeste
+Vale Verde,São Jerônimo,Metropolitana
+Itacurubi,Santiago,Centro Ocidental
+Turuçu,Pelotas,Sudeste
+Itatiba do Sul,Erechim,Noroeste
+Braga,Três Passos,Noroeste
+Dois Lajeados,Guaporé,Nordeste
+Novo Machado,Santa Rosa,Noroeste
+Campestre da Serra,Vacaria,Nordeste
+Vila Flores,Caxias do Sul,Nordeste
+Campos Borges,Cruz Alta,Noroeste
+São Valentim,Erechim,Noroeste
+Nova Bréscia,Lajeado-Estrela,Centro Oriental
+Charrua,Passo Fundo,Noroeste
+Esmeralda,Vacaria,Nordeste
+Barra do Guarita,Três Passos,Noroeste
+São Martinho da Serra,Santa Maria,Centro Ocidental
+Colorado,Não-Me-Toque,Noroeste
+Monte Alegre dos Campos,Vacaria,Nordeste
+Caseiros,Passo Fundo,Noroeste
+Vitória das Missões,Santo Ângelo,Noroeste
+Ernestina,Passo Fundo,Noroeste
+Muitos Capões,Vacaria,Nordeste
+Imigrante,Lajeado-Estrela,Centro Oriental
+Dona Francisca,Restinga Seca,Centro Ocidental
+Taquaruçu do Sul,Frederico Westphalen,Noroeste
+São Domingos do Sul,Passo Fundo,Noroeste
+Mormaço,Soledade,Noroeste
+Dilermando de Aguiar,Santa Maria,Centro Ocidental
+Alto Feliz,Montenegro,Metropolitana
+Herveiras,Santa Cruz do Sul,Centro Oriental
+Tio Hugo,Não-Me-Toque,Noroeste
+Westfália,Lajeado-Estrela,Centro Oriental
+Erebango,Erechim,Noroeste
+Mampituba,Osório,Metropolitana
+Morrinhos do Sul,Osório,Metropolitana
+Esperança do Sul,Três Passos,Noroeste
+Pinto Bandeira,Caxias do Sul,Nordeste
+Garruchos,Campanha Ocidental,Sudoeste
+São Pedro do Butiá,Cerro Largo,Noroeste
+Sede Nova,Três Passos,Noroeste
+Arroio do Padre,Pelotas,Sudeste
+Centenário,Erechim,Noroeste
+Victor Graeff,Não-Me-Toque,Noroeste
+Lagoa Bonita do Sul,Santa Cruz do Sul,Centro Oriental
+Presidente Lucena,Gramado-Canela,Metropolitana
+Derrubadas,Três Passos,Noroeste
+Cristal do Sul,Frederico Westphalen,Noroeste
+Rio dos Índios,Frederico Westphalen,Noroeste
+Vista Gaúcha,Três Passos,Noroeste
+Entre Rios do Sul,Erechim,Noroeste
+Toropi,Santa Maria,Centro Ocidental
+Boa Vista do Sul,Caxias do Sul,Nordeste
+Senador Salgado Filho,Santo Ângelo,Noroeste
+Quevedos,Santiago,Centro Ocidental
+Coxilha,Passo Fundo,Noroeste
+Vista Alegre,Frederico Westphalen,Noroeste
+São Jorge,Guaporé,Nordeste
+Capitão,Lajeado-Estrela,Centro Oriental
+Salvador das Missões,Cerro Largo,Noroeste
+Três Forquilhas,Osório,Metropolitana
+Camargo,Passo Fundo,Noroeste
+São Valério do Sul,Ijuí,Noroeste
+Fagundes Varela,Caxias do Sul,Nordeste
+Nova Candelária,Três Passos,Noroeste
+Três Arroios,Erechim,Noroeste
+Maratá,Montenegro,Metropolitana
+Jacuizinho,Cruz Alta,Noroeste
+Saldanha Marinho,Cruz Alta,Noroeste
+Sagrada Família,Carazinho,Noroeste
+Boa Vista do Incra,Cruz Alta,Noroeste
+Pinhal,Carazinho,Noroeste
+Monte Belo do Sul,Caxias do Sul,Nordeste
+São José das Missões,Carazinho,Noroeste
+Lajeado do Bugre,Carazinho,Noroeste
+São João do Polêsine,Restinga Seca,Centro Ocidental
+Nova Pádua,Caxias do Sul,Nordeste
+Santa Margarida do Sul,Campanha Central,Sudoeste
+Dom Pedro de Alcântara,Osório,Metropolitana
+Mato Castelhano,Passo Fundo,Noroeste
+Barra Funda,Carazinho,Noroeste
+Coronel Barros,Ijuí,Noroeste
+Dezesseis de Novembro,Santo Ângelo,Noroeste
+Boa Vista do Cadeado,Cruz Alta,Noroeste
+Eugênio de Castro,Santo Ângelo,Noroeste
+Colinas,Lajeado-Estrela,Centro Oriental
+Itati,Osório,Metropolitana
+Forquetinha,Lajeado-Estrela,Centro Oriental
+Porto Mauá,Santa Rosa,Noroeste
+Silveira Martins,Restinga Seca,Centro Ocidental
+São José do Sul,Montenegro,Metropolitana
+Pirapó,Santo Ângelo,Noroeste
+Unistalda,Santiago,Centro Ocidental
+Rolador,Santo Ângelo,Noroeste
+Faxinalzinho,Erechim,Noroeste
+Santo Expedito do Sul,Sananduva,Noroeste
+Travesseiro,Lajeado-Estrela,Centro Oriental
+Cerro Grande,Carazinho,Noroeste
+Coqueiros do Sul,Carazinho,Noroeste
+Paulo Bento,Erechim,Noroeste
+Nova Ramada,Ijuí,Noroeste
+São Valentim do Sul,Guaporé,Nordeste
+Inhacorá,Ijuí,Noroeste
+Novo Tiradentes,Frederico Westphalen,Noroeste
+São Vendelino,Montenegro,Metropolitana
+Bozano,Ijuí,Noroeste
+Santo Antônio do Palma,Passo Fundo,Noroeste
+Itapuca,Guaporé,Nordeste
+Gramado dos Loureiros,Frederico Westphalen,Noroeste
+Boa Vista das Missões,Carazinho,Noroeste
+Vanini,Passo Fundo,Noroeste
+Vila Lângaro,Passo Fundo,Noroeste
+Relvado,Lajeado-Estrela,Centro Oriental
+Poço das Antas,Montenegro,Metropolitana
+São José do Inhacorá,Santa Rosa,Noroeste
+Mariano Moro,Erechim,Noroeste
+Ubiretama,Santo Ângelo,Noroeste
+Dois Irmãos das Missões,Frederico Westphalen,Noroeste
+Benjamin Constant do Sul,Erechim,Noroeste
+Santo Antônio do Planalto,Carazinho,Noroeste
+Pedras Altas,Jaguarão,Sudeste
+São José do Herval,Soledade,Noroeste
+São Pedro das Missões,Carazinho,Noroeste
+Sério,Lajeado-Estrela,Centro Oriental
+Doutor Ricardo,Lajeado Estrela,Centro Oriental
+Sete de Setembro,Cerro Largo,Noroeste
+Bom Progresso,Três Passos,Noroeste
+Almirante Tamandaré do Sul,Carazinho,Noroeste
+Pinhal da Serra,Vacaria,Nordeste
+Protásio Alves,Guaporé,Nordeste
+Ivorá,Restinga Seca,Centro Ocidental
+Ipiranga do Sul,Erechim,Noroeste
+Muliterno,Passo Fundo,Noroeste
+Cruzaltense,Erechim,Noroeste
+Quatro Irmãos,Erechim,Noroeste
+Vespasiano Corrêa,Lajeado-Estrela,Centro Oriental
+Nova Boa Vista,Carazinho,Noroeste
+Floriano Peixoto,Erechim,Noroeste
+Santa Tereza,Caxias do Sul,Nordeste
+Canudos do Vale,Lajeado-Estrela,Centro Oriental
+Novo Xingu,Frederico Westphalen,Noroeste
+Barra do Rio Azul,Erechim,Noroeste
+Linha Nova,Montenegro,Metropolitana
+Nicolau Vergueiro,Passo Fundo,Noroeste
+Capão Bonito do Sul,Vacaria,Nordeste
+Pouso Novo,Lajeado-Estrela,Centro Oriental
+Mato Queimado,Cerro Largo,Noroeste
+Alto Alegre,Cruz Alta,Noroeste
+Santa Cecília do Sul,Passo Fundo,Noroeste
+Gentil,Passo Fundo,Noroeste
+Coronel Pilar,Caxias do Sul,Nordeste
+Lagoa dos Três Cantos,Não-Me-Toque,Noroeste
+Ponte Preta,Erechim,Noroeste
+Vista Alegre do Prata,Guaporé,Nordeste
+Guabiju,Guaporé,Nordeste
+Coqueiro Baixo,Lajeado-Estrela,Centro Oriental
+Tupanci do Sul,Sananduva,Noroeste
+Montauri,Guaporé,Nordeste
+Porto Vera Cruz,Santa Rosa,Noroeste
+Carlos Gomes,Erechim,Noroeste
+André da Rocha,Guaporé,Nordeste
+União da Serra,Guaporé,Nordeste
+Engenho Velho,Frederico Westphalen,Noroeste
