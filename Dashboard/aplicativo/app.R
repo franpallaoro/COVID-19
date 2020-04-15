@@ -3,6 +3,7 @@
 
 library(shiny)
 library(shinydashboard)
+library(shinydashboardPlus)
 library(dashboardthemes)
 library(dplyr)
 library(ggplot2)
@@ -248,7 +249,72 @@ ui <- dashboardPage(
               
               
               ), 
-      tabItem("us", "Em construção") 
+      tabItem("us",
+  
+              widgetUserBox(
+                title = tags$b("Franciele Lobo Pallaoro"),
+                subtitle = "Estudante de Estatística da UFRGS",
+                type = 2,
+                width = 4,
+                src = NULL,
+                color = "teal",
+                footer = "Contato: franpallaoro@gmail.com"
+              ),
+              
+              widgetUserBox(
+                title = tags$b("Gabriel Holmer Saul"),
+                subtitle = "Estudante de Estatística da UFRGS",
+                type = 2,
+                width = 4,
+                src = NULL,
+                color = "purple",
+                footer = "Contato: gabrielholmersaul@gmail.com"
+              )
+            ,
+              
+              widgetUserBox(
+                  title = tags$b("Gustavo Machado Utpott"),
+                  subtitle = "Estudante de Estatística da UFRGS",
+                  type = 2,
+                  width = 4,
+                  src = NULL,
+                  color = "red",
+                  footer = "Contato: gustavo.utpott@gmail.com"
+                ),
+              
+              widgetUserBox(
+                title = tags$b("Juliana Sena de Souza"),
+                subtitle = "Estudante de Pós-Graduação em Epidemiologia da UFRGS",
+                type = 2,
+                width = 4,
+                src =  NULL,
+                color = "maroon",
+                footer = "Contato: julianass.estatistica@gmail.com"
+              ),
+              
+              
+              widgetUserBox(
+                title = tags$b("Márcia Helena Barbian"),
+                subtitle = "Professora do departamento de Estatística da UFRGS",
+                type = 2,
+                width = 4,
+                src = NULL,
+                color = "orange",
+                footer =  "Contato: mhbarbian@gmail.com"
+              ), 
+              
+              widgetUserBox(
+                title = tags$b("Rodrigo Citton P. dos Reis"),
+                subtitle = "Professor do departamento de Estatística da UFRGS",
+                type = 2,
+                width = 4,
+                src = NULL,
+                color = "yellow",
+                footer =  "Contato: citton.padilha@ufrgs.br"
+              )
+              
+              
+              ) 
     )
 
   ) # dashboard body
