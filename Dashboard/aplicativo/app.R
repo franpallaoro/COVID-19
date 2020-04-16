@@ -19,27 +19,29 @@ covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
 # banco de dados por estado:
 data_state <- covid %>%
   select(state, confirmed, deaths, confirmed_per_100k_inhabitants, 
-         death_rate, is_last, place_type) %>%
+         death_rate, is_last, place_type, estimated_population_2019) %>%
   filter(is_last == 'TRUE' & place_type == 'state')
 
 data_state[27,5] <- ifelse(is.na(data_state[27,5]) == 'TRUE', 0, data_state[27,5])
 
 # banco de dados com o total de casos no brasil por dia: 
 
+pop_br = sum(data_state$estimated_population_2019)
+
 casos_br <- covid %>%
-  select(state, confirmed, deaths, estimated_population_2019, 
+  select(state, confirmed, deaths, 
          date, place_type) %>%
   filter(place_type == 'state') %>%
-  aggregate(cbind(confirmed, deaths, estimated_population_2019) ~ date, data = ., sum)
+  aggregate(cbind(confirmed, deaths) ~ date, data = ., sum)
 
 casos_br <- casos_br %>%
-  mutate(conf_per100k = confirmed/estimated_population_2019*100000) %>%
+  mutate(conf_per100k = confirmed/pop_br*100000) %>%
   mutate(letal = deaths/confirmed) %>%
   select(confirmed, deaths, conf_per100k, letal, date)
 
 # cor e ooções de seleção da variável a ser vista
 
-fcolor <- c("#3d9970", "#3c8dbc", "#01ff6f", "#39cccc")
+fcolor <- c("#00a65a", "#3c8dbc", "#01ff6f", "#605ca8")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
 
 obts <- readRDS(here::here('obitos_br_uf.rds'))
@@ -149,8 +151,76 @@ plot_bar <- function(input){
     layout(yaxis = list(tickmode = 'array', 
                         tickvals = 1:nrow(data_state), 
                         ticktext = unique(data_state$state)))
-  
 }
+
+# dados do brasil por semana epi
+week_geral <- function(input){
+  
+  #-- banco de dados para semana epidemiologica
+  temp <-  covid %>%
+    select(state, confirmed, deaths, 
+           date, place_type) %>%
+    filter(place_type == 'state') %>%
+    aggregate(cbind(confirmed, deaths) ~ date, data = ., sum)
+  
+  temp2 <- obts %>%
+    select(date, epidemiological_week_2020)
+  
+  temp2 <- merge(temp, temp2, by = 'date') %>%
+    unique()
+  
+  temp2 <- temp2 %>%
+    mutate(conf_diario = c(confirmed[1], diff(confirmed))) %>%
+    mutate(deaths_diario = c(deaths[1], diff(deaths))) %>%
+    aggregate(cbind(conf_diario, deaths_diario) ~ epidemiological_week_2020, data = ., sum) %>%
+    mutate(taxa = conf_diario/pop_br*100000) %>%
+    mutate(letal = deaths_diario/conf_diario)
+  
+  colnames(temp2) <- c('ep_week', 'confirmed', 'deaths', 'taxa_per_100k', 'letal')
+  
+  temp2$taxa_per_100k <- round(temp2$taxa_per_100k, 3)
+  temp2$letal <- round(temp2$letal, 3)
+  
+  
+  temp2 <- temp2 %>%
+    select(confirmed, deaths, taxa_per_100k, letal, ep_week)
+  
+  temp <- temp2[,c(which(input == select_choices), 5)] # dado selecionado no input
+  col_sel <- fcolor[which(input == select_choices)]
+  colnames(temp)[1] <- 'Frequencia'
+  
+  if(which(input == select_choices) < 3){
+    
+    temp$Acumulado <- cumsum(temp$Frequencia)
+    
+    p <- ggplot(temp) +
+      geom_line(aes(x = ep_week, y = Acumulado, group = 1), color = col_sel, linetype = 'dotted') +
+      geom_point(aes(x = ep_week, y = Acumulado), color = col_sel) + 
+      geom_bar(aes(x = ep_week, y = Frequencia), fill = col_sel, stat = 'identity') + 
+      theme(axis.text.x = element_text(angle = 45, size = 8, vjust = 0.5)) + 
+      labs(x = NULL, y = paste0(input)) + 
+      theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+            panel.grid.major = element_blank()) 
+    
+    ggplotly(p)
+    
+  } else {
+    
+    p <- ggplot(temp) +
+      geom_line(aes(x = ep_week, y = Frequencia, group = 1), color = col_sel) +
+      geom_point(aes(x = ep_week, y = Frequencia, group = 1), color = col_sel) +
+      theme(axis.text.x = element_text(angle = 45, size = 8, vjust = 0.5)) + 
+      labs(x = NULL, y = paste0(input)) + 
+      theme(axis.text.x = element_text(angle = 0, hjust = 1)) + 
+      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+            panel.grid.major = element_blank())
+    ggplotly(p)
+    
+  }
+}
+
+
 
 #-------------------------------------
 # ui do dashboard:
@@ -167,7 +237,7 @@ ui <- dashboardPage(
       ,badgeText = "CovidMetrika"
       ,badgeTextColor = "white"
       ,badgeTextSize = 2
-      ,badgeBackColor = "#40E0D0"
+      ,badgeBackColor = "#39cccc"
       ,badgeBorderRadius = 3
     )
   ),
@@ -181,12 +251,12 @@ ui <- dashboardPage(
                   choices = select_choices, selected = select_choices[1]),
       
       menuItem("Dashboard", icon = icon("chart-area"), tabName = "dashbr", 
-               badgeLabel = "BR", badgeColor = "green"),
+               badgeLabel = "BR", badgeColor = "teal"),
       menuItem("Dashboard", icon = icon("chart-bar"), tabName = "dashuf", 
-               badgeLabel = "UF", badgeColor = "green"),
-      menuItem("T.B.A.", icon = icon("chart-line"), tabName = "resp", badgeColor = "green"),
-      menuItem("Fonte de Dados", icon = icon("download"), tabName = "dados", badgeColor = "green"),
-      menuItem("CovidMetrika", icon = icon("users"), tabName = "us", badgeColor = "green")
+               badgeLabel = "UF", badgeColor = "teal"),
+      menuItem("T.B.A.", icon = icon("chart-line"), tabName = "resp", badgeColor = "teal"),
+      menuItem("Fonte de Dados", icon = icon("fa fa-file"), tabName = "dados", badgeColor = "teal"),
+      menuItem("CovidMetrika", icon = icon("users"), tabName = "us", badgeColor = "teal")
     )
   ),
   
@@ -209,8 +279,23 @@ ui <- dashboardPage(
                 valueBoxOutput("letalBox", width = 3),
         
                 #-------------------------------------
+                # plot geral - primeiro plot
+
                 column(width = 12,
-                  box(width = NULL, plotlyOutput("confPlot", height = 300L))), 
+                       tabsetPanel(type = "tabs",
+                                   tabPanel("Diário", 
+                                            box(width = NULL, 
+                                                plotlyOutput("confPlot", height = 300L))
+                                            ), #tabpanel 1
+                                   
+                                   tabPanel("Semana Epidemiológica", 
+                                            box(width = NULL, 
+                                                plotlyOutput("conf2Plot", height = 300L))
+                                   ) #tabpanel 2
+                      
+                  ) #tabset
+                  
+                  ), # coluna 
                 
                 box(ggiraphOutput("mapaPlot", height = 500L), width = 6L, height = 540L),
                 box(plotlyOutput("barPlot", height = 500L), width = 6L, height = 540L)
@@ -225,23 +310,23 @@ ui <- dashboardPage(
                 infoBox(tags$p("Brasil.io", style = "font-size: 200%;"), 
                         subtitle = 'Fonte: Secretarias de Saúde das Unidades Federativas, 
                         dados tratados por Álvaro Justen e colaboradores',
-                         icon = icon("at"), color = "green", width = 12, 
+                         icon = icon("at"), color = "teal", width = 12, 
                          href = "https://brasil.io/dataset/covid19/caso", fill = TRUE),
                 
                 valueBox('Sobre:', subtitle = 'Informações dos dados', icon = icon("info"), 
-                        color = 'green', width = 3, 
+                        color = 'teal', width = 3, 
                         href = 'https://github.com/turicas/covid19-br/blob/master/api.md#casos'),
                 
                 valueBox('Dados:', subtitle = 'Download', icon = icon("download"), 
-                        color = 'green', width = 3,
+                        color = 'teal', width = 3,
                         href = 'https://data.brasil.io/dataset/covid19/_meta/list.html'),
                 
                 valueBox('F.A.Q.:', subtitle = 'Perguntas Frequentes', icon = icon("question-circle"), 
-                        color = 'green', width = 3,
+                        color = 'teal', width = 3,
                         href = 'https://github.com/turicas/covid19-br/blob/master/faq.md'),
                 
                 valueBox('Licença:', subtitle = '(CC BY-SA 4.0)', icon = icon("creative-commons"), 
-                        color = 'green', width = 3,
+                        color = 'teal', width = 3,
                         href = 'https://creativecommons.org/licenses/by-sa/4.0/deed.en')
                 
               ) #fluidRow
@@ -257,7 +342,7 @@ ui <- dashboardPage(
                 type = 2,
                 width = 4,
                 src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/franciele.jpg?raw=true',
-                color = "green",
+                color = "light-blue",
                 footer = "Contato: franpallaoro@gmail.com"
               ),
               
@@ -267,7 +352,7 @@ ui <- dashboardPage(
                 type = 2,
                 width = 4,
                 src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gabriel.jpg?raw=true',
-                color = "olive",
+                color = "teal",
                 footer = "Contato: gabrielholmersaul@gmail.com"
               )
             ,
@@ -278,7 +363,7 @@ ui <- dashboardPage(
                   type = 2,
                   width = 4,
                   src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gustavo.png?raw=true',
-                  color = "green",
+                  color = "light-blue",
                   footer = "Contato: gustavo.utpott@gmail.com"
                 ),
               
@@ -288,7 +373,7 @@ ui <- dashboardPage(
                 type = 2,
                 width = 4,
                 src =  'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/juliana.jpeg?raw=true',
-                color = "olive",
+                color = "teal",
                 footer = "Contato: julianass.estatistica@gmail.com"
               ),
               
@@ -299,7 +384,7 @@ ui <- dashboardPage(
                 type = 2,
                 width = 4,
                 src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/marcia.png?raw=true',
-                color = "green",
+                color = "light-blue",
                 footer =  "Contato: mhbarbian@gmail.com"
               ), 
               
@@ -309,7 +394,7 @@ ui <- dashboardPage(
                 type = 2,
                 width = 4,
                 src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/rodrigo.jpg?raw=true',
-                color = "olive",
+                color = "teal",
                 footer =  "Contato: citton.padilha@ufrgs.br"
               ), 
             
@@ -332,7 +417,7 @@ server <- function(input, output) {
   
   output$casosBox <- renderValueBox({
     valueBox(casos_br[nrow(casos_br),1], "Casos", icon = icon("ambulance"),
-      color = "olive"
+      color = "green"
     )
   })
   
@@ -352,15 +437,21 @@ server <- function(input, output) {
     valueBox(
       paste0(round(casos_br[nrow(casos_br),4]*100, 2), '%'), 
       "Letalidade", icon = icon("exclamation-circle"),
-      color = "teal"
+      color = "purple"
     )
   })
   #-------------------------------------
 
+  # gráfico com o número de casos geral 
     output$confPlot <- renderPlotly({
     plot_geral(input$typevar)
   })
   
+  output$conf2Plot <- renderPlotly({
+    week_geral(input$typevar)
+  })
+  
+  # grafico com o mapa de casos por UF
   output$mapaPlot <- renderggiraph({
     plot_mapa(input$typevar)
   })
