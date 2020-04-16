@@ -26,7 +26,7 @@ library(gganimate)
 # Dados municípios (shape file)
 
 dep <- read_sf(
-  here::here("data", "rs",
+  here::here("rs",
              "43MUE250GC_SIR.shp")) %>%
   clean_names() %>%
   st_set_crs(3857)
