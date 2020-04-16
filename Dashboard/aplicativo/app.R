@@ -14,7 +14,7 @@ library(ggiraph)
 theme_set(theme_gray())
 #-------------------------------------
 # banco de dados de  casos confirmados:
-covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
+covid <- readRDS(here::here('data','casos_covid19_br_mun.rds'))
 
 # banco de dados por estado:
 data_state <- covid %>%
@@ -42,7 +42,7 @@ casos_br <- casos_br %>%
 fcolor <- c("#3d9970", "#3c8dbc", "#01ff6f", "#39cccc")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
 
-obts <- readRDS(here::here('obitos_br_uf.rds'))
+obts <- readRDS(here::here('data','obitos_br_uf.rds'))
 
 temp <- obts %>%
   select(date, epidemiological_week_2020)
@@ -256,7 +256,7 @@ ui <- dashboardPage(
                 subtitle = "Estudante de Estatística da UFRGS",
                 type = 2,
                 width = 4,
-                src = NULL,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/e924aaac-3e5b-4233-803a-ba9f371dd42b.jpg?raw=true',
                 color = "teal",
                 footer = "Contato: franpallaoro@gmail.com"
               ),
@@ -266,7 +266,7 @@ ui <- dashboardPage(
                 subtitle = "Estudante de Estatística da UFRGS",
                 type = 2,
                 width = 4,
-                src = NULL,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/IMG_20200328_183528.jpg?raw=true',
                 color = "purple",
                 footer = "Contato: gabrielholmersaul@gmail.com"
               )
@@ -277,7 +277,7 @@ ui <- dashboardPage(
                   subtitle = "Estudante de Estatística da UFRGS",
                   type = 2,
                   width = 4,
-                  src = NULL,
+                  src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/20191016_093525.jpg?raw=true',
                   color = "red",
                   footer = "Contato: gustavo.utpott@gmail.com"
                 ),
@@ -287,7 +287,7 @@ ui <- dashboardPage(
                 subtitle = "Estudante de Pós-Graduação em Epidemiologia da UFRGS",
                 type = 2,
                 width = 4,
-                src =  NULL,
+                src =  'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/20191016_093525.jpg?raw=true',
                 color = "maroon",
                 footer = "Contato: julianass.estatistica@gmail.com"
               ),
@@ -298,7 +298,7 @@ ui <- dashboardPage(
                 subtitle = "Professora do departamento de Estatística da UFRGS",
                 type = 2,
                 width = 4,
-                src = NULL,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/foto_marcia.png?raw=true',
                 color = "orange",
                 footer =  "Contato: mhbarbian@gmail.com"
               ), 
@@ -308,7 +308,7 @@ ui <- dashboardPage(
                 subtitle = "Professor do departamento de Estatística da UFRGS",
                 type = 2,
                 width = 4,
-                src = NULL,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/20191016_093525.jpg?raw=true',
                 color = "yellow",
                 footer =  "Contato: citton.padilha@ufrgs.br"
               )
