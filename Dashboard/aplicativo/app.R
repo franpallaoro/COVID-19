@@ -255,8 +255,10 @@ ui <- dashboardPage(
       menuItem("Dashboard", icon = icon("chart-bar"), tabName = "dashuf", 
                badgeLabel = "UF", badgeColor = "teal"),
       menuItem("T.B.A.", icon = icon("chart-line"), tabName = "resp", badgeColor = "teal"),
-      menuItem("Fonte de Dados", icon = icon("fa fa-file"), tabName = "dados", badgeColor = "teal"),
-      menuItem("CovidMetrika", icon = icon("users"), tabName = "us", badgeColor = "teal")
+      menuItem("Fonte de Dados", icon = icon("file-download"), tabName = "dados", badgeColor = "teal"),
+      menuItem("CovidMetrika", icon = icon("users"), tabName = "us", badgeColor = "teal"), 
+      menuItem("Source Code", icon = icon("code"), badgeColor = "teal", 
+               href = 'https://github.com/franpallaoro/COVID-19/')
     )
   ),
   
