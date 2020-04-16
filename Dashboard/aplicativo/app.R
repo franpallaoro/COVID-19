@@ -22,7 +22,7 @@ data_state <- covid %>%
          death_rate, is_last, place_type) %>%
   filter(is_last == 'TRUE' & place_type == 'state')
 
-data_state[27,5] <- 0
+data_state[27,5] <- ifelse(is.na(data_state[27,5]) == 'TRUE', 0, data_state[27,5])
 
 # banco de dados com o total de casos no brasil por dia: 
 

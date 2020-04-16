@@ -91,9 +91,8 @@ df_casos$date <- as.Date(df_casos$date, format = "%Y-%m-%d")
 # Salva dados em um arquivo RDS
 
 saveRDS(df_casos,
-        file = here::here("data", "casos_covid19_br_mun.rds"))
+        file = here::here("casos_covid19_br_mun.rds"))
 
 saveRDS(df_obitos,
-        file = here::here("data", "obitos_br_uf.rds"))
-
+        file = here::here("obitos_br_uf.rds"))
 
