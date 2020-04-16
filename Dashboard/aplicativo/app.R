@@ -311,7 +311,10 @@ ui <- dashboardPage(
                 src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/rodrigo.jpg?raw=true',
                 color = "olive",
                 footer =  "Contato: citton.padilha@ufrgs.br"
-              )
+              ), 
+            
+            tags$img(src = "https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/logos.png?raw=true", 
+                     height = "150", width = "1000")
               
               
               ) 
