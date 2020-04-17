@@ -57,10 +57,14 @@ serra     <- tolower(serra)
 litoral_n <- tolower(litoral_n)
 urba_sul  <- tolower(urba_sul)
 
-dep$rmpa      <- ifelse(tolower(iconv(x = dep$nm_municip, from = "latin1", to = "UTF-8")) %in% rmpa, 1, 0)
-dep$serra     <- ifelse(tolower(iconv(x = dep$nm_municip, from = "latin1", to = "UTF-8")) %in% serra, 1, 0)
-dep$litoral_n <- ifelse(tolower(iconv(x = dep$nm_municip, from = "latin1", to = "UTF-8")) %in% litoral_n, 1, 0)
-dep$urba_sul  <- ifelse(tolower(iconv(x = dep$nm_municip, from = "latin1", to = "UTF-8")) %in% urba_sul, 1, 0)
+dep$rmpa      <- ifelse(tolower(iconv(x = dep$nm_municip, 
+                                      from = "latin1", to = "UTF-8")) %in% rmpa, 1, 0)
+dep$serra     <- ifelse(tolower(iconv(x = dep$nm_municip, 
+                                      from = "latin1", to = "UTF-8")) %in% serra, 1, 0)
+dep$litoral_n <- ifelse(tolower(iconv(x = dep$nm_municip, 
+                                      from = "latin1", to = "UTF-8")) %in% litoral_n, 1, 0)
+dep$urba_sul  <- ifelse(tolower(iconv(x = dep$nm_municip, 
+                                      from = "latin1", to = "UTF-8")) %in% urba_sul, 1, 0)
 
 
 # ---------------------------------------------------
@@ -102,4 +106,55 @@ covid_week <- covid %>%
   group_by(time = epiweek(date), cd_municipio) %>%
   summarise(casos = sum(casos), mortes = sum(mortes))
 
-aps
+# ---------------------------------------------------
+# Dados municípios (população)
+
+pop <- read.csv2(here::here("data", "Pop_RS.csv"))
+names(pop) <- tolower(names(pop))
+
+pop$codigo <- as.character(pop$codigo)
+
+# ---------------------------------------------------
+# Pré tratamento
+# ---------------------------------------------------
+
+dep <- dep %>%
+  left_join(pop, by = c("cd_geocodm" = "codigo"))
+
+#---------------------------------------------------
+
+covid_week <- covid_week %>% 
+  right_join(pop, by = c("cd_municipio" = "codigo"))
+
+covid_week <- covid_week %>% 
+  mutate(casos_p100 = (casos/estimativas.populacionais.2018) * 100000) %>%
+  mutate(letalidade = mortes/casos) %>%
+  select(time, municipios, cd_municipio, casos, mortes, casos_p100, letalidade)
+
+#---------------------------------------------------
+# tirando os NA de letalidade:
+
+covid_week$letalidade <- ifelse(is.na(covid_week$letalidade) == 'TRUE', 
+                                0, covid_week$letalidade)
+
+#---------------------------------------------------
+# criando variáveis categórias para os casos:
+
+covid_week <- covid_week %>%
+  mutate(casos_p100_cat = cut(x = casos_p100,
+                              breaks = c(-Inf, 0, 10, 20, 50, 80, 150, Inf),
+                              labels = c("0", "1 a 10", "11 a 20", "21 a 50", 
+                                         "51 a 80", "81 a 150", "150+")),
+         casos_cat = cut(x = casos,
+                         breaks = c(-Inf, 0, 10, 20, 40, 80, 100, 200, Inf),
+                         labels = c("0", "1 a 10", "11 a 20", "21 a 40", 
+                                    "41 a 80", "81 a 100", "101 a 200", "200+")),
+         mortes_cat = cut(x = mortes,
+                         breaks = c(-Inf, 0, 5, 10, 15, 20, 30, 35, Inf),
+                         labels = c("0", "1 a 5", "6 a 10", "11 a 15", 
+                                    "16 a 20", "21 a 30", "31 a 35", "35+")), 
+         
+         letalidade_cat = cut(x = letalidade,
+                          breaks = c(-Inf, 0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, Inf),
+                          labels = c("0", "0 a 5%", "5% a 10%", "10% a 20%", 
+                                     "20% a 30%", "30% a 40%", "40% a 50%", "+50%")))
