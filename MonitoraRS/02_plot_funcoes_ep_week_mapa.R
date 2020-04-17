@@ -2,7 +2,7 @@ library(ggplot2)
 library(ggthemes)
 library(gganimate)
 
-virPallete <- viridis::viridis(n = 8)
+virPallete <- viridis::viridis(n = 7)
 
 #                             Semana Epidemiológica:
 #---------------------------------------------------
@@ -34,6 +34,8 @@ rs_week <- function(input){
     theme(legend.position = "right") +
     facet_wrap( ~ time)
 }
+
+rs_week(options[3])
 
 #---------------------------------------------------
 #                           Por Aglomerados Urbanos:
@@ -80,3 +82,5 @@ aglomerado_week <- function(input, input2){
     facet_wrap( ~ time)
   
 }
+
+aglomerado_week(input = options[3], input2 = agl_opt[3])
