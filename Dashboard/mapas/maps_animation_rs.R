@@ -86,6 +86,7 @@ covid <- covid %>%
 
 covid$dt_coleta <- as.Date(covid$dt_coleta,
                            format = "%d/%m/%y")
+
 covid$cd_municipio <- as.character(covid$cd_municipio)
 
 dates <- unique(covid$dt_coleta)
@@ -107,7 +108,6 @@ covid_cum <- covid %>%
   mutate(casos = cumsum(casos))
 
 # Agrega por semana epidemiológica
-
 covid_week <- covid %>% 
   group_by(time = week(time), cd_municipio) %>%
   summarise(casos = sum(casos))
