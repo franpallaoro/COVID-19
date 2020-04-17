@@ -10,6 +10,8 @@ library(ggplot2)
 library(here)
 library(plotly)
 library(ggiraph)
+library(tidyr)
+library(stringr)
 
 theme_set(theme_gray())
 #-------------------------------------
@@ -23,6 +25,16 @@ data_state <- covid %>%
   filter(is_last == 'TRUE' & place_type == 'state')
 
 data_state[27,5] <- ifelse(is.na(data_state[27,5]) == 'TRUE', 0, data_state[27,5])
+
+# banco de dados obitos cartorio:
+
+obitos_cartorio <- readRDS(here::here('data','obitos_br_uf.rds')) %>%
+  filter(date >= "2020-03-16") # filtrando a partir do primeiro caso
+
+names(obitos_cartorio) <- c("Estado","Data","Acumulado mortes COVID-19","Acumulado mortes Pneumonia 2019","Acumulado mortes Pneumonia 2020",
+                            "Acumulado mortes por falha respiratória 2019","Acumulado mortes por falha respiratória 2020",
+                            "Semana_epidemiologica_2019","Semana_epidemiologica_2020","Mortes COVID-19","Mortes Pneumonia 2019",
+                            "Mortes Pneumonia 2020","Mortes por falha respiratória 2019","Mortes por falha respiratória 2020")
 
 # banco de dados com o total de casos no brasil por dia: 
 
@@ -222,6 +234,55 @@ week_geral <- function(input){
   }
 }
 
+# function plot óbitos do cartório
+
+plot_cart <- function(input) {
+
+  if(input=="Diário") {
+    var <- rlang::sym("Data")
+    text <- "Dia desde o primeiro óbito COVID-19"
+    text2 <- "Número de óbitos diários"
+  } else {
+    var <- rlang::sym("Semana_epidemiologica_2020")
+    text <- "Semana epidemiológica desde o primeiro óbito COVID-19"
+    text2 <- "Número de óbitos por semana epidemiólogica"
+  }
+  
+  aux <- obitos_cartorio %>%
+    group_by(!!var) %>%
+    summarise_at(names(obitos_cartorio)[c(3:7,10:14)],sum) %>%
+    pivot_longer(
+      cols = -c(!!var),
+      names_to = "disease_type",
+      values_to = "deaths"
+    ) %>%
+    filter(!str_detect(disease_type,"^Acumulado"))
+  
+  valores <- c("Mortes Pneumonia 2019","Mortes Pneumonia 2020","Mortes por falha respiratória 2019",
+               "Mortes por falha respiratória 2020","Mortes COVID-19")
+  paleta <- RColorBrewer::brewer.pal("Paired", n = 5)
+  
+  names(paleta) <- valores
+  
+  p1 <- ggplot(aux) +
+    geom_line(aes(x = !!var, y = deaths, color = disease_type), linetype = 'dotted') +
+    geom_point(aes(x = !!var, y = deaths, color = disease_type)) + 
+    theme(axis.text.x = element_text(angle = 45, size = 8, vjust = 0.5)) + 
+    scale_color_manual(name = "Doenças", values = paleta) +
+    labs(x = text, y = text2) + 
+    theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+    theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+          panel.grid.major = element_blank(),
+          panel.background = element_rect("transparent", color = NA)) 
+  
+  if(input=="Diário") {
+    p1 <- p1 +
+      scale_x_date(date_breaks = "1 day", date_labels = "%m-%d") +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  }
+  
+  ggplotly(p1)
+}
 
 
 #-------------------------------------
@@ -255,7 +316,7 @@ ui <- dashboardPage(
                badgeLabel = "BR", badgeColor = "teal"),
       menuItem("COVID-19", icon = icon("chart-bar"), tabName = "dashuf", 
                badgeLabel = "UF", badgeColor = "teal"),
-      menuItem("Óbitos Cartório", icon = icon("chart-line"), tabName = "resp", badgeColor = "teal"),
+      menuItem("Óbitos Cartório", icon = icon("chart-line"), tabName = "cart", badgeLabel = "BR", badgeColor = "teal"),
       menuItem("Fonte de Dados", icon = icon("file-download"), tabName = "dados", badgeColor = "teal"),
       menuItem("CovidMetrika", icon = icon("users"), tabName = "us", badgeColor = "teal"), 
       menuItem("Source Code", icon = icon("code"), badgeColor = "teal", 
@@ -306,7 +367,36 @@ ui <- dashboardPage(
       ), # final da parte dos dados nacionais
       
       tabItem("dashuf", "Em construção"),
-      tabItem("resp", "Em construção"),
+      tabItem("cart",
+              
+              # reescrevendo as cores default para as que eu quero nas boxes de óbitos cartório
+              
+              tags$style(".small-box.bg-navy { background-color: #1F78B4 !important; color: #FFFFFF !important; }"),
+              tags$style(".small-box.bg-olive { background-color: #33A02C !important; color: #FFFFFF !important; }"),
+              tags$style(".small-box.bg-lime { background-color: #FB9A99 !important; color: #FFFFFF !important; }"),
+              
+              fluidRow(
+                valueBoxOutput("box_pneumonia", width = 4),
+                valueBoxOutput("box_falha", width = 4),
+                valueBoxOutput("box_covid", width = 4),
+                column(
+                  width = 12,
+                  tabBox(id = "tab_cart",
+                         width = 12,
+                         title = "Número de óbitos novos registrados em cartório",
+                         tabPanel("Diário",
+                                  plotlyOutput("cart_dia_plot", height = 600)
+                         ),
+                         tabPanel("Semana Epidemiológica",
+                                  plotlyOutput("cart_sem_plot", height = 600)
+                         )
+                         
+                  ) 
+                  
+                )
+              )
+              
+      ),
       tabItem("dados", 
               
               fluidRow(
@@ -464,6 +554,52 @@ server <- function(input, output) {
   })
   
   #-------------------------------------
+  
+  # tabItem obitos cartorio
+  
+  # boxes 
+  
+  output$box_pneumonia <- renderValueBox({
+    valueBox(
+      value = sum(obitos_cartorio$`Mortes Pneumonia 2020`), 
+      subtitle = "Total de óbitos pneumonia desde o primeiro óbito COVID-19", 
+      icon = icon("lungs"),
+      color = "navy"
+    )
+  })
+  
+  output$box_falha <- renderValueBox({
+    valueBox(
+      value = sum(obitos_cartorio$`Mortes por falha respiratória 2020`), 
+      subtitle = "Total de óbitos falha respiratória desde o primeiro óbito COVID-19", 
+      icon = icon("lungs"),
+      color = "olive"
+    )
+  })
+  
+  output$box_covid <- renderValueBox({
+    valueBox(
+      value = sum(obitos_cartorio$`Mortes COVID-19`), 
+      subtitle = "Total de óbitos COVID-19", 
+      icon = icon("virus"),
+      color = "lime"
+    )
+  })
+
+  # gráfico com óbitos por dia
+  
+  output$cart_dia_plot <- renderPlotly({
+    plot_cart(input$tab_cart)
+  })
+  
+  # gráfico com óbitos por semana epidemiologica
+  
+  output$cart_sem_plot <- renderPlotly({
+    plot_cart(input$tab_cart)
+  })
+  
+  #-------------------------------------
+  
 }
 
 shinyApp(ui = ui, server = server)
