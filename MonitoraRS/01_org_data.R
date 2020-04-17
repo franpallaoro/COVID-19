@@ -116,11 +116,6 @@ pop$codigo <- as.character(pop$codigo)
 
 # ---------------------------------------------------
 # Pré tratamento
-# ---------------------------------------------------
-
-dep <- dep %>%
-  left_join(pop, by = c("cd_geocodm" = "codigo"))
-
 #---------------------------------------------------
 
 covid_week <- covid_week %>% 
@@ -142,9 +137,9 @@ covid_week$letalidade <- ifelse(is.na(covid_week$letalidade) == 'TRUE',
 
 covid_week <- covid_week %>%
   mutate(casos_p100_cat = cut(x = casos_p100,
-                              breaks = c(-Inf, 0, 10, 20, 50, 80, 150, Inf),
+                              breaks = c(-Inf, 0, 10, 20, 50, 80, 100, 150, Inf),
                               labels = c("0", "1 a 10", "11 a 20", "21 a 50", 
-                                         "51 a 80", "81 a 150", "150+")),
+                                         "51 a 80", "81 a 100", "101 a 150", "150+")),
          casos_cat = cut(x = casos,
                          breaks = c(-Inf, 0, 10, 20, 40, 80, 100, 200, Inf),
                          labels = c("0", "1 a 10", "11 a 20", "21 a 40", 
@@ -158,3 +153,12 @@ covid_week <- covid_week %>%
                           breaks = c(-Inf, 0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, Inf),
                           labels = c("0", "0 a 5%", "5% a 10%", "10% a 20%", 
                                      "20% a 30%", "30% a 40%", "40% a 50%", "+50%")))
+
+#---------------------------------------------------
+# banco de dados final:
+
+dep_week <- dep %>%
+  left_join(covid_week, by = c("cd_geocodm" = "cd_municipio"))
+
+dep_date <- dep %>%
+  left_join(covid, by = c("cd_geocodm" = "cd_municipio"))
