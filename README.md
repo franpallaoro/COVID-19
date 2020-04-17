@@ -20,7 +20,9 @@ Repositório destinado aos projetos do grupo __covidMetrika__ composto por estud
 
 ## Publicações
 
-- O primeiro painel criado pelo nosso grupo já está disponível online com os dados de COVID-19 a nível nacional. Para acessá-lo basta clicar [aqui](https://mhbarbian.shinyapps.io/CovidMetrika/).
+### CovidMetrika dashboard
+
+O primeiro painel criado pelo nosso grupo já está disponível online com os dados de COVID-19 a nível nacional. Para acessá-lo basta clicar [aqui](https://mhbarbian.shinyapps.io/CovidMetrika/).
 
 <img src="/images/CovidMetrikaDash01.png" width="300">
 
