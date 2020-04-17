@@ -41,7 +41,7 @@ casos_br <- casos_br %>%
 
 # cor e ooções de seleção da variável a ser vista
 
-fcolor <- c("#00a65a", "#3c8dbc", "#01ff6f", "#605ca8")
+fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
 
 obts <- readRDS(here::here('obitos_br_uf.rds'))
@@ -121,7 +121,7 @@ plot_mapa <- function(input){
   g <- ggplot(tidy) +
     geom_polygon_interactive(aes(long, lat, group = group, fill = variavel, tooltip = variavel),
                              color = 'black') + 
-    scale_fill_continuous(name = select_choices[which(input == select_choices)], low = 'azure2', 
+    scale_fill_continuous(name = select_choices[which(input == select_choices)], low = '#ebebeb', 
                           high = fcolor[which(input == select_choices)], na.value = 'white') + 
     theme(axis.title = element_blank(), axis.ticks = element_blank(), axis.text = element_blank()) + 
     theme_void()
@@ -250,9 +250,9 @@ ui <- dashboardPage(
       selectInput(inputId = 'typevar', label = "Selecione a variável:", 
                   choices = select_choices, selected = select_choices[1]),
       
-      menuItem("Dashboard", icon = icon("chart-area"), tabName = "dashbr", 
+      menuItem("COVID-19", icon = icon("chart-area"), tabName = "dashbr", 
                badgeLabel = "BR", badgeColor = "teal"),
-      menuItem("Dashboard", icon = icon("chart-bar"), tabName = "dashuf", 
+      menuItem("COVID-19", icon = icon("chart-bar"), tabName = "dashuf", 
                badgeLabel = "UF", badgeColor = "teal"),
       menuItem("T.B.A.", icon = icon("chart-line"), tabName = "resp", badgeColor = "teal"),
       menuItem("Fonte de Dados", icon = icon("file-download"), tabName = "dados", badgeColor = "teal"),
@@ -419,19 +419,19 @@ server <- function(input, output) {
   
   output$casosBox <- renderValueBox({
     valueBox(casos_br[nrow(casos_br),1], "Casos", icon = icon("ambulance"),
-      color = "green"
+      color = "red"
     )
   })
   
   output$obitosBox <- renderValueBox({
     valueBox(casos_br[nrow(casos_br),2], "Óbitos", icon = icon("skull"),
-      color = "light-blue"
+      color = "purple"
     )
   })
   
   output$taxaBox <- renderValueBox({
     valueBox(round(casos_br[nrow(casos_br),3],2), "Taxa /100k hab.", icon = icon("heartbeat"),
-      color = "lime"
+      color = "yellow"
     )
   })
   
@@ -439,7 +439,7 @@ server <- function(input, output) {
     valueBox(
       paste0(round(casos_br[nrow(casos_br),4]*100, 2), '%'), 
       "Letalidade", icon = icon("exclamation-circle"),
-      color = "purple"
+      color = "maroon"
     )
   })
   #-------------------------------------
