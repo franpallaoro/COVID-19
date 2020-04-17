@@ -91,6 +91,34 @@ cd_mun <- dep$cd_geocodm
 aux <- expand.grid(cd_mun, dates)
 names(aux) <- c('cd_mun', 'dates')
 
+# precisa transformar os dados acumulados em dados 
+# que são diarios
+
+auxc <- vector()
+auxd <- vector()
+
+for(i in 1:length(unique(covid$city_ibge_code))){
+  
+  temp <- covid[which(covid$city_ibge_code == unique(covid$city_ibge_code)[i]),]
+  
+  contc = c(temp$confirmed[1], diff(temp$confirmed))
+  contd = c(temp$deaths[1], diff(temp$deaths))
+  
+  auxc <- c(auxc, contc)
+  auxd <- c(auxd, contd)
+}
+
+covid <- covid %>%
+  mutate(confirmed = ifelse(auxc < 0 , 0, auxc)) %>%
+  mutate(deaths = ifelse(auxd < 0 , 0, auxd))
+
+rm(auxc)
+rm(auxd)
+rm(temp)
+rm(contc)
+rm(contd)
+rm(i)
+
 # ---------------------------------------------------
 # Casos acumulados por data de coleta
 covid <- aux %>% 
@@ -105,6 +133,33 @@ covid_week <- covid %>%
   group_by(time = epiweek(date), cd_municipio) %>%
   summarise(casos = sum(casos), mortes = sum(mortes))
 
+# Agora o banco de dados mostra a quantidade de casos 
+# por semana epidemiologica, mas não mostra o acumulado
+
+banco = NULL
+
+for(i in 1:length(unique(covid_week$cd_municipio))){
+  
+  temp <- covid_week[which(covid_week$cd_municipio == unique(covid_week$cd_municipio)[i]),]
+  
+  temp$contc = cumsum(temp$casos)
+  temp$contd = cumsum(temp$mortes)
+  
+  banco = rbind(banco, temp)
+
+}
+
+rm(temp)
+rm(i)
+
+covid_cumsum <- banco %>% 
+  select(time, cd_municipio, contc, contd) %>%
+  mutate(casos = contc) %>%
+  mutate(mortes = contd) %>%
+  select(time, cd_municipio, casos, mortes)
+
+rm(banco)
+
 # ---------------------------------------------------
 # Dados municípios (população)
 
@@ -117,10 +172,10 @@ pop$codigo <- as.character(pop$codigo)
 # Pré tratamento
 #---------------------------------------------------
 
-covid_week <- covid_week %>% 
+covid_cumsum <- covid_cumsum %>% 
   right_join(pop, by = c("cd_municipio" = "codigo"))
 
-covid_week <- covid_week %>% 
+covid_cumsum <- covid_cumsum %>% 
   mutate(casos_p100 = (casos/estimativas.populacionais.2018) * 100000) %>%
   mutate(letalidade = mortes/casos) %>%
   select(time, municipios, cd_municipio, casos, mortes, casos_p100, letalidade)
@@ -128,36 +183,34 @@ covid_week <- covid_week %>%
 #---------------------------------------------------
 # tirando os NA de letalidade:
 
-covid_week$letalidade <- ifelse(is.na(covid_week$letalidade) == 'TRUE', 
-                                0, covid_week$letalidade)
+covid_cumsum$letalidade <- ifelse(is.na(covid_cumsum$letalidade) == 'TRUE', 
+                                0, covid_cumsum$letalidade)
 
 #---------------------------------------------------
 # criando variáveis categórias para os casos:
 
-covid_week <- covid_week %>%
+covid_cumsum <- covid_cumsum %>%
   mutate(casos_p100_cat = cut(x = casos_p100,
-                              breaks = c(-Inf, 0, 10, 20, 50, 80, 100, 150, Inf),
-                              labels = c("0", "1 a 10", "11 a 20", "21 a 50", 
-                                         "51 a 80", "81 a 100", "101 a 150", "150+")),
+                              breaks = c(-Inf, 0, 5, 10, 20, 40, 80, Inf),
+                              labels = c("0", "1 a 5", "6 a 10", "11 a 20", 
+                                         "21 a 40", "41 a 80", "80+")),
          casos_cat = cut(x = casos,
-                         breaks = c(-Inf, 0, 10, 20, 40, 80, 100, 200, Inf),
-                         labels = c("0", "1 a 10", "11 a 20", "21 a 40", 
-                                    "41 a 80", "81 a 100", "101 a 200", "200+")),
+                         breaks = c(-Inf, 0, 5, 10, 20, 40, 80, 160, Inf),
+                         labels = c("0", "1 a 5", "6 a 10", "11 a 20", "21 a 40", 
+                                    "41 a 80", "80 a 160", "160+")), 
+         
          mortes_cat = cut(x = mortes,
-                         breaks = c(-Inf, 0, 5, 10, 15, 20, 30, 35, Inf),
-                         labels = c("0", "1 a 5", "6 a 10", "11 a 15", 
-                                    "16 a 20", "21 a 30", "31 a 35", "35+")), 
+                         breaks = c(-Inf, 0, 1, 2, 3, 4, 5, Inf),
+                         labels = c("0", "1", "2", "3", 
+                                    "4", "5", "5+")), 
          
          letalidade_cat = cut(x = letalidade,
-                          breaks = c(-Inf, 0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, Inf),
-                          labels = c("0", "0 a 5%", "5% a 10%", "10% a 20%", 
-                                     "20% a 30%", "30% a 40%", "40% a 50%", "+50%")))
+                          breaks = c(-Inf, 0, 0.025, 0.05, 0.1, 0.2, 0.5, Inf),
+                          labels = c("0", "0 a 2.5%", "2.5% a 5%", "5% a 10%", 
+                                     "10% a 20%", "20% a 50%", "+50%")))
 
 #---------------------------------------------------
 # banco de dados final:
 
 dep_week <- dep %>%
-  left_join(covid_week, by = c("cd_geocodm" = "cd_municipio"))
-
-dep_date <- dep %>%
-  left_join(covid, by = c("cd_geocodm" = "cd_municipio"))
+  left_join(covid_cumsum, by = c("cd_geocodm" = "cd_municipio"))

@@ -2,7 +2,6 @@ library(ggplot2)
 library(ggthemes)
 library(gganimate)
 
-virPallete <- viridis::viridis(n = 8)
 
 #                             Semana Epidemiológica:
 #---------------------------------------------------
@@ -23,6 +22,15 @@ rs_week <- function(input){
   names(temp)[1] <- 'variavel'
   
   
+  if(which(options == input) != 1){
+    
+    virPallete <- viridis::viridis(n = 7)
+    
+  } else {
+    
+    virPallete <- viridis::viridis(n = 8)
+  }
+  
   ggplot() +
     geom_sf(data = subset(temp, subset = !is.na(variavel)),
             aes(fill = variavel), size = .05) +
@@ -34,6 +42,8 @@ rs_week <- function(input){
     theme(legend.position = "right") +
     facet_wrap( ~ time)
 }
+
+rs_week(options[1])
 
 #---------------------------------------------------
 #                           Por Aglomerados Urbanos:
@@ -58,6 +68,17 @@ aglomerado_week <- function(input, input2){
     filter(regiao == 1)
   
   
+  
+  if(which(options == input) != 1){
+    
+    virPallete <- viridis::viridis(n = 7)
+    
+  } else {
+    
+    virPallete <- viridis::viridis(n = 8)
+  }
+  
+  
   # agora definir qual variavel mostrar
   
   temp <- dep_aux %>%
@@ -75,8 +96,10 @@ aglomerado_week <- function(input, input2){
     labs(fill = paste0(options[which(options == input)]),
          title = paste0('COVID-19 - Municípios ', 
                         agl_opt[which(agl_opt == input2)], 
-                       " - Acumulado por semana epidemiológica")) +
+                       " - \n Acumulado por semana epidemiológica")) +
     theme(legend.position = "right") +
     facet_wrap( ~ time)
   
 }
+
+aglomerado_week(input = options[3], input2 = agl_opt[3])
