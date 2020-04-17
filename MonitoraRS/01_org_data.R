@@ -12,8 +12,7 @@ library(grid)
 library(classInt)
 library(magick)
 library(lubridate)
-library(ggthemes)
-library(gganimate)
+
 
 # ---------------------------------------------------
 # Carrega dados e pre-processamento
