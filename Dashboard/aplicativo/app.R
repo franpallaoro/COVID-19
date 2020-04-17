@@ -14,7 +14,7 @@ library(ggiraph)
 theme_set(theme_gray())
 #-------------------------------------
 # banco de dados de  casos confirmados:
-covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
+covid <- readRDS(here::here('data','casos_covid19_br_mun.rds'))
 
 # banco de dados por estado:
 data_state <- covid %>%
@@ -44,7 +44,7 @@ casos_br <- casos_br %>%
 fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
 
-obts <- readRDS(here::here('obitos_br_uf.rds'))
+obts <- readRDS(here::here('data', 'obitos_br_uf.rds'))
 
 temp <- obts %>%
   select(date, epidemiological_week_2020)
