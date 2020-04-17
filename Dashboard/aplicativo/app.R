@@ -124,7 +124,9 @@ plot_mapa <- function(input){
     scale_fill_continuous(name = select_choices[which(input == select_choices)], low = '#ebebeb', 
                           high = fcolor[which(input == select_choices)], na.value = 'white') + 
     theme(axis.title = element_blank(), axis.ticks = element_blank(), axis.text = element_blank()) + 
-    theme_void()
+    theme_void() + 
+    theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+          panel.grid.major = element_blank()) 
   
   ggiraph(code = print(g))
   
@@ -238,8 +240,7 @@ ui <- dashboardPage(
       ,badgeTextColor = "white"
       ,badgeTextSize = 2
       ,badgeBackColor = "#39cccc"
-      ,badgeBorderRadius = 3
-    )
+      ,badgeBorderRadius = 3)
   ),
   
   #-------------------------------------
@@ -299,7 +300,7 @@ ui <- dashboardPage(
                   
                   ), # coluna 
                 
-                box(ggiraphOutput("mapaPlot", height = 500L), width = 6L, height = 540L),
+                box(ggiraphOutput("mapaPlot", height = 350L), width = 6L, height = 390L),
                 box(plotlyOutput("barPlot", height = 500L), width = 6L, height = 540L)
       ) #fluidrow
       ), # final da parte dos dados nacionais
