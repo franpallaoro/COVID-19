@@ -193,8 +193,7 @@ ggsave(plot = p,
 # print(p)
 
 covid_rs_vector <- ggplot() +
-  geom_sf(data = dep,
-          aes(fill = casos_p100), ) +
+  geom_sf(data = dep, aes(fill = casos_p100)) +
   viridis::scale_fill_viridis() +
   theme_map() +
   transition_time(time) +

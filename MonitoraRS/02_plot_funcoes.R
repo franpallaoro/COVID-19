@@ -33,3 +33,22 @@ rs_week <- function(input){
 }
 
 
+#                                            Diário:
+#---------------------------------------------------
+#                       Estado do Rio Grande do Sul:
+#---------------------------------------------------
+
+ggplot() +
+  geom_sf(data = dep_date, aes(fill = casos)) +
+  scale_fill_manual(values = virPallete) +
+  theme_map() +
+  transition_time(time) +
+  labs(fill = "Casos por\n 100.000 hab.",
+       title = "Semana epidemiológica: {round(frame_time, 0)}",
+       caption = "Número  acumulado de casos confirmados COVID-19 
+       - Municípios RS") +
+  theme(legend.position = "right")
+
+animate(covid_rs_vector)
+anim_save(filename = "covid_rs_anima.gif",
+          path = here::here("outputs"))
