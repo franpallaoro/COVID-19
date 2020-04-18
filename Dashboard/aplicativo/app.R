@@ -16,7 +16,7 @@ library(stringr)
 theme_set(theme_gray())
 #-------------------------------------
 # banco de dados de  casos confirmados:
-covid <- readRDS(here::here('data','casos_covid19_br_mun.rds'))
+covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
 
 # banco de dados por estado:
 data_state <- covid %>%
@@ -24,11 +24,9 @@ data_state <- covid %>%
          death_rate, is_last, place_type, estimated_population_2019) %>%
   filter(is_last == 'TRUE' & place_type == 'state')
 
-data_state[27,5] <- ifelse(is.na(data_state[27,5]) == 'TRUE', 0, data_state[27,5])
-
 # banco de dados obitos cartorio:
 
-obitos_cartorio <- readRDS(here::here('data','obitos_br_uf.rds')) %>%
+obitos_cartorio <- readRDS(here::here('obitos_br_uf.rds')) %>%
   filter(date >= "2020-03-16") # filtrando a partir do primeiro caso
 
 names(obitos_cartorio) <- c("Estado","Data","Acumulado mortes COVID-19","Acumulado mortes Pneumonia 2019","Acumulado mortes Pneumonia 2020",
@@ -56,7 +54,7 @@ casos_br <- casos_br %>%
 fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
 
-obts <- readRDS(here::here('data', 'obitos_br_uf.rds'))
+obts <- readRDS(here::here('obitos_br_uf.rds'))
 
 temp <- obts %>%
   select(date, epidemiological_week_2020)
