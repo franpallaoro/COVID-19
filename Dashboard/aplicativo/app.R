@@ -369,6 +369,10 @@ ui <- dashboardPage(
       tabItem("dashuf", "Em construção"),
       tabItem("cart",
               
+              # pegando de alguma forma htmlzada a versão mais recente dos ícones font awesome
+              
+              tags$script(src = "https://kit.fontawesome.com/ab15947b75.js", crossorigin="anonymous"), 
+              
               # reescrevendo as cores default para as que eu quero nas boxes de óbitos cartório
               
               tags$style(".small-box.bg-navy { background-color: #1F78B4 !important; color: #FFFFFF !important; }"),
@@ -563,7 +567,7 @@ server <- function(input, output) {
     valueBox(
       value = sum(obitos_cartorio$`Mortes Pneumonia 2020`), 
       subtitle = "Total de óbitos pneumonia desde o primeiro óbito COVID-19", 
-      icon = icon("lungs"),
+      icon = tags$i(class = "fa fa-lungs"),
       color = "navy"
     )
   })
@@ -572,7 +576,7 @@ server <- function(input, output) {
     valueBox(
       value = sum(obitos_cartorio$`Mortes por falha respiratória 2020`), 
       subtitle = "Total de óbitos falha respiratória desde o primeiro óbito COVID-19", 
-      icon = icon("lungs"),
+      icon = tags$i(class = "fa fa-lungs"),
       color = "olive"
     )
   })
@@ -581,7 +585,7 @@ server <- function(input, output) {
     valueBox(
       value = sum(obitos_cartorio$`Mortes COVID-19`), 
       subtitle = "Total de óbitos COVID-19", 
-      icon = icon("virus"),
+      icon = tags$i(class = "fa fa-virus"),
       color = "lime"
     )
   })
