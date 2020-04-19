@@ -35,7 +35,6 @@ names(obitos_cartorio) <- c("Estado","Data","Acumulado mortes COVID-19","Acumula
                             "Mortes Pneumonia 2020","Mortes por falha respiratória 2019","Mortes por falha respiratória 2020")
 
 # banco de dados com o total de casos no brasil por dia: 
-
 pop_br = sum(data_state$estimated_population_2019)
 
 casos_br <- covid %>%
@@ -154,9 +153,10 @@ plot_bar <- function(input){
     geom_text(aes(label = Frequencia), size = 3) +
     coord_flip() +
     ylim(0, max(Frequencia) + mean(Frequencia)) + 
-    labs(x = NULL, y = paste0(input)) + 
+    labs(x = NULL, y = NULL) + 
     theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
-          panel.grid.major = element_blank())
+          panel.grid.major = element_blank(), 
+          axis.ticks.x = element_blank(), axis.text.x = element_blank())
   
   ggplotly(p) %>%
     style(textposition = "middleright") %>%
@@ -233,10 +233,9 @@ week_geral <- function(input){
 }
 
 # function plot óbitos do cartório
-
 plot_cart <- function(input) {
 
-  if(input=="Diário") {
+  if(input == "Diário") {
     var <- rlang::sym("Data")
     text <- "Dia desde o primeiro óbito COVID-19"
     text2 <- "Número de óbitos diários"
@@ -258,28 +257,135 @@ plot_cart <- function(input) {
   
   valores <- c("Mortes Pneumonia 2019","Mortes Pneumonia 2020","Mortes por falha respiratória 2019",
                "Mortes por falha respiratória 2020","Mortes COVID-19")
-  paleta <- RColorBrewer::brewer.pal("Paired", n = 5)
   
+  paleta <- RColorBrewer::brewer.pal("Paired", n = 5)
   names(paleta) <- valores
   
-  p1 <- ggplot(aux) +
-    geom_line(aes(x = !!var, y = deaths, color = disease_type), linetype = 'dotted') +
-    geom_point(aes(x = !!var, y = deaths, color = disease_type)) + 
-    theme(axis.text.x = element_text(angle = 45, size = 8, vjust = 0.5)) + 
-    scale_color_manual(name = "Doenças", values = paleta) +
-    labs(x = text, y = text2) + 
-    theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-    theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
-          panel.grid.major = element_blank(),
-          panel.background = element_rect("transparent", color = NA)) 
-  
-  if(input=="Diário") {
-    p1 <- p1 +
-      scale_x_date(date_breaks = "1 day", date_labels = "%m-%d") +
+  if(input == "Diário") {
+    
+    aux$Data <- as.character(stringr::str_sub(aux$Data, 6, 10))
+    
+    p1 <- ggplot(aux) +
+      geom_line(aes(x = !!var, y = deaths, color = disease_type, group = 1), linetype = 'dotted') +
+      geom_point(aes(x = !!var, y = deaths, color = disease_type)) + 
+      scale_color_manual(name = "Doenças", values = paleta) +
+      labs(x = text, y = text2) + 
+      theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+            panel.grid.major = element_blank()) +
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    
+    ggplotly(p1) %>%
+      layout(xaxis = list(tickmode = 'array', 
+                          tickvals = 1:length(unique(aux$Data)), 
+                          ticktext = unique(aux$Data)))
+    
+  } else {
+    
+    p1 <- ggplot(aux) +
+      geom_line(aes(x = !!var, y = deaths, color = disease_type, group = 1), linetype = 'dotted') +
+      geom_point(aes(x = !!var, y = deaths, color = disease_type)) + 
+      scale_color_manual(name = "Doenças", values = paleta) +
+      labs(x = text, y = text2) + 
+      theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+            panel.grid.major = element_blank()) +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    
+    ggplotly(p1) %>%
+      style(textposition = "middleright") 
   }
   
-  ggplotly(p1)
+}
+
+# óbitos do cartório separados por tipo 
+obitos_separados <- function(input, escolha){
+  
+  if(input == "Diário") {
+    
+    var <- rlang::sym("Data")
+    text <- "Dia desde o primeiro óbito COVID-19"
+    text2 <- "Número de óbitos diários"
+    
+  } else {
+    
+    var <- rlang::sym("Semana_epidemiologica_2020")
+    text <- "Semana epidemiológica desde o primeiro óbito COVID-19"
+    text2 <- "Número de óbitos por semana epidemiólogica"
+    
+  }
+  
+  aux <- obitos_cartorio %>%
+    group_by(!!var) %>%
+    summarise_at(names(obitos_cartorio)[c(3:7,10:14)],sum) %>%
+    pivot_longer(
+      cols = -c(!!var),
+      names_to = "disease_type",
+      values_to = "deaths"
+    ) %>%
+    filter(!str_detect(disease_type,"^Acumulado"))
+  
+  valores <- c("Mortes Pneumonia 2019","Mortes Pneumonia 2020","Mortes por falha respiratória 2019",
+               "Mortes por falha respiratória 2020","Mortes COVID-19")
+  
+  paleta <- RColorBrewer::brewer.pal("Paired", n = 5)
+  names(paleta) <- valores
+  
+  
+  if (escolha == 1) {
+    
+    aux <- aux %>% 
+      filter(disease_type == 'Mortes Pneumonia 2019' | disease_type == 'Mortes Pneumonia 2020' | 
+               disease_type == 'Mortes COVID-19')
+    
+  } else {
+      
+      aux <- aux %>% 
+        filter(disease_type == 'Mortes por falha respiratória 2019' | disease_type == 'Mortes COVID-19' |
+                 disease_type == 'Mortes por falha respiratória 2020' )
+
+  }
+  
+  
+  if(input == "Diário") {
+    
+    aux$Data <- as.character(stringr::str_sub(aux$Data, 6, 10))
+    
+    p1 <- ggplot(aux) +
+      geom_line(aes(x = !!var, y = deaths, color = disease_type, group = 1), linetype = 'dotted') +
+      geom_point(aes(x = !!var, y = deaths, color = disease_type)) + 
+      scale_color_manual(name = "Doenças", values = paleta) +
+      labs(x = text, y = text2) + 
+      theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+            panel.grid.major = element_blank()) +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+    
+    ggplotly(p1) %>%
+      layout(xaxis = list(tickmode = 'array', 
+                          tickvals = 1:length(unique(aux$Data)), 
+                          ticktext = unique(aux$Data)), 
+             legend = list(orientation = "h",   # show entries horizontally
+                                  xanchor = "center",  # use center of legend as anchor
+                                  x = 0.5))
+  } else {
+    
+    p1 <- ggplot(aux) +
+      geom_line(aes(x = !!var, y = deaths, color = disease_type, group = 1), linetype = 'dotted') +
+      geom_point(aes(x = !!var, y = deaths, color = disease_type)) + 
+      scale_color_manual(name = "Doenças", values = paleta) +
+      labs(x = text, y = text2) + 
+      theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+            panel.grid.major = element_blank()) +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+    
+    ggplotly(p1) %>%
+      style(textposition = "middleright") %>%
+      layout(legend = list(orientation = "h",   # show entries horizontally
+                           xanchor = "center",  # use center of legend as anchor
+                           x = 0.5))
+  }
 }
 
 
@@ -310,15 +416,15 @@ ui <- dashboardPage(
       selectInput(inputId = 'typevar', label = "Selecione a variável:", 
                   choices = select_choices, selected = select_choices[1]),
       
-      menuItem("COVID-19", icon = icon("chart-area"), tabName = "dashbr", 
+      menuItem("Covid-19", icon = icon("chart-area"), tabName = "dashbr", 
                badgeLabel = "BR", badgeColor = "teal"),
-      menuItem("COVID-19", icon = icon("chart-bar"), tabName = "dashuf", 
+      menuItem("Covid-19", icon = icon("chart-bar"), tabName = "dashuf", 
                badgeLabel = "UF", badgeColor = "teal"),
-      menuItem("Óbitos Cartório", icon = icon("chart-line"), tabName = "cart", badgeLabel = "BR", badgeColor = "teal"),
+      menuItem("Total de Óbitos", icon = icon("chart-line"), tabName = "cart", badgeLabel = "BR", badgeColor = "teal"),
       menuItem("Fonte de Dados", icon = icon("file-download"), tabName = "dados", badgeColor = "teal"),
       menuItem("CovidMetrika", icon = icon("users"), tabName = "us", badgeColor = "teal"), 
       menuItem("Source Code", icon = icon("code"), badgeColor = "teal", 
-               href = 'https://github.com/franpallaoro/COVID-19/')
+               href = 'https://github.com/franpallaoro/COVID-19/tree/master/Dashboard')
     )
   ),
   
@@ -360,7 +466,7 @@ ui <- dashboardPage(
                   ), # coluna 
                 
                 box(ggiraphOutput("mapaPlot", height = 350L), width = 6L, height = 390L),
-                box(plotlyOutput("barPlot", height = 500L), width = 6L, height = 540L)
+                box(plotlyOutput("barPlot", height = 350L), width = 6L, height = 390L)
       ) #fluidrow
       ), # final da parte dos dados nacionais
       
@@ -393,10 +499,10 @@ ui <- dashboardPage(
                                   plotlyOutput("cart_sem_plot", height = 600)
                          )
                          
-                  ) 
+                  ) # tabBox 
                   
-                )
-              )
+                ) # coluna
+              ) # fluid
               
       ),
       tabItem("dados", 
@@ -564,7 +670,7 @@ server <- function(input, output) {
   output$box_pneumonia <- renderValueBox({
     valueBox(
       value = sum(obitos_cartorio$`Mortes Pneumonia 2020`), 
-      subtitle = "Total de óbitos pneumonia desde o primeiro óbito COVID-19", 
+      subtitle = "Pneumonia (desde o 1º óbito Covid-19)", 
       icon = tags$i(class = "fa fa-lungs"),
       color = "navy"
     )
@@ -573,7 +679,7 @@ server <- function(input, output) {
   output$box_falha <- renderValueBox({
     valueBox(
       value = sum(obitos_cartorio$`Mortes por falha respiratória 2020`), 
-      subtitle = "Total de óbitos falha respiratória desde o primeiro óbito COVID-19", 
+      subtitle = "Falha Respiratória (desde o 1º óbito Covid-19)", 
       icon = tags$i(class = "fa fa-lungs"),
       color = "olive"
     )
@@ -582,7 +688,7 @@ server <- function(input, output) {
   output$box_covid <- renderValueBox({
     valueBox(
       value = sum(obitos_cartorio$`Mortes COVID-19`), 
-      subtitle = "Total de óbitos COVID-19", 
+      subtitle = "Covid-19", 
       icon = tags$i(class = "fa fa-virus"),
       color = "lime"
     )
@@ -599,8 +705,8 @@ server <- function(input, output) {
   output$cart_sem_plot <- renderPlotly({
     plot_cart(input$tab_cart)
   })
-  
   #-------------------------------------
+  
   
 }
 
