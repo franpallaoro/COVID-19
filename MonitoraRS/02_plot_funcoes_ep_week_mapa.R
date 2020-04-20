@@ -8,28 +8,28 @@ library(gganimate)
 #                       Estado do Rio Grande do Sul:
 #---------------------------------------------------
 
-options <- c('Casos Confirmados', 'Óbitos', 
-             'Casos por\n 100.000 hab.', 'Letalidade')
+options <- c('Casos Confirmados', 
+             'Casos por\n 100.000 hab.', 'SIR')
 
 
 rs_week <- function(input){
   
   temp <- dep_week %>%
-    select(casos_cat, mortes_cat, casos_p100_cat, 
-           letalidade_cat, time, municipios, geometry)
+    select(casos_cat, casos_p100_cat, SIR, time, municipios, geometry)
   
-  temp <- temp[,c(which(options == input), 5:7)]
+  temp <- temp[,c(which(options == input), 4:6)]
   names(temp)[1] <- 'variavel'
   
   
-  if(which(options == input) != 1){
-    
-    virPallete <- viridis::viridis(n = 7)
-    
-  } else {
-    
+  if(which(options == input) == 1){
     virPallete <- viridis::viridis(n = 8)
-  }
+  } else {
+    if(which(options == input) == 4) {
+      virPallete <- viridis::viridis(n = 2)
+    } else {
+        virPallete <- viridis::viridis(n = 7)
+        }
+    }
   
   ggplot() +
     geom_sf(data = subset(temp, subset = !is.na(variavel)),
@@ -102,4 +102,4 @@ aglomerado_week <- function(input, input2){
   
 }
 
-aglomerado_week(input = options[3], input2 = agl_opt[3])
+aglomerado_week(input = options[1], input2 = agl_opt[1])

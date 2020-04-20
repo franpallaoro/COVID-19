@@ -119,6 +119,8 @@ rm(contc)
 rm(contd)
 rm(i)
 
+casosRS <- sum(covid$confirmed)
+
 # ---------------------------------------------------
 # Casos acumulados por data de coleta
 covid <- aux %>% 
@@ -175,10 +177,14 @@ pop$codigo <- as.character(pop$codigo)
 covid_cumsum <- covid_cumsum %>% 
   right_join(pop, by = c("cd_municipio" = "codigo"))
 
+popRS <- sum(unique(covid_cumsum$estimativas.populacionais.2018))
+
 covid_cumsum <- covid_cumsum %>% 
   mutate(casos_p100 = (casos/estimativas.populacionais.2018) * 100000) %>%
   mutate(letalidade = mortes/casos) %>%
-  select(time, municipios, cd_municipio, casos, mortes, casos_p100, letalidade)
+  mutate(E = casosRS/popRS*estimativas.populacionais.2018) %>%
+  mutate(SIR = casos/E) %>%
+  select(time, municipios, cd_municipio, casos, mortes, casos_p100, letalidade, SIR)
 
 #---------------------------------------------------
 # tirando os NA de letalidade:
@@ -207,7 +213,11 @@ covid_cumsum <- covid_cumsum %>%
          letalidade_cat = cut(x = letalidade,
                           breaks = c(-Inf, 0, 0.025, 0.05, 0.1, 0.2, 0.5, Inf),
                           labels = c("0", "0 a 2.5%", "2.5% a 5%", "5% a 10%", 
-                                     "10% a 20%", "20% a 50%", "+50%")))
+                                     "10% a 20%", "20% a 50%", "+50%")), 
+         
+         SIR_cat = cut(x = SIR, 
+                       breaks = c(-Inf, 1, Inf), 
+                       labels = c('SIR < 1', 'SIR > 1')))
 
 #---------------------------------------------------
 # banco de dados final:
