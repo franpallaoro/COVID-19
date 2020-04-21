@@ -76,4 +76,4 @@ BYM2_semana_ep <- function(sem_ep){
 }
 
 
-BYM2_semana_ep(16)
+resultado = BYM2_semana_ep(16)
