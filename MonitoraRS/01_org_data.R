@@ -184,7 +184,7 @@ covid_cumsum <- covid_cumsum %>%
   mutate(letalidade = mortes/casos) %>%
   mutate(E = casosRS/popRS*estimativas.populacionais.2018) %>%
   mutate(SIR = casos/E) %>%
-  select(time, municipios, cd_municipio, casos, mortes, casos_p100, letalidade, SIR)
+  select(time, municipios, cd_municipio, casos, mortes, casos_p100, letalidade, E, SIR)
 
 #---------------------------------------------------
 # tirando os NA de letalidade:
