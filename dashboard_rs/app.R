@@ -91,7 +91,7 @@ sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem("Mapa COVID-19 RS", tabName = "mapa_covid_rs"),
     menuItem("Mapa Leitos RS", tabName = "mapa_leitos_rs"),
-    menuItem("Sobre o app", tabName = "sobre")
+    menuItem("CovidMetrika", tabName = "sobre")
   ),
   width = 180
 )
@@ -199,15 +199,14 @@ body <- dashboardBody(
     ),
     tabItem("sobre",
             fluidPage(
-              titlePanel("Sobre o aplicativo"),
               fluidRow(
                 column(
-                  width = 6,
+                  width = 12,
                   gradientBox(
                     title = "Fonte de dados",
                     width = 12,
                     icon = "fa fa-file",
-                    gradientColor = "teal", 
+                    gradientColor = "yellow", 
                     boxToolSize = "sm", 
                     closable = F,
                     collapsible = T,
@@ -217,65 +216,77 @@ body <- dashboardBody(
                     footer = "Dados obtidos pelo DATASUS têm aqui sua última extração disponível que é de fevereiro/2020, já os outros são atualizados diariamente"
                   )
                 ),
-                column(
-                  width = 6, 
-                  tags$img(src = "ufrgs_logo.png", height = "100", width = "130"),
-                  tags$img(src = "logo_ime2.png", height = "100", width = "400"))
               ),
-              widgetUserBoxx(
-                title = "Gustavo Machado Utpott",
+              widgetUserBox(
+                title = tags$b("Franciele Lobo Pallaoro"),
                 subtitle = "Estudante de Estatística da UFRGS",
-                type = NULL,
-                width = 6,
-                src = NULL,
+                type = 2,
+                width = 4,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/franciele.jpg?raw=true',
                 color = "red",
-                footer = "Contato: gustavo.utpott@gmail.com"
+                "Contato: franpallaoro@gmail.com",
+                footer_padding = F
               ),
-              widgetUserBoxx(
-                title = "Márcia Helena Barbian",
-                subtitle = "Professora do Departamento de Estatística da UFRGS",
-                type = NULL,
-                width = 6,
-                src = NULL,
-                color = "red",
-                footer = "Contato: mhbarbian@gmail.com"
-              ),
-              widgetUserBoxx(
-                title = "Franciele Lobo Pallaoro",
+              
+              widgetUserBox(
+                title = tags$b("Gabriel Holmer Saul"),
                 subtitle = "Estudante de Estatística da UFRGS",
-                type = NULL,
-                width = 6,
-                src = NULL,
-                color = "red",
-                footer = "Contato: franpallaoro@gmail.com"
-              ),
-              widgetUserBoxx(
-                title = "Gabriel Holmer Saul",
+                type = 2,
+                width = 4,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gabriel.jpg?raw=true',
+                color = "orange",
+                "Contato: gabrielholmersaul@gmail.com",
+                footer_padding = F
+              )
+              ,
+              
+              widgetUserBox(
+                title = tags$b("Gustavo Machado Utpott"),
                 subtitle = "Estudante de Estatística da UFRGS",
-                type = NULL,
-                width = 6,
-                src = NULL,
+                type = 2,
+                width = 4,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gustavo.png?raw=true',
                 color = "red",
-                footer = "Contato: gabrielholmersaul@gmail.com"
+                "Contato: gustavo.utpott@gmail.com",
+                footer_padding = F
               ),
-              widgetUserBoxx(
-                title = "Juliana Sena de Souza",
-                subtitle = "Estudante de Pós-graduação em Epidemiologia da UFRGS",
-                type = NULL,
-                width = 6,
-                src = NULL,
+              
+              widgetUserBox(
+                title = tags$b("Juliana Sena de Souza"),
+                subtitle = "Estudante de Pós-Graduação em Epidemiologia da UFRGS",
+                type = 2,
+                width = 4,
+                src =  'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/juliana.jpeg?raw=true',
+                color = "orange",
+                "Contato: julianass.estatistica@gmail.com",
+                footer_padding = F
+              ),
+              
+              
+              widgetUserBox(
+                title = tags$b("Márcia Helena Barbian"),
+                subtitle = "Professora do departamento de Estatística da UFRGS",
+                type = 2,
+                width = 4,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/marcia.png?raw=true',
                 color = "red",
-                footer = "Contato: julianass.estatistica@gmail.com"
-              ),
-              widgetUserBoxx(
-                title = "Rodrigo Citton P. dos Reis",
-                subtitle = "Professor do Departamento de Estatística da UFRGS",
-                type = NULL,
-                width = 6,
-                src = NULL,
-                color = "red",
-                footer = "Contato: citton.padilha@ufrgs.br"
-              ),
+                "Contato: mhbarbian@gmail.com",
+                footer_padding = F
+              ), 
+              
+              widgetUserBox(
+                title = tags$b("Rodrigo Citton P. dos Reis"),
+                subtitle = "Professor do departamento de Estatística da UFRGS",
+                type = 2,
+                width = 4,
+                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/rodrigo.jpg?raw=true',
+                color = "orange",
+                "Contato: citton.padilha@ufrgs.br",
+                footer_padding = F
+              ), 
+              
+              tags$img(src = "https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/logos.png?raw=true", 
+                       height = "150", width = "1000")
               
             )
     )
@@ -549,32 +560,64 @@ server <- function(input, output) {
   
   output$serie_casos <- renderPlotly({
     
-    aux <- dados_covid_rs %>%
-      filter(place_type == "city") %>%
-      group_by(date) %>%
-      summarise(acumulado = sum(confirmed)) %>%
-      arrange(date)
-    
-    ordem <- as.character(format(aux$date, "%d-%m"))
-    
-    aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
-    for(i in 2:nrow(aux)) {
-      aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
+    if(input$var_covid_2 == "municipio") {
+      
+      aux <- dados_covid_rs %>%
+        filter(place_type == "city") %>%
+        group_by(date) %>%
+        summarise(acumulado = sum(confirmed)) %>%
+        arrange(date)
+      
+      ordem <- as.character(format(aux$date, "%d-%m"))
+      
+      aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
+      for(i in 2:nrow(aux)) {
+        aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
+      }
+      
+      aux$date <- as.character(format(aux$date, "%d-%m"))
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = date, y = acumulado, group = 1)) +
+        geom_point(aes(x = date, y = acumulado), size=2) +
+        geom_col(aes(x = date, y = novos), fill = "#d95f02") +
+        geom_text(aes(x = date, y = novos, label = novos)) +
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Dia", y = "Casos confirmados") +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
+      
+      ggplotly(p) %>%
+        style(textposition = "top")
+      
+    } else {
+      
+      aux <- dados_covid_rs %>%
+        filter(place_type == "city") %>%
+        group_by(date,mesorregiao) %>%
+        summarise(acumulado = sum(confirmed)) %>%
+        arrange(date)
+      
+      ordem <- as.character(format(aux$date, "%d-%m"))
+      
+      aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
+      for(i in 2:nrow(aux)) {
+        aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
+      }
+      
+      aux$date <- as.character(format(aux$date, "%d-%m"))
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = date, y = acumulado, color = mesorregiao, group = mesorregiao), linetype = "dotted") +
+        geom_point(aes(x = date, y = acumulado, color = mesorregiao), size=2) +
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Dia", y = "Casos confirmados", color = "Mesoregião") +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
+      
+      ggplotly(p) 
+      
     }
     
-    aux$date <- as.character(format(aux$date, "%d-%m"))
     
-    p <- ggplot(aux) +
-      geom_line(aes(x = date, y = acumulado, group = 1)) +
-      geom_point(aes(x = date, y = acumulado), size=2) +
-      geom_col(aes(x = date, y = novos), fill = "#d95f02") +
-      geom_text(aes(x = date, y = novos, label = novos)) +
-      scale_x_discrete(limits = ordem) +
-      labs(x = "Dia", y = "Casos confirmados") +
-      theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
-    
-    ggplotly(p) %>%
-      style(textposition = "top")
     
   })
   
@@ -583,33 +626,61 @@ server <- function(input, output) {
   
   output$serie_obitos <- renderPlotly({
     
-    aux <- dados_covid_rs %>%
-      filter(place_type == "city") %>%
-      group_by(date) %>%
-      summarise(acumulado = sum(deaths)) %>%
-      arrange(date)
-    
-    ordem <- as.character(format(aux$date, "%d-%m"))
-    
-    aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
-    for(i in 2:nrow(aux)) {
-      aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
+    if(input$var_covid_2 == "municipio") {
+      
+      aux <- dados_covid_rs %>%
+        filter(place_type == "city") %>%
+        group_by(date) %>%
+        summarise(acumulado = sum(deaths)) %>%
+        arrange(date)
+      
+      ordem <- as.character(format(aux$date, "%d-%m"))
+      
+      aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
+      for(i in 2:nrow(aux)) {
+        aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
+      }
+      
+      aux$date <- as.character(format(aux$date, "%d-%m"))
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = date, y = acumulado, group = 1)) +
+        geom_point(aes(x = date, y = acumulado), size=2) +
+        geom_col(aes(x = date, y = novos), fill = "#d95f02") +
+        geom_text(aes(x = date, y = novos, label = novos)) +
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Dia", y = "Óbitos confirmados") +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
+      
+      ggplotly(p) %>%
+        style(textposition = "top")
+      
+    } else {
+      aux <- dados_covid_rs %>%
+        filter(place_type == "city") %>%
+        group_by(date, mesorregiao) %>%
+        summarise(acumulado = sum(deaths)) %>%
+        arrange(date)
+      
+      ordem <- as.character(format(aux$date, "%d-%m"))
+      
+      aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
+      for(i in 2:nrow(aux)) {
+        aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
+      }
+      
+      aux$date <- as.character(format(aux$date, "%d-%m"))
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = date, y = acumulado, color = mesorregiao, group = mesorregiao), linetype = "dotted") +
+        geom_point(aes(x = date, y = acumulado, color = mesorregiao), size=2) +
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Dia", y = "Óbitos confirmados" , color = "Mesoregião") +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
+      
+      ggplotly(p)
     }
-    
-    aux$date <- as.character(format(aux$date, "%d-%m"))
-    
-    p <- ggplot(aux) +
-      geom_line(aes(x = date, y = acumulado, group = 1)) +
-      geom_point(aes(x = date, y = acumulado), size=2) +
-      geom_col(aes(x = date, y = novos), fill = "#d95f02") +
-      geom_text(aes(x = date, y = novos, label = novos)) +
-      scale_x_discrete(limits = ordem) +
-      labs(x = "Dia", y = "Óbitos confirmados") +
-      theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
-    
-    ggplotly(p) %>%
-      style(textposition = "top")
-    
+
   })
   
   ###############################
