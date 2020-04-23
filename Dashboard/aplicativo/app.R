@@ -13,8 +13,21 @@ library(ggiraph)
 library(tidyr)
 library(stringr)
 library(forcats)
+######## mapas
+library(sp) #Caindo em desuso
+library(sf) #Esta sendo a melhor opcao entre o sp
+library(leaflet) #Talvez n usaremos
+library(RColorBrewer)
+
+################
 
 theme_set(theme_gray())
+#-----------------------------------
+# shapfiles dos estados
+mapa_brasil <- sf::st_read("brasil_uf/BRUFE250GC_SIR.shp", quiet = TRUE)
+#transforma em um arquivo que o leaflet consegue ler!!!!
+mapa_brasil <- st_transform(mapa_brasil, "+init=epsg:4326")
+
 #-------------------------------------
 # banco de dados de  casos confirmados:
 covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
@@ -121,24 +134,47 @@ plot_mapa <- function(input){
   dataset <- data_state %>%
     select(confirmed, deaths, confirmed_per_100k_inhabitants, death_rate, state) %>%
     mutate(id = state) 
-  
+ 
   dataset <- dataset %>%
     mutate(variavel = dataset[,which(input == select_choices)]) %>%
-    select(id, variavel)
+    select(id, variavel) %>%
+    mutate(NM_ESTADO = mapa_brasil$NM_ESTADO)
+
+#########################################################################################
+#### MAPA  
+#########################################################################################
+ 
+  tidy <- dplyr::left_join(mapa_brasil, dataset, by = 'NM_ESTADO')
+  tidy = st_as_sf(tidy)
+  tidy <- st_transform(tidy, "+init=epsg:4326") ##leaflet
   
-  tidy <- dplyr::left_join(abjData::br_uf_map, dataset, by = 'id')
+  #selcor = fcolor[which(input == select_choices)]
+  pal <- colorBin("RdYlBu", domain =c(0, max(tidy$variavel), bins = 7)) ## cor da legenda
   
-  g <- ggplot(tidy) +
-    geom_polygon_interactive(aes(long, lat, group = group, fill = variavel, tooltip = variavel),
-                             color = 'black') + 
-    scale_fill_continuous(name = select_choices[which(input == select_choices)], low = '#ebebeb', 
-                          high = fcolor[which(input == select_choices)], na.value = 'white') + 
-    theme(axis.title = element_blank(), axis.ticks = element_blank(), axis.text = element_blank()) + 
-    theme_void() + 
-    theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
-          panel.grid.major = element_blank()) 
+  leaflet(tidy) %>%
+    addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
+    addPolygons(fillColor = ~pal(variavel), 
+                weight = 1.5,
+                opacity = 0.7,
+                fillOpacity = 0.7,
+                color = "gray",
+                highlight = highlightOptions(
+                  weight = 5,
+                  color = "#666",
+                  fillOpacity = 0.7,
+                  bringToFront = TRUE),
+                label = sprintf("%s - %s", tidy$NM_ESTADO, tidy$variavel),
+                labelOptions = labelOptions(
+                  style = list("font-weight" = "normal", padding = "6px 11px"),
+                  textsize = "15px",
+                  direction = "auto")) %>%
+    addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, 
+              title = select_choices[which(input == select_choices)],
+              #labels = ~tidy$NM_ESTADO,
+              position = "bottomright")
   
-  ggiraph(code = print(g))
+#########################################################################################
+#########################################################################################
   
 }
 
@@ -454,7 +490,7 @@ ui <- dashboardPage(
         
                 #-------------------------------------
                 # plot geral - primeiro plot
-                box(ggiraphOutput("mapaPlot", height = 350L), width = 6L, height = 390L),
+                box(leafletOutput("mapaPlot", height = 350L), width = 6L, height = 390L),
                 box(plotlyOutput("barPlot", height = 350L), width = 6L, height = 390L),   
                 column(width = 12,
                        tabsetPanel(type = "tabs",
@@ -659,7 +695,7 @@ server <- function(input, output) {
   })
   
   # grafico com o mapa de casos por UF
-  output$mapaPlot <- renderggiraph({
+  output$mapaPlot <- renderLeaflet({
     plot_mapa(input$typevar)
   })
   
