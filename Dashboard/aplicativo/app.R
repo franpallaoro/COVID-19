@@ -12,6 +12,7 @@ library(plotly)
 library(ggiraph)
 library(tidyr)
 library(stringr)
+library(forcats)
 
 theme_set(theme_gray())
 #-------------------------------------
@@ -147,13 +148,18 @@ plot_bar <- function(input){
   Frequencia = round(as.vector(data_state[,(which(input == select_choices) + 1)]), 2)
   selcor = fcolor[which(input == select_choices)]
   
+  data_state$Frequencia <- Frequencia   ### Para organizar o grafico por frequencia do estado
+  data_state = data_state %>%
+                arrange(Frequencia)
+  ordem <- data_state$state
   
   p = ggplot(data_state, aes(x = state, y = Frequencia)) +
     geom_col(fill = selcor) +
     geom_text(aes(label = Frequencia), size = 3) +
+    scale_x_discrete(limits = ordem) +
     coord_flip() +
     ylim(0, max(Frequencia) + mean(Frequencia)) + 
-    labs(x = NULL, y = NULL) + 
+    #labs(x = NULL, y = NULL) + 
     theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
           panel.grid.major = element_blank(), 
           axis.ticks.x = element_blank(), axis.text.x = element_blank())
@@ -448,7 +454,8 @@ ui <- dashboardPage(
         
                 #-------------------------------------
                 # plot geral - primeiro plot
-
+                box(ggiraphOutput("mapaPlot", height = 350L), width = 6L, height = 390L),
+                box(plotlyOutput("barPlot", height = 350L), width = 6L, height = 390L),   
                 column(width = 12,
                        tabsetPanel(type = "tabs",
                                    tabPanel("Diário", 
@@ -463,10 +470,9 @@ ui <- dashboardPage(
                       
                   ) #tabset
                   
-                  ), # coluna 
+                  ) # coluna 
                 
-                box(ggiraphOutput("mapaPlot", height = 350L), width = 6L, height = 390L),
-                box(plotlyOutput("barPlot", height = 350L), width = 6L, height = 390L)
+                
       ) #fluidrow
       ), # final da parte dos dados nacionais
       
