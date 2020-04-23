@@ -65,6 +65,10 @@ dep$litoral_n <- ifelse(tolower(iconv(x = dep$nm_municip,
 dep$urba_sul  <- ifelse(tolower(iconv(x = dep$nm_municip, 
                                       from = "latin1", to = "UTF-8")) %in% urba_sul, 1, 0)
 
+rm(rmpa)
+rm(serra)
+rm(litoral_n)
+rm(urba_sul)
 
 # ---------------------------------------------------
 # banco de dados de casos confirmados do RS:
@@ -185,6 +189,10 @@ covid_cumsum <- covid_cumsum %>%
   mutate(E = casosRS/popRS*estimativas.populacionais.2018) %>%
   mutate(SIR = casos/E) %>%
   select(time, municipios, cd_municipio, casos, mortes, casos_p100, letalidade, E, SIR)
+
+rm(pop)
+rm(dates)
+rm(cd_mun)
 
 #---------------------------------------------------
 # tirando os NA de letalidade:
