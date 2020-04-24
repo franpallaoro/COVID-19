@@ -1,3 +1,24 @@
+<!-- links to social media icons -->
+<!-- no need to change these -->
+
+<!-- icons with padding -->
+
+[1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
+[2.1]: http://i.imgur.com/P3YfQoD.png (facebook icon with padding)
+[3.1]: http://i.imgur.com/yCsTjba.png (google plus icon with padding)
+[4.1]: http://i.imgur.com/YckIOms.png (tumblr icon with padding)
+[5.1]: http://i.imgur.com/1AGmwO3.png (dribbble icon with padding)
+[6.1]: http://i.imgur.com/0o48UoR.png (github icon with padding)
+
+<!-- links to your social media accounts -->
+<!-- update these accordingly -->
+
+[1]: http://www.twitter.com/CMetrika
+# [2]: http://www.facebook.com/sednaoui
+# [3]: https://plus.google.com/+CarlSednaoui
+# [4]: http://carlsed.tumblr.com
+# [5]: http://dribbble.com/carlsednaoui
+# [6]: http://www.github.com/carlsednaoui
 
 <img src="../flp/images/logoCM.png" width="300">
 
@@ -32,12 +53,6 @@ Este painel com os casos de Porto Alegre apresenta informações por fonte notif
 
 <img src="/images/CovidMetrikaDash03.png" width="300">
 
-### COVID-19 em Porto Alegre
-
-Este painel com os casos de Porto Alegre apresenta informações por fonte notificadora (hospitais, UPAs, laboratórios, entre outras). Este é o "real" primeiro painel! Gustavo e Márcia são os autores e o CovidMetrika fica feliz em poder colaborar no desenvolvimento deste excelente dashboard. Para acessá-lo basta clicar [aqui](https://mhbarbian.shinyapps.io/covid19_poa/).
-
-<img src="/images/CovidMetrikaDash03.png" width="300">
-
 ### COVID-19 no Rio Grande do Sul
 
 Este novo painel apresenta informações de casos de COVID-19 a nível estadual. Para acessá-lo basta clicar [aqui](https://mhbarbian.shinyapps.io/covid19_rs/).
@@ -57,6 +72,6 @@ Este novo painel apresenta informações de casos de COVID-19 a nível estadual.
 
 Interessados em colaborar podem enviar e-mail para citton.padilha@ufrgs.br
 
-<a href="https://twitter.com/intent/tweet?screen_name=CMetrika&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-show-count="false">Tweet to @CMetrika</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+Nos siga em [![alt text][1.1]][1]
 
 <img src="../flp/images/Ufrgs.png" width="100"> <img src="../flp/images/ppgepi.png" width="170"> <img src="../flp/images/ime.png" width="170">
