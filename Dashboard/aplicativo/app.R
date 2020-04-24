@@ -61,6 +61,8 @@ names(obitos_cartorio) <- c("Estado","Data","Acumulado mortes COVID-19","Acumula
 # banco de dados com total de casos no brasil por dia 2.0
 # criei um novo para que não ficasse aqueles números negativos
 
+pop_br = sum(data_state$estimated_population_2019)
+
 ultima_atualizacao <- covid %>%
   select(state, confirmed, deaths, date, place_type, is_last) %>%
   filter(place_type == "state") %>%
@@ -84,7 +86,7 @@ casos_br <- as.data.frame(casos_br[,c(2:5,1)])
 
 # cor e ooções de seleção da variável a ser vista
 
-fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
+fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#00a65a")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
 
 obts <- readRDS(here::here('obitos_br_uf.rds'))
@@ -161,12 +163,14 @@ plot_mapa <- function(input){
 #########################################################################################
 #### MAPA  
 #########################################################################################
+  
+  paleta <- c("Reds","Purples","Oranges","Greens")[which(input == select_choices)]
  
   tidy <- merge(mapa_brasil, dataset, by.x = "id", by.y = "id")
   tidy = st_as_sf(tidy)
   tidy <- st_transform(tidy, "+init=epsg:4326") ##leaflet
   
-  pal = colorQuantile(palette="RdYlBu", domain =tidy$variavel, n = 5, reverse = TRUE)
+  pal = colorQuantile(palette=paleta, domain =tidy$variavel, n = 5)
   #fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
   #selcor = fcolor[1]
   #pal <- colorBin("RdYlBu", domain =c(0, max(tidy$variavel), bins = 8), reverse= TRUE) ## cor da legenda
@@ -188,9 +192,9 @@ plot_mapa <- function(input){
                   style = list("font-weight" = "normal", padding = "6px 11px"),
                   textsize = "15px",
                   direction = "auto"))   %>%
-    addLegend(pal = pal, values =tidy$variavel, labFormat = function(type, cuts, p) {  # legenda para colorQuantile
+    addLegend(pal = pal, values = round(tidy$variavel,4), labFormat = function(type, cuts, p) {  # legenda para colorQuantile
       n = length(cuts)
-      paste0(cuts[-n], " &ndash; ", cuts[-1])},
+      paste0(round(cuts[-n],2), " &ndash; ", round(cuts[-1],2))},
       title = select_choices[which(input == select_choices)],
       labels = ~tidy$NM_ESTADO,
                 position = "bottomright")
@@ -222,7 +226,7 @@ plot_bar <- function(input){
     scale_x_discrete(limits = ordem) +
     coord_flip() +
     ylim(0, max(Frequencia) + mean(Frequencia)) + 
-    #labs(x = NULL, y = NULL) + 
+    labs(x = NULL, y = NULL) + 
     theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
           panel.grid.major = element_blank(), 
           axis.ticks.x = element_blank(), axis.text.x = element_blank())
@@ -707,7 +711,7 @@ server <- function(input, output) {
     valueBox(
       paste0(round(casos_br[nrow(casos_br),"letal"]*100, 2), '%'), 
       "Letalidade", icon = icon("exclamation-circle"),
-      color = "maroon"
+      color = "green"
     )
   })
   #-------------------------------------
