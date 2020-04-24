@@ -26,17 +26,17 @@ library(RColorBrewer)
 theme_set(theme_gray())
 #-----------------------------------
 # shapfiles dos estados
-mapa_brasil <- sf::st_read("brasil_uf/BRUFE250GC_SIR.shp", quiet = TRUE)
-mapa_brasil <- mapa_brasil %>% 
-  mutate(NM_ESTADO = str_to_lower(NM_ESTADO)) # todas as cidades com letra minuscula  e tira o acento
+mapa_brasil <- sf::st_read("brasil_uf/BRUFE250GC_SIR.shp", quiet = TRUE) %>%
+  mutate(NM_ESTADO = str_to_title(NM_ESTADO)) # todas os estados com letra  de título
 
 #transforma em um arquivo que o leaflet consegue ler!!!!
-estados_siglas <- read_excel("estados_siglas.xlsx")
-estados_siglas = estados_siglas%>% 
-                  mutate(NM_ESTADO = str_to_lower(Estado), id = as.factor(Sigla)) %>%
-                  select(NM_ESTADO, id)
+estados_siglas <- read_excel("estados_siglas.xlsx") %>%
+  mutate(NM_ESTADO = str_to_title(Estado), id = as.factor(Sigla)) %>%
+  select(NM_ESTADO, id)
+
 mapa_brasil <- merge(mapa_brasil, estados_siglas, by = 'NM_ESTADO')
 mapa_brasil <- st_transform(mapa_brasil, "+init=epsg:4326")
+
 #-------------------------------------
 # banco de dados de  casos confirmados:
 covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
@@ -57,19 +57,30 @@ names(obitos_cartorio) <- c("Estado","Data","Acumulado mortes COVID-19","Acumula
                             "Semana_epidemiologica_2019","Semana_epidemiologica_2020","Mortes COVID-19","Mortes Pneumonia 2019",
                             "Mortes Pneumonia 2020","Mortes por falha respiratória 2019","Mortes por falha respiratória 2020")
 
-# banco de dados com o total de casos no brasil por dia: 
-pop_br = sum(data_state$estimated_population_2019)
+
+# banco de dados com total de casos no brasil por dia 2.0
+# criei um novo para que não ficasse aqueles números negativos
+
+ultima_atualizacao <- covid %>%
+  select(state, confirmed, deaths, date, place_type, is_last) %>%
+  filter(place_type == "state") %>%
+  group_by(is_last) %>%
+  filter(is_last) %>%
+  summarise(confirmed = sum(confirmed), deaths = sum(deaths), conf_per100k = sum(confirmed)/pop_br*100000,
+            letal = sum(deaths)/sum(confirmed)) %>%
+  select(-is_last)
 
 casos_br <- covid %>%
-  select(state, confirmed, deaths, 
-         date, place_type) %>%
-  filter(place_type == 'state') %>%
-  aggregate(cbind(confirmed, deaths) ~ date, data = ., sum)
+  select(state, confirmed, deaths, date, place_type, is_last) %>%
+  filter(place_type == "state") %>%
+  group_by(date) %>%
+  summarise(confirmed = sum(confirmed), deaths = sum(deaths), conf_per100k = sum(confirmed)/pop_br*100000,
+            letal = sum(deaths)/sum(confirmed)) %>%
+  arrange(date)
 
-casos_br <- casos_br %>%
-  mutate(conf_per100k = confirmed/pop_br*100000) %>%
-  mutate(letal = deaths/confirmed) %>%
-  select(confirmed, deaths, conf_per100k, letal, date)
+casos_br[nrow(casos_br),c("confirmed","deaths","conf_per100k","letal")] <- ultima_atualizacao  
+
+casos_br <- as.data.frame(casos_br[,c(2:5,1)])
 
 # cor e ooções de seleção da variável a ser vista
 
@@ -92,7 +103,7 @@ rm(temp)
 # serie temporal com os dados no brasil
 plot_geral <- function(input){
   
-  temp <- casos_br[,c(which(input == select_choices), 5)] # dado selecionado no input
+  temp <- as.data.frame(casos_br[,c(which(input == select_choices), 5)]) # dado selecionado no input
   temp <- data.frame(Data = as.character(stringr::str_sub(temp$date, 6, 10)), 
                      Frequencia = round(temp[,1], 3))
   
@@ -675,26 +686,26 @@ server <- function(input, output) {
   # 'output' das caixas de informações principais: 
   
   output$casosBox <- renderValueBox({
-    valueBox(casos_br[nrow(casos_br),1], "Casos", icon = icon("ambulance"),
+    valueBox(casos_br[nrow(casos_br),"confirmed"], "Casos", icon = icon("ambulance"),
       color = "red"
     )
   })
   
   output$obitosBox <- renderValueBox({
-    valueBox(casos_br[nrow(casos_br),2], "Óbitos", icon = icon("skull"),
+    valueBox(casos_br[nrow(casos_br),"deaths"], "Óbitos", icon = icon("skull"),
       color = "purple"
     )
   })
   
   output$taxaBox <- renderValueBox({
-    valueBox(round(casos_br[nrow(casos_br),3],2), "Taxa /100k hab.", icon = icon("heartbeat"),
+    valueBox(round(casos_br[nrow(casos_br),"conf_per100k"],2), "Taxa /100k hab.", icon = icon("heartbeat"),
       color = "yellow"
     )
   })
   
   output$letalBox <- renderValueBox({
     valueBox(
-      paste0(round(casos_br[nrow(casos_br),4]*100, 2), '%'), 
+      paste0(round(casos_br[nrow(casos_br),"letal"]*100, 2), '%'), 
       "Letalidade", icon = icon("exclamation-circle"),
       color = "maroon"
     )
