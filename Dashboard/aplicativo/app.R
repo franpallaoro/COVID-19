@@ -13,6 +13,8 @@ library(ggiraph)
 library(tidyr)
 library(stringr)
 library(forcats)
+library(readxl)
+library(tidyverse)
 ######## mapas
 library(sp) #Caindo em desuso
 library(sf) #Esta sendo a melhor opcao entre o sp
@@ -25,9 +27,16 @@ theme_set(theme_gray())
 #-----------------------------------
 # shapfiles dos estados
 mapa_brasil <- sf::st_read("brasil_uf/BRUFE250GC_SIR.shp", quiet = TRUE)
-#transforma em um arquivo que o leaflet consegue ler!!!!
-mapa_brasil <- st_transform(mapa_brasil, "+init=epsg:4326")
+mapa_brasil <- mapa_brasil %>% 
+  mutate(NM_ESTADO = str_to_lower(NM_ESTADO)) # todas as cidades com letra minuscula  e tira o acento
 
+#transforma em um arquivo que o leaflet consegue ler!!!!
+estados_siglas <- read_excel("estados_siglas.xlsx")
+estados_siglas = estados_siglas%>% 
+                  mutate(NM_ESTADO = str_to_lower(Estado), id = as.factor(Sigla)) %>%
+                  select(NM_ESTADO, id)
+mapa_brasil <- merge(mapa_brasil, estados_siglas, by = 'NM_ESTADO')
+mapa_brasil <- st_transform(mapa_brasil, "+init=epsg:4326")
 #-------------------------------------
 # banco de dados de  casos confirmados:
 covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
@@ -136,20 +145,20 @@ plot_mapa <- function(input){
     mutate(id = state) 
  
   dataset <- dataset %>%
-    mutate(variavel = dataset[,which(input == select_choices)]) %>%
-    select(id, variavel) %>%
-    mutate(NM_ESTADO = mapa_brasil$NM_ESTADO)
-
+    mutate(variavel = dataset[,which(input == select_choices)], id = as.factor(id)) %>%
+    select(id, variavel) 
 #########################################################################################
 #### MAPA  
 #########################################################################################
  
-  tidy <- dplyr::left_join(mapa_brasil, dataset, by = 'NM_ESTADO')
+  tidy <- merge(mapa_brasil, dataset, by.x = "id", by.y = "id")
   tidy = st_as_sf(tidy)
   tidy <- st_transform(tidy, "+init=epsg:4326") ##leaflet
   
-  #selcor = fcolor[which(input == select_choices)]
-  pal <- colorBin("RdYlBu", domain =c(0, max(tidy$variavel), bins = 7)) ## cor da legenda
+  pal = colorQuantile(palette="RdYlBu", domain =tidy$variavel, n = 5, reverse = TRUE)
+  #fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
+  #selcor = fcolor[1]
+  #pal <- colorBin("RdYlBu", domain =c(0, max(tidy$variavel), bins = 8), reverse= TRUE) ## cor da legenda
   
   leaflet(tidy) %>%
     addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
@@ -167,11 +176,18 @@ plot_mapa <- function(input){
                 labelOptions = labelOptions(
                   style = list("font-weight" = "normal", padding = "6px 11px"),
                   textsize = "15px",
-                  direction = "auto")) %>%
-    addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, 
-              title = select_choices[which(input == select_choices)],
+                  direction = "auto"))   %>%
+    addLegend(pal = pal, values =tidy$variavel, labFormat = function(type, cuts, p) {  # legenda para colorQuantile
+      n = length(cuts)
+      paste0(cuts[-n], " &ndash; ", cuts[-1])},
+      title = select_choices[which(input == select_choices)],
+      labels = ~tidy$NM_ESTADO,
+                position = "bottomright")
+      
+    #addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, # legenda para colorBin
+    #          title = select_choices[which(input == select_choices)],
               #labels = ~tidy$NM_ESTADO,
-              position = "bottomright")
+    #          position = "bottomright")
   
 #########################################################################################
 #########################################################################################

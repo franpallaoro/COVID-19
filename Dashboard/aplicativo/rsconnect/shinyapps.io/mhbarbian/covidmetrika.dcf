@@ -1,0 +1,12 @@
+name: covidmetrika
+title: aplicativo
+username:
+account: mhbarbian
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2133446
+bundleId: 3057966
+url: https://mhbarbian.shinyapps.io/CovidMetrika/
+when: 1587701655.04454
+asMultiple: FALSE
+asStatic: FALSE

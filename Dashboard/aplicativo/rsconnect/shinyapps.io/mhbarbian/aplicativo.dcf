@@ -1,0 +1,12 @@
+name: aplicativo
+title: aplicativo
+username:
+account: mhbarbian
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2173392
+bundleId: 3056130
+url: https://mhbarbian.shinyapps.io/aplicativo/
+when: 1587666964.45034
+asMultiple: FALSE
+asStatic: FALSE
