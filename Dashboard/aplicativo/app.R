@@ -20,19 +20,43 @@ library(sp) #Caindo em desuso
 library(sf) #Esta sendo a melhor opcao entre o sp
 library(leaflet) #Talvez n usaremos
 library(RColorBrewer)
+library(DT)
 
 ################
 
 theme_set(theme_gray())
 #-----------------------------------
 # shapfiles dos estados
-mapa_brasil <- sf::st_read("brasil_uf/BRUFE250GC_SIR.shp", quiet = TRUE) %>%
+mapa_brasil <- sf::st_read("shapefiles/brasil_uf/BRUFE250GC_SIR.shp", quiet = TRUE) %>%
   mutate(NM_ESTADO = str_to_title(NM_ESTADO)) # todas os estados com letra  de título
+
+# shapefile uf_municipios
+
+lendo_shapefile_uf_mun <- function() {
+  estados_siglas <- read_excel("estados_siglas.xlsx") %>%
+    mutate(estado = str_to_title(Estado), id = as.factor(Sigla)) %>%
+    arrange(Codigo)
+  
+  pasta <- "shapefiles/uf_municipios/"
+  arquivos <- str_c(pasta,list.files(pasta, pattern = ".shp"))
+  
+  dados <- map(arquivos,sf::st_read, quiet = T)
+  
+  names(dados) <- estados_siglas$id
+  
+  return(dados)
+
+}
+
+dados_shp_uf_mun <- lendo_shapefile_uf_mun()
 
 #transforma em um arquivo que o leaflet consegue ler!!!!
 estados_siglas <- read_excel("estados_siglas.xlsx") %>%
   mutate(NM_ESTADO = str_to_title(Estado), id = as.factor(Sigla)) %>%
   select(NM_ESTADO, id)
+
+labels_estado <- estados_siglas$id
+names(labels_estado) <- estados_siglas$NM_ESTADO
 
 mapa_brasil <- merge(mapa_brasil, estados_siglas, by = 'NM_ESTADO')
 mapa_brasil <- st_transform(mapa_brasil, "+init=epsg:4326")
@@ -86,8 +110,9 @@ casos_br <- as.data.frame(casos_br[,c(2:5,1)])
 
 # cor e ooções de seleção da variável a ser vista
 
-fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#00a65a")
+fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
+select_choices2 <- c("confirmed","deaths","confirmed_per_100k_inhabitants","death_rate")
 
 obts <- readRDS(here::here('obitos_br_uf.rds'))
 
@@ -164,7 +189,7 @@ plot_mapa <- function(input){
 #### MAPA  
 #########################################################################################
   
-  paleta <- c("Reds","Purples","Oranges","Greens")[which(input == select_choices)]
+  paleta <- c("Reds","Purples","Oranges","PuRd")[which(input == select_choices)]
  
   tidy <- merge(mapa_brasil, dataset, by.x = "id", by.y = "id")
   tidy = st_as_sf(tidy)
@@ -303,6 +328,229 @@ week_geral <- function(input){
     ggplotly(p)
     
   }
+}
+
+# funtion mapa uf
+
+plot_mapa_uf <- function(estado,input) {
+  
+  aux_var <- select_choices2[which(input == select_choices)]
+  
+  var <- rlang::sym(aux_var)
+  
+  aux <- covid %>%
+    filter(is_last & place_type=="city" & state == estado) %>%
+    select(city_ibge_code,!!var)
+  
+  dados_mapa <- dados_shp_uf_mun[[estado]] %>%
+    mutate(municipio = str_to_title(NM_MUNICIP)) %>%
+    left_join(aux, by = c("CD_GEOCMU" = "city_ibge_code")) %>%
+    mutate(var = !!var)
+  
+  y_quantidade <- dados_mapa$var
+  
+  #y_quantidade <- replace_na(y_quantidade, 0) # não rodar pois fica pior ainda o problema do range dos bins
+  
+  if (aux_var == "confirmed") {
+    paleta <- "Reds"
+    arredonda <- 0
+  } else if (aux_var == "deaths") {
+    paleta <- "Purples"
+    arredonda <- 0
+  } else if (aux_var == "confirmed_per_100k_inhabitants") {
+    paleta <- "Oranges"
+    arredonda <- 2
+  } else {
+    paleta <- "PuRd"
+    arredonda <- 2
+    dados_mapa$var <- 100*dados_mapa$var
+  }
+  
+  pal <- colorQuantile(palette=paleta, domain = y_quantidade, n = 5, na.color = "#fff5f0")
+  
+  leaflet(dados_mapa) %>%
+    addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
+    addPolygons(fillColor = ~pal(y_quantidade), 
+                weight = 1.5,
+                opacity = 0.7,
+                fillOpacity = 0.7,
+                color = "gray",
+                highlight = highlightOptions(
+                  weight = 5,
+                  color = "#666",
+                  fillOpacity = 0.7,
+                  bringToFront = TRUE),
+                label = sprintf("%s - %s", dados_mapa$municipio, y_quantidade),
+                labelOptions = labelOptions(
+                  style = list("font-weight" = "normal", padding = "6px 11px"),
+                  textsize = "15px",
+                  direction = "auto"))   %>%
+    addLegend(pal = pal, values = round(y_quantidade,arredonda), labFormat = function(type, cuts, p) {  # legenda para colorQuantile
+      n = length(cuts)
+      paste0(round(cuts[-n],arredonda), " &ndash; ", round(cuts[-1],arredonda))},
+      title = select_choices[which(estado == select_choices)],
+      labels = ~dados_mapa$municipio,
+      position = "bottomright")
+  
+}
+
+# function tabela tabItem UF
+
+tabela_uf <- function(estado, input) {
+  
+  aux_var <- select_choices2[which(input == select_choices)]
+  
+  var <- rlang::sym(aux_var)
+  
+  aux <- covid %>%
+    filter(is_last & place_type=="city" & state == estado) %>%
+    select(city,!!var) %>%
+    arrange(desc(!!var))
+  
+  texto <- ifelse(
+    test = aux_var == "confirmed",
+    yes = "Confirmados",
+    no = ifelse(
+      test = aux_var == "deaths",
+      yes = "Óbitos",
+      no = ifelse(
+        test = aux_var == "confirmed_per_100k_inhabitants",
+        yes = "Confirmados/100mil hab.",
+        no = "Letalidade"
+      )
+    ))
+  
+  tabela <- datatable(
+    aux[,c("city",aux_var)], 
+    rownames=F,
+    class = "compact",
+    colnames = c("Município",texto),
+    options = list(
+      dom = "tS", 
+      ordering = F,
+      scrollY = "560px",
+      paging = FALSE
+    )
+  ) %>%
+    formatStyle("city",color = "#787878", fontSize = "14px", backgroundColor = "#f0f0f0") %>%
+    formatStyle(aux_var, color = fcolor[which(input==select_choices)], fontWeight = "bold",fontSize = "14px", backgroundColor = "#f0f0f0")
+  
+  if(aux_var %in% c("confirmed_per_100k_inhabitants","death_rate")) {
+    tabela <- formatRound(tabela, aux_var, digits = 2)
+  }
+  
+  tabela
+  
+}
+
+# function série uf 
+
+plot_serie_uf <- function(estado, input, tipo) {
+  
+  aux_var <- select_choices2[which(input == select_choices)]
+  
+  var <- rlang::sym(aux_var)
+  
+  col_sel <- fcolor[which(input == select_choices)]
+  
+  aux <- covid %>%
+    filter(place_type=="state" & state == estado) %>%
+    arrange(date)
+  
+  if(tipo == "Diário") {
+    
+    ordem <- as.character(format(aux$date, "%d-%m"))
+    
+    if(aux_var %in% select_choices2[c(1,2)]) {
+      
+      aux$novos <- c(aux[1,aux_var],rep(NA,nrow(aux)-1))
+      for(i in 2:nrow(aux)) {
+        aux$novos[i] <- aux[i,aux_var]-aux[i-1,aux_var]
+      }
+      
+      aux$date <- as.character(format(aux$date, "%d-%m"))
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = date, y = !!var, group = 1), color = col_sel, linetype = 'dotted') +
+        geom_point(aes(x = date, y = !!var), color = col_sel) + 
+        geom_col(aes(x = date, y = novos), fill = col_sel) +
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Dia", y = input) +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5)) +
+        theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+              panel.grid.major = element_blank())
+      
+    } else {
+      
+      aux$date <- as.character(format(aux$date, "%d-%m"))
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = date, y = !!var, group = 1), color = col_sel, linetype = 'dotted') +
+        geom_point(aes(x = date, y = !!var), color = col_sel) + 
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Dia", y = input) +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5)) +
+        theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+              panel.grid.major = element_blank())
+      
+    }
+    
+    
+    
+  } else {
+    
+    temp2 <- obts %>%
+      select(date, epidemiological_week_2020) %>%
+      filter(date %in% aux$date) %>%
+      unique()
+    
+    aux <- left_join(aux,temp2, by = "date") %>%
+      group_by(epidemiological_week_2020) %>%
+      filter(date == max(date)) %>%
+      ungroup()
+    
+    ordem <- as.character(aux$epidemiological_week_2020)
+    
+    
+    
+    if(aux_var %in% select_choices2[c(1,2)]) {
+      
+      aux$novos <- c(as.data.frame(aux)[1,aux_var],rep(NA,nrow(aux)-1))
+      for(i in 2:nrow(aux)) {
+        aux$novos[i] <- as.data.frame(aux)[i,aux_var]-as.data.frame(aux)[i-1,aux_var]
+      }
+      
+      aux$epidemiological_week_2020 <- as.character(aux$epidemiological_week_2020)
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = epidemiological_week_2020, y = !!var, group = 1), color = col_sel, linetype = 'dotted') +
+        geom_point(aes(x = epidemiological_week_2020, y = !!var), color = col_sel) + 
+        geom_col(aes(x = epidemiological_week_2020, y = novos), fill = col_sel) +
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Semana Epidemiológica", y = input) +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5)) +
+        theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+              panel.grid.major = element_blank())
+      
+    } else {
+      
+      aux$epidemiological_week_2020 <- as.character(aux$epidemiological_week_2020)
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = epidemiological_week_2020, y = !!var, group = 1), color = col_sel, linetype = 'dotted') +
+        geom_point(aes(x = epidemiological_week_2020, y = !!var), color = col_sel) + 
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Semana Epidemiológica", y = input) +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5)) +
+        theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+              panel.grid.major = element_blank())
+      
+    }
+    
+  }
+  
+  ggplotly(p) 
+  
 }
 
 # function plot óbitos do cartório
@@ -543,7 +791,49 @@ ui <- dashboardPage(
       ) #fluidrow
       ), # final da parte dos dados nacionais
       
-      tabItem("dashuf", "Em construção"),
+      tabItem("dashuf",
+              
+              selectInput(
+                "estado",
+                label = "Escolha um estado",
+                choices = labels_estado,
+                selected = "RS"
+              ),
+              
+              fluidRow(
+                valueBoxOutput("casos_uf", width = 3),
+                valueBoxOutput("obitos_uf", width = 3),
+                valueBoxOutput("taxa_uf", width = 3),
+                valueBoxOutput("letal_uf", width = 3),
+              ),
+              fluidRow(
+                box(
+                  leafletOutput("mapa_uf", height = 390L),
+                  width = 9,
+                  height = 410L
+                ),
+                box(
+                  dataTableOutput("table_uf", height = "390px"),
+                  width = 3,
+                  height = 410L
+                ),
+                column(
+                  width = 12,
+                  tabBox(id = "tab_uf",
+                         width = 12,
+                         title = NULL,
+                         tabPanel("Diário",
+                                  plotlyOutput("uf_dia_plot", height = 350)
+                         ),
+                         tabPanel("Semana Epidemiológica",
+                                  plotlyOutput("uf_sem_plot", height = 350)
+                         )
+                         
+                  )
+                )
+              )
+              
+      ),
       tabItem("cart",
               
               # pegando de alguma forma htmlzada a versão mais recente dos ícones font awesome
@@ -687,6 +977,10 @@ ui <- dashboardPage(
 #-------------------------------------
 server <- function(input, output) {
   #-------------------------------------
+  #-------------------------------------
+  
+  # tabItem dashbr
+  
   # 'output' das caixas de informações principais: 
   
   output$casosBox <- renderValueBox({
@@ -711,7 +1005,7 @@ server <- function(input, output) {
     valueBox(
       paste0(round(casos_br[nrow(casos_br),"letal"]*100, 2), '%'), 
       "Letalidade", icon = icon("exclamation-circle"),
-      color = "green"
+      color = "maroon"
     )
   })
   #-------------------------------------
@@ -734,6 +1028,92 @@ server <- function(input, output) {
     plot_bar(input$typevar)
   })
   
+  #-------------------------------------
+  #-------------------------------------
+  
+  # tabItem dashuf
+  
+  # boxes
+  
+  output$casos_uf <- renderValueBox({
+    aux <- covid %>%
+      filter(state == input$estado) %>%
+      filter(is_last) %>%
+      filter(place_type == "state")
+    
+    valueBox(aux$confirmed, "Casos", icon = icon("ambulance"),
+             color = "red"
+    )
+  })
+  
+  output$obitos_uf <- renderValueBox({
+    aux <- covid %>%
+      filter(state == input$estado) %>%
+      filter(is_last) %>%
+      filter(place_type == "state")
+    
+    valueBox(aux$deaths, "Óbitos", icon = icon("skull"),
+             color = "purple"
+    )
+  })
+  
+  output$taxa_uf <- renderValueBox({
+    aux <- covid %>%
+      filter(state == input$estado) %>%
+      filter(is_last) %>%
+      filter(place_type == "state")
+    
+    valueBox(round(aux$confirmed_per_100k_inhabitants,2), "Taxa /100k hab.", icon = icon("heartbeat"),
+             color = "yellow"
+    )
+  })
+  
+  output$letal_uf <- renderValueBox({
+    aux <- covid %>%
+      filter(state == input$estado) %>%
+      filter(is_last) %>%
+      filter(place_type == "state")
+    
+    valueBox(
+      paste0(round(aux$death_rate*100, 2), '%'), 
+      "Letalidade", icon = icon("exclamation-circle"),
+      color = "maroon"
+    )
+  })
+  
+  # mapa_uf 
+  
+  output$mapa_uf <- renderLeaflet({
+    
+    plot_mapa_uf(estado = input$estado, input = input$typevar)
+    
+  })
+  
+  # tabela_uf
+  
+  output$table_uf <- renderDataTable({
+    
+    tabela_uf(estado = input$estado, input = input$typevar)
+    
+  })
+  
+  # série_uf diário
+  
+  output$uf_dia_plot <- renderPlotly({
+    
+    plot_serie_uf(estado = input$estado, input = input$typevar, tipo = "Diário")
+    
+  })
+  
+  # série_uf semanal
+  
+  output$uf_sem_plot <- renderPlotly({
+    
+    plot_serie_uf(estado = input$estado, input = input$typevar, tipo = "Semana Epidemiológica")
+    
+  })
+  
+  #-------------------------------------
   #-------------------------------------
   
   # tabItem obitos cartorio
