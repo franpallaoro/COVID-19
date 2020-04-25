@@ -15,7 +15,7 @@ library(stringr)
 library(forcats)
 library(readxl)
 library(tidyverse)
-######## mapas
+
 library(sp) #Caindo em desuso
 library(sf) #Esta sendo a melhor opcao entre o sp
 library(leaflet) #Talvez n usaremos
@@ -24,18 +24,22 @@ library(RColorBrewer)
 ################
 
 theme_set(theme_gray())
+
+options(OutDec= ",")
+
 #-----------------------------------
 # shapfiles dos estados
 mapa_brasil <- sf::st_read("brasil_uf/BRUFE250GC_SIR.shp", quiet = TRUE) %>%
   mutate(NM_ESTADO = str_to_title(NM_ESTADO)) # todas os estados com letra  de título
 
-#transforma em um arquivo que o leaflet consegue ler!!!!
+#transforma em um arquivo que o leaflet consegue ler!!
 estados_siglas <- read_excel("estados_siglas.xlsx") %>%
   mutate(NM_ESTADO = str_to_title(Estado), id = as.factor(Sigla)) %>%
   select(NM_ESTADO, id)
 
-mapa_brasil <- merge(mapa_brasil, estados_siglas, by = 'NM_ESTADO')
-mapa_brasil <- st_transform(mapa_brasil, "+init=epsg:4326")
+mapa_brasil <- mapa_brasil %>% 
+  merge(estados_siglas, by = 'NM_ESTADO') %>% 
+  st_transform("+init=epsg:4326")
 
 #-------------------------------------
 # banco de dados de  casos confirmados:
@@ -116,15 +120,17 @@ plot_geral <- function(input){
     Diario <- c(casos_br[1,which(input == select_choices)], 
                 diff(casos_br[,which(input == select_choices)]))
     
+    name_aux <- ifelse(input == select_choices[1], 
+                       'Casos Acumulados', 'Óbitos Acumulados')
+    
     p <- ggplot(temp) +
       geom_line(aes(x = Data, y = Frequencia, group = 1), color = col_sel, linetype = 'dotted') +
       geom_point(aes(x = Data, y = Frequencia), color = col_sel) + 
       geom_bar(aes(x = Data, y = Diario), fill = col_sel, stat = 'identity') + 
       theme(axis.text.x = element_text(angle = 45, size = 8, vjust = 0.5)) + 
-      labs(x = NULL, y = paste0(input)) + 
+      labs(x = NULL, y = name_aux) + 
       theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
-            panel.grid.major = element_blank())
+      theme(plot.background = element_rect(fill = "transparent", color = NA))
     
     
     ggplotly(p) %>%
@@ -139,8 +145,7 @@ plot_geral <- function(input){
       theme(axis.text.x = element_text(angle = 45, size = 8, vjust = 0.5)) + 
       labs(x = NULL, y = paste0(input)) + 
       theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
-      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
-            panel.grid.major = element_blank())
+      theme(plot.background = element_rect(fill = "transparent", color = NA))
     
     
     ggplotly(p) %>%
@@ -171,10 +176,7 @@ plot_mapa <- function(input){
   tidy <- st_transform(tidy, "+init=epsg:4326") ##leaflet
   
   pal = colorQuantile(palette=paleta, domain =tidy$variavel, n = 5)
-  #fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
-  #selcor = fcolor[1]
-  #pal <- colorBin("RdYlBu", domain =c(0, max(tidy$variavel), bins = 8), reverse= TRUE) ## cor da legenda
-  
+
   leaflet(tidy) %>%
     addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
     addPolygons(fillColor = ~pal(variavel), 
@@ -199,14 +201,6 @@ plot_mapa <- function(input){
       labels = ~tidy$NM_ESTADO,
                 position = "bottomright")
       
-    #addLegend(pal = pal, values = ~tidy$variavel, opacity = 0.7, # legenda para colorBin
-    #          title = select_choices[which(input == select_choices)],
-              #labels = ~tidy$NM_ESTADO,
-    #          position = "bottomright")
-  
-#########################################################################################
-#########################################################################################
-  
 }
 
 # gráfico de barras por estado
@@ -220,22 +214,29 @@ plot_bar <- function(input){
                 arrange(Frequencia)
   ordem <- data_state$state
   
-  p = ggplot(data_state, aes(x = state, y = Frequencia)) +
+  temp <- data_state %>%
+    select(state, Frequencia) %>% 
+    mutate(obs_text = Frequencia)
+  
+  names(temp)[1] <- 'UF'
+  
+  
+  p = ggplot(temp, aes(x = UF, y = Frequencia)) +
     geom_col(fill = selcor) +
-    geom_text(aes(label = Frequencia), size = 3) +
+    geom_text(aes(label = paste0(temp$obs_text)), size = 3) +
     scale_x_discrete(limits = ordem) +
     coord_flip() +
     ylim(0, max(Frequencia) + mean(Frequencia)) + 
     labs(x = NULL, y = NULL) + 
-    theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
-          panel.grid.major = element_blank(), 
+    theme(plot.background = element_rect(fill = "transparent", color = NA), 
           axis.ticks.x = element_blank(), axis.text.x = element_blank())
   
-  ggplotly(p) %>%
+  
+  ggplotly(p, tooltip = c('UF', 'Frequencia')) %>%
     style(textposition = "middleright") %>%
     layout(yaxis = list(tickmode = 'array', 
-                        tickvals = 1:nrow(data_state), 
-                        ticktext = unique(data_state$state)))
+                        tickvals = 1:nrow(temp), 
+                        ticktext = unique(temp$UF)))
 }
 
 # dados do brasil por semana epi
@@ -276,6 +277,9 @@ week_geral <- function(input){
   
   if(which(input == select_choices) < 3){
     
+    name_aux <- ifelse(input == select_choices[1], 
+                       'Casos Acumulados', 'Óbitos Acumulados')
+    
     temp$Acumulado <- cumsum(temp$Frequencia)
     
     p <- ggplot(temp) +
@@ -283,12 +287,14 @@ week_geral <- function(input){
       geom_point(aes(x = ep_week, y = Acumulado), color = col_sel) + 
       geom_bar(aes(x = ep_week, y = Frequencia), fill = col_sel, stat = 'identity') + 
       theme(axis.text.x = element_text(angle = 45, size = 8, vjust = 0.5)) + 
-      labs(x = NULL, y = paste0(input)) + 
+      labs(x = NULL, y = name_aux) + 
       theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
-            panel.grid.major = element_blank()) 
+      theme(plot.background = element_rect(fill = "transparent", color = NA)) 
     
-    ggplotly(p)
+    ggplotly(p) %>%
+      layout(xaxis = list(tickmode = 'array', 
+                          tickvals = temp$ep_week, 
+                          ticktext = temp$ep_week))
     
   } else {
     
@@ -298,9 +304,12 @@ week_geral <- function(input){
       theme(axis.text.x = element_text(angle = 45, size = 8, vjust = 0.5)) + 
       labs(x = NULL, y = paste0(input)) + 
       theme(axis.text.x = element_text(angle = 0, hjust = 1)) + 
-      theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
-            panel.grid.major = element_blank())
-    ggplotly(p)
+      theme(plot.background = element_rect(fill = "transparent", color = NA))
+    
+    ggplotly(p) %>%
+      layout(xaxis = list(tickmode = 'array', 
+                          tickvals = temp$ep_week, 
+                          ticktext = temp$ep_week))
     
   }
 }
@@ -702,7 +711,7 @@ server <- function(input, output) {
   })
   
   output$taxaBox <- renderValueBox({
-    valueBox(round(casos_br[nrow(casos_br),"conf_per100k"],2), "Taxa /100k hab.", icon = icon("heartbeat"),
+    valueBox(round(casos_br[nrow(casos_br),"conf_per100k"],2), "Casos /100 mil hab.", icon = icon("heartbeat"),
       color = "yellow"
     )
   })
