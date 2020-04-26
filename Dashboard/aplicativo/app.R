@@ -381,7 +381,7 @@ plot_mapa_uf <- function(estado,input) {
   
   y_quantidade <- dados_mapa$var
   
-  #y_quantidade <- replace_na(y_quantidade, 0) # não rodar pois fica pior ainda o problema do range dos bins
+  y_quantidade <- replace_na(y_quantidade, 0) 
   
   if (aux_var == "confirmed") {
     paleta <- "Reds"
@@ -398,7 +398,11 @@ plot_mapa_uf <- function(estado,input) {
     dados_mapa$var <- 100*dados_mapa$var
   }
   
-  pal <- colorQuantile(palette=paleta, domain = y_quantidade, n = 5, na.color = "#fff5f0")
+  # criando intervalo com uma função muito boa
+  
+  intervalos <- classInt::classIntervals(var = y_quantidade, n = 7, style = "fisher")
+  
+  pal <- colorBin(palette=paleta, domain = y_quantidade, bins = intervalos[["brks"]])
   
   leaflet(dados_mapa) %>%
     addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
@@ -460,7 +464,7 @@ tabela_uf <- function(estado, input) {
     options = list(
       dom = "tS", 
       ordering = F,
-      scrollY = "560px",
+      scrollY = "390px",
       paging = FALSE
     )
   ) %>%
