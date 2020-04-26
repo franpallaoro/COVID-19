@@ -402,6 +402,10 @@ plot_mapa_uf <- function(estado,input) {
   
   intervalos <- classInt::classIntervals(var = y_quantidade, n = 7, style = "fisher")
   
+  if(aux_var!="death_rate") {
+    intervalos[["brks"]][[2]] <- 1
+  }
+  
   pal <- colorBin(palette=paleta, domain = y_quantidade, bins = intervalos[["brks"]])
   
   leaflet(dados_mapa) %>%
