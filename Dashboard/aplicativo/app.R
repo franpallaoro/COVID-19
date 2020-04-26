@@ -278,12 +278,24 @@ plot_bar <- function(input){
 # dados do brasil por semana epi
 week_geral <- function(input){
   
+  # banco com última atualização para não ficar dados negativos
+  
+  ultima_atualizacao <- covid %>%
+    select(state, confirmed, deaths, date, place_type, is_last) %>%
+    filter(place_type == "state") %>%
+    group_by(is_last) %>%
+    filter(is_last) %>%
+    summarise(confirmed = sum(confirmed), deaths = sum(deaths), conf_per100k = sum(confirmed)/pop_br*100000,
+              letal = sum(deaths)/sum(confirmed))
+  
   #-- banco de dados para semana epidemiologica
   temp <-  covid %>%
     select(state, confirmed, deaths, 
            date, place_type) %>%
     filter(place_type == 'state') %>%
     aggregate(cbind(confirmed, deaths) ~ date, data = ., sum)
+  
+  temp[nrow(temp),c("confirmed","deaths")] <- c(ultima_atualizacao$confirmed,ultima_atualizacao$deaths)
   
   temp2 <- obts %>%
     select(date, epidemiological_week_2020)
