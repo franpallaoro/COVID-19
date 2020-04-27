@@ -24,6 +24,11 @@ library(DT)
 
 ################
 
+# dando source pra rodar código de extração dos dados assim, quando for fazer
+# deploy no shinyapps.io, ele automaticamente faz o download dos dados mais recentes
+
+source("00_obter_banco_de_dados.R") 
+
 theme_set(theme_gray())
 
 options(OutDec= ",")
@@ -36,7 +41,7 @@ mapa_brasil <- sf::st_read("shapefiles/brasil_uf/BRUFE250GC_SIR.shp", quiet = TR
 # shapefile uf_municipios
 
 lendo_shapefile_uf_mun <- function() {
-  estados_siglas <- read_excel("estados_siglas.xlsx") %>%
+  estados_siglas <- read_excel("dados/estados_siglas.xlsx") %>%
     mutate(estado = str_to_title(Estado), id = as.factor(Sigla)) %>%
     arrange(Codigo)
   
@@ -54,7 +59,7 @@ lendo_shapefile_uf_mun <- function() {
 dados_shp_uf_mun <- lendo_shapefile_uf_mun()
 
 #transforma em um arquivo que o leaflet consegue ler!!!!
-estados_siglas <- read_excel("estados_siglas.xlsx") %>%
+estados_siglas <- read_excel("dados/estados_siglas.xlsx") %>%
   mutate(NM_ESTADO = str_to_title(Estado), id = as.factor(Sigla)) %>%
   select(NM_ESTADO, id)
 
@@ -67,7 +72,7 @@ mapa_brasil <- mapa_brasil %>%
 
 #-------------------------------------
 # banco de dados de  casos confirmados:
-covid <- readRDS(here::here('casos_covid19_br_mun.rds'))
+covid <- readRDS(here::here("dados",'casos_covid19_br_mun.rds'))
 
 # banco de dados por estado:
 data_state <- covid %>%
@@ -77,7 +82,7 @@ data_state <- covid %>%
 
 # banco de dados obitos cartorio:
 
-obitos_cartorio <- readRDS(here::here('obitos_br_uf.rds')) %>%
+obitos_cartorio <- readRDS(here::here("dados",'obitos_br_uf.rds')) %>%
   filter(date >= "2020-03-16") # filtrando a partir do primeiro caso
 
 names(obitos_cartorio) <- c("Estado","Data","Acumulado mortes COVID-19","Acumulado mortes Pneumonia 2019","Acumulado mortes Pneumonia 2020",
@@ -118,7 +123,7 @@ fcolor <- c("#dd4b39", "#605ca8", "#f39c12", "#d81b60")
 select_choices <- c("Casos Confirmados", "Óbitos", "Casos/100k hab.", "Letalidade")
 select_choices2 <- c("confirmed","deaths","confirmed_per_100k_inhabitants","death_rate")
 
-obts <- readRDS(here::here('obitos_br_uf.rds'))
+obts <- readRDS(here::here("dados",'obitos_br_uf.rds'))
 
 temp <- obts %>%
   select(date, epidemiological_week_2020)
