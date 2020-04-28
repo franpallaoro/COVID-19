@@ -126,7 +126,7 @@ rm(i)
 casosRS <- sum(covid$confirmed)
 
 # ---------------------------------------------------
-# Casos acumulados por data de coleta
+# Casos por data de coleta
 covid <- aux %>% 
   left_join(covid,
             by = c("cd_mun" = "city_ibge_code",  "dates" = "date")) %>% 
@@ -232,3 +232,19 @@ covid_cumsum <- covid_cumsum %>%
 
 dep_week <- dep %>%
   left_join(covid_cumsum, by = c("cd_geocodm" = "cd_municipio"))
+
+rm(casosRS)
+rm(popRS)
+rm(aux)
+rm(dep)
+
+# o que é cada banco de dados: 
+# covid: número de casos diário
+# covid_week: número de casos por semana epidemiológica 
+# covid_cumsum: número de casos acumulado por semana epidemiológica 
+
+# e por fim: 
+# dep_week: banco de dados com as informações do covid_cumsum 
+# e as informações do dep, que diz respeito a geometry de cada 
+# cidade.
+

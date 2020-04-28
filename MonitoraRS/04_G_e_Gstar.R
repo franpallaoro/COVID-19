@@ -1,7 +1,7 @@
 library(spdep)
 
 df <- dep_week %>% 
-  filter(dep_week$time == 16)
+  filter(dep_week$time == 17) #ultima semana epidemiológica
 rownames(df) <- df$municipios
 
 wr <- poly2nb(df, row.names = df$municipios) # vizinhos:
