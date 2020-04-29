@@ -65,6 +65,9 @@ casosRS <- df_casos %>%
 saveRDS(casosRS,
         file = here::here("data", "casos_covid19_rs_tot.rds"))
 
+saveRDS(df_casos,
+        file = here::here("data", "casos_covid19.rds"))
+
 rm(df)
 rm(df_casos)
 rm(request)
