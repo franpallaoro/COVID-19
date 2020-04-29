@@ -8,8 +8,9 @@ library(abjutils)
 # esse script serve para organizar todos objetos de banco de dados que utilizarei no aplicativo
 # são 3 principais:
 # - o de casos do rs obtido através do brasil_io
-# - o shapefile do rs com dados sobre os casos de corona(confirmaodos, incidencia, mortes, etc)
+# - dois shapefiles do rs(municipio e mesoregião) com dados sobre os casos de corona(confirmaodos, incidencia, mortes, etc)
 # - um arquivo com latitudes e longitudes das cidades/hospitais e seus leitos
+# - dois shapefiles do rs(municipio e mesoregião) com dados sobre os leitos
 
 # lendo shapefiles RS municipios
 
@@ -69,51 +70,6 @@ dados_covid_join_meso <- dados_covid_join %>%
   summarise(confirmed = sum(confirmed), deaths = sum(deaths), estimated_population_2019 = sum(estimated_population_2019),
             death_rate = sum(deaths)/sum(confirmed), confirmed_per_100k_inhabitants = sum(confirmed)*100000/sum(estimated_population_2019))
 
-#################################
-# lendo leitos UTI do site da SES
-#################################
-
-
-lista_municipos <- read_csv("dados/shapefiles/municipios.csv") %>%
-  select(codigo_ibge, latitude, longitude) %>%
-  mutate(codigo_ibge = factor(codigo_ibge))
-
-locais <- c("HOSPITAL NOSSA SENHORA DA CONCEICAO SA","HOSPITAL DE CLINICAS","	HOSPITAL DIVINA PROVIDENCIA","HOSPITAL ERNESTO DORNELLES",
-            "HOSPITAL MAE DE DEUS","HOSPITAL MOINHOS DE VENTO","HOSPITAL RESTINGA E EXTREMO SUL","IRMANDADE DA SANTA CASA DE MISERICORDIA DE PORTO ALEGRE",
-            "HOSPITAL SAO LUCAS DA PUCRS","HOSPITAL CRISTO REDENTOR","HPS","HOSPITAL FEMINA","HOSPITAL INDEPENDENCIA",
-            "HOSPITAL MATERNO INFANTIL PRESIDENTE VARGAS","AESC HOSPITAL SANTA ANA","ASSOCIACAO HOSPITALAR VILA NOVA",
-            "INSTITUTO DE CARDIOLOGIA","HOSPITAL BDW","HOSPITAL BENEFICENCIA PORTUGUESA","HBMPA")
-
-
-latitude <- c(-30.015870,-30.038435,-30.084428,-30.047509,-30.058845,-30.025520,-30.142524,-30.030803,
-              -30.055122,-30.010102,-30.036874,-30.029239,-30.061051,-30.029525,-30.086664,-30.119308,
-              -30.049092,-30.045729,-30.028964,-30.09793)
-longitude <- c(-51.158236,-51.206637,-51.188390,-51.212131,-51.228945,-51.208420,-51.128803,-51.221512,
-               -51.173819,-51.159260,-51.209282,-51.206848,-51.149073,-51.214865,-51.206890,-51.207744,
-               -51.209030,-51.208110,-51.218389,-51.25114)
-
-lat_long <- tibble(
-  local = locais,
-  lat = latitude,
-  long = longitude
-)
-
-pasta <- "dados/leitos/"
-arquivos <- list.files(pasta, pattern = ".xlsx")
-caminhos <- str_c(pasta, arquivos)
-
-leitos_uti <- map(caminhos, read_excel, na = c("","-")) %>%
-  bind_rows() %>%
-  distinct(CNES, DATA, .keep_all = T) %>%
-  mutate(covid_confirmado = `TOTAL...9`) %>%
-  mutate(municipio = str_to_title(MUNICIPIO)) %>%
-  left_join(codigos_cidades_sem_acento, by = "municipio") %>%
-  select(-municipio) %>%
-  left_join(codigos_cidades, by = "codigo") %>%
-  select(data = DATA, cnes = CNES, hospital = HOSPITAL, codigo, municipio, leitos_internacoes = INTERNACOES, 
-         leitos_total = LEITOS, leitos_covid = covid_confirmado) %>%
-  left_join(lista_municipos, by = c("codigo" = "codigo_ibge")) %>%
-  mutate(codigo = factor(codigo, levels = levels(mapa_rs_shp$CD_GEOCMU)))
 
 # fazendo o join dos dados covid ao shp
 
@@ -127,4 +83,79 @@ dados_mapa_rs <- mapa_rs_shp %>%
 
 dados_mapa_rs_meso <- mapa_meso_rs %>%
   left_join(dados_covid_join_meso, by = c("meso_regiao" = "mesorregiao"))
+
+
+#################################
+# lendo leitos UTI do site da SES
+#################################
+
+hospital_municipio <- read_excel("dados/leitos/outros/leitos_municipios.xlsx", col_names = F) %>%
+  select(cnes = ...3, hospital = ...4, municipio = ...2) %>%
+  mutate(municipio = str_to_title(municipio)) %>%
+  left_join(codigos_cidades_sem_acento, by = "municipio") %>%
+  select(-municipio) %>%
+  left_join(codigos_cidades, by = "codigo") %>%
+  select(-hospital)
+
+write_csv(hospital_municipio, "dados/leitos/outros/hospital_municipio.csv")
+
+hospital_municipio <- read_csv("dados/leitos/outros/hospital_municipio.csv") %>%
+  mutate(codigo_ibge = as.character(codigo)) %>%
+  select(-codigo)
+
+dados_cnes <- read_csv("dados/leitos/outros/base_cnes_atualizada.csv") %>%
+  select(CNES, LATITUDE, LONGITUDE)
+
+pasta <- "dados/leitos/"
+arquivos <- list.files(pasta, pattern = ".csv")
+caminhos <- str_c(pasta, arquivos)
+
+leitos_uti <- map(caminhos, read_csv) %>%
+  map(dplyr::select, -(`Taxa Ocupação`)) %>%
+  bind_rows() %>%
+  distinct(`Cód`, `Últ Atualização`, .keep_all = T) %>%
+  left_join(hospital_municipio, by = c("Cód" = "cnes")) %>%
+  left_join(rs_mesoregiao_microregiao, by = c("codigo_ibge" = "codigo")) %>%
+  mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y %H:%M")) %>%
+  select(data_atualizacao = data_atualizacao, cnes = Cód, hospital = Hospital, codigo_ibge = codigo_ibge, municipio, leitos_internacoes = Pacientes, 
+         leitos_total = Leitos, leitos_covid = Confirmados, meso_regiao = mesorregiao, data_hora_atualizacao = `Últ Atualização`) %>%
+  mutate(codigo_ibge = factor(codigo_ibge, levels = levels(mapa_rs_shp$CD_GEOCMU))) %>%
+  left_join(dados_cnes, by = c("cnes" = "CNES"))
+
+leitos_join_mun <- leitos_uti %>%
+  group_by(cnes) %>%
+  filter(data_hora_atualizacao == max(data_hora_atualizacao)) %>%
+  group_by(codigo_ibge) %>%
+  summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid))
+
+leitos_join_meso <- leitos_uti %>%
+  group_by(cnes) %>%
+  filter(data_hora_atualizacao == max(data_hora_atualizacao)) %>%
+  group_by(meso_regiao) %>%
+  summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid))
+  
+
+# fazendo o join dos dados covid ao shp
+
+# shp municipio
+
+leitos_mapa_mun_rs <- mapa_rs_shp %>%
+  left_join(leitos_join_mun, by = c("CD_GEOCMU" = "codigo_ibge")) %>%
+  mutate(codigo = factor("CD_GEOCMU", levels = levels(mapa_rs_shp$CD_GEOCMU)))
+
+# shp mesoregiao
+
+leitos_mapa_meso_rs <- mapa_meso_rs %>%
+  left_join(leitos_join_meso, by = "meso_regiao")
+
+
+
+
+
+
+
+
+
+
+
 
