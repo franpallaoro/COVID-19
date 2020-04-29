@@ -47,12 +47,23 @@ df_casos$date <- as.Date(df_casos$date, format = "%Y-%m-%d")
 casosRS <- df_casos %>%
   filter(state == 'RS' & place_type == 'city')
 
-
 # -------------------------------------------------- 
 # Salva dados em um arquivo RDS
 
 saveRDS(casosRS,
         file = here::here("data", "casos_covid19_rs_mun.rds"))
+
+# -------------------------------------------------- 
+# Separando os dados e pegando somente os do RS total:
+
+casosRS <- df_casos %>%
+  filter(state == 'RS' & place_type == 'state')
+
+# -------------------------------------------------- 
+# Salva dados em um arquivo RDS
+
+saveRDS(casosRS,
+        file = here::here("data", "casos_covid19_rs_tot.rds"))
 
 rm(df)
 rm(df_casos)
