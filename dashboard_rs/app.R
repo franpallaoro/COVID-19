@@ -125,7 +125,7 @@ body <- dashboardBody(
                       h3("Selecione a variável de interesse"),
                       radioButtons("var_covid",
                                    label = NULL,
-                                   choices = list("Confirmados" = "confirmed","Confirmados por 100 mil habitantes" = "confirmed_per_100k_inhabitants","Óbitos" = "deaths"),
+                                   choices = list("Confirmados" = "confirmed","Confirmados por 100mil hab." = "confirmed_per_100k_inhabitants","Óbitos" = "deaths","Letalidade" = "death_rate"),
                                    selected = "confirmed",
                                    inline = T)
                     ),
@@ -148,24 +148,25 @@ body <- dashboardBody(
                 column(
                   width = 3,
                   box(
-                    background = "red",
                     dataTableOutput("table_covid", height = "580px"),
                     width = 12
                   )
                 )
               ),
               fluidRow(
-                box(
-                  width = 6,
-                  title = "Série histórica do número de casos",
-                  background = "red",
-                  plotlyOutput("serie_casos", height = "450px")
-                ),
-                box(
-                  width = 6,
-                  title = "Série histórica do número de óbitos",
-                  background = "red",
-                  plotlyOutput("serie_obitos", height = "450px")
+                column(
+                  width = 12,
+                  tabBox(id = "tab_covid",
+                         width = 12,
+                         title = NULL,
+                         tabPanel("Diário",
+                                  plotlyOutput("serie_covid_dia", height = 450)
+                         ),
+                         tabPanel("Semana Epidemiológica",
+                                  plotlyOutput("serie_covid_sem", height = 450)
+                         )
+                         
+                  )
                 )
               )
             )
@@ -195,7 +196,7 @@ body <- dashboardBody(
                       h3("Selecione a variável de interesse"),
                       radioButtons("var_leitos",
                                    label = NULL,
-                                   choices = list("Total de leitos" = "leitos_total","Leitos ocupados" = "leitos_internacoes","Leitos ocupados COVID-19" = "leitos_covid"),
+                                   choices = list("Leitos totais" = "leitos_total","Leitos ocupados" = "leitos_internacoes","Lotação" = "lotacao", "Leitos ocupados COVID-19" = "leitos_covid"),
                                    selected = "leitos_total",
                                    inline = T)
                     ),
@@ -225,15 +226,10 @@ body <- dashboardBody(
               ),
               fluidRow(
                 box(
-                  width = 6,
-                  title = "Série histórica de leitos ocupados",
-                  plotlyOutput("serie_leitos_ocupa", height = "450px")
+                  width = 12,
+                  title = "Série histórica de leitos",
+                  plotlyOutput("serie_leitos", height = "500px")
                 ),
-                box(
-                  width = 6,
-                  title = "Série histórica leitos ocupados covid-19",
-                  plotlyOutput("serie_leitos_covid", height = "450px")
-                )
               )
             )
     ),
@@ -264,94 +260,77 @@ body <- dashboardBody(
     tabItem("sobre",
             fluidPage(
               fluidRow(
-                column(
-                  width = 12,
-                  gradientBox(
-                    title = "Fonte de dados",
-                    width = 12,
-                    icon = "fa fa-file",
-                    gradientColor = "yellow", 
-                    boxToolSize = "sm", 
-                    closable = F,
-                    collapsible = T,
-                    a(strong("Dados COVID-19"), href = "https://brasil.io/dataset/covid19/caso", style = "color:black"),br(),
-                    a(strong("Dados leitos"), href = "http://ti.saude.rs.gov.br/covid19/leitos/", style = "color:black"),br(),
-                    a(strong("Dados DATASUS"), href =  "http://www2.datasus.gov.br/DATASUS/index.php?area=0204&id=11663", style = "color:black"),
-                    footer = "Dados obtidos pelo DATASUS têm aqui sua última extração disponível que é de fevereiro/2020, já os outros são atualizados diariamente"
-                  )
+                widgetUserBox(
+                  title = tags$b("Franciele Lobo Pallaoro"),
+                  subtitle = "Estudante de Estatística da UFRGS",
+                  type = 2,
+                  width = 4,
+                  src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/franciele.jpg?raw=true',
+                  color = "red",
+                  "Contato: franpallaoro@gmail.com",
+                  footer_padding = F
                 ),
-              ),
-              widgetUserBox(
-                title = tags$b("Franciele Lobo Pallaoro"),
-                subtitle = "Estudante de Estatística da UFRGS",
-                type = 2,
-                width = 4,
-                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/franciele.jpg?raw=true',
-                color = "red",
-                "Contato: franpallaoro@gmail.com",
-                footer_padding = F
-              ),
-              
-              widgetUserBox(
-                title = tags$b("Gabriel Holmer Saul"),
-                subtitle = "Estudante de Estatística da UFRGS",
-                type = 2,
-                width = 4,
-                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gabriel.jpg?raw=true',
-                color = "orange",
-                "Contato: gabrielholmersaul@gmail.com",
-                footer_padding = F
+                
+                widgetUserBox(
+                  title = tags$b("Gabriel Holmer Saul"),
+                  subtitle = "Estudante de Estatística da UFRGS",
+                  type = 2,
+                  width = 4,
+                  src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gabriel.jpg?raw=true',
+                  color = "orange",
+                  "Contato: gabrielholmersaul@gmail.com",
+                  footer_padding = F
+                )
+                ,
+                
+                widgetUserBox(
+                  title = tags$b("Gustavo Machado Utpott"),
+                  subtitle = "Estudante de Estatística da UFRGS",
+                  type = 2,
+                  width = 4,
+                  src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gustavo.png?raw=true',
+                  color = "red",
+                  "Contato: gustavo.utpott@gmail.com",
+                  footer_padding = F
+                ),
+                
+                widgetUserBox(
+                  title = tags$b("Juliana Sena de Souza"),
+                  subtitle = "Estudante de Pós-Graduação em Epidemiologia da UFRGS",
+                  type = 2,
+                  width = 4,
+                  src =  'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/juliana.jpeg?raw=true',
+                  color = "orange",
+                  "Contato: julianass.estatistica@gmail.com",
+                  footer_padding = F
+                ),
+                
+                
+                widgetUserBox(
+                  title = tags$b("Márcia Helena Barbian"),
+                  subtitle = "Professora do departamento de Estatística da UFRGS",
+                  type = 2,
+                  width = 4,
+                  src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/marcia.png?raw=true',
+                  color = "red",
+                  "Contato: mhbarbian@gmail.com",
+                  footer_padding = F
+                ), 
+                
+                widgetUserBox(
+                  title = tags$b("Rodrigo Citton P. dos Reis"),
+                  subtitle = "Professor do departamento de Estatística da UFRGS",
+                  type = 2,
+                  width = 4,
+                  src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/rodrigo.jpg?raw=true',
+                  color = "orange",
+                  "Contato: citton.padilha@ufrgs.br",
+                  footer_padding = F
+                ), 
+                
+                tags$img(src = "https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/logos.png?raw=true", 
+                         height = "150", width = "1000")
               )
-              ,
-              
-              widgetUserBox(
-                title = tags$b("Gustavo Machado Utpott"),
-                subtitle = "Estudante de Estatística da UFRGS",
-                type = 2,
-                width = 4,
-                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gustavo.png?raw=true',
-                color = "red",
-                "Contato: gustavo.utpott@gmail.com",
-                footer_padding = F
-              ),
-              
-              widgetUserBox(
-                title = tags$b("Juliana Sena de Souza"),
-                subtitle = "Estudante de Pós-Graduação em Epidemiologia da UFRGS",
-                type = 2,
-                width = 4,
-                src =  'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/juliana.jpeg?raw=true',
-                color = "orange",
-                "Contato: julianass.estatistica@gmail.com",
-                footer_padding = F
-              ),
-              
-              
-              widgetUserBox(
-                title = tags$b("Márcia Helena Barbian"),
-                subtitle = "Professora do departamento de Estatística da UFRGS",
-                type = 2,
-                width = 4,
-                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/marcia.png?raw=true',
-                color = "red",
-                "Contato: mhbarbian@gmail.com",
-                footer_padding = F
-              ), 
-              
-              widgetUserBox(
-                title = tags$b("Rodrigo Citton P. dos Reis"),
-                subtitle = "Professor do departamento de Estatística da UFRGS",
-                type = 2,
-                width = 4,
-                src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/rodrigo.jpg?raw=true',
-                color = "orange",
-                "Contato: citton.padilha@ufrgs.br",
-                footer_padding = F
-              ), 
-              
-              tags$img(src = "https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/logos.png?raw=true", 
-                       height = "150", width = "1000")
-              
             )
     )
   )
@@ -458,370 +437,22 @@ server <- function(input, output) {
     } else if(input$var_covid == "deaths") {
       paleta <- "Greys"
       texto <- "Óbitos confirmados"
-    } else {
+    } else if(input$var_covid == "confirmed_per_100k_inhabitants") {
       paleta <- "Oranges"
       texto <- "Casos por 100mil habitantes"
-    }
-    
-    # criando intervalo com uma função muito boa
-    
-    intervalos <- classInt::classIntervals(var = y_quantidade, n = 6, style = "fisher")
-    
-    intervalos[["brks"]][1:2] <- c(0,1)
-    
-    
-    pal <- colorBin(palette=paleta, domain = y_quantidade, bins = intervalos[["brks"]])
-    
-    leaflet(aux_mapa) %>%
-      addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
-      addPolygons(fillColor = ~pal(y_quantidade), 
-                  weight = 1.5,
-                  opacity = 0.7,
-                  fillOpacity = 0.7,
-                  color = "gray",
-                  highlight = highlightOptions(
-                    weight = 5,
-                    color = "#666",
-                    fillOpacity = 0.7,
-                    bringToFront = TRUE),
-                  label = sprintf("%s - %s", variavel, y_quantidade),
-                  labelOptions = labelOptions(
-                    style = list("font-weight" = "normal", padding = "6px 11px"),
-                    textsize = "15px",
-                    direction = "auto"))   %>%
-      addLegend(pal = pal, values = round(y_quantidade,0), labFormat = function(type, cuts, p) {  # legenda para colorQuantile
-        n = length(cuts)
-        paste0(round(cuts[-n],0), " &ndash; ", round(cuts[-1],0))},
-        title = texto,
-        labels = ~variavel,
-        position = "bottomright")
-    
-  })
-  
-  #############
-  # table_covid
-  
-  output$table_covid <- renderDataTable({
-    
-    var <- rlang::sym(input$var_covid)
-    
-    if(input$var_covid_2 == "municipio") {
-      
-      aux <- dados_covid_rs %>%
-        filter(place_type == "city") %>%
-        filter(is_last) %>%
-        arrange(desc(!!var))
-      
-      texto <- ifelse(
-        test = input$var_covid == "confirmed",
-        yes = "Confirmados",
-        no = ifelse(
-          test = input$var_covid == "deaths",
-          yes = "Óbitos",
-          no = "Confirmados por 100mil habitantes"
-        ))
-      
-      tabela <- datatable(
-        aux[,c("municipio",input$var_covid)], 
-        rownames=F,
-        class = "compact",
-        colnames = c("Município",texto),
-        options = list(
-          dom = "tS", 
-          ordering = F,
-          scrollY = "560px",
-          paging = FALSE
-        )
-      ) %>%
-        formatStyle("municipio",color = "#e0e1e2", fontSize = "12px", backgroundColor = "#222d32") %>%
-        formatStyle(input$var_covid, color = "#dd4b39", fontWeight = "bold",fontSize = "12px", backgroundColor = "#222d32")
-      
-      if(input$var_covid == "confirmed_per_100k_inhabitants") {
-        tabela <- formatRound(tabela, input$var_covid, digits = 2)
-      }
-      
-      tabela
-    
     } else {
-      
-      aux <- dados_covid_rs %>%
-        filter(place_type == "city") %>%
-        filter(is_last) %>%
-        group_by(mesorregiao) %>%
-        summarise(confirmed = sum(confirmed), deaths = sum(deaths), estimated_population_2019 = sum(estimated_population_2019),
-                  death_rate = sum(deaths)/sum(confirmed), confirmed_per_100k_inhabitants = sum(confirmed)*100000/sum(estimated_population_2019)) %>%
-        arrange(desc(!!var))
-      
-      texto <- ifelse(
-        test = input$var_covid == "confirmed",
-        yes = "Confirmados",
-        no = ifelse(
-          test = input$var_covid == "deaths",
-          yes = "Óbitos",
-          no = "Confirmados por 100mil habitantes"
-        ))
-      
-      tabela <- datatable(
-        aux[,c("mesorregiao",input$var_covid)], 
-        rownames=F,
-        class = "compact",
-        colnames = c("Mesoregião",texto),
-        options = list(
-          dom = "tS", 
-          ordering = F,
-          scrollY = "560px",
-          paging = FALSE
-        )
-      ) %>%
-        formatStyle("mesorregiao",color = "#e0e1e2", fontSize = "12px", backgroundColor = "#222d32") %>%
-        formatStyle(input$var_covid, color = "#dd4b39", fontWeight = "bold",fontSize = "12px", backgroundColor = "#222d32")
-      
-      if(input$var_covid == "confirmed_per_100k_inhabitants") {
-        tabela <- formatRound(tabela, input$var_covid, digits = 2)
-      }
-      
-      tabela  
-      
-    }
-    
-  })
-  
-  ############
-  # serie_casos
-  
-  output$serie_casos <- renderPlotly({
-    
-    if(input$var_covid_2 == "municipio") {
-      
-      aux <- dados_covid_rs %>%
-        filter(place_type == "city") %>%
-        group_by(date) %>%
-        summarise(acumulado = sum(confirmed)) %>%
-        arrange(date)
-      
-      ordem <- as.character(format(aux$date, "%d-%m"))
-      
-      aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
-      for(i in 2:nrow(aux)) {
-        aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
-      }
-      
-      aux$date <- as.character(format(aux$date, "%d-%m"))
-      
-      p <- ggplot(aux) +
-        geom_line(aes(x = date, y = acumulado, group = 1)) +
-        geom_point(aes(x = date, y = acumulado), size=2) +
-        geom_col(aes(x = date, y = novos), fill = "#d95f02") +
-        geom_text(aes(x = date, y = novos, label = novos)) +
-        scale_x_discrete(limits = ordem) +
-        labs(x = "Dia", y = "Casos confirmados") +
-        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
-      
-      ggplotly(p) %>%
-        style(textposition = "top")
-      
-    } else {
-      
-      aux <- dados_covid_rs %>%
-        filter(place_type == "city") %>%
-        group_by(date,mesorregiao) %>%
-        summarise(acumulado = sum(confirmed)) %>%
-        arrange(date)
-      
-      ordem <- as.character(format(aux$date, "%d-%m"))
-      
-      aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
-      for(i in 2:nrow(aux)) {
-        aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
-      }
-      
-      aux$date <- as.character(format(aux$date, "%d-%m"))
-      
-      p <- ggplot(aux) +
-        geom_line(aes(x = date, y = acumulado, color = mesorregiao, group = mesorregiao), linetype = "dotted") +
-        geom_point(aes(x = date, y = acumulado, color = mesorregiao), size=2) +
-        scale_x_discrete(limits = ordem) +
-        labs(x = "Dia", y = "Casos confirmados", color = "Mesoregião") +
-        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
-      
-      ggplotly(p) 
-      
-    }
-    
-    
-    
-  })
-  
-  ############
-  # serie_obitos
-  
-  output$serie_obitos <- renderPlotly({
-    
-    if(input$var_covid_2 == "municipio") {
-      
-      aux <- dados_covid_rs %>%
-        filter(place_type == "city") %>%
-        group_by(date) %>%
-        summarise(acumulado = sum(deaths)) %>%
-        arrange(date)
-      
-      ordem <- as.character(format(aux$date, "%d-%m"))
-      
-      aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
-      for(i in 2:nrow(aux)) {
-        aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
-      }
-      
-      aux$date <- as.character(format(aux$date, "%d-%m"))
-      
-      p <- ggplot(aux) +
-        geom_line(aes(x = date, y = acumulado, group = 1)) +
-        geom_point(aes(x = date, y = acumulado), size=2) +
-        geom_col(aes(x = date, y = novos), fill = "#d95f02") +
-        geom_text(aes(x = date, y = novos, label = novos)) +
-        scale_x_discrete(limits = ordem) +
-        labs(x = "Dia", y = "Óbitos confirmados") +
-        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
-      
-      ggplotly(p) %>%
-        style(textposition = "top")
-      
-    } else {
-      aux <- dados_covid_rs %>%
-        filter(place_type == "city") %>%
-        group_by(date, mesorregiao) %>%
-        summarise(acumulado = sum(deaths)) %>%
-        arrange(date)
-      
-      ordem <- as.character(format(aux$date, "%d-%m"))
-      
-      aux$novos <- c(aux$acumulado[1],rep(NA,nrow(aux)-1))
-      for(i in 2:nrow(aux)) {
-        aux$novos[i] <- aux$acumulado[i]-aux$acumulado[i-1]
-      }
-      
-      aux$date <- as.character(format(aux$date, "%d-%m"))
-      
-      p <- ggplot(aux) +
-        geom_line(aes(x = date, y = acumulado, color = mesorregiao, group = mesorregiao), linetype = "dotted") +
-        geom_point(aes(x = date, y = acumulado, color = mesorregiao), size=2) +
-        scale_x_discrete(limits = ordem) +
-        labs(x = "Dia", y = "Óbitos confirmados" , color = "Mesoregião") +
-        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
-      
-      ggplotly(p)
-    }
-
-  })
-  
-  ###############################
-  ###### secoond tabItem ########
-  ###############################
-  
-  # caixas com numeros gerais
-  
-  # caixa de leitos totais
-  output$box_tot <- renderValueBox({
-    aux <- leitos_uti %>%
-      group_by(cnes) %>%
-      filter(data_atualizacao == max(data_atualizacao))
-    
-    valueBox(
-      sum(aux$leitos_total),
-      "Leitos totais",
-      icon = icon("hospital"),
-      color = "blue" 
-    )
-  })
-  # caixa de internados
-  output$box_int <- renderValueBox({
-    aux <- leitos_uti %>%
-      group_by(cnes) %>%
-      filter(data_atualizacao == max(data_atualizacao))
-    
-    valueBox(
-      sum(aux$leitos_internacoes),
-      "Leitos ocupados",
-      icon = icon("procedures"),
-      color = "purple" 
-    )
-  })
-  # caixa de lotação
-  output$box_lot <- renderValueBox({
-    aux <- leitos_uti %>%
-      group_by(cnes) %>%
-      filter(data_atualizacao == max(data_atualizacao))
-
-    valueBox(
-      paste0(round(100*sum(aux$leitos_internacoes)/sum(aux$leitos_total),2),"%"),
-      "Porcentagem de lotação dos leitos",
-      icon = icon("hospital-user"),
-      color = "maroon", 
-    )
-  })
-  # caixas de leitos covid
-  output$box_cov <- renderValueBox({
-    aux <- leitos_uti %>%
-      group_by(cnes) %>%
-      filter(data_atualizacao == max(data_atualizacao))
-    
-    valueBox(
-      sum(aux$leitos_covid),
-      "Leitos ocupados COVID-19",
-      icon = icon("virus"),
-      color = "fuchsia", 
-    )
-  })
-  
-  #####################
-  # Mapa_leitos
-  
-  output$mapa_leitos <- renderLeaflet({
-    
-    var <- rlang::sym(input$var_leitos)
-    
-    if (input$var_leitos_2 == "hospital") {
-      aux_mapa <- leitos_uti %>%
-        filter(!is.na(!!var)) %>%
-        filter(!!var != 0) %>%
-        group_by(cnes, LATITUDE, LONGITUDE, hospital) %>%
-        filter(data_atualizacao == max(data_atualizacao)) %>%
-        summarise(var = sum(!!var))
-    } else if (input$var_leitos_2 == "municipio") {
-      aux_mapa <- leitos_mapa_mun_rs %>%
-        mutate(var = !!var)
-    } else {
-      aux_mapa <- leitos_mapa_meso_rs %>%
-        mutate(var = !!var)
-    }
-    
-    y_quantidade <- aux_mapa$var
-    
-    if (input$var_leitos == "leitos_total") {
-      paleta <- "Blues"
-      cor <- "#0073b7"
-      texto <- "Total de leitos"
-    } else if (input$var_leitos == "leitos_internacoes") {
       paleta <- "Purples"
-      cor <- "#605ca8"
-      texto <- "Leitos ocupados"
-    } else {
-      paleta <- "RdPu"
-      cor <- "#f012be"
-      texto <- "Leitos ocupados COVID-19"
+      texto <- "Letalidade"
     }
     
-    if(input$var_leitos_2 != "hospital") {
-      
-      variavel <- as.data.frame(aux_mapa)[,input$var_leitos_2]
-      
-      y_quantidade <- replace_na(y_quantidade, 0) 
+    if(input$var_covid != "death_rate") {
       
       # criando intervalo com uma função muito boa
       
       intervalos <- classInt::classIntervals(var = y_quantidade, n = 6, style = "fisher")
       
       intervalos[["brks"]][1:2] <- c(0,1)
+      
       
       pal <- colorBin(palette=paleta, domain = y_quantidade, bins = intervalos[["brks"]])
       
@@ -842,27 +473,498 @@ server <- function(input, output) {
                       style = list("font-weight" = "normal", padding = "6px 11px"),
                       textsize = "15px",
                       direction = "auto"))   %>%
-        addLegend(pal = pal, values = y_quantidade, labFormat = function(type, cuts, p) {  # legenda para colorQuantile
+        addLegend(pal = pal, values = round(y_quantidade,0), labFormat = function(type, cuts, p) {  # legenda para colorQuantile
           n = length(cuts)
-          paste0(cuts[-n], " &ndash; ", cuts[-1])},
+          paste0(round(cuts[-n],0), " &ndash; ", round(cuts[-1],0))},
           title = texto,
           labels = ~variavel,
           position = "bottomright")
       
     } else {
       
-      labs <- lapply(seq(nrow(aux_mapa)), function(i) {
-        paste0(aux_mapa[i, "var"], " ",texto, '</p>', 
-               " ",aux_mapa[i, "hospital"]) 
-      })
+      # criando intervalo com uma função muito boa
       
-      calculo_raio <- 3.5*aux_mapa$var^(1/2)
+      intervalos <- classInt::classIntervals(var = y_quantidade, n = 6, style = "fisher")
+      
+      if (input$var_covid_2 == "municipio") {
+        intervalos[["brks"]][1:6] <- c(0,0.001,0.03,0.05,0.1,0.5,1)
+      }
+      
+      pal <- colorBin(palette=paleta, domain = y_quantidade, bins = intervalos[["brks"]])
       
       leaflet(aux_mapa) %>%
         addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
-        addCircleMarkers(lng = aux_mapa$LONGITUDE, lat = aux_mapa$LATITUDE, radius = calculo_raio,
-                         color = cor, fillOpacity = 0.5, label = lapply(labs, htmltools::HTML), 
-                         labelOptions = labelOptions(interactive = T, textsize = "15px"))
+        addPolygons(fillColor = ~pal(y_quantidade), 
+                    weight = 1.5,
+                    opacity = 0.7,
+                    fillOpacity = 0.7,
+                    color = "gray",
+                    highlight = highlightOptions(
+                      weight = 5,
+                      color = "#666",
+                      fillOpacity = 0.7,
+                      bringToFront = TRUE),
+                    label = sprintf("%s - %s", variavel, paste0(100*round(y_quantidade,4),"%")),
+                    labelOptions = labelOptions(
+                      style = list("font-weight" = "normal", padding = "6px 11px"),
+                      textsize = "15px",
+                      direction = "auto"))   %>%
+        addLegend(pal = pal, values = round(y_quantidade,0), labFormat = function(type, cuts, p) {  # legenda para colorQuantile
+          n = length(cuts)
+          paste0(100*round(cuts[-n],4),"%", " &ndash; ", 100*round(cuts[-1],4),"%")},
+          title = texto,
+          labels = ~variavel,
+          position = "bottomright")
+      
+    }
+    
+    
+    
+  })
+  
+  #############
+  # table_covid
+  
+  output$table_covid <- renderDataTable({
+    
+    var <- rlang::sym(input$var_covid)
+    
+    if(input$var_covid == "confirmed") {
+      cor <- "#dd4b39"
+      texto <- "Casos confirmados"
+    } else if(input$var_covid == "confirmed_per_100k_inhabitants") {
+      cor <- "#ff851b"
+      texto <- "Confirmados por 100k habitantes"
+    } else if(input$var_covid == "deaths"){
+      cor <- "#757474"
+      texto <- "Óbitos"
+    } else {
+      cor <- "#605ca8"
+      texto <- "Letalidade"
+    }
+    
+    if(input$var_covid_2 == "municipio") {
+      
+      aux <- dados_covid_rs %>%
+        filter(place_type == "city") %>%
+        filter(is_last) %>%
+        arrange(desc(!!var))
+      
+      if(input$var_covid == "death_rate") {
+        aux <- aux %>%
+          filter(!is.na(!!var))
+        aux$death_rate <- paste0(100*round(aux$death_rate,4),"%")
+      }
+  
+      tabela <- datatable(
+        aux[,c("municipio",input$var_covid)], 
+        rownames=F,
+        class = "compact",
+        colnames = c("Município",texto),
+        options = list(
+          dom = "tS", 
+          ordering = F,
+          scrollY = "560px",
+          paging = FALSE
+        )
+      ) %>%
+        formatStyle("municipio",color = "#222d32", fontSize = "12px", backgroundColor = "#f0f0f0") %>%
+        formatStyle(input$var_covid, color = cor, fontWeight = "bold",fontSize = "12px", backgroundColor = "#f0f0f0")
+      
+      if(input$var_covid == "confirmed_per_100k_inhabitants") {
+        tabela <- formatRound(tabela, input$var_covid, digits = 2)
+      }
+      
+      tabela
+    
+    } else {
+      
+      aux <- dados_covid_rs %>%
+        filter(place_type == "city") %>%
+        filter(is_last) %>%
+        group_by(mesorregiao) %>%
+        summarise(confirmed = sum(confirmed), deaths = sum(deaths), estimated_population_2019 = sum(estimated_population_2019),
+                  death_rate = sum(deaths)/sum(confirmed), confirmed_per_100k_inhabitants = sum(confirmed)*100000/sum(estimated_population_2019)) %>%
+        arrange(desc(!!var))
+      
+      if(input$var_covid == "death_rate") {
+        aux$death_rate <- paste0(100*round(aux$death_rate,4),"%")
+      }
+      
+      tabela <- datatable(
+        aux[,c("mesorregiao",input$var_covid)], 
+        rownames=F,
+        class = "compact",
+        colnames = c("Mesoregião",texto),
+        options = list(
+          dom = "tS", 
+          ordering = F,
+          scrollY = "560px",
+          paging = FALSE
+        )
+      ) %>%
+        formatStyle("mesorregiao",color = "#222d32", fontSize = "12px", backgroundColor = "#f0f0f0") %>%
+        formatStyle(input$var_covid, color = cor, fontWeight = "bold",fontSize = "12px", backgroundColor = "#f0f0f0")
+      
+      if(input$var_covid == "confirmed_per_100k_inhabitants") {
+        tabela <- formatRound(tabela, input$var_covid, digits = 2)
+      }
+      
+      tabela  
+      
+    }
+    
+  })
+  
+  ############
+  # serie_covid_dia
+  
+  output$serie_covid_dia <- renderPlotly({
+
+    var <- rlang::sym(input$var_covid)
+      
+    aux <- dados_covid_rs %>%
+      filter(place_type == "state") %>%
+      arrange(date)
+    
+    if(input$var_covid == "confirmed") {
+      cor <- "#dd4b39"
+      texto <- "Casos confirmados"
+    } else if(input$var_covid == "confirmed_per_100k_inhabitants") {
+      cor <- "#ff851b"
+      texto <- "Confirmados por 100k habitantes"
+    } else {
+      cor <- "#757474"
+      texto <- "Óbitos"
+    }
+    
+    
+    ordem <- as.character(format(aux$date, "%d-%m"))
+    
+    aux$date <- as.character(format(aux$date, "%d-%m"))
+    
+    if(input$var_covid %in% c("confirmed","deaths")) {
+      
+      aux <- as.data.frame(aux)
+      
+      aux$novos <- c(aux[1,input$var_covid],rep(NA,nrow(aux)-1))
+      for(i in 2:nrow(aux)) {
+        aux$novos[i] <- aux[i,input$var_covid]-aux[i-1,input$var_covid]
+      }
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = date, y = !!var, group = 1), color = cor, linetype = 'dotted') +
+        geom_point(aes(x = date, y = !!var), color = cor) + 
+        geom_col(data = aux, mapping = aes(x = date, y = novos), fill = cor) +
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Dia", y = texto) +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5)) +
+        theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+              panel.grid.major = element_blank())
+        
+    } else {
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = date, y = !!var, group = 1), color = cor, linetype = 'dotted') +
+        geom_point(aes(x = date, y = !!var), color = cor) + 
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Dia", y = texto) +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5)) +
+        theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+              panel.grid.major = element_blank())
+      
+    }
+        
+    
+    
+    ggplotly(p) 
+    
+  })
+  
+  ############
+  # serie_covid_semana
+  
+  output$serie_covid_sem <- renderPlotly({
+    
+    var <- rlang::sym(input$var_covid)
+    
+    if(input$var_covid == "confirmed") {
+      cor <- "#dd4b39"
+      texto <- "Casos confirmados"
+    } else if(input$var_covid == "confirmed_per_100k_inhabitants") {
+      cor <- "#ff851b"
+      texto <- "Confirmados por 100k habitantes"
+    } else {
+      cor <- "#757474"
+      texto <- "Óbitos"
+    } 
+      
+    aux <- dados_covid_rs %>%
+      filter(place_type == "state") %>%
+      group_by(semana_epidemiologica) %>%
+      filter(date == max(date)) %>%
+      ungroup() %>%
+      arrange(semana_epidemiologica)
+    
+    ordem <- as.character(aux$semana_epidemiologica)
+    
+    aux$semana_epidemiologica <- as.character(aux$semana_epidemiologica)
+    
+    if(input$var_covid %in% c("confirmed","deaths")) {
+      
+      aux$novos <- c(as.data.frame(aux)[1,input$var_covid],rep(NA,nrow(aux)-1))
+      for(i in 2:nrow(aux)) {
+        aux$novos[i] <- as.data.frame(aux)[i,input$var_covid]-as.data.frame(aux)[i-1,input$var_covid]
+      }
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = semana_epidemiologica, y = !!var, group = 1), color = cor, linetype = 'dotted') +
+        geom_point(aes(x = semana_epidemiologica, y = !!var), color = cor) + 
+        geom_col(aes(x = semana_epidemiologica, y = novos), fill = cor) +
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Semana Epidemiológica", y = texto) +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5)) +
+        theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+              panel.grid.major = element_blank())
+      
+    } else {
+      
+      
+      p <- ggplot(aux) +
+        geom_line(aes(x = semana_epidemiologica, y = !!var, group = 1), color = cor, linetype = 'dotted') +
+        geom_point(aes(x = semana_epidemiologica, y = !!var), color = cor) + 
+        scale_x_discrete(limits = ordem) +
+        labs(x = "Semana Epidemiológica", y = texto) +
+        theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5)) +
+        theme(plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+              panel.grid.major = element_blank())
+      
+    }
+      
+    
+    ggplotly(p) 
+    
+  })
+  
+  ###############################
+  ###### secoond tabItem ########
+  ###############################
+  
+  # caixas com numeros gerais
+  
+  # caixa de leitos totais
+  output$box_tot <- renderValueBox({
+    aux <- leitos_uti %>%
+      group_by(cnes) %>%
+      filter(data_atualizacao == max(data_atualizacao))
+    
+    valueBox(
+      sum(aux$leitos_total),
+      "Leitos totais",
+      icon = icon("hospital"),
+      color = "green" 
+    )
+  })
+  # caixa de internados
+  output$box_int <- renderValueBox({
+    aux <- leitos_uti %>%
+      group_by(cnes) %>%
+      filter(data_atualizacao == max(data_atualizacao))
+    
+    valueBox(
+      sum(aux$leitos_internacoes),
+      "Leitos ocupados",
+      icon = icon("procedures"),
+      color = "blue" 
+    )
+  })
+  # caixa de lotação
+  output$box_lot <- renderValueBox({
+    aux <- leitos_uti %>%
+      group_by(cnes) %>%
+      filter(data_atualizacao == max(data_atualizacao))
+
+    valueBox(
+      paste0(round(100*sum(aux$leitos_internacoes)/sum(aux$leitos_total),2),"%"),
+      "Porcentagem de lotação dos leitos",
+      icon = icon("hospital-user"),
+      color = "purple", 
+    )
+  })
+  # caixas de leitos covid
+  output$box_cov <- renderValueBox({
+    aux <- leitos_uti %>%
+      group_by(cnes) %>%
+      filter(data_atualizacao == max(data_atualizacao))
+    
+    valueBox(
+      sum(aux$leitos_covid),
+      "Leitos ocupados COVID-19",
+      icon = icon("virus"),
+      color = "maroon", 
+    )
+  })
+  
+  #####################
+  # Mapa_leitos
+  
+  output$mapa_leitos <- renderLeaflet({
+    
+    var <- rlang::sym(input$var_leitos)
+    
+    if (input$var_leitos_2 == "hospital") {
+      if (input$var_leitos != "lotacao") {
+        aux_mapa <- leitos_uti %>%
+          filter(!is.na(!!var)) %>%
+          filter(!!var != 0) %>%
+          group_by(cnes, LATITUDE, LONGITUDE, hospital) %>%
+          filter(data_atualizacao == max(data_atualizacao)) %>%
+          summarise(var = sum(!!var))
+      } else {
+        aux_mapa <- leitos_uti %>%
+          filter(!is.na(!!var)) %>%
+          group_by(cnes, LATITUDE, LONGITUDE, hospital) %>%
+          filter(data_atualizacao == max(data_atualizacao)) %>%
+          summarise(var = ifelse(sum(leitos_total)!=0,sum(leitos_internacoes)/sum(leitos_total),NA))
+      }
+      
+    } else if (input$var_leitos_2 == "municipio") {
+      aux_mapa <- leitos_mapa_mun_rs %>%
+        mutate(var = !!var)
+    } else {
+      aux_mapa <- leitos_mapa_meso_rs %>%
+        mutate(var = !!var)
+    }
+    
+    y_quantidade <- aux_mapa$var
+    
+    if (input$var_leitos == "leitos_total") {
+      paleta <- "Greens"
+      cor <- "#00a65a"
+      texto <- "Total de leitos"
+    } else if (input$var_leitos == "leitos_internacoes") {
+      paleta <- "Blues"
+      cor <- "#0073b7"
+      texto <- "Leitos ocupados"
+    } else if(input$var_leitos == "lotacao") {
+      paleta <- "Purples"
+      cor <- "#605ca8"
+      texto <- "Lotação média"
+    } else {
+      paleta <- "RdPu"
+      cor <- "#d81b60"
+      texto <- "Leitos ocupados COVID-19"
+    }
+    
+    if(input$var_leitos_2 != "hospital") {
+      
+      variavel <- as.data.frame(aux_mapa)[,input$var_leitos_2]
+      
+      if(input$var_leitos != "lotacao") {
+        
+        y_quantidade <- replace_na(y_quantidade, 0) 
+        
+        # criando intervalo com uma função muito boa
+        
+        intervalos <- classInt::classIntervals(var = y_quantidade, n = 6, style = "fisher")
+        
+        intervalos[["brks"]][1:2] <- c(0,1)
+        
+        pal <- colorBin(palette=paleta, domain = y_quantidade, bins = intervalos[["brks"]])
+        
+        leaflet(aux_mapa) %>%
+          addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
+          addPolygons(fillColor = ~pal(y_quantidade), 
+                      weight = 1.5,
+                      opacity = 0.7,
+                      fillOpacity = 0.7,
+                      color = "gray",
+                      highlight = highlightOptions(
+                        weight = 5,
+                        color = "#666",
+                        fillOpacity = 0.7,
+                        bringToFront = TRUE),
+                      label = sprintf("%s - %s", variavel, y_quantidade),
+                      labelOptions = labelOptions(
+                        style = list("font-weight" = "normal", padding = "6px 11px"),
+                        textsize = "15px",
+                        direction = "auto"))   %>%
+          addLegend(pal = pal, values = y_quantidade, labFormat = function(type, cuts, p) {  # legenda para colorQuantile
+            n = length(cuts)
+            paste0(cuts[-n], " &ndash; ", cuts[-1])},
+            title = texto,
+            labels = ~variavel,
+            position = "bottomright")
+        
+      } else {
+        
+        paleta <- RColorBrewer::brewer.pal(n=6,"Purples")
+        paleta <- paleta[2:6]
+        
+        pal <- colorBin(palette=paleta, domain = y_quantidade, bins = c(0,0.2,0.4,0.6,0.8,max(y_quantidade, na.rm = T)), na.color = "#ffffff")
+        
+        leaflet(aux_mapa) %>%
+          addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
+          addPolygons(fillColor = ~pal(y_quantidade), 
+                      weight = 1.5,
+                      opacity = 0.7,
+                      fillOpacity = 0.7,
+                      color = "gray",
+                      highlight = highlightOptions(
+                        weight = 5,
+                        color = "#666",
+                        fillOpacity = 0.7,
+                        bringToFront = TRUE),
+                      label = sprintf("%s - %s", variavel, paste0(100*round(y_quantidade,4),"%")),
+                      labelOptions = labelOptions(
+                        style = list("font-weight" = "normal", padding = "6px 11px"),
+                        textsize = "15px",
+                        direction = "auto"))   %>%
+          addLegend(pal = pal, values = paste0(100*round(y_quantidade,4),"%"), labFormat = function(type, cuts, p) {  # legenda para colorQuantile
+            n = length(cuts)
+            paste0(cuts[-n]*100,"%", " &ndash; ", cuts[-1]*100,"%")},
+            title = texto,
+            labels = ~variavel,
+            position = "bottomright")
+        
+      }
+      
+      
+      
+    } else {
+      
+      if(input$var_leitos != "lotacao") {
+        
+        labs <- lapply(seq(nrow(aux_mapa)), function(i) {
+          paste0(aux_mapa[i, "var"],"%", " ",texto, '</p>', 
+                 " ",aux_mapa[i, "hospital"]) 
+        })
+        
+        calculo_raio <- 3.5*aux_mapa$var^(1/2)
+        
+        leaflet(aux_mapa) %>%
+          addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
+          addCircleMarkers(lng = aux_mapa$LONGITUDE, lat = aux_mapa$LATITUDE, radius = calculo_raio,
+                           color = cor, fillOpacity = 0.5, label = lapply(labs, htmltools::HTML), 
+                           labelOptions = labelOptions(interactive = T, textsize = "15px"))
+        
+      } else {
+        
+        labs <- lapply(seq(nrow(aux_mapa)), function(i) {
+          paste0(100*round(aux_mapa[i, "var"],4),"%", " ",texto, '</p>', 
+                 " ",aux_mapa[i, "hospital"]) 
+        })
+        
+        calculo_raio <- (10*aux_mapa$var)^(2)/3
+        
+        leaflet(aux_mapa) %>%
+          addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
+          addCircleMarkers(lng = aux_mapa$LONGITUDE, lat = aux_mapa$LATITUDE, radius = calculo_raio,
+                           color = cor, fillOpacity = 0.5, label = lapply(labs, htmltools::HTML), 
+                           labelOptions = labelOptions(interactive = T, textsize = "15px"))
+      }
+      
+      
       
     }
   })
@@ -873,29 +975,64 @@ server <- function(input, output) {
   output$table_leitos <- renderDataTable({
     
     var <- rlang::sym(input$var_leitos)
-    ifelse(input$var_leitos_2=="hospital",var2 <- rlang::sym("cnes"),var2 <- rlang::sym(input$var_leitos_2))
+    var2 <- rlang::sym(input$var_leitos_2)
     
-    aux <- leitos_uti %>%
-      group_by(cnes) %>%
-      filter(data_atualizacao == max(data_atualizacao)) %>%
-      select(c(input$var_leitos_2,input$var_leitos))
-    
-    aux <- aux %>%
-      group_by(!!var2) %>%
-      summarise(var = sum(!!var)) %>%
-      mutate_all(~ replace(., . == 0, NA)) %>%
-      filter_all(all_vars(!is.na(.))) %>%
-      arrange(desc(var))
-    
-    if(input$var_leitos == "leitos_total") {
-      text <- "Leitos UTI - Adulto"
-      cor <- "#0073b7"
-    } else if(input$var_leitos == "leitos_internacoes") {
-      text <- "Internações UTI - Adulto"
-      cor <- "#605ca8"
+    if (input$var_leitos_2 != "hospital") {
+      if(input$var_leitos != "lotacao") {
+        aux <- leitos_uti %>%
+          group_by(cnes) %>%
+          filter(data_atualizacao == max(data_atualizacao)) %>%
+          ungroup() %>%
+          select(c(input$var_leitos,input$var_leitos_2))
+        
+        aux <- aux %>%
+          group_by(!!var2) %>%
+          summarise(var = sum(!!var)) %>%
+          mutate_all(~ replace(., . == 0, NA)) %>%
+          filter_all(all_vars(!is.na(.))) %>%
+          arrange(desc(var))
+      } else {
+        aux <- leitos_uti %>%
+          group_by(cnes) %>%
+          filter(data_atualizacao == max(data_atualizacao)) %>%
+          ungroup() %>%
+          select(c(leitos_total,leitos_internacoes,input$var_leitos_2))
+        
+        aux <- aux %>%
+          group_by(!!var2) %>%
+          summarise(var = ifelse(sum(leitos_total) == 0, NA, sum(leitos_internacoes)/sum(leitos_total))) %>%
+          mutate_all(~ replace(., . == 0, NA)) %>%
+          filter_all(all_vars(!is.na(.))) %>%
+          arrange(desc(var))
+      }
+      
+      
     } else {
-      text <- "Internações COVID-19"
-      cor <- "#f012be"
+      aux <- leitos_uti %>%
+        group_by(cnes) %>%
+        filter(data_atualizacao == max(data_atualizacao)) %>%
+        ungroup() %>%
+        select(c(input$var_leitos,"hospital","cnes")) %>%
+        mutate(var = !!var) %>%
+        filter(!is.na(var)) %>%
+        arrange(desc(var))
+      
+    }
+    
+    
+    if (input$var_leitos == "leitos_total") {
+      cor <- "#00a65a"
+      texto <- "Total de leitos"
+    } else if (input$var_leitos == "leitos_internacoes") {
+      cor <- "#0073b7"
+      texto <- "Leitos ocupados"
+    } else if(input$var_leitos == "lotacao") {
+      cor <- "#605ca8"
+      texto <- "Lotação média"
+      aux$var <- paste0(round(aux$var,4)*100,"%")
+    } else {
+      cor <- "#d81b60"
+      texto <- "Leitos ocupados COVID-19"
     }
     
     if(input$var_leitos_2 == "municipio") {
@@ -910,7 +1047,7 @@ server <- function(input, output) {
       aux[,c(input$var_leitos_2,"var")], 
       rownames=F,
       class = "compact",
-      colnames = c(text2,text),
+      colnames = c(text2,texto),
       options = list(
         dom = "tS", 
         ordering = F,
@@ -924,53 +1061,35 @@ server <- function(input, output) {
   })
   
   #############
-  # serie_leitos_ocupa
+  # serie_leitos
   
-  output$serie_leitos_ocupa <- renderPlotly({
+  output$serie_leitos <- renderPlotly({
 
     aux <- leitos_uti %>%
       group_by(data_atualizacao) %>%
-      summarise(total = sum(leitos_total), internacoes = sum(leitos_internacoes), lotacao = sum(leitos_internacoes)/sum(leitos_total))
+      summarise(total = sum(leitos_total), internacoes = sum(leitos_internacoes), lotacao = sum(leitos_internacoes)/sum(leitos_total),
+                covid = sum(leitos_covid))
     
     ordem <- as.character(format(aux$data_atualizacao, "%d-%m"))
     
     aux$data_atualizacao <- as.character(format(aux$data_atualizacao, "%d-%m"))
     
     p <- ggplot(aux) +
-      geom_line(aes(x = data_atualizacao, y = total, group = 1), color = "#0073b7") +
-      geom_point(aes(x = data_atualizacao, y = total), color = "#0073b7") +
-      geom_col(aes(x = data_atualizacao, y = internacoes, label = lotacao), fill = "#605ca8") +
+      geom_line(aes(x = data_atualizacao, y = total, group = 1), color = "#00a65a") +
+      geom_point(aes(x = data_atualizacao, y = total), color = "#00a65a") +
+      geom_line(aes(x = data_atualizacao, y = internacoes, group = 1), color = "#0073b7") +
+      geom_point(aes(x = data_atualizacao, y = internacoes, label = lotacao), color = "#0073b7") +
+      geom_line(aes(x = data_atualizacao, y = covid, group = 1), color = "#d81b60") +
+      geom_point(aes(x = data_atualizacao, y = covid), color = "#d81b60") +
       scale_x_discrete(limits = ordem) +
-      labs(x = "Dia", y = "Número de leitos ocupados e total") +
+      labs(x = "Dia", y = "Número de leitos ocupados, com COVID-19 e total") +
       theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
       
     ggplotly(p)
     
   })
   
-  #############
-  # serie_leitos_covid
-  
-  output$serie_leitos_covid <- renderPlotly({
 
-    aux <- leitos_uti %>%
-      group_by(data_atualizacao) %>%
-      summarise(var = sum(leitos_covid))
-    
-    ordem <- as.character(format(aux$data_atualizacao, "%d-%m"))
-    
-    aux$data_atualizacao <- as.character(format(aux$data_atualizacao, "%d-%m"))
-    
-    p <- ggplot(aux) +
-      geom_col(aes(x = data_atualizacao, y = var), fill = "#f012be") +
-      scale_x_discrete(limits = ordem) +
-      labs(x = "Dia", y = "Número de leitos com pacientes COVID-19") +
-      theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
-    
-    ggplotly(p)
-    
-  })
-  
   ###############################
   ######  third tabItem  ########
   ###############################

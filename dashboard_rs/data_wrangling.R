@@ -157,20 +157,23 @@ aux_covid <- aux_covid %>%
 leitos_uti <- aux_todos %>%
   left_join(aux_internados, by = c("cnes","data_atualizacao")) %>%
   left_join(aux_covid, by = c("cnes","data_atualizacao")) %>%
-  mutate(data_atualizacao = lubridate::as_date(data_atualizacao))
+  mutate(data_atualizacao = lubridate::as_date(data_atualizacao)) %>%
+  mutate(lotacao = ifelse(leitos_total == 0, NA, leitos_internacoes/leitos_total))
 
 
 leitos_join_mun <- leitos_uti %>%
   group_by(cnes) %>%
   filter(data_atualizacao == max(data_atualizacao)) %>%
   group_by(codigo_ibge) %>%
-  summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid))
+  summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid),
+            lotacao = ifelse(sum(leitos_total)==0, NA, sum(leitos_internacoes)/sum(leitos_total)))
 
 leitos_join_meso <- leitos_uti %>%
   group_by(cnes) %>%
   filter(data_atualizacao == max(data_atualizacao)) %>%
   group_by(meso_regiao) %>%
-  summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid))
+  summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid),
+            lotacao = ifelse(sum(leitos_total)==0, NA, sum(leitos_internacoes)/sum(leitos_total)))
   
 
 # fazendo o join dos dados covid ao shp
@@ -185,6 +188,13 @@ leitos_mapa_mun_rs <- mapa_rs_shp %>%
 
 leitos_mapa_meso_rs <- mapa_meso_rs %>%
   left_join(leitos_join_meso, by = "meso_regiao")
+
+# lendo arquivo com semana epidemoilógica para adicionar ao banco
+
+semana <- read_csv("dados/semana_epidemio_dia.csv")
+
+dados_covid_rs <- dados_covid_rs %>%
+  left_join(semana, by = c("date" = "dia"))
 
 # deixando só os objetos essenciais
 
