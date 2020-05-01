@@ -89,19 +89,8 @@ dados_mapa_rs_meso <- mapa_meso_rs %>%
 # lendo leitos UTI do site da SES
 #################################
 
-hospital_municipio <- read_excel("dados/leitos/outros/leitos_municipios.xlsx", col_names = F) %>%
-  select(cnes = ...3, hospital = ...4, municipio = ...2) %>%
-  mutate(municipio = str_to_title(municipio)) %>%
-  left_join(codigos_cidades_sem_acento, by = "municipio") %>%
-  select(-municipio) %>%
-  left_join(codigos_cidades, by = "codigo") %>%
-  select(-hospital)
-
-write_csv(hospital_municipio, "dados/leitos/outros/hospital_municipio.csv")
-
 hospital_municipio <- read_csv("dados/leitos/outros/hospital_municipio.csv") %>%
-  mutate(codigo_ibge = as.character(codigo)) %>%
-  select(-codigo)
+  mutate(codigo_ibge = as.character(codigo_ibge))
 
 dados_cnes <- read_csv("dados/leitos/outros/base_cnes_atualizada.csv") %>%
   select(CNES, LATITUDE, LONGITUDE)
@@ -113,24 +102,73 @@ caminhos <- str_c(pasta, arquivos)
 leitos_uti <- map(caminhos, read_csv) %>%
   map(dplyr::select, -(`Taxa Ocupação`)) %>%
   bind_rows() %>%
-  distinct(`Cód`, `Últ Atualização`, .keep_all = T) %>%
   left_join(hospital_municipio, by = c("Cód" = "cnes")) %>%
   left_join(rs_mesoregiao_microregiao, by = c("codigo_ibge" = "codigo")) %>%
   mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y %H:%M")) %>%
+  distinct(`Cód`, data_atualizacao, .keep_all = T) %>%
   select(data_atualizacao = data_atualizacao, cnes = Cód, hospital = Hospital, codigo_ibge = codigo_ibge, municipio, leitos_internacoes = Pacientes, 
          leitos_total = Leitos, leitos_covid = Confirmados, meso_regiao = mesorregiao, data_hora_atualizacao = `Últ Atualização`) %>%
   mutate(codigo_ibge = factor(codigo_ibge, levels = levels(mapa_rs_shp$CD_GEOCMU))) %>%
-  left_join(dados_cnes, by = c("cnes" = "CNES"))
+  left_join(dados_cnes, by = c("cnes" = "CNES")) %>%
+  filter(data_atualizacao > "2020-04-27") %>%
+  select(-data_hora_atualizacao)
+
+# resolvendo problema dos dados incompletos
+# pegando dados de dias anteriores para os dias sem dado
+
+# colocando as datas como se fosse colunas para verificar quais os dados que estão faltando para cada hospital
+
+aux_total <- leitos_uti %>%
+  select(-c(leitos_internacoes,leitos_covid)) %>%
+  pivot_wider(names_from = data_atualizacao, values_from = leitos_total) %>%
+  as.data.frame()
+
+aux_internados <- leitos_uti %>%
+  select(-c(leitos_total,leitos_covid)) %>%
+  pivot_wider(names_from = data_atualizacao, values_from = leitos_internacoes) %>%
+  as.data.frame()
+
+aux_covid <- leitos_uti %>%
+  select(-c(leitos_total,leitos_internacoes)) %>%
+  pivot_wider(names_from = data_atualizacao, values_from = leitos_covid) %>%
+  as.data.frame()
+
+# e a partir dai caso um dado esteja sem atualização para aquele dia, então pega-se o dado do dia anterior
+# foi bem hardcore mas acho que deu tudo certo, mas acho que seria importante avisar disso em algum momento,
+# que estamos supondo a mesma situação do dia anterior para aqueles dias em que não temos dados(tudo a partir de quando começamos a coletar os dados no dia 28/04/20)
+
+for (i in 9:ncol(aux_total)) {
+  aux_total[,i] <- ifelse(is.na(aux_total[,i]),aux_total[,(i-1)],aux_total[,i])
+  aux_internados[,i] <- ifelse(is.na(aux_internados[,i]),aux_internados[,(i-1)],aux_internados[,i])
+  aux_covid[,i] <- ifelse(is.na(aux_covid[,i]),aux_covid[,(i-1)],aux_covid[,i])
+}
+
+aux_todos <- aux_total %>%
+  pivot_longer(-names(aux_total)[1:7],names_to = "data_atualizacao", values_to = "leitos_total")
+
+aux_internados <- aux_internados %>%
+  pivot_longer(-names(aux_internados)[1:7],names_to = "data_atualizacao", values_to = "leitos_internacoes") %>%
+  select(cnes,data_atualizacao,leitos_internacoes)
+
+aux_covid <- aux_covid %>%
+  pivot_longer(-names(aux_covid)[1:7],names_to = "data_atualizacao", values_to = "leitos_covid") %>%
+  select(cnes,data_atualizacao,leitos_covid)
+
+leitos_uti <- aux_todos %>%
+  left_join(aux_internados, by = c("cnes","data_atualizacao")) %>%
+  left_join(aux_covid, by = c("cnes","data_atualizacao")) %>%
+  mutate(data_atualizacao = lubridate::as_date(data_atualizacao))
+
 
 leitos_join_mun <- leitos_uti %>%
   group_by(cnes) %>%
-  filter(data_hora_atualizacao == max(data_hora_atualizacao)) %>%
+  filter(data_atualizacao == max(data_atualizacao)) %>%
   group_by(codigo_ibge) %>%
   summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid))
 
 leitos_join_meso <- leitos_uti %>%
   group_by(cnes) %>%
-  filter(data_hora_atualizacao == max(data_hora_atualizacao)) %>%
+  filter(data_atualizacao == max(data_atualizacao)) %>%
   group_by(meso_regiao) %>%
   summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid))
   
@@ -148,12 +186,10 @@ leitos_mapa_mun_rs <- mapa_rs_shp %>%
 leitos_mapa_meso_rs <- mapa_meso_rs %>%
   left_join(leitos_join_meso, by = "meso_regiao")
 
+# deixando só os objetos essenciais
 
-
-
-
-
-
+rm(list=setdiff(ls(),c("leitos_mapa_mun_rs","leitos_mapa_meso_rs","leitos_uti","dados_mapa_rs_meso",
+                       "dados_mapa_rs","dados_covid_rs")))
 
 
 
