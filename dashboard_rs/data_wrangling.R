@@ -111,7 +111,8 @@ leitos_uti <- map(caminhos, read_csv) %>%
   mutate(codigo_ibge = factor(codigo_ibge, levels = levels(mapa_rs_shp$CD_GEOCMU))) %>%
   left_join(dados_cnes, by = c("cnes" = "CNES")) %>%
   filter(data_atualizacao > "2020-04-27") %>%
-  select(-data_hora_atualizacao)
+  select(-data_hora_atualizacao) %>%
+  arrange(data_atualizacao)
 
 # resolvendo problema dos dados incompletos
 # pegando dados de dias anteriores para os dias sem dado
@@ -158,7 +159,8 @@ leitos_uti <- aux_todos %>%
   left_join(aux_internados, by = c("cnes","data_atualizacao")) %>%
   left_join(aux_covid, by = c("cnes","data_atualizacao")) %>%
   mutate(data_atualizacao = lubridate::as_date(data_atualizacao)) %>%
-  mutate(lotacao = ifelse(leitos_total == 0, NA, leitos_internacoes/leitos_total))
+  mutate(lotacao = ifelse(leitos_total == 0, NA, leitos_internacoes/leitos_total),
+         leitos_disponiveis = leitos_total - leitos_internacoes)
 
 
 leitos_join_mun <- leitos_uti %>%
@@ -166,14 +168,14 @@ leitos_join_mun <- leitos_uti %>%
   filter(data_atualizacao == max(data_atualizacao)) %>%
   group_by(codigo_ibge) %>%
   summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid),
-            lotacao = ifelse(sum(leitos_total)==0, NA, sum(leitos_internacoes)/sum(leitos_total)))
+            lotacao = ifelse(sum(leitos_total)==0, NA, sum(leitos_internacoes)/sum(leitos_total)), leitos_disponiveis = leitos_total - leitos_internacoes)
 
 leitos_join_meso <- leitos_uti %>%
   group_by(cnes) %>%
   filter(data_atualizacao == max(data_atualizacao)) %>%
   group_by(meso_regiao) %>%
   summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid),
-            lotacao = ifelse(sum(leitos_total)==0, NA, sum(leitos_internacoes)/sum(leitos_total)))
+            lotacao = ifelse(sum(leitos_total)==0, NA, sum(leitos_internacoes)/sum(leitos_total)), leitos_disponiveis = leitos_total - leitos_internacoes)
   
 
 # fazendo o join dos dados covid ao shp

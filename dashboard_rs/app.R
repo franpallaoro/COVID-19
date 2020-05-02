@@ -196,7 +196,7 @@ body <- dashboardBody(
                       h3("Selecione a variável de interesse"),
                       radioButtons("var_leitos",
                                    label = NULL,
-                                   choices = list("Leitos totais" = "leitos_total","Leitos ocupados" = "leitos_internacoes","Lotação" = "lotacao", "Leitos ocupados COVID-19" = "leitos_covid"),
+                                   choices = list("Leitos totais" = "leitos_total","Leitos disponíveis" = "leitos_disponiveis","Lotação" = "lotacao", "Leitos ocupados COVID-19" = "leitos_covid"),
                                    selected = "leitos_total",
                                    inline = T)
                     ),
@@ -772,8 +772,8 @@ server <- function(input, output) {
       filter(data_atualizacao == max(data_atualizacao))
     
     valueBox(
-      sum(aux$leitos_internacoes),
-      "Leitos ocupados",
+      sum(aux$leitos_disponiveis),
+      "Leitos disponíveis",
       icon = icon("procedures"),
       color = "blue" 
     )
@@ -842,10 +842,10 @@ server <- function(input, output) {
       paleta <- "Greens"
       cor <- "#00a65a"
       texto <- "Total de leitos"
-    } else if (input$var_leitos == "leitos_internacoes") {
+    } else if (input$var_leitos == "leitos_disponiveis") {
       paleta <- "Blues"
       cor <- "#0073b7"
-      texto <- "Leitos ocupados"
+      texto <- "Leitos disponíveis"
     } else if(input$var_leitos == "lotacao") {
       paleta <- "Purples"
       cor <- "#605ca8"
@@ -901,7 +901,7 @@ server <- function(input, output) {
         paleta <- RColorBrewer::brewer.pal(n=6,"Purples")
         paleta <- paleta[2:6]
         
-        pal <- colorBin(palette=paleta, domain = y_quantidade, bins = c(0,0.2,0.4,0.6,0.8,max(y_quantidade, na.rm = T)), na.color = "#ffffff")
+        pal <- colorBin(palette=paleta, domain = y_quantidade, bins = c(0,0.2,0.4,0.6,0.8,round(max(y_quantidade, na.rm = T),4)), na.color = "#ffffff")
         
         leaflet(aux_mapa) %>%
           addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
@@ -1023,9 +1023,9 @@ server <- function(input, output) {
     if (input$var_leitos == "leitos_total") {
       cor <- "#00a65a"
       texto <- "Total de leitos"
-    } else if (input$var_leitos == "leitos_internacoes") {
+    } else if (input$var_leitos == "leitos_disponiveis") {
       cor <- "#0073b7"
-      texto <- "Leitos ocupados"
+      texto <- "Leitos disponíveis"
     } else if(input$var_leitos == "lotacao") {
       cor <- "#605ca8"
       texto <- "Lotação média"
@@ -1067,8 +1067,9 @@ server <- function(input, output) {
 
     aux <- leitos_uti %>%
       group_by(data_atualizacao) %>%
-      summarise(total = sum(leitos_total), internacoes = sum(leitos_internacoes), lotacao = sum(leitos_internacoes)/sum(leitos_total),
-                covid = sum(leitos_covid))
+      summarise(total = sum(leitos_total), disponiveis = sum(leitos_disponiveis), lotacao = sum(leitos_internacoes)/sum(leitos_total),
+                covid = sum(leitos_covid)) %>%
+      arrange(data_atualizacao)
     
     ordem <- as.character(format(aux$data_atualizacao, "%d-%m"))
     
@@ -1077,12 +1078,12 @@ server <- function(input, output) {
     p <- ggplot(aux) +
       geom_line(aes(x = data_atualizacao, y = total, group = 1), color = "#00a65a") +
       geom_point(aes(x = data_atualizacao, y = total), color = "#00a65a") +
-      geom_line(aes(x = data_atualizacao, y = internacoes, group = 1), color = "#0073b7") +
-      geom_point(aes(x = data_atualizacao, y = internacoes, label = lotacao), color = "#0073b7") +
+      geom_line(aes(x = data_atualizacao, y = disponiveis, group = 1), color = "#0073b7") +
+      geom_point(aes(x = data_atualizacao, y = disponiveis, label = lotacao), color = "#0073b7") +
       geom_line(aes(x = data_atualizacao, y = covid, group = 1), color = "#d81b60") +
       geom_point(aes(x = data_atualizacao, y = covid), color = "#d81b60") +
       scale_x_discrete(limits = ordem) +
-      labs(x = "Dia", y = "Número de leitos ocupados, com COVID-19 e total") +
+      labs(x = "Dia", y = "Número de leitos disponíveis, com COVID-19 e total") +
       theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
       
     ggplotly(p)
