@@ -936,7 +936,7 @@ server <- function(input, output) {
       if(input$var_leitos != "lotacao") {
         
         labs <- lapply(seq(nrow(aux_mapa)), function(i) {
-          paste0(aux_mapa[i, "var"],"%", " ",texto, '</p>', 
+          paste0(aux_mapa[i, "var"], " - ",texto, '</p>', 
                  " ",aux_mapa[i, "hospital"]) 
         })
         
