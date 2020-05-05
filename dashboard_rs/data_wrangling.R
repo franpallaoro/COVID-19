@@ -104,7 +104,8 @@ leitos_uti <- map(caminhos, read_csv) %>%
   bind_rows() %>%
   left_join(hospital_municipio, by = c("Cód" = "cnes")) %>%
   left_join(rs_mesoregiao_microregiao, by = c("codigo_ibge" = "codigo")) %>%
-  mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y %H:%M")) %>%
+  mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y %H:%M"),
+         Hospital = str_to_title(Hospital)) %>%
   distinct(`Cód`, data_atualizacao, .keep_all = T) %>%
   select(data_atualizacao = data_atualizacao, cnes = Cód, hospital = Hospital, codigo_ibge = codigo_ibge, municipio, leitos_internacoes = Pacientes, 
          leitos_total = Leitos, leitos_covid = Confirmados, meso_regiao = mesorregiao, data_hora_atualizacao = `Últ Atualização`) %>%
