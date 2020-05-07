@@ -23,7 +23,7 @@ mapa_rs_shp[mapa_rs_shp$municipio=="Vespasiano Correa","municipio"] <- "Vespasia
 # lendo shapefiles mesoregiões RS
 
 mapa_meso_rs <- sf::st_read("dados/shapefiles/43MEE250GC_SIR.shp", quiet = TRUE) %>%
-  mutate(meso_regiao = str_remove(str_remove(str_to_title(NM_MESO),"\\sRio-Grandense"),"\\sDe Porto Alegre"))
+  mutate(mesorregiao = str_remove(str_remove(str_to_title(NM_MESO),"\\sRio-Grandense"),"\\sDe Porto Alegre"))
 
 # criando um objeto para atribuir códigos ibge às cidades
 
@@ -82,7 +82,7 @@ dados_mapa_rs <- mapa_rs_shp %>%
 # shp mesoregiao
 
 dados_mapa_rs_meso <- mapa_meso_rs %>%
-  left_join(dados_covid_join_meso, by = c("meso_regiao" = "mesorregiao"))
+  left_join(dados_covid_join_meso, by = c("mesorregiao" = "mesorregiao"))
 
 
 #################################
@@ -99,16 +99,32 @@ pasta <- "dados/leitos/"
 arquivos <- list.files(pasta, pattern = ".csv")
 caminhos <- str_c(pasta, arquivos)
 
+# arrumando problema da base deles em que em vez da coluna com dados de hospitais ter o nome "Hosital"
+# ta com nome municipios(começou no dia 04/05/2020 e ta indo até hj 07/05/2020)
+# ah e também a coluna Cód q possui o código cnes do hospital está escrita como Cód IBGE agr
+# incrivel como sempre conseguem arranjar algum novo problema com esses dados da SES
+
+arquivos_troca_nome <- c("leitos_dados_ses_05_05.csv","leitos_dados_ses_06_05.csv")
+caminhos_troca_nome <- str_c(pasta,arquivos_troca_nome)
+
+arruma_nome <- map(caminhos_troca_nome, read_csv) %>%
+  map(dplyr::mutate, Cód = `Cód IBGE`, Hospital = Município_1) %>%
+  map(dplyr::select, -(`Taxa Ocupação`)) %>%
+  bind_rows() 
+
+caminhos <- caminhos[!(caminhos %in% caminhos_troca_nome)]
+
 leitos_uti <- map(caminhos, read_csv) %>%
   map(dplyr::select, -(`Taxa Ocupação`)) %>%
   bind_rows() %>%
+  bind_rows(arruma_nome) %>% # adicionando arquivos bugados
   left_join(hospital_municipio, by = c("Cód" = "cnes")) %>%
   left_join(rs_mesoregiao_microregiao, by = c("codigo_ibge" = "codigo")) %>%
   mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y %H:%M"),
          Hospital = str_to_title(Hospital)) %>%
   distinct(`Cód`, data_atualizacao, .keep_all = T) %>%
   select(data_atualizacao = data_atualizacao, cnes = Cód, hospital = Hospital, codigo_ibge = codigo_ibge, municipio, leitos_internacoes = Pacientes, 
-         leitos_total = Leitos, leitos_covid = Confirmados, meso_regiao = mesorregiao, data_hora_atualizacao = `Últ Atualização`) %>%
+         leitos_total = Leitos, leitos_covid = Confirmados, mesorregiao = mesorregiao, data_hora_atualizacao = `Últ Atualização`) %>%
   mutate(codigo_ibge = factor(codigo_ibge, levels = levels(mapa_rs_shp$CD_GEOCMU))) %>%
   left_join(dados_cnes, by = c("cnes" = "CNES")) %>%
   filter(data_atualizacao > "2020-04-27") %>%
@@ -174,7 +190,7 @@ leitos_join_mun <- leitos_uti %>%
 leitos_join_meso <- leitos_uti %>%
   group_by(cnes) %>%
   filter(data_atualizacao == max(data_atualizacao)) %>%
-  group_by(meso_regiao) %>%
+  group_by(mesorregiao) %>%
   summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid),
             lotacao = ifelse(sum(leitos_total)==0, NA, sum(leitos_internacoes)/sum(leitos_total)), leitos_disponiveis = leitos_total - leitos_internacoes)
   
@@ -190,7 +206,7 @@ leitos_mapa_mun_rs <- mapa_rs_shp %>%
 # shp mesoregiao
 
 leitos_mapa_meso_rs <- mapa_meso_rs %>%
-  left_join(leitos_join_meso, by = "meso_regiao")
+  left_join(leitos_join_meso, by = "mesorregiao")
 
 # lendo arquivo com semana epidemoilógica para adicionar ao banco
 

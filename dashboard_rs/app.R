@@ -137,7 +137,7 @@ body <- dashboardBody(
                   h3("Selecione o tipo de agrupamento"),
                   radioButtons("var_covid_2",
                                label = NULL,
-                               choices = list("Municípios" = "municipio", "Mesoregiões" = "meso_regiao"),
+                               choices = list("Municípios" = "municipio", "Mesoregiões" = "mesorregiao"),
                                selected = "municipio",
                                inline = T),
                 ),
@@ -171,17 +171,7 @@ body <- dashboardBody(
               fluidRow(
                 column(
                   width = 9,
-                  tabBox(id = "tab_covid",
-                         width = 12,
-                         title = NULL,
-                         tabPanel("Diário",
-                                  plotlyOutput("serie_covid_dia", height = 450)
-                         ),
-                         tabPanel("Semana Epidemiológica",
-                                  plotlyOutput("serie_covid_sem", height = 450)
-                         )
-                         
-                  )
+                  uiOutput("ui_serie_covid")
                 ),
                 column(
                   width = 3,
@@ -230,7 +220,7 @@ body <- dashboardBody(
                       h3("Selecione o tipo de agrupamento"),
                       radioButtons("var_leitos_2",
                                    label = NULL,
-                                   choices = list("Hospital" = "hospital", "Municípios" = "municipio", "Mesoregiões" = "meso_regiao"),
+                                   choices = list("Hospital" = "hospital", "Municípios" = "municipio", "Mesoregiões" = "mesorregiao"),
                                    selected = "municipio",
                                    inline = T),
                     )
@@ -264,14 +254,19 @@ body <- dashboardBody(
                 
                 setZoom(id = "dados_covid",class = "small-box"), # dando um zoomzin quando passa o mouse nos links com base de dados
                 setZoom(id = "dados_leitos",class = "small-box"),
+                setZoom(id = "licenca",class = "small-box"),
                 
                 column(
-                  width = 6,
+                  width = 12,
                   valueBoxOutput("dados_covid",width = 12)
                 ),
                 column(
                   width = 6,
                   valueBoxOutput("dados_leitos",width = 12)
+                ),
+                column(
+                  width = 6,
+                  valueBoxOutput("licenca", width = 12)
                 )
               )
               
@@ -574,26 +569,37 @@ server <- function(input, output) {
       filter(is_last) %>%
       group_by(!!var2) %>%
       summarise(confirmed = sum(confirmed), deaths = sum(deaths), estimated_population_2019 = sum(estimated_population_2019),
-                death_rate = sum(deaths)/sum(confirmed), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1]) %>%
+                death_rate = sum(deaths)/sum(confirmed), confirmed_per_100k_inhabitants = sum(confirmed)*100000/sum(estimated_population_2019))  %>%
       arrange(desc(!!var))
       
     if(input$var_covid == "death_rate") {
+      aux <- as.data.frame(aux)
+      
+      aux <- aux[1:25,]
+      
+      ordem <- aux[,input$var_covid_2]
+      
       aux <- aux %>%
         filter(!is.na(!!var))
-      aux$death_rate <- paste0(100*round(aux$death_rate,4),"%")
+     
+    } else {
+      aux <- as.data.frame(aux)
+      
+      aux <- aux[1:25,]
+      
+      ordem <- aux[,input$var_covid_2]
     }
-    
-    aux <- as.data.frame(aux)
-    
-    aux <- aux[1:25,]
-    
-    ordem <- aux[,input$var_covid_2]
     
     p <- ggplot(aux, aes(x = !!var2, y = !!var)) +
       geom_col(fill = cor) +
       labs(x = input$var_covid_2, y = texto) +
       scale_x_discrete(limits = rev(ordem)) +
       coord_flip()
+    
+    if(input$var_covid == "death_rate") {
+      p <- p +
+        scale_y_continuous(labels=percent)
+    }
     
     ggplotly(p)
     
@@ -696,23 +702,78 @@ server <- function(input, output) {
     
   })
   
+  #############
+  # ui_serie_covid
+  
+  output$ui_serie_covid <- renderUI({
+    
+    var <- rlang::sym(input$var_covid)
+    var2 <- rlang::sym(input$var_covid_2)
+    
+    aux <- dados_covid_rs %>%
+      filter(!is.na(!!var) & !!var != 0) %>%
+      as.data.frame()
+    
+    leveis <- levels(as.factor(aux[,input$var_covid_2]))
+    
+    if(input$var_covid_2 == "municipio") {
+      text2 <- " município ou deixe todos selecionados(default)"
+    } else {
+      text2 <- "a mesoregião ou deixe todas selecionadas(default)"
+    }
+    
+    tabBox(id = "tab_covid",
+           width = 12,
+           title = NULL,
+           tabPanel("Diário",
+                    plotlyOutput("serie_covid_dia", height = 450)
+           ),
+           tabPanel("Semana Epidemiológica",
+                    plotlyOutput("serie_covid_sem", height = 450)
+           ),
+           tabPanel("Filtro",
+                    selectInput(
+                      "filtro_serie_covid",
+                      label = paste0("Selecione algum",text2),
+                      choices = c("Todos selecionados",leveis),
+                      selected = "Todos selecionados",
+                      multiple = F
+                    )
+          )
+    )
+  })
+  
   ############
   # serie_covid_dia
   
   output$serie_covid_dia <- renderPlotly({
 
     var <- rlang::sym(input$var_covid)
+    var2 <- rlang::sym(input$var_covid_2)
     
     pop_rs <- dados_covid_rs %>%
       filter(place_type == "state")
-      
+    
     aux <- dados_covid_rs %>%
-      filter(place_type == "city") %>%
-      filter(mesorregiao %in% input$filtro_covid) %>%
-      group_by(date) %>%
-      summarise(confirmed = sum(confirmed), deaths = sum(deaths), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1],
-                death_rate = sum(deaths)/sum(confirmed)) %>%
-      arrange(date)
+      filter(place_type == "city") 
+    
+    if(input$filtro_serie_covid != "Todos selecionados") {
+      aux <- aux %>%
+        filter(!!var2 %in% input$filtro_serie_covid) %>%
+        filter(mesorregiao %in% input$filtro_covid) %>%
+        group_by(date) %>%
+        summarise(confirmed = sum(confirmed), deaths = sum(deaths), confirmed_per_100k_inhabitants = sum(confirmed)*100000/sum(estimated_population_2019),
+                  death_rate = sum(deaths)/sum(confirmed)) %>%
+        arrange(date)
+    } else {
+      aux <- aux %>%
+        filter(mesorregiao %in% input$filtro_covid) %>%
+        group_by(date) %>%
+        summarise(confirmed = sum(confirmed), deaths = sum(deaths), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1],
+                  death_rate = sum(deaths)/sum(confirmed)) %>%
+        arrange(date)
+    }
+    
     
     if(input$var_covid == "confirmed") {
       cor <- "#dd4b39"
@@ -777,6 +838,7 @@ server <- function(input, output) {
   output$serie_covid_sem <- renderPlotly({
     
     var <- rlang::sym(input$var_covid)
+    var2 <- rlang::sym(input$var_covid_2)
     
     if(input$var_covid == "confirmed") {
       cor <- "#dd4b39"
@@ -796,15 +858,30 @@ server <- function(input, output) {
       filter(place_type == "state")
     
     aux <- dados_covid_rs %>%
-      filter(place_type == "city") %>%
-      filter(mesorregiao %in% input$filtro_covid) %>%
-      group_by(semana_epidemiologica, municipio) %>%
-      filter(date == max(date)) %>%
-      ungroup() %>%
-      group_by(semana_epidemiologica) %>%
-      summarise(confirmed = sum(confirmed), deaths = sum(deaths), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1],
-                death_rate = sum(deaths)/sum(confirmed)) %>%
-      arrange(semana_epidemiologica)
+      filter(place_type == "city")
+    
+    if(input$filtro_serie_covid != "Todos selecionados") {
+      aux <- aux %>%
+        filter(!!var2 %in% input$filtro_serie_covid) %>%
+        filter(mesorregiao %in% input$filtro_covid) %>%
+        group_by(semana_epidemiologica, municipio) %>%
+        filter(date == max(date)) %>%
+        ungroup() %>%
+        group_by(semana_epidemiologica) %>%
+        summarise(confirmed = sum(confirmed), deaths = sum(deaths), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1],
+                  death_rate = sum(deaths)/sum(confirmed)) %>%
+        arrange(semana_epidemiologica)
+    } else {
+      aux <- aux %>%
+        filter(mesorregiao %in% input$filtro_covid) %>%
+        group_by(semana_epidemiologica, municipio) %>%
+        filter(date == max(date)) %>%
+        ungroup() %>%
+        group_by(semana_epidemiologica) %>%
+        summarise(confirmed = sum(confirmed), deaths = sum(deaths), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1],
+                  death_rate = sum(deaths)/sum(confirmed)) %>%
+        arrange(semana_epidemiologica)
+    }
     
     ordem <- as.character(aux$semana_epidemiologica)
     
@@ -1137,7 +1214,7 @@ server <- function(input, output) {
     
     if(input$var_leitos_2 == "municipio") {
       text2 <- "Município"
-    } else if(input$var_leitos_2 == "meso_regiao") {
+    } else if(input$var_leitos_2 == "mesorregiao") {
       text2 <- "Mesoregião"
     } else {
       text2 <- "Hospital"
@@ -1176,7 +1253,7 @@ server <- function(input, output) {
     
     if(input$var_leitos_2 == "municipio") {
       text2 <- " município ou deixe todos selecionados(default)"
-    } else if(input$var_leitos_2 == "meso_regiao") {
+    } else if(input$var_leitos_2 == "mesorregiao") {
       text2 <- "a mesoregião ou deixe todas selecionadas(default)"
     } else {
       text2 <- " hospital ou deixe todos selecionados(default)"
@@ -1219,7 +1296,7 @@ server <- function(input, output) {
       summarise(leitos_total = sum(leitos_total, na.rm = T), leitos_disponiveis = sum(leitos_disponiveis, na.rm = T), lotacao = sum(leitos_internacoes, na.rm = T)/sum(leitos_total, na.rm = T),
                 leitos_covid = sum(leitos_covid, na.rm = T)) %>%
       arrange(data_atualizacao)
-  
+    
     ordem <- as.character(format(aux$data_atualizacao, "%d-%m"))
     
     aux$data_atualizacao <- as.character(format(aux$data_atualizacao, "%d-%m"))
@@ -1233,7 +1310,6 @@ server <- function(input, output) {
     } else if(input$var_leitos == "lotacao") {
       cor <- "#605ca8"
       texto <- "Lotação média"
-      aux$var <- paste0(round(aux$var,4)*100,"%")
     } else {
       cor <- "#d81b60"
       texto <- "Leitos ocupados COVID-19"
@@ -1244,7 +1320,12 @@ server <- function(input, output) {
       scale_x_discrete(limits = ordem) +
       labs(x = "Dia", y = texto) +
       theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
-      
+    
+    if(input$var_leitos == "lotacao") {
+      p <- p +
+        scale_y_continuous(labels=percent, limits = c(0,min(max(aux$lotacao)+0.1,1)))
+    }
+    
     ggplotly(p)
     
   })
@@ -1276,6 +1357,18 @@ server <- function(input, output) {
       color = "aqua",
       href = "http://ti.saude.rs.gov.br/covid19/leitos/dashboard.php",
       width = 12
+    )
+    
+  })
+  
+  output$licenca <- renderValueBox({
+    
+    valueBox("Licença:", 
+             subtitle = "(CC BY-SA 4.0)", 
+             icon = icon("creative-commons"), 
+             color = "aqua", 
+             width = 12,
+             href = "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
     )
     
   })
