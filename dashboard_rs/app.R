@@ -78,6 +78,8 @@ widgetUserBoxx <- function (..., title = NULL, subtitle = NULL, type = NULL, bac
                                                                                                                                                   else "box-footer no-padding", footer)))
 }
 
+data_hora_atual <- str_c("Última atualização em ",format(Sys.time(), "%H:%M %d/%m/%Y"))
+
 ##############################################################################################
 # Aplicativo
 ##############################################################################################
@@ -104,7 +106,11 @@ body <- dashboardBody(
     tabItem("mapa_covid_rs",
             fluidPage(
               titlePanel(
-                h1("Mapa com dados do COVID-19 Rio Grande do Sul")
+                column(
+                  width = 12,
+                  h1("Dados do COVID-19 Rio Grande do Sul"),
+                  h5(em(data_hora_atual))
+                )
               ),
               
               # reescrevendo as cores default para as que eu quero nas boxes de óbitos cartório
@@ -118,27 +124,36 @@ body <- dashboardBody(
               ),
               fluidRow(
                 column(
-                  width = 9,
-                  fluidRow(
-                    column(
-                      width = 6,
-                      h3("Selecione a variável de interesse"),
-                      radioButtons("var_covid",
-                                   label = NULL,
-                                   choices = list("Confirmados" = "confirmed","Confirmados por 100mil hab." = "confirmed_per_100k_inhabitants","Óbitos" = "deaths","Letalidade" = "death_rate"),
-                                   selected = "confirmed",
-                                   inline = T)
-                    ),
-                    column(
-                      width = 6,
-                      h3("Selecione o tipo de agrupamento"),
-                      radioButtons("var_covid_2",
-                                   label = NULL,
-                                   choices = list("Municípios" = "municipio", "Mesoregiões" = "meso_regiao"),
-                                   selected = "municipio",
-                                   inline = T),
-                    )
-                  ),
+                  width = 4,
+                  h3("Selecione a variável de interesse"),
+                  radioButtons("var_covid",
+                               label = NULL,
+                               choices = list("Confirmados" = "confirmed","Confirmados por 100mil hab." = "confirmed_per_100k_inhabitants","Óbitos" = "deaths","Letalidade" = "death_rate"),
+                               selected = "confirmed",
+                               inline = T)
+                ),
+                column(
+                  width = 4,
+                  h3("Selecione o tipo de agrupamento"),
+                  radioButtons("var_covid_2",
+                               label = NULL,
+                               choices = list("Municípios" = "municipio", "Mesoregiões" = "meso_regiao"),
+                               selected = "municipio",
+                               inline = T),
+                ),
+                column(
+                  width = 4,
+                  h3("Selecione as regiões de interesse"),
+                  checkboxGroupInput("filtro_covid",
+                                     label = NULL,
+                                     choices = levels(as.factor(dados_covid_rs$mesorregiao)),
+                                     selected = levels(as.factor(dados_covid_rs$mesorregiao)),
+                                     inline = T),
+                )
+              ),
+              fluidRow(
+                column(
+                  width = 7,
                   mainPanel(
                     leafletOutput("mapa_covid", height = "500px"),
                     HTML("<br><br><br>"), # para dar um espaço entre os gráficos
@@ -146,16 +161,16 @@ body <- dashboardBody(
                   )
                 ),
                 column(
-                  width = 3,
+                  width = 5,
                   box(
-                    dataTableOutput("table_covid", height = "580px"),
+                    plotlyOutput("grafico_covid", height = "500px"),
                     width = 12
                   )
                 )
               ),
               fluidRow(
                 column(
-                  width = 12,
+                  width = 9,
                   tabBox(id = "tab_covid",
                          width = 12,
                          title = NULL,
@@ -167,6 +182,13 @@ body <- dashboardBody(
                          )
                          
                   )
+                ),
+                column(
+                  width = 3,
+                  box(
+                    dataTableOutput("table_covid", height = "480px"),
+                    width = 12
+                  )
                 )
               )
             )
@@ -177,9 +199,12 @@ body <- dashboardBody(
               # pegando de alguma forma htmlzada a versão mais recente dos ícones font awesome
               
               tags$script(src = "https://kit.fontawesome.com/ab15947b75.js", crossorigin="anonymous"), 
-              
               titlePanel(
-                h1("Mapa com dados dos leitos UTI Adulto no Rio Grande do Sul")
+                column(
+                  width = 12,
+                  h1("Dados dos leitos UTI - Adulto no Rio Grande do Sul"),
+                  h5(em(data_hora_atual))
+                )
               ),
               fluidRow(
                 valueBoxOutput("box_tot", width = 3),
@@ -197,7 +222,7 @@ body <- dashboardBody(
                       radioButtons("var_leitos",
                                    label = NULL,
                                    choices = list("Leitos totais" = "leitos_total","Leitos disponíveis" = "leitos_disponiveis","Lotação" = "lotacao", "Leitos ocupados COVID-19" = "leitos_covid"),
-                                   selected = "leitos_total",
+                                   selected = "leitos_disponiveis",
                                    inline = T)
                     ),
                     column(
@@ -519,6 +544,62 @@ server <- function(input, output) {
   })
   
   #############
+  # grafico_covid
+  
+  output$grafico_covid <- renderPlotly({
+    
+    var <- rlang::sym(input$var_covid)
+    var2 <- rlang::sym(input$var_covid_2)
+    
+    if(input$var_covid == "confirmed") {
+      cor <- "#dd4b39"
+      texto <- "Casos confirmados"
+    } else if(input$var_covid == "confirmed_per_100k_inhabitants") {
+      cor <- "#ff851b"
+      texto <- "Confirmados por 100k habitantes"
+    } else if(input$var_covid == "deaths"){
+      cor <- "#757474"
+      texto <- "Óbitos"
+    } else {
+      cor <- "#605ca8"
+      texto <- "Letalidade"
+    }
+    
+    pop_rs <- dados_covid_rs %>%
+      filter(place_type == "state")
+    
+    aux <- dados_covid_rs %>%
+      filter(place_type == "city") %>%
+      filter(mesorregiao %in% input$filtro_covid) %>%
+      filter(is_last) %>%
+      group_by(!!var2) %>%
+      summarise(confirmed = sum(confirmed), deaths = sum(deaths), estimated_population_2019 = sum(estimated_population_2019),
+                death_rate = sum(deaths)/sum(confirmed), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1]) %>%
+      arrange(desc(!!var))
+      
+    if(input$var_covid == "death_rate") {
+      aux <- aux %>%
+        filter(!is.na(!!var))
+      aux$death_rate <- paste0(100*round(aux$death_rate,4),"%")
+    }
+    
+    aux <- as.data.frame(aux)
+    
+    aux <- aux[1:25,]
+    
+    ordem <- aux[,input$var_covid_2]
+    
+    p <- ggplot(aux, aes(x = !!var2, y = !!var)) +
+      geom_col(fill = cor) +
+      labs(x = input$var_covid_2, y = texto) +
+      scale_x_discrete(limits = rev(ordem)) +
+      coord_flip()
+    
+    ggplotly(p)
+    
+  })
+  
+  #############
   # table_covid
   
   output$table_covid <- renderDataTable({
@@ -543,11 +624,13 @@ server <- function(input, output) {
       
       aux <- dados_covid_rs %>%
         filter(place_type == "city") %>%
+        filter(mesorregiao %in% input$filtro_covid) %>%
         filter(is_last) %>%
         arrange(desc(!!var))
       
       if(input$var_covid == "death_rate") {
         aux <- aux %>%
+          filter(mesorregiao %in% input$filtro_covid) %>%
           filter(!is.na(!!var))
         aux$death_rate <- paste0(100*round(aux$death_rate,4),"%")
       }
@@ -558,9 +641,9 @@ server <- function(input, output) {
         class = "compact",
         colnames = c("Município",texto),
         options = list(
-          dom = "tS", 
+          dom = "tfS", 
           ordering = F,
-          scrollY = "560px",
+          scrollY = "460px",
           paging = FALSE
         )
       ) %>%
@@ -577,6 +660,7 @@ server <- function(input, output) {
       
       aux <- dados_covid_rs %>%
         filter(place_type == "city") %>%
+        filter(mesorregiao %in% input$filtro_covid) %>%
         filter(is_last) %>%
         group_by(mesorregiao) %>%
         summarise(confirmed = sum(confirmed), deaths = sum(deaths), estimated_population_2019 = sum(estimated_population_2019),
@@ -618,9 +702,16 @@ server <- function(input, output) {
   output$serie_covid_dia <- renderPlotly({
 
     var <- rlang::sym(input$var_covid)
+    
+    pop_rs <- dados_covid_rs %>%
+      filter(place_type == "state")
       
     aux <- dados_covid_rs %>%
-      filter(place_type == "state") %>%
+      filter(place_type == "city") %>%
+      filter(mesorregiao %in% input$filtro_covid) %>%
+      group_by(date) %>%
+      summarise(confirmed = sum(confirmed), deaths = sum(deaths), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1],
+                death_rate = sum(deaths)/sum(confirmed)) %>%
       arrange(date)
     
     if(input$var_covid == "confirmed") {
@@ -629,9 +720,12 @@ server <- function(input, output) {
     } else if(input$var_covid == "confirmed_per_100k_inhabitants") {
       cor <- "#ff851b"
       texto <- "Confirmados por 100k habitantes"
-    } else {
+    } else if(input$var_covid == "deaths") {
       cor <- "#757474"
       texto <- "Óbitos"
+    } else {
+      cor <- "#605ca8"
+      texto <- "Letalidade"
     }
     
     
@@ -690,16 +784,26 @@ server <- function(input, output) {
     } else if(input$var_covid == "confirmed_per_100k_inhabitants") {
       cor <- "#ff851b"
       texto <- "Confirmados por 100k habitantes"
-    } else {
+    } else if(input$var_covid == "deaths") {
       cor <- "#757474"
       texto <- "Óbitos"
-    } 
-      
+    } else {
+      cor <- "#605ca8"
+      texto <- "Letalidade"
+    }
+    
+    pop_rs <- dados_covid_rs %>%
+      filter(place_type == "state")
+    
     aux <- dados_covid_rs %>%
-      filter(place_type == "state") %>%
-      group_by(semana_epidemiologica) %>%
+      filter(place_type == "city") %>%
+      filter(mesorregiao %in% input$filtro_covid) %>%
+      group_by(semana_epidemiologica, municipio) %>%
       filter(date == max(date)) %>%
       ungroup() %>%
+      group_by(semana_epidemiologica) %>%
+      summarise(confirmed = sum(confirmed), deaths = sum(deaths), confirmed_per_100k_inhabitants = sum(confirmed)*100000/pop_rs$estimated_population_2019[1],
+                death_rate = sum(deaths)/sum(confirmed)) %>%
       arrange(semana_epidemiologica)
     
     ordem <- as.character(aux$semana_epidemiologica)
@@ -1112,8 +1216,8 @@ server <- function(input, output) {
     
     aux <- aux %>%
       group_by(data_atualizacao) %>%
-      summarise(leitos_total = sum(leitos_total), leitos_disponiveis = sum(leitos_disponiveis), lotacao = sum(leitos_internacoes)/sum(leitos_total),
-                leitos_covid = sum(leitos_covid)) %>%
+      summarise(leitos_total = sum(leitos_total, na.rm = T), leitos_disponiveis = sum(leitos_disponiveis, na.rm = T), lotacao = sum(leitos_internacoes, na.rm = T)/sum(leitos_total, na.rm = T),
+                leitos_covid = sum(leitos_covid, na.rm = T)) %>%
       arrange(data_atualizacao)
   
     ordem <- as.character(format(aux$data_atualizacao, "%d-%m"))
