@@ -8,6 +8,7 @@ library(spdep)
 library(dplyr)
 library(INLA)
 
+# modelo BYM sem covariáveis, podendo ser feito para cada semana epidemiologica disponível: 
 
 BYM2_semana_ep <- function(sem_ep){
   
@@ -18,8 +19,7 @@ BYM2_semana_ep <- function(sem_ep){
     cbind(idarea = 1:nrow(temp))
   
   nb <- poly2nb(temp)
-  head(nb)
-  
+
   # PC priori:
   prior <- list(
     prec = list(
@@ -76,4 +76,4 @@ BYM2_semana_ep <- function(sem_ep){
 }
 
 
-resultado = BYM2_semana_ep(16)
+BYM_SC = BYM2_semana_ep(17)
