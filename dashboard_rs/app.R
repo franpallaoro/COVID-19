@@ -993,10 +993,10 @@ server <- function(input, output) {
       if (input$var_leitos != "lotacao") {
         aux_mapa <- leitos_uti %>%
           filter(!is.na(!!var)) %>%
-          filter(!!var != 0) %>%
           group_by(cnes, LATITUDE, LONGITUDE, hospital) %>%
           filter(data_atualizacao == max(data_atualizacao)) %>%
-          summarise(var = sum(!!var))
+          summarise(var = sum(!!var)) %>%
+          filter(var != 0)
       } else {
         aux_mapa <- leitos_uti %>%
           filter(!is.na(!!var)) %>%
