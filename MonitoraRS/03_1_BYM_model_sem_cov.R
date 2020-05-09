@@ -8,6 +8,8 @@ library(spdep)
 library(dplyr)
 library(INLA)
 
+source('01_org_data.R')
+
 # modelo BYM sem covariáveis, podendo ser feito para cada semana epidemiologica disponível: 
 
 BYM2_semana_ep <- function(sem_ep){
@@ -42,38 +44,43 @@ BYM2_semana_ep <- function(sem_ep){
   temp$LL <- res$summary.fitted.values[, "0.025quant"]
   temp$UL <- res$summary.fitted.values[, "0.975quant"]
   
+  aux = as.data.frame(temp[,c('RR', 'UL', 'LL')])[1:3]
   
   gRR <- ggplot() +
     geom_sf(data = temp, aes(fill = RR), size = .05) +
     theme_map() +
-    labs(fill = 'RR', title = paste0("COVID-19 - Municípios RS - Risco Relativo - 
-                                     Semana Epidemiológica ", unique(temp$time))) +
+    labs(fill = 'RR', title = 'Risco Relativo') +
     theme(legend.position = "right") + 
-    scale_fill_gradient(low = viridis::viridis(n = 2)[1], high = viridis::viridis(n = 2)[2]) + 
+    scale_fill_gradient(low = viridis::viridis(n = 2)[1], high = viridis::viridis(n = 2)[2], 
+                        breaks = round(seq(0, ceiling(max(aux)), 3),2), 
+                        limits = c(0, ceiling(max(aux)))) + 
     theme(panel.border = element_rect(colour = "black", fill = NA, size = 1))
   
   gUL <- ggplot() +
     geom_sf(data = temp, aes(fill = UL), size = .05) +
     theme_map() +
-    labs(fill = 'UL', title = paste0("COVID-19 - Municípios RS - Intervalo de Credibilidade 97.5% - 
-       Semana Epidemiológica ", unique(temp$time))) +
+    labs(fill = 'UL', title = 'Intervalo de Credibilidade 97.5%') +
     theme(legend.position = "right") + 
-    scale_fill_gradient(low = viridis::viridis(n = 2)[1], high = viridis::viridis(n = 2)[2]) + 
+    scale_fill_gradient(low = viridis::viridis(n = 2)[1], high = viridis::viridis(n = 2)[2], 
+                        breaks = round(seq(0, ceiling(max(aux)), 3),2), 
+                        limits = c(0, ceiling(max(aux)))) + 
     theme(panel.border = element_rect(colour = "black", fill = NA, size = 1))
   
   gLL <- ggplot() +
     geom_sf(data = temp, aes(fill = LL), size = .05) +
     theme_map() +
-    labs(fill = 'LL', title = paste0("COVID-19 - Municípios RS - Intervalo de Credibilidade 2.5% - 
-       Semana Epidemiológica ", unique(temp$time))) +
+    labs(fill = 'LL', title = 'Intervalo de Credibilidade 2.5%') +
     theme(legend.position = "right") + 
-    scale_fill_gradient(low = viridis::viridis(n = 2)[1], high = viridis::viridis(n = 2)[2]) + 
+    scale_fill_gradient(low = viridis::viridis(n = 2)[1], high = viridis::viridis(n = 2)[2], 
+                        breaks = round(seq(0, ceiling(max(aux)), 3),2), 
+                        limits = c(0, ceiling(max(aux)))) + 
     theme(panel.border = element_rect(colour = "black", fill = NA, size = 1))
   
-  gr <- list()
-  gr <- list(LL = gLL, RR = gRR, UL = gUL)
+  gridExtra::grid.arrange(gLL, gRR, gUL, ncol = 3, 
+                          top = paste0("COVID-19 - Municípios RS - Semana Epidemiológica ", 
+                                       unique(temp$time)))
   
 }
 
 
-BYM_SC = BYM2_semana_ep(17)
+BYM2_semana_ep(19)
