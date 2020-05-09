@@ -293,7 +293,7 @@ body <- dashboardBody(
                   type = 2,
                   width = 4,
                   src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/gabriel.jpg?raw=true',
-                  color = "orange",
+                  color = "red",
                   "Contato: gabrielholmersaul@gmail.com",
                   footer_padding = F
                 )
@@ -316,7 +316,7 @@ body <- dashboardBody(
                   type = 2,
                   width = 4,
                   src =  'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/juliana.jpeg?raw=true',
-                  color = "orange",
+                  color = "red",
                   "Contato: julianass.estatistica@gmail.com",
                   footer_padding = F
                 ),
@@ -329,7 +329,7 @@ body <- dashboardBody(
                   width = 4,
                   src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/marcia.png?raw=true',
                   color = "red",
-                  "Contato: mhbarbian@gmail.com",
+                  "Contato: mhbarbian@ufrgs.br",
                   footer_padding = F
                 ), 
                 
@@ -339,7 +339,7 @@ body <- dashboardBody(
                   type = 2,
                   width = 4,
                   src = 'https://github.com/franpallaoro/COVID-19/blob/ssjuliana/Dashboard/fotos/rodrigo.jpg?raw=true',
-                  color = "orange",
+                  color = "red",
                   "Contato: citton.padilha@ufrgs.br",
                   footer_padding = F
                 ), 
