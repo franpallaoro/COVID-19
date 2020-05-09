@@ -104,7 +104,8 @@ caminhos <- str_c(pasta, arquivos)
 # ah e também a coluna Cód q possui o código cnes do hospital está escrita como Cód IBGE agr
 # incrivel como sempre conseguem arranjar algum novo problema com esses dados da SES
 
-arquivos_troca_nome <- c("leitos_dados_ses_05_05.csv","leitos_dados_ses_06_05.csv","leitos_dados_ses_07_05.csv")
+arquivos_troca_nome <- c("leitos_dados_ses_05_05.csv","leitos_dados_ses_06_05.csv","leitos_dados_ses_07_05.csv",
+                         "leitos_dados_ses_08_05.csv")
 caminhos_troca_nome <- str_c(pasta,arquivos_troca_nome)
 
 arruma_nome <- map(caminhos_troca_nome, read_csv) %>%
