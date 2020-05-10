@@ -288,6 +288,19 @@ body <- dashboardBody(
     tabItem("sobre",
             fluidPage(
               fluidRow(
+                
+                widgetUserBox(
+                  title = "www.ufrgs.br/covidmetrika",
+                  type = 2,
+                  width = 12,
+                  color = "blue",
+                  "Aplicativo desenvolvido pelo covidMetrika, grupo composto por 
+                  estudantes e professores do Departamento de Estatística e Programa de Pós-Graduação 
+                  em Epidemiologia da Universidade Federal do Rio Grande do Sul.",
+                  footer_padding = F
+                ),
+                
+                
                 widgetUserBox(
                   title = tags$b("Franciele Lobo Pallaoro"),
                   subtitle = "Estudante de Estatística da UFRGS",
