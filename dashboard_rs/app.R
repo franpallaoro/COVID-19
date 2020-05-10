@@ -204,32 +204,47 @@ body <- dashboardBody(
               ),
               fluidRow(
                 column(
-                  width = 9,
-                  fluidRow(
-                    column(
-                      width = 6,
-                      h3("Selecione a variável de interesse"),
-                      radioButtons("var_leitos",
-                                   label = NULL,
-                                   choices = list("Leitos totais" = "leitos_total","Leitos disponíveis" = "leitos_disponiveis","Lotação" = "lotacao", "Leitos ocupados COVID-19" = "leitos_covid"),
-                                   selected = "leitos_disponiveis",
-                                   inline = T)
-                    ),
-                    column(
-                      width = 6,
-                      h3("Selecione o tipo de agrupamento"),
-                      radioButtons("var_leitos_2",
-                                   label = NULL,
-                                   choices = list("Hospital" = "hospital", "Municípios" = "municipio", "Mesoregiões" = "mesorregiao"),
-                                   selected = "municipio",
-                                   inline = T),
-                    )
-                  ),
+                  width = 4,
+                  h3("Selecione a variável de interesse"),
+                  radioButtons("var_leitos",
+                               label = NULL,
+                               choices = list("Leitos totais" = "leitos_total","Leitos disponíveis" = "leitos_disponiveis","Lotação" = "lotacao", "Leitos ocupados COVID-19" = "leitos_covid"),
+                               selected = "leitos_disponiveis",
+                               inline = T)
+                ),
+                column(
+                  width = 4,
+                  h3("Selecione o tipo de agrupamento"),
+                  radioButtons("var_leitos_2",
+                               label = NULL,
+                               choices = list("Hospital" = "hospital", "Municípios" = "municipio", "Mesoregiões" = "mesorregiao"),
+                               selected = "municipio",
+                               inline = T),
+                ),
+                column(
+                  width = 4,
+                  h3("Selecione as regiões de interesse"),
+                  checkboxGroupInput("filtro_covid",
+                                     label = NULL,
+                                     choices = levels(as.factor(dados_covid_rs$mesorregiao)),
+                                     selected = levels(as.factor(dados_covid_rs$mesorregiao)),
+                                     inline = T),
+                ),
+                column(
+                  width = 7,
                   mainPanel(
                     leafletOutput("mapa_leitos", height = "500px"),
                     HTML("<br><br><br>"), # para dar um espaço entre os gráficos
                     width = 12
                   )
+                ),
+                column(
+                  width = 5,
+                  plotlyOutput("grafico_leitos", height = "500px")
+                ),
+                column(
+                  width = 9,
+                  uiOutput("ui_serie_leitos")
                 ),
                 column(
                   width = 3,
@@ -238,9 +253,6 @@ body <- dashboardBody(
                     width = 12
                   )
                 )
-              ),
-              fluidRow(
-                uiOutput("ui_serie_leitos")
               )
             )
     ),
@@ -1078,7 +1090,9 @@ server <- function(input, output) {
         paleta <- RColorBrewer::brewer.pal(n=6,"Purples")
         paleta <- paleta[2:6]
         
-        pal <- colorBin(palette=paleta, domain = y_quantidade, bins = c(0,0.2,0.4,0.6,0.8,round(max(y_quantidade, na.rm = T),4)), na.color = "#ffffff")
+        intervalos <- classInt::classIntervals(var = y_quantidade, n = 6, style = "fisher")
+        
+        pal <- colorBin(palette=paleta, domain = y_quantidade, bins = intervalos[["brks"]], na.color = "#ffffff")
         
         leaflet(aux_mapa) %>%
           addTiles(urlTemplate = "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", attribution = 'Google') %>%
@@ -1099,7 +1113,7 @@ server <- function(input, output) {
                         direction = "auto"))   %>%
           addLegend(pal = pal, values = paste0(100*round(y_quantidade,4),"%"), labFormat = function(type, cuts, p) {  # legenda para colorQuantile
             n = length(cuts)
-            paste0(cuts[-n]*100,"%", " &ndash; ", cuts[-1]*100,"%")},
+            paste0(round(cuts[-n]*100,2),"%", " &ndash; ", round(cuts[-1]*100,2),"%")},
             title = texto,
             labels = ~variavel,
             position = "bottomright")
@@ -1144,6 +1158,92 @@ server <- function(input, output) {
       
       
     }
+  })
+  
+  #############
+  # grafico_leitos
+  
+  output$grafico_leitos <- renderPlotly({
+    
+    var <- rlang::sym(input$var_leitos)
+    var2 <- rlang::sym(input$var_leitos_2)
+    
+    if (input$var_leitos == "leitos_total") {
+      cor <- "#00a65a"
+      texto <- "Total de leitos"
+    } else if (input$var_leitos == "leitos_disponiveis") {
+      cor <- "#0073b7"
+      texto <- "Leitos disponíveis"
+    } else if(input$var_leitos == "lotacao") {
+      cor <- "#605ca8"
+      texto <- "Lotação média"
+    } else {
+      cor <- "#d81b60"
+      texto <- "Leitos ocupados COVID-19"
+    }
+    
+    if (input$var_leitos_2 != "hospital") {
+      if(input$var_leitos != "lotacao") {
+        aux <- leitos_uti %>%
+          group_by(cnes) %>%
+          filter(data_atualizacao == max(data_atualizacao)) %>%
+          ungroup() %>%
+          select(c(input$var_leitos,input$var_leitos_2))
+        
+        aux <- aux %>%
+          group_by(!!var2) %>%
+          summarise(var = sum(!!var)) %>%
+          mutate_all(~ replace(., . == 0, NA)) %>%
+          filter_all(all_vars(!is.na(.))) %>%
+          arrange(desc(var))
+      } else {
+        aux <- leitos_uti %>%
+          group_by(cnes) %>%
+          filter(data_atualizacao == max(data_atualizacao)) %>%
+          ungroup() %>%
+          select(c(leitos_total,leitos_internacoes,input$var_leitos_2))
+        
+        aux <- aux %>%
+          group_by(!!var2) %>%
+          summarise(var = ifelse(sum(leitos_total) == 0, NA, sum(leitos_internacoes)/sum(leitos_total))) %>%
+          mutate_all(~ replace(., . == 0, NA)) %>%
+          filter_all(all_vars(!is.na(.))) %>%
+          arrange(desc(var))
+      }
+      
+      
+    } else {
+      aux <- leitos_uti %>%
+        group_by(cnes) %>%
+        filter(data_atualizacao == max(data_atualizacao)) %>%
+        ungroup() %>%
+        select(c(input$var_leitos,"hospital","cnes")) %>%
+        mutate(var = !!var) %>%
+        filter(!is.na(var)) %>%
+        arrange(desc(var))
+      
+    }
+    
+
+    aux <- as.data.frame(aux)
+    
+    aux <- aux[1:25,]
+    
+    ordem <- aux[,input$var_leitos_2]
+      
+    p <- ggplot(aux, aes(x = !!var2, y = var)) +
+      geom_col(fill = cor) +
+      labs(x = input$var_leitos_2, y = input$var_leitos) +
+      scale_x_discrete(limits = rev(ordem)) +
+      coord_flip()
+    
+    if(input$var_leitos == "lotacao") {
+      p <- p +
+        scale_y_continuous(labels=percent)
+    }
+    
+    ggplotly(p)
+    
   })
   
   #############
@@ -1226,7 +1326,7 @@ server <- function(input, output) {
       class = "compact",
       colnames = c(text2,texto),
       options = list(
-        dom = "tS", 
+        dom = "tfS", 
         ordering = F,
         scrollY = "530px",
         paging = FALSE
@@ -1280,7 +1380,6 @@ server <- function(input, output) {
   
   output$serie_leitos <- renderPlotly({
     
-    var <- rlang::sym(input$var_leitos)
     var2 <- rlang::sym(input$var_leitos_2)
     
     aux <- leitos_uti
@@ -1293,38 +1392,35 @@ server <- function(input, output) {
     
     aux <- aux %>%
       group_by(data_atualizacao) %>%
-      summarise(leitos_total = sum(leitos_total, na.rm = T), leitos_disponiveis = sum(leitos_disponiveis, na.rm = T), lotacao = sum(leitos_internacoes, na.rm = T)/sum(leitos_total, na.rm = T),
-                leitos_covid = sum(leitos_covid, na.rm = T)) %>%
-      arrange(data_atualizacao)
+      summarise(`Leitos com covid` = sum(leitos_covid, na.rm = T), `Leitos sem covid` = sum(leitos_internacoes, na.rm =T) - sum(leitos_covid, na.rm = T),
+                `Total leitos` = sum(leitos_total, na.rm = T), lotacao = sum(leitos_internacoes, na.rm = T)/sum(leitos_total, na.rm = T)) %>%
+      arrange(data_atualizacao) %>%
+      pivot_longer(-data_atualizacao, names_to = "leito_tipo", values_to = "Quantidade")
     
-    ordem <- as.character(format(aux$data_atualizacao, "%d-%m"))
+    ordem <- as.character(format(unique(aux$data_atualizacao), "%d-%m"))
     
     aux$data_atualizacao <- as.character(format(aux$data_atualizacao, "%d-%m"))
     
-    if (input$var_leitos == "leitos_total") {
-      cor <- "#00a65a"
-      texto <- "Total de leitos"
-    } else if (input$var_leitos == "leitos_disponiveis") {
-      cor <- "#0073b7"
-      texto <- "Leitos disponíveis"
-    } else if(input$var_leitos == "lotacao") {
-      cor <- "#605ca8"
-      texto <- "Lotação média"
-    } else {
-      cor <- "#d81b60"
-      texto <- "Leitos ocupados COVID-19"
-    }
+    leitos_total <- aux %>%
+      filter(leito_tipo == "Total leitos")
     
-    p <- ggplot(aux) +
-      geom_col(aes(x = data_atualizacao, y = !!var), fill = cor) +
-      scale_x_discrete(limits = ordem) +
-      labs(x = "Dia", y = texto) +
-      theme(axis.text.x = element_text(angle=45,size=8, vjust = 0.5))
+    lotacao_media <- aux %>%
+      filter(leito_tipo == "lotacao")
     
-    if(input$var_leitos == "lotacao") {
-      p <- p +
-        scale_y_continuous(labels=percent, limits = c(0,min(max(aux$lotacao)+0.1,1)))
-    }
+    lotacao_media <- rep(lotacao_media$Quantidade, each = 2)
+    
+    aux <- aux %>%
+      filter(leito_tipo %in% c("Leitos sem covid","Leitos com covid"))
+    
+    paleta <- list("Leitos sem covid" = "#605ca8",
+                   "Leitos com covid" = "#d81b60")
+    
+    p <- ggplot() +
+      geom_col(data = aux, aes(x = data_atualizacao, y = Quantidade, fill = leito_tipo, label = lotacao_media), position = position_stack(reverse = T)) +
+      geom_line(data = leitos_total, aes(x = data_atualizacao, y = Quantidade, group = 1), color = "#00a65a") +
+      geom_point(data = leitos_total, aes(x = data_atualizacao, y = Quantidade), color = "#00a65a") +
+      scale_fill_manual(values = paleta) +
+      scale_x_discrete(limits = ordem)
     
     ggplotly(p)
     
