@@ -25,7 +25,12 @@ df$quad_sig <- ifelse(df$Sgini >= 0 & df$lag >= 0 & df$pval <= 0.05, 1,
 breaks <- seq(1, 5, 1)
 labels <- c("High-High", "Low-Low", "High-Low", "Low-High", "Not Signif.")
 np <- findInterval(df$quad_sig, breaks)
-colors <- c("red", "blue", "lightpink", "skyblue2", "white")
+
+colors <- c(viridis::viridis(n = 5)[5],
+            viridis::viridis(n = 5)[4], 
+            viridis::viridis(n = 5)[3], 
+            viridis::viridis(n = 5)[2], 
+            viridis::viridis(n = 5)[1])
 
 df$quad_sig <- ifelse(df$Sgini >= 0 & df$lag >= 0 & df$pval <= 0.05, 1, 
                       ifelse(df$Sgini <= 0 & df$lag <= 0 & df$pval <= 0.05, 2, 
@@ -37,13 +42,20 @@ df$quad_sig <- factor(df$quad_sig, levels = c(1,2,3, 4, 5),
                       labels = c("Alto-Alto", "Baixo-Baixo", "Alto-Baixo", 
                                  "Baixo-Alto", "Não Significativo"))    
 
-pal <- colorFactor(palette = c("red", "blue", "green", "green", "gray"), domain = df$quad_sig)
+pal <- colorFactor(palette = c(viridis::viridis(n = 5)[1],
+                               viridis::viridis(n = 5)[2], 
+                               viridis::viridis(n = 5)[3], 
+                               viridis::viridis(n = 5)[4], 
+                               viridis::viridis(n = 5)[5]), domain = df$quad_sig)
 
 
-ggplot() +
+glisa <- ggplot() +
   geom_sf(data = df, aes(fill = quad_sig), size = .05) +
   theme_map() +
-  scale_fill_manual(values = colors) + 
-  labs(title = "COVID-19 - Municípios RS") +
+  scale_fill_manual(values = colors, drop = FALSE) + 
+  labs(title = "COVID-19 - Municípios RS - LISA", fill = NULL) +
   theme(legend.position = "right") + 
   theme(panel.border = element_rect(colour = "black", fill = NA, size = 1))
+
+ggsave(filename = 'LISA.png', plot = glisa, 
+       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)

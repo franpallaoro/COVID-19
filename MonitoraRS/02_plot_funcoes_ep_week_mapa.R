@@ -1,7 +1,5 @@
 library(ggplot2)
 library(ggthemes)
-library(gganimate)
-
 
 #                             Semana Epidemiológica:
 #---------------------------------------------------
@@ -15,7 +13,7 @@ options <- c('Casos Confirmados',
 rs_week <- function(input){
   
   temp <- dep_week %>%
-    select(casos_cat, casos_p100_cat, SIR, time, municipios, geometry)
+    select(casos_cat, casos_p100_cat, SIR_cat, time, municipios, geometry)
   
   temp <- temp[,c(which(options == input), 4:6)]
   names(temp)[1] <- 'variavel'
@@ -23,27 +21,46 @@ rs_week <- function(input){
   
   if(which(options == input) == 1){
     virPallete <- viridis::viridis(n = 8)
+    
+    ggplot() +
+      geom_sf(data = subset(temp, subset = !is.na(variavel)),
+              aes(fill = variavel), size = .05) +
+      scale_fill_manual(values = virPallete) +
+      theme_map() +
+      labs(fill = paste0(options[which(options == input)]),
+           title = "COVID-19 - Municípios RS - 
+           Acumulado por semana epidemiológica") +
+      theme(legend.position = "right") +
+      facet_wrap( ~ time)
+    
   } else {
-    if(which(options == input) == 4) {
-      virPallete <- viridis::viridis(n = 2)
-    } else {
-        virPallete <- viridis::viridis(n = 7)
-        }
-    }
+
+      virPallete <- viridis::viridis(n = 7)
+      
+      ggplot() +
+        geom_sf(data = subset(temp, subset = !is.na(variavel)),
+                aes(fill = variavel), size = .05) +
+        scale_fill_manual(values = virPallete) +
+        theme_map() +
+        labs(fill = paste0(options[which(options == input)]),
+             title = "COVID-19 - Municípios RS - 
+             Acumulado por semana epidemiológica") +
+        theme(legend.position = "right") +
+        facet_wrap( ~ time)
+  }
   
-  ggplot() +
-    geom_sf(data = subset(temp, subset = !is.na(variavel)),
-            aes(fill = variavel), size = .05) +
-    scale_fill_manual(values = virPallete) +
-    theme_map() +
-    labs(fill = paste0(options[which(options == input)]),
-         title = "COVID-19 - Municípios RS - 
-         Acumulado por semana epidemiológica") +
-    theme(legend.position = "right") +
-    facet_wrap( ~ time)
 }
 
-rs_week(options[1])
+rs_week(options[3])
+
+ggsave(filename = 'Casos.png', plot = rs_week(options[1]), 
+       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
+
+ggsave(filename = 'Taxa.png', plot = rs_week(options[2]), 
+       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
+
+ggsave(filename = 'SIR.png', plot = rs_week(options[3]), 
+       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
 
 #---------------------------------------------------
 #                           Por Aglomerados Urbanos:
@@ -103,3 +120,7 @@ aglomerado_week <- function(input, input2){
 }
 
 aglomerado_week(input = options[1], input2 = agl_opt[1])
+
+
+ggsave(filename = 'Casos.png', plot = rs_week(options[1]), 
+       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)

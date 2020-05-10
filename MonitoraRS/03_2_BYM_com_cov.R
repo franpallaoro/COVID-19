@@ -101,3 +101,9 @@ gLL <- ggplot() +
 gridExtra::grid.arrange(gLL, gRR, gUL, ncol = 3, 
                         top = paste0("COVID-19 - Municípios RS - Semana Epidemiológica ", 
                                        unique(dados$time)))
+
+
+ggsave(filename = 'BYM.png', plot = gridExtra::grid.arrange(gLL, gRR, gUL, ncol = 3, 
+                                                            top = paste0("COVID-19 - Municípios RS - Semana Epidemiológica ", 
+                                                                         unique(dados$time))), 
+       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)

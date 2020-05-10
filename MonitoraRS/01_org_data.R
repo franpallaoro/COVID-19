@@ -206,8 +206,8 @@ covid_cumsum$letalidade <- ifelse(is.na(covid_cumsum$letalidade) == 'TRUE',
 covid_cumsum <- covid_cumsum %>%
   mutate(casos_p100_cat = cut(x = casos_p100,
                               breaks = c(-Inf, 0, 5, 10, 20, 40, 80, Inf),
-                              labels = c("0", "1 a 5", "6 a 10", "11 a 20", 
-                                         "21 a 40", "41 a 80", "80+")),
+                              labels = c("0", "1 a 5", "5 a 10", "10 a 20", 
+                                         "20 a 40", "40 a 80", "80+")),
          casos_cat = cut(x = casos,
                          breaks = c(-Inf, 0, 5, 10, 20, 40, 80, 160, Inf),
                          labels = c("0", "1 a 5", "6 a 10", "11 a 20", "21 a 40", 
@@ -224,8 +224,9 @@ covid_cumsum <- covid_cumsum %>%
                                      "10% a 20%", "20% a 50%", "+50%")), 
          
          SIR_cat = cut(x = SIR, 
-                       breaks = c(-Inf, 1, Inf), 
-                       labels = c('SIR < 1', 'SIR > 1')))
+                       breaks = c(-Inf, 0, 1, 3, 5, 7, 10, Inf), 
+                       labels = c("0", "0 a 1", "1 a 3", "3 a 5", 
+                                  "5 a 7", "7 a 10", "10+")))
 
 #---------------------------------------------------
 # banco de dados final:
@@ -247,4 +248,3 @@ rm(dep)
 # dep_week: banco de dados com as informações do covid_cumsum 
 # e as informações do dep, que diz respeito a geometry de cada 
 # cidade.
-
