@@ -85,10 +85,14 @@ data_state <- covid %>%
 obitos_cartorio <- readRDS(here::here("dados",'obitos_br_uf.rds')) %>%
   filter(date >= "2020-03-16") # filtrando a partir do primeiro caso
 
-names(obitos_cartorio) <- c("Estado","Data","Acumulado mortes COVID-19","Acumulado mortes Pneumonia 2019","Acumulado mortes Pneumonia 2020",
+names(obitos_cartorio) <- c("Estado","Data","Acumulado mortes COVID-19","Acumulado mortes indeterminadas 2019","Acumulado mortes indeterminadas 2020",
+                            "Acumulado mortes outras 2019","Acumulado mortes outras 2020","Acumulado mortes Pneumonia 2019","Acumulado mortes Pneumonia 2020",
                             "Acumulado mortes por falha respiratória 2019","Acumulado mortes por falha respiratória 2020",
-                            "Semana_epidemiologica_2019","Semana_epidemiologica_2020","Mortes COVID-19","Mortes Pneumonia 2019",
-                            "Mortes Pneumonia 2020","Mortes por falha respiratória 2019","Mortes por falha respiratória 2020")
+                            "Acumulado mortes sars 2019","Acumulado mortes sars 2020","Acumulado mortes septicemia 2019","Acumulado mortes septicemia 2020",
+                            "Acumulado mortes total 2019","Acumulado mortes total 2020","Semana_epidemiologica_2019","Semana_epidemiologica_2020",
+                            "Mortes COVID-19","Mortes indeterminadas 2019","Mortes indeterminadas 2020","Mortes outras 2019","Mortes outras 2020",
+                            "Mortes Pneumonia 2019","Mortes Pneumonia 2020","Mortes por falha respiratória 2019","Mortes por falha respiratória 2020",
+                            "Mortes sars 2019","Mortes sars 2020","Mortes septicemia 2019","Mortes septicemia 2020","Mortes total 2019","Mortes total 2020")
 
 
 # banco de dados com total de casos no brasil por dia 2.0
@@ -611,18 +615,21 @@ plot_cart <- function(input) {
     text2 <- "Número de óbitos por semana epidemiólogica"
   }
   
+  valores <- c("Mortes Pneumonia 2019","Mortes Pneumonia 2020","Mortes por falha respiratória 2019",
+               "Mortes por falha respiratória 2020","Mortes COVID-19")
+  
   aux <- obitos_cartorio %>%
     group_by(!!var) %>%
-    summarise_at(names(obitos_cartorio)[c(3:7,10:14)],sum) %>%
+    summarise_at(names(obitos_cartorio)[c(3:17,20:34)],sum) %>%
     pivot_longer(
       cols = -c(!!var),
       names_to = "disease_type",
       values_to = "deaths"
     ) %>%
-    filter(!str_detect(disease_type,"^Acumulado"))
+    filter(!str_detect(disease_type,"^Acumulado")) %>%
+    filter(disease_type %in% valores)
   
-  valores <- c("Mortes Pneumonia 2019","Mortes Pneumonia 2020","Mortes por falha respiratória 2019",
-               "Mortes por falha respiratória 2020","Mortes COVID-19")
+  
   
   paleta <- RColorBrewer::brewer.pal("Paired", n = 5)
   names(paleta) <- valores
@@ -681,18 +688,21 @@ obitos_separados <- function(input, escolha){
     
   }
   
+  valores <- c("Mortes Pneumonia 2019","Mortes Pneumonia 2020","Mortes por falha respiratória 2019",
+               "Mortes por falha respiratória 2020","Mortes COVID-19")
+  
   aux <- obitos_cartorio %>%
     group_by(!!var) %>%
-    summarise_at(names(obitos_cartorio)[c(3:7,10:14)],sum) %>%
+    summarise_at(names(obitos_cartorio)[c(3:17,20:34)],sum) %>%
     pivot_longer(
       cols = -c(!!var),
       names_to = "disease_type",
       values_to = "deaths"
     ) %>%
-    filter(!str_detect(disease_type,"^Acumulado"))
+    filter(!str_detect(disease_type,"^Acumulado")) %>%
+    filter(disease_type %in% valores)
   
-  valores <- c("Mortes Pneumonia 2019","Mortes Pneumonia 2020","Mortes por falha respiratória 2019",
-               "Mortes por falha respiratória 2020","Mortes COVID-19")
+  
   
   paleta <- RColorBrewer::brewer.pal("Paired", n = 5)
   names(paleta) <- valores
