@@ -105,7 +105,7 @@ caminhos <- str_c(pasta, arquivos)
 # incrivel como sempre conseguem arranjar algum novo problema com esses dados da SES
 
 arquivos_troca_nome <- c("leitos_dados_ses_05_05.csv","leitos_dados_ses_06_05.csv","leitos_dados_ses_07_05.csv",
-                         "leitos_dados_ses_08_05.csv","leitos_dados_ses_09_05.csv")
+                         "leitos_dados_ses_08_05.csv","leitos_dados_ses_09_05.csv","leitos_dados_ses_10_05.csv")
 caminhos_troca_nome <- str_c(pasta,arquivos_troca_nome)
 
 arruma_nome <- map(caminhos_troca_nome, read_csv) %>%
@@ -121,8 +121,9 @@ leitos_uti <- map(caminhos, read_csv) %>%
   bind_rows(arruma_nome) %>% # adicionando arquivos bugados
   left_join(hospital_municipio, by = c("Cód" = "cnes")) 
 
-leitos_uti=merge(leitos_uti, rs_mesoregiao_microregiao, by = "codigo", all = TRUE) %>%
-  mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y",  tz = "America/Sao_Paulo")) %>%
+leitos_uti <- merge(leitos_uti, rs_mesoregiao_microregiao, by = "codigo", all = TRUE) %>%
+  mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y",  tz = "America/Sao_Paulo"),
+         Hospital = str_to_title(Hospital)) %>%
   distinct(`Cód`, data_atualizacao, .keep_all = T) %>%
   select(data_atualizacao = data_atualizacao, cnes = Cód, hospital = Hospital, codigo_ibge = codigo_ibge, municipio, leitos_internacoes = Pacientes,
          leitos_total = Leitos, leitos_covid = Confirmados, meso_regiao = mesorregiao, data_hora_atualizacao = `Últ Atualização`) %>%
