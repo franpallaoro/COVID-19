@@ -90,7 +90,7 @@ dados_mapa_rs_meso <- mapa_meso_rs %>%
 #################################
 
 hospital_municipio <- read_csv("dados/leitos/outros/hospital_municipio.csv") %>%
-  mutate(codigo_ibge = as.character(codigo_ibge))
+  mutate(codigo = as.factor(codigo_ibge))
 
 dados_cnes <- read_csv("dados/leitos/outros/base_cnes_atualizada.csv") %>%
   select(CNES, LATITUDE, LONGITUDE)
@@ -105,7 +105,7 @@ caminhos <- str_c(pasta, arquivos)
 # incrivel como sempre conseguem arranjar algum novo problema com esses dados da SES
 
 arquivos_troca_nome <- c("leitos_dados_ses_05_05.csv","leitos_dados_ses_06_05.csv","leitos_dados_ses_07_05.csv",
-                         "leitos_dados_ses_08_05.csv")
+                         "leitos_dados_ses_08_05.csv","leitos_dados_ses_09_05.csv")
 caminhos_troca_nome <- str_c(pasta,arquivos_troca_nome)
 
 arruma_nome <- map(caminhos_troca_nome, read_csv) %>%
@@ -119,13 +119,13 @@ leitos_uti <- map(caminhos, read_csv) %>%
   map(dplyr::select, -(`Taxa Ocupação`)) %>%
   bind_rows() %>%
   bind_rows(arruma_nome) %>% # adicionando arquivos bugados
-  left_join(hospital_municipio, by = c("Cód" = "cnes")) %>%
-  left_join(rs_mesoregiao_microregiao, by = c("codigo_ibge" = "codigo")) %>%
-  mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y %H:%M"),
-         Hospital = str_to_title(Hospital)) %>%
+  left_join(hospital_municipio, by = c("Cód" = "cnes")) 
+
+leitos_uti=merge(leitos_uti, rs_mesoregiao_microregiao, by = "codigo", all = TRUE) %>%
+  mutate(data_atualizacao = lubridate::as_date(`Últ Atualização`, format = "%d/%m/%Y",  tz = "America/Sao_Paulo")) %>%
   distinct(`Cód`, data_atualizacao, .keep_all = T) %>%
-  select(data_atualizacao = data_atualizacao, cnes = Cód, hospital = Hospital, codigo_ibge = codigo_ibge, municipio, leitos_internacoes = Pacientes, 
-         leitos_total = Leitos, leitos_covid = Confirmados, mesorregiao = mesorregiao, data_hora_atualizacao = `Últ Atualização`) %>%
+  select(data_atualizacao = data_atualizacao, cnes = Cód, hospital = Hospital, codigo_ibge = codigo_ibge, municipio, leitos_internacoes = Pacientes,
+         leitos_total = Leitos, leitos_covid = Confirmados, meso_regiao = mesorregiao, data_hora_atualizacao = `Últ Atualização`) %>%
   mutate(codigo_ibge = factor(codigo_ibge, levels = levels(mapa_rs_shp$CD_GEOCMU))) %>%
   left_join(dados_cnes, by = c("cnes" = "CNES")) %>%
   filter(data_atualizacao > "2020-04-27") %>%
@@ -187,6 +187,8 @@ leitos_join_mun <- leitos_uti %>%
   group_by(codigo_ibge) %>%
   summarise(leitos_internacoes = sum(leitos_internacoes), leitos_total = sum(leitos_total), leitos_covid = sum(leitos_covid),
             lotacao = ifelse(sum(leitos_total)==0, NA, sum(leitos_internacoes)/sum(leitos_total)), leitos_disponiveis = leitos_total - leitos_internacoes)
+
+names(leitos_uti)[5] = c("mesorregiao")
 
 leitos_join_meso <- leitos_uti %>%
   group_by(cnes) %>%
