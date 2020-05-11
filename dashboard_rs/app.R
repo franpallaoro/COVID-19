@@ -289,18 +289,13 @@ body <- dashboardBody(
             fluidPage(
               fluidRow(
                 
-                widgetUserBox(
-                  title = "www.ufrgs.br/covidmetrika",
-                  type = 2,
+                setZoom(id = "covidMetrika",class = "small-box"),
+                
+                column(
                   width = 12,
-                  color = "blue",
-                  "Aplicativo desenvolvido pelo covidMetrika, grupo composto por 
-                  estudantes e professores do Departamento de Estatística e Programa de Pós-Graduação 
-                  em Epidemiologia da Universidade Federal do Rio Grande do Sul.",
-                  footer_padding = F
+                  valueBoxOutput("covidMetrika",width = 12)
                 ),
-                
-                
+              
                 widgetUserBox(
                   title = tags$b("Franciele Lobo Pallaoro"),
                   subtitle = "Estudante de Estatística da UFRGS",
@@ -1478,6 +1473,18 @@ server <- function(input, output) {
              color = "aqua", 
              width = 12,
              href = "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+    )
+    
+  })
+  
+  output$covidMetrika <- renderValueBox({
+    
+    valueBox("covidMetrika", 
+             subtitle = div("Aplicativo desenvolvido pelo grupo covidMetrika",br(),"Confira aqui nosso site para ver nossos outros projetos!",br(),"Contato: covidmetrika@gmail.com"), 
+             icon = icon("external-link-alt"), 
+             color = "yellow", 
+             width = 12,
+             href = "https://www.ufrgs.br/covidmetrika/"
     )
     
   })
