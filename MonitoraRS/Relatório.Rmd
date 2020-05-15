@@ -22,15 +22,15 @@ Juliana Sena de Souza$^1$, Márcia Helena Barbian$^2$, Rodrigo Citton Padilha do
 1. Programa de Pós-Graduação em Epidemiologia, Universidade Federal do Rio Grande do Sul
 1. Graduando(a) em Estatística, Universidade Federal do Rio Grande do Sul
 
-# Introdução
+# Introdução:
 
-# Conjunto de Dados 
+# Conjunto de Dados:
 
 ```{r, include = FALSE}
 source('01_org_data.R', encoding = "UTF-8")
 ```
 
-O conjunto de dados é formado por casos confirmados e óbitos por COVID-19 disponibilizados nos boletins das __Secretarias Estaduais de Saúde__ (SES). Os dados foram obtidos em [@brasilio], que fornece dados públicos brasileiros já tradados e de fácil acesso.
+O conjunto de dados é formado por casos confirmados e óbitos por COVID-19 disponibilizados nos boletins das __Secretarias Estaduais de Saúde__ (SES). Os dados foram obtidos em [@brasilio], que fornece dados públicos brasileiros já tratados e de fácil acesso. Com relação aos dados de COVID-19, a planilha é atualizada diariamete de acordo com o que é divulgado por cada SES. Para este relatório, considerou-se as informações acerca do estado do __Rio Grande do Sul__, a contar a partir do primeiro caso no estado, `r gsub("-", " de ", format(min(covid$date), "%d-%B"))`, até o último dia da 20ª semana epidemiológica, `r gsub("-", " de ", format(max(covid$date), "%d-%B"))`.
 
 ## Semana Epidemiológica {.tabset}
 
@@ -38,32 +38,89 @@ O conjunto de dados é formado por casos confirmados e óbitos por COVID-19 disp
 source('02_plot_funcoes_ep_week_mapa.R', encoding = "UTF-8")
 ```
 
-
 ### Casos Confirmados
 
-```{r}
+O Rio Grande do Sul já possui um total de `r sum(covid$casos)` casos de COVID-19. O gráfico abaixo apresenta os casos confirmados por município. 
+
+```{r casos, fig.cap = 'COVID-19: Casos Confirmados nos Municípios do RS - Acumulado por semana epidemiológica'}
+
 rs_week(options[1])
 ```
 
 
 ### Casos (por 100 mil hab.)
 
-```{r}
+```{r taxa, fig.cap = 'COVID-19: Casos (por 100 mil hab.) nos Municípios do RS - Acumulado por semana epidemiológica'}
 rs_week(options[2])
 ```
 
 
 ### Óbitos
 
-```{r}
+```{r obitos, fig.cap = 'COVID-19: Óbitos Confirmados nos Municípios do RS - Acumulado por semana epidemiológica'}
 rs_week(options[3])
 ```
 
 
 ### Letalidade
 
-```{r}
+```{r, fig.cap = 'COVID-19: Letalidade nos Municípios do RS - Acumulado por semana epidemiológica'}
 rs_week(options[4])
+```
+
+
+# Taxa de Incidência Padronizada:
+
+```{r}
+rs_week(options[5])
+```
+
+
+# Risco da doença (em áreas pequenas):
+
+```{r}
+source('03_2_BYM_com_cov.R', encoding = 'UTF-8')
+```
+
+# Indicadores Locais de Associação Espacial: {.tabset}
+
+```{r}
+source('04_G_e_Gstar.R', encoding = 'UTF-8')
+
+source('05_LISA.R', encoding = 'UTF-8')
+```
+
+
+## G
+
+```{r}
+gg
+
+```
+
+## G*
+
+```{r}
+
+ggstar
+
+```
+
+
+## I de Moran
+
+```{r}
+
+gIi
+
+```
+
+## LISA
+
+```{r}
+
+glisa
+
 ```
 
 

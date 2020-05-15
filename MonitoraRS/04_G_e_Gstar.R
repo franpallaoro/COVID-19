@@ -62,11 +62,11 @@ gIi <- ggplot() +
   theme(panel.border = element_rect(colour = "black", fill = NA, size = 1))
 
 
-ggsave(filename = 'G.png', plot = gg, 
-       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
+#ggsave(filename = 'G.png', plot = gg, 
+#       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
 
-ggsave(filename = 'Gstar.png', plot = ggstar, 
-       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
+#ggsave(filename = 'Gstar.png', plot = ggstar, 
+#       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
 
-ggsave(filename = 'Moran.png', plot = gIi, 
-       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
+#ggsave(filename = 'Moran.png', plot = gIi, 
+#       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)

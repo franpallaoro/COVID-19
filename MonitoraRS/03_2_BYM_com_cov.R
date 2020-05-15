@@ -9,7 +9,6 @@ library(dplyr)
 library(INLA)
 
 # chamando o banco de dados organizado:
-source('01_org_data.R')
 
 rm(covid)
 rm(covid_cumsum)
@@ -103,7 +102,7 @@ gridExtra::grid.arrange(gLL, gRR, gUL, ncol = 3,
                                        unique(dados$time)))
 
 
-ggsave(filename = 'BYM.png', plot = gridExtra::grid.arrange(gLL, gRR, gUL, ncol = 3, 
-                                                            top = paste0("COVID-19 - Municípios RS - Semana Epidemiológica ", 
-                                                                         unique(dados$time))), 
-       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
+#ggsave(filename = 'BYM.png', plot = gridExtra::grid.arrange(gLL, gRR, gUL, ncol = 3, 
+#                                                            top = paste0("COVID-19 - Municípios RS - Semana Epidemiológica ", 
+#                                                                         unique(dados$time))), 
+#       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)

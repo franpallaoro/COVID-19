@@ -53,9 +53,10 @@ glisa <- ggplot() +
   geom_sf(data = df, aes(fill = quad_sig), size = .05) +
   theme_map() +
   scale_fill_manual(values = colors, drop = FALSE) + 
-  labs(title = "COVID-19 - Municípios RS - LISA", fill = NULL) +
+  labs(title = paste0("COVID-19 - Municípios RS - \nSemana Epidemiológica ", 
+                      unique(df$time), ' - LISA'), fill = NULL) +
   theme(legend.position = "right") + 
   theme(panel.border = element_rect(colour = "black", fill = NA, size = 1))
 
-ggsave(filename = 'LISA.png', plot = glisa, 
-       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)
+#ggsave(filename = 'LISA.png', plot = glisa, 
+#       path = 'C:/Users/Juliana/Downloads/series', width = 8, height = 8)

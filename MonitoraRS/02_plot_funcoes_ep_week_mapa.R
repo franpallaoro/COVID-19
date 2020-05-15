@@ -30,8 +30,6 @@ rs_week <- function(input){
     scale_fill_manual(values = virPallete) +
     theme_map() +
     labs(fill = paste0(options[which(options == input)]),
-         title = "COVID-19 - Municípios RS - 
-             Acumulado por semana epidemiológica",
          caption = 'Fonte: Secretarias de Saúde das Unidades Federativas, dados tratados por 
          Álvaro Justen e colaboradores/Brasil.IO') +
     theme(legend.position = "right") +
@@ -91,9 +89,6 @@ aglomerado_week <- function(input, input2){
     scale_fill_manual(values = virPallete) +
     theme_map() +
     labs(fill = paste0(options[which(options == input)]),
-         title = paste0('COVID-19 - Municípios ', 
-                        agl_opt[which(agl_opt == input2)], 
-                       " - \n Acumulado por semana epidemiológica"),
          caption = 'Fonte: Secretarias de Saúde das Unidades Federativas, dados tratados por 
          Álvaro Justen e colaboradores/Brasil.IO') +
     theme(legend.position = "right") +

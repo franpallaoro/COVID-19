@@ -17,3 +17,12 @@ classInt
 magick
 lubridate
 ggthemes
+sp
+SpatialEpi
+spData
+spdep
+Matrix
+foreach
+INLA
+leaflet
+RColorBrewer
