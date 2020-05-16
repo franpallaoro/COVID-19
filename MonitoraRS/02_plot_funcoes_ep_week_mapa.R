@@ -13,9 +13,9 @@ options <- c('Casos Confirmados',
 rs_week <- function(input){
   
   temp <- dep_week %>%
-    select(casos_cat, casos_p100_cat, mortes_cat, letalidade_cat, SIR_cat, time, municipios, geometry)
+    select(casos_cat, casos_p100_cat, mortes_cat, letalidade_cat, SIR_cat, municipio, geometry)
   
-  temp <- temp[,c(which(options == input), 6:8)]
+  temp <- temp[,c(which(options == input), 6:7)]
   names(temp)[1] <- 'variavel'
   
   if(which(options == input) == 1){
@@ -30,10 +30,9 @@ rs_week <- function(input){
     scale_fill_manual(values = virPallete) +
     theme_map() +
     labs(fill = paste0(options[which(options == input)]),
-         caption = 'Fonte: Secretarias de Saúde das Unidades Federativas, dados tratados por 
-         Álvaro Justen e colaboradores/Brasil.IO') +
-    theme(legend.position = "right") +
-    facet_wrap( ~ time, ncol = 3)
+         caption = 'Fonte: Ministério da Saúde. Secretaria de Vigilância em Saúde (SVS)') +
+    # facet_wrap( ~ time, ncol = 3) +
+    theme(legend.position = "right")
   
 }
 
